@@ -1,0 +1,98 @@
+.add-RFQ{
+    height: calc(100vh - 128px );
+}
+.previous{
+    color:rgba(191,191,191,1);
+    font-size: 20px;
+    font-family: SFPDLight !important;
+  }
+  .content{
+      height: 100%;
+      background-color: #fff;
+      padding: 24px;
+      /* margin-top: 30px; */
+      /* height: calc(100vh - 180px); */
+      max-height: calc(100vh - 260px);
+            overflow-y: scroll;
+  }
+  .gray-st{
+      height: 30px;
+      width: 100% !important;
+      background-color: #f0f2f5;
+  }
+  .gray-st-down{
+    height: 30px;
+    position: relative;
+    bottom: 0;
+    width: 100% !important;
+    background-color: #f0f2f5;
+}
+  nz-footer{
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color:#fff ;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+    height: 64px;
+  }
+  .blue{
+    color: #1890ff !important;
+}
+.mar-2{
+    margin-right: 12px;
+}
+.header{
+    font-size: 20px;
+}
+.push-right{
+    float: right !important;
+}
+.summary>p{
+    margin: 0px !important;
+}
+
+.summary>title{
+    font-size: 20px;
+    color:#262626;
+}
+.text-right{
+    text-align: right;
+}
+th{
+    font-weight: 900 !important;
+    color: #262626 !important;
+}
+.mbb-12{
+    margin-bottom: 12px;
+}
+nz-upload{
+    height: 188px !important;
+}
+.ant-upload.ant-upload-drag {
+  
+    height: 220px !important;
+}
+.upload{
+    height: auto !important;
+    min-height: 220px !important
+    ;
+}
+.full-width{
+    width: 100% !important;
+}
+.city-padding{
+    padding: 0px 15px 0px 15px;
+}
+.preview{
+    height: 180px;
+    width: 100%;
+    background-image: url(../../../../assets/img/part2.png);
+    height: 180px;
+    width: 100%;
+    background-color: #f5f5f5;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

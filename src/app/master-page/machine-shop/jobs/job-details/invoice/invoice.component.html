@@ -1,0 +1,157 @@
+<div class="container-64">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">RFQs / RFQ 112938 / Quote QT-2308 /</span>  Payment Receipt </nz-page-header-title>
+    </nz-page-header>
+  </div>
+
+  <div class="content row">
+    
+      <div class="col-3 gray-bg"></div>
+      <div class="col-6 pt-30px scrollable">
+        <div class="header">
+            <img src="../../../../assets/img/concept-small.svg">
+            <div class="push-right text-right"> 
+                <b class="blue">Invoice</b><br>
+                <small class="push-right gray-7 mb-1">Invoice #00133312</small>
+            </div>
+            
+            <hr class="mt-30px">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="summary">
+                    <h6><b class="mb-1">Billed to</b></h6>
+                    <p>
+                      Shop Name: <b>Quantum PHX</b> 
+                    </p>
+                    <p>
+                      Address: <b>R221, ST.Monica Pier</b> 
+                    </p>
+                    <p>
+                      City: <b>San Jose</b> 
+                    </p>
+                    <p>
+                      State: <b>CA, 41211</b> 
+                    </p>
+                    <p>
+                      Shop Phone Number: <b>A+1(514)213331</b> 
+                    </p>
+                  </div>
+            </div>
+  
+            <div class="col-6">
+                <div class="summary text-right">
+                    <h6><b class="mb-1">QUOTE No #2308</b></h6>
+                    <p>
+                        Date
+                    </p>
+                    <p>
+                        Engineer Name 
+                    </p>
+                    <p>
+                        Part Name
+                    </p>
+                    <p>
+                        Engineer Email
+                    </p>
+                    <p>
+                        Engineer Address Line 1
+                    </p>
+                  </div>
+            </div>
+        </div>
+        <div class="mt-30px">
+            <nz-table  [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Cost</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable.data">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.quantity }}</td>
+                    <td>${{ data.cost }}</td>
+                    <td>${{ data.cost * data.quantity }}</td>
+                    
+                  </tr>
+                </tbody>
+              </nz-table>
+              <div class="mt-2 row">
+                  <div class="col-9">
+                     
+                  </div>
+                  <div class="col-3">
+                      <p class=" tax">+ Tax $15.00</p>
+                      <nz-table [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Ammount Due</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr >
+                            <td class="blue text-center o20px-size"><b>$1,360.00</b></td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                  </div>
+              </div>
+        </div>
+      </div>
+  
+        <div class="col-3 gray-bg"></div>
+    
+  </div>
+  
+
+
+  <nz-footer>
+    <button  nz-button class="mar-2" nzType="primary">Download invocie<i nz-icon nzType="download" nzTheme="outline"></i></button>
+    <button data-toggle="modal" data-target="#ShareModal"  nz-button class="mar-2" nzType="default">Share<i nz-icon nzType="share-alt" nzTheme="outline"></i></button>
+</nz-footer>
+
+
+
+<div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <b> <img src="../../../../assets/img/share.svg" style="margin-right:10px"> Share with others</b>
+        <div class="modal-content-custom-email">
+        <div class="row mt-1">
+           <p class="col-12"> <span class="blue">*</span>Email</p><br>
+         <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>   
+         <div class="col-2">
+           <img (click)="addEmail()" src="../../../../assets/img/plus-circle.svg">
+         </div>    
+        </div>
+        <div class="row mt-2" *ngFor="let email of receivers">
+          <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>   
+          <div class="col-2">
+            <img (click)="removeEmail()" src="../../../../assets/img/delete.svg">
+          </div> 
+         </div>
+        <div class="row mt-3">
+          <p class="col-12">Add a note</p><br>
+          <div class="col-12">
+            <textarea rows="4" nz-input  ></textarea>
+
+          </div>
+        </div>
+        <div class="mt-2 push-r">
+          <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Close</button>
+          <button nz-button nzType="primary" type="button" data-dismiss="modal">Share</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

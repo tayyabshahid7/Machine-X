@@ -1,0 +1,190 @@
+<div class="add-RFQ">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">RFQs /  </span> Add new RFQ </nz-page-header-title>
+    </nz-page-header>
+  </div>
+<div class="gray-st"></div>
+  <div class="content">
+    
+   <div class="row">
+       <div class="col-6">
+           <p><span class="blue">*</span>Upload or select file</p>
+         <div class="upload mbb-12">  
+             <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        >
+      <p class="ant-upload-drag-icon">
+        <i nz-icon nzType="inbox"></i>
+      </p>
+      <p class="ant-upload-text">Click or drag file to this area to upload or 
+          <a class="blue" nz-dropdown   [nzDropdownMenu]="menu">
+            select file from library
+        <i nz-icon nzType="down"></i>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+            <li nz-submenu nzTitle="Part XXX-XXX-YZW">
+              <ul>
+                <li nz-menu-item>Revision D</li>
+                <li nz-menu-item>Revision C</li>
+                <li nz-menu-item>Revision A</li>
+                <li nz-menu-item>Revision B</li>
+              </ul>
+            </li>
+            <li nz-submenu nzTitle="Part XXX-XXX-YZW">
+              <ul>
+                  <li nz-menu-item>Revision D</li>
+                  <li nz-menu-item>Revision C</li>
+                  <li nz-menu-item>Revision A</li>
+                  <li nz-menu-item>Revision B</li>
+              </ul>
+            </li>
+            <li nz-submenu nzTitle="Part XXX-XXX-YZW">
+              <ul>
+                  <li nz-menu-item>Revision D</li>
+                  <li nz-menu-item>Revision C</li>
+                  <li nz-menu-item>Revision A</li>
+                  <li nz-menu-item>Revision B</li>
+              </ul>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </a>
+    </p>
+  
+      <p class="ant-upload-hint">
+        Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+      </p>
+    </nz-upload>
+</div>
+
+    <div class="row mbb-12">
+        <div class="col-6">
+            <div class="mb-2"><span class="blue">*</span>Part quantity</div>
+            <nz-input-number [(ngModel)]="quantitiy" nzPlaceHolder="Add quantity" class="full-width" [nzMin]="1" [nzStep]="1"></nz-input-number>
+        </div>
+        <div class="col-6">
+          <div class="mb-2"><span class="blue">*</span>Material type</div>
+          <textarea [(ngModel)]="materialType" nz-input placeholder="Material" rows="1"></textarea>
+      </div>
+    </div>
+
+    <div class="row mbb-12">
+        <div class="col-6">
+            <div class="mb-2"><span class="blue">*</span>Quote needed by</div>
+            <nz-input-number [(ngModel)]="neededBy" class="col-12" [nzStep]="1"  class="full-width" nzPlaceHolder="Select number of days" ></nz-input-number>
+                
+          </div>
+        <div class="col-6">
+            <div class="mb-2"><span class="blue">*</span> Part needed date
+            </div>
+            <nz-date-picker class="col-12" [(ngModel)]="date" [nzFormat]="dateFormat">
+            </nz-date-picker>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="mb-2"><span class="blue">*</span>Note</div>
+        <textarea [(ngModel)]="note" nz-input  rows="4"></textarea>
+    </div>
+       </div>
+       <div class="col-3">
+           <h6><b>Shipping address</b></h6>
+
+           <div class="row">
+            <div class="col-12">
+                <div class="mb-2"><span class="blue">*</span>Shipping address</div>
+                <nz-select [(ngModel)]="shippingAddress" class="col-12" nzAllowClear  >
+                  <nz-option nzValue="1" nzLabel="default"></nz-option>
+                  <nz-option nzValue="1" nzLabel="default"></nz-option>
+                  <nz-option nzValue="1" nzLabel="default"></nz-option>
+                </nz-select>     
+              </div>
+
+            <div class="col-12 mb-2">
+              <div class="mb-2">Street No, Ap. Building</div>
+              <input nz-input placeholder="Example Address, 123456" />
+            </div>
+
+            <div class="col-7 mb-2">
+              <div class="mb-2">City</div>
+              <input nz-input placeholder="San Francisco" />
+            </div>
+            <div class="col-5 mb-2">
+              <div class="mb-2">Zip Code</div>
+              <input nz-input placeholder="123455" />
+            </div>
+            <div class="col-12 mb-2">
+              <div class="mb-2">Country</div>
+              <nz-select class="col-12" nzAllowClear  >
+                <nz-option nzValue="1" nzLabel="USA"></nz-option>
+                <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+              </nz-select>     
+            </div>
+            <div class="col-12 mb-2">
+              <div class="mb-2">Contact person / Number</div>
+              <input nz-input placeholder="Example Address, 123456"/>
+            </div>
+<!-- 
+            <div class="col-12 mb-3">
+              <label (ngModelChange)="checkButton()" nz-checkbox [(ngModel)]="addressnew">Ship to a different address</label>
+            </div> -->
+            <nz-content *ngIf="addressnew">
+              <div>
+                <div class="col-12">
+                  <div class="mb-2"><span class="blue">*</span>Shipping address</div>
+                  <nz-select class="col-12" nzAllowClear  >
+                    <nz-option nzValue="1" nzLabel="default"></nz-option>
+                    <nz-option nzValue="1" nzLabel="default"></nz-option>
+                    <nz-option nzValue="1" nzLabel="default"></nz-option>
+                  </nz-select>     
+                </div>
+                <div class="col-12 mb-2">
+                  <div class="mb-2">Street No, Ap. Building</div>
+                  <input nz-input placeholder="Example Address, 123456" />
+                </div>
+                  <div class="row city-padding">
+                    <div class="col-7 mb-2">
+                      <div class="mb-2">City</div>
+                      <input nz-input placeholder="San Francisco" />
+                    </div>
+                    <div class="col-5 mb-2">
+                      <div class="mb-2">Zip Code</div>
+                      <input nz-input placeholder="123455" />
+                    </div>
+                  </div>
+                
+                <div class="col-12 mb-2">
+                  <div class="mb-2">Country</div>
+                  <nz-select class="col-12" nzAllowClear  >
+                    <nz-option nzValue="1" nzLabel="USA"></nz-option>
+                    <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+                  </nz-select>     
+                </div>
+                <div class="col-12 mb-2">
+                  <div class="mb-2">Contact person / Number</div>
+                  <input nz-input placeholder="Example Address, 123456"/>
+                </div>
+    
+              </div>
+            </nz-content>
+           </div>
+
+
+       </div>
+       <div class="col-3">
+           <h6><b> PREVIEW</b></h6>
+           <div class="preview"></div>
+           
+       </div>
+   </div>  
+  </div>
+  <div class="gray-st-down"></div>
+
+  <nz-footer>
+    <button  (click)="confirmation()" nz-button class="mar-2" nzType="primary" [disabled]="quantitiy =='' || materialType == '' || neededBy =='' || date == null || note == '' || shippingAddress == null">Generate RFQ</button>
+    <button (click)=" showDeleteConfirm()" nz-button class="mar-2" nzType="default">Cancel</button>
+</nz-footer>
+</div>

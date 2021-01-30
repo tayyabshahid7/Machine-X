@@ -1,0 +1,166 @@
+<div class="main-container-64"><div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">My Parts /</span> Handle Bar - X02-FKA-2MI </nz-page-header-title>
+     
+    </nz-page-header>
+  </div>
+<div class="part-detials">
+    <div class="row">
+        <div class="col-6">
+            <span class="section-title">ENGINEER  NOTES</span>
+            <p class="blue-partname">Part XXX-XXX-XXX  <span class="sub-title"> Added four hours ago</span></p>
+            <p class="note-body">
+                Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements. 
+            </p>
+            <nz-divider [nzText]="text">
+                <ng-template #text><i nz-icon nzType="plus"></i></ng-template>
+              </nz-divider>
+        </div>
+        <div class="col-6">
+            <span class="section-title">Preview</span>
+            <div class="part-preview" style="background-image: url(../../../assets/img/largPart.png);background-repeat: no-repeat;background-size: contain"></div>
+        </div>
+    </div>
+    <!-- Right Side  -->
+    <div class="row mr-t-24">
+        <div class="col-6">
+            <span class="section-title">REVISION  NOTES</span>
+            <p class="blue-partname">Revision C   <span class="sub-title"> Added two hours ago</span></p>
+            <p class="note-body">
+                Continually fashion strategic metrics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. 
+                Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements.
+                   Continually fashion strategic met rics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage  Continually fashion strategic metrics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. 
+                Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements.
+                   Continually fashion strategic met rics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage exist Continually fashion strategic metrics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. 
+                Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements.
+                   Continually fashion strategic met rics through interdependent partnerships. 
+                Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage exist existing revolutionary alignments rather than client-centric process improvements. 
+            </p>
+        </div>
+        <div class="col-6">
+            <span class="section-title">REVISIONS</span>
+          
+            <div (click)="addRevision()" class="add-new-revision">
+                <b  class="blue-color">+ Add new revision</b>
+            </div>
+            <div class="revisionsList">
+            <div class="revision-selected row">
+                <div class="col-6 list-title-desc">
+                    <b>Revision C</b>
+                    <p>Short description text</p>
+
+                </div>
+                <div class="col-6 row list-title-desc">
+                    <div class="col-8">
+                        <p class="added">Added at:</p>
+                        <p class="added-date">2020-07-21 10:23</p>
+                    </div>
+                    <div class="col-4 " style="padding: 12px;">
+                        <div>
+                              <a nz-dropdown nzTrigger="click" nzPlacement="bottomCenter" [nzDropdownMenu]="menu">
+                                <i  nz-icon nzType="folder-open" style="color:#1890FF;font-size: 20px;padding-right: 10px;" nzTheme="outline"></i>
+                              </a>
+                              <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu class="custom-menu">
+                                    <p class="blue">Attached files</p>
+                                  <li nz-menu-item>
+                                      Filename.Cad
+                                      <i class="download-icon" nz-icon nzType="download" nzTheme="outline"></i>
+                                  </li>
+                                  <li nz-menu-item>
+                                    Filename.Cad
+                                    <i class="download-icon" nz-icon nzType="download" nzTheme="outline"></i>
+                                </li>
+                                <li nz-menu-item>
+                                    Filename.Cad
+                                    <i class="download-icon" nz-icon nzType="download" nzTheme="outline"></i>
+                                </li>
+                                <p class="blue">Download All</p>
+                                <li nz-menu-item>
+                                    Filename.zip
+                                    <i class="download-icon" nz-icon nzType="download" nzTheme="outline"></i>
+                                </li>
+                                </ul>
+                              </nz-dropdown-menu>
+                              <a nz-dropdown nzTrigger="click" nzPlacement="bottomCenter" [nzDropdownMenu]="menu2">
+                                <i nz-icon nzType="ellipsis" style="color:#1890FF;font-size: 20px;" nzTheme="outline"></i>
+                            </a>
+                            <nz-dropdown-menu #menu2="nzDropdownMenu">
+                                <ul nz-menu class="custom-menu">
+                                  <li nz-menu-item>
+                                    Delet Revision
+                                    <i class="download-icon" nz-icon nzType="delete" nzTheme="outline"></i>
+                                </li>
+                                </ul>
+                              </nz-dropdown-menu>
+
+                          </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="revision row">
+                <div class="col-6 list-title-desc">
+                    <b>Revision C</b>
+                    <p>Short description text</p>
+
+                </div>
+                <div class="col-6 row list-title-desc">
+                    <div class="col-8">
+                        <p class="added">Added at:</p>
+                        <p class="added-date">2020-07-21 10:23</p>
+                    </div>
+                    <div class="col-4 " style="padding: 12px;">
+                        <i nz-icon nzType="download" style="color:#1890FF;font-size: 20px;padding-right: 10px;" nzTheme="outline"></i>
+                        <i nz-icon nzType="ellipsis" style="color:#1890FF;font-size: 20px;" nzTheme="outline"></i>
+                    </div>
+                </div>                
+            </div>
+            <div class="revision row">
+                <div class="col-6 list-title-desc">
+                    <b>Revision C</b>
+                    <p>Short description text</p>
+
+                </div>
+                <div class="col-6 row list-title-desc">
+                    <div class="col-8">
+                        <p class="added">Added at:</p>
+                        <p class="added-date">2020-07-21 10:23</p>
+                    </div>
+                    <div class="col-4 " style="padding: 12px;">
+                        <i nz-icon nzType="download" style="color:#1890FF;font-size: 20px;padding-right: 10px;" nzTheme="outline"></i>
+                        <i nz-icon nzType="ellipsis" style="color:#1890FF;font-size: 20px;" nzTheme="outline"></i>
+                    </div>
+                </div>                
+            </div>
+            <div class="revision row">
+                <div class="col-6 list-title-desc">
+                    <b>Revision C</b>
+                    <p>Short description text</p>
+
+                </div>
+                <div class="col-6 row list-title-desc">
+                    <div class="col-8">
+                        <p class="added">Added at:</p>
+                        <p class="added-date">2020-07-21 10:23</p>
+                    </div>
+                    <div class="col-4 " style="padding: 12px;">
+                        <i nz-icon nzType="download" style="color:#1890FF;font-size: 20px;padding-right: 10px;" nzTheme="outline"></i>
+                        <i nz-icon nzType="ellipsis" style="color:#1890FF;font-size: 20px;" nzTheme="outline"></i>
+                    </div>
+                </div>                
+            </div>
+        </div>
+            </div>
+        
+    </div>
+
+</div>
+<nz-footer>
+    <button (click)="showArchive()" nz-button class="mar-2" nzType="danger">Archive Part</button>
+</nz-footer>
+</div>

@@ -1,0 +1,205 @@
+<div class=" dashboard-full-h">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Hello, Profesor!</nz-page-header-title>
+      <nz-page-header-extra>
+           Dashboard Data 
+        <nz-switch [(ngModel)]="switchValue" (ngModelChange)="handelData()"></nz-switch>
+    </nz-page-header-extra>
+    </nz-page-header>
+   
+  </div>
+
+  <div class="content">
+   <div class="row">
+       <div class="col-6 pr-24px">
+           <h5><b class="gray-9">Welcome Back</b></h5>
+           <small class="gray-8">Here’s an overview of how things are going</small>
+           <div class="mt-2">
+            <h6><b class="gray-9">Jobs</b></h6><br>
+               <div class="row">
+                   
+             <div  class="pointer  statistic-box acive-box">
+            <p class="gray-8 card-text">Approved</p>
+                 <b class="blue pl-5px">{{activeParts}}</b>
+             </div>
+
+             <div  class="pointer  statistic-box acive-box">
+              <p class="gray-8 card-text">In progress</p>
+                   <b class="green pl-5px">{{activeParts}}</b>
+               </div>
+
+             <div class=" statistic-box finished-box">
+                <p class="gray-8 card-text">Complete</p>
+                <b class="gray-6 pl-5px">{{finishedParts}}</b>
+            </div>
+
+            <!-- <div class=" statistic-box add-part-box pointer" (click)="addPart()">
+                <p class="gray-8 card-text">Add Part</p>
+                <p class="text-center bold"><b class="blue text-center pl-5px">+</b></p>  
+            </div> -->
+
+               </div>
+               
+               <div class="row">
+                   <div class="col-12 RFQ-panel panel">
+                       <div class="panel-header">
+                           <span class="panel-title">RFQs</span>
+                            <span (click)="viewRFQ()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+                       </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table" *ngIf="tableData.length!=0">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col " class="text-left gray-7">Newest</th>
+                                        <th scope="col" class="text-right gray-7">Submissions</th>
+                                        <th scope="col" class="text-right gray-7">Days left</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody  *ngIf="tableData.length!=0">
+                                      <tr *ngFor="let data of tableData">
+                                        <td >
+                                            <div>
+                                                <div><b>{{data.rfq}}</b></div>
+                                                <p *ngIf="data.accepted" class="no-margin"><span class="green">Accepting Quotes</span> . <a class="gray-7 pl-1">Edit</a>  ·  <a class="blue">Files</a></p>
+                                                <p *ngIf="!data.accepted" class="no-margin"><span class="orange">Not Accepting Quotes </span> . <a class="gray-7 pl-1">Edit</a>  ·  <a class="blue">Files</a></p>
+                                            </div>
+                                        </td>
+                                        <td  class="text-right"><b class="table-data-style">{{data.submissions}}</b></td>
+                                        <td  class="text-right"><b class="table-data-style">{{data.daysLeft}}</b></td>
+                                      </tr>
+                                    </tbody>  
+                                   
+                                  </table>
+                                  <br  *ngIf="tableData.length==0">
+                                     <!-- <div class=" pointer add-new-rfq blue col-12" (click)="addRFQ()">
+                                        <b>Add new RFQ</b>
+                                        <b class="push-rigth"><img src="../../../assets/img/bold-plus.svg"></b>
+                                  </div> -->
+
+                                  <div class="gray-6 no-data-padding" *ngIf="tableData.length==0">
+                                      <p class="text-center gray-6">
+                                        No RFQs available yet.
+                                      </p>
+                                  </div>
+                               
+                            </div>
+                        </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="col-6 pl-24px ">
+           <div class="row">
+            <div class="col-12 jobs-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Recent Issues</span>
+                     <span (click)=" viewJobs()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+                </div>
+                 <div class="row">
+                     <div class="col-12">
+                         <table class="table" *ngIf="tableData.length!=0">
+                             <thead>
+                               <tr>
+                                 <th style="width:45%" class="text-left gray-7">Job ID</th>
+                                 <th  style="width:45%" class="text-left gray-7">Issue Date</th>
+                                 <th  class="text-center gray-7">Status</th>
+                               </tr>
+                             </thead>
+                             <tbody  *ngIf="tableData.length!=0">
+                               <tr *ngFor="let data of tableData">
+                                 <td  >
+                                    <p class="no-margin">{{data.JobId}}</p>
+                                 </td>
+                                 <td  class="  text-left"><b class="gray-8 table-data-style">{{data.transJobDate}} </b></td>
+                                 <td  class="  text-center"><b [ngClass]="{'red-6': data.JobStatus == 'Ongoing','gray-7': data.JobStatus != 'Ongoing'}" class="red"> {{data.JobStatus}}</b></td>
+
+                               </tr>
+                             </tbody>  
+                            
+                           </table>
+                           <br  *ngIf="tableData.length==0">
+                           
+
+                           <div class="gray-6 no-data-padding" *ngIf="tableData.length==0">
+                               <p class="text-center gray-6">
+                                No known issues available.
+                               </p>
+                           </div>
+                        
+                     </div>
+                 </div>
+            </div>
+
+            <div class="col-12 trans-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Transaction history</span>
+                     <span (click)="viewTransactions()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+                </div>
+                 <div class="row">
+                     <div class="col-12">
+                         <table class="table" *ngIf="tableData.length!=0">
+                             <thead>
+                               <tr>
+                                 <th scope="col " class="text-left gray-7">Total</th>
+                                 <th scope="col" class="text-right gray-7">Last Transaction</th>
+                                 <th scope="col" class="text-right gray-9"> <b>Due amount</b></th>
+                               </tr>
+                             </thead>
+                             <tbody  *ngIf="tableData.length!=0">
+                               <tr *ngFor="let data of tableData">
+                                 <td >
+                                     <div class="gray-7">
+                                         <div><b>{{data.transJobNumber}}</b></div>
+                                         <p  class="no-margin">{{data.transQu}}</p>     
+                                     </div>
+                                 </td>
+                                 <td  class="text-right">
+                                     <div class="gray-7">
+                                        <div><b>{{data.transJobNumber}}</b></div>
+                                        <p  class="no-margin">{{data.transJobDate}}</p>     
+                                    </div>
+                                    
+                                    </td>
+                                 <td  class="text-right"><b class=" gray-9">${{data.transCost}}</b></td>
+                               </tr>
+                             </tbody>  
+                            
+                           </table>
+                         
+                           <div  *ngIf="tableData.length!=0"  class=" col-12">
+                              <div class="row">
+                                <div class="col-4 gray-9">
+                                  Income | <span class="gray-7"> Nov 1 - Nov 30 </span>
+                                </div>
+                                <div class="col-4 gray-7">
+                                  This Week: <span class="blue">$213.90</span>
+                                </div>
+                                <div class="col-4 gray-7">
+                                  Available: <span class="green">$3113.90</span>
+
+                                </div>
+                              </div>
+                          </div>
+
+
+                           <div class="gray-6 no-data-padding-trans" *ngIf="tableData.length==0">
+                               <p class="text-center gray-6">
+                                No transactions available.
+                               </p>
+                           </div>
+                        
+                     </div>
+                 </div>
+            </div>
+           </div>
+       </div>
+   </div>
+  </div>
+
+
+<nz-footer>
+</nz-footer>
+
+</div>

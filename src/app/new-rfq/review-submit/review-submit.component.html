@@ -1,0 +1,123 @@
+<div class="container-64">
+  <div class="site-page-header-ghost-wrapper bottom-border">
+      <nz-page-header nzBackIcon [nzGhost]="false">
+        <nz-page-header-title><span class="previous">New RFQs / </span>  RFQ #2132 </nz-page-header-title>
+      </nz-page-header>
+    </div>
+  
+    <div class="content row">
+      
+        <div class="col-md-3 gray-bg"></div>
+        <div class="col-md-6 pt-30px scrollable">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="summary">
+                    <p>
+                    <b>   Shop Name: </b>Quantum PHX
+                    </p>
+                    <p>
+                     <b> Address: </b>R221, ST.Monica Pier 
+                    </p>
+                    <p>
+                    <b>  City:</b>  San Jose
+                    </p>
+                    <p>
+                     <b>  State: </b> CA, 41211
+                    </p>
+                    <p>
+                      <b> Shop Phone Number:</b> A+1(514)213331
+                    </p>
+                  </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="summary">
+                    <!-- <h6><b class="mb-1">QUOTE #2308</b></h6> -->
+                    <p>
+                       <b>Date:</b>  Quantum PHX
+                    </p>
+                    <p>
+                     <b>  Engineer Name:</b>  R221, ST.Monica Pier
+                    </p>
+                    <p>
+                       <b> Part Name:</b>  Bike Door Handle 551-MXO-4JM
+                    </p>
+                    <p>
+                      <b> Engineer Email: </b> CA, 41211
+                    </p>
+                    <p>
+                       <b>Engineer Address Line 1: </b>San Diego, CA
+                    </p>
+                  </div>
+            </div>
+        </div>
+        <div class="mt-30px">
+            <nz-table  [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Cost</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable.data">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.quantity }}</td>
+                    <td>${{ data.cost }}</td>
+                    <td>${{ data.cost * data.quantity }}</td>
+                    
+                  </tr>
+                </tbody>
+              </nz-table>
+              <div class="mt-2 row">
+                  <div class="col-md-8">
+                     <b>Note</b>
+                      <p>
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum
+                      </p>
+                  </div>
+                  <div class="col-md-3">
+                      <p class=" tax text-center">+ Tax $15.00</p>
+                      <nz-table [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                        <thead>
+                          <tr>
+                            <th>Grand Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr >
+                            <td class="blue">$1,360.00</td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                  </div>
+              </div>
+              <div>
+                  <span class="blue">*</span>Attached files
+              </div>
+              <div>
+                <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322-901_Rvision-C.PDF</a>
+              </div>
+        </div>
+
+        </div>
+    
+          <div class="col-md-3 gray-bg"></div>
+      
+    </div>
+    
+  
+  
+    <nz-footer>
+      <button  nz-button class="mar-2" (click)="backToNewRFQ()" nzType="primary">Submit Quote</button>
+      <button  nz-button class="mar-2" (click)="backToNewRFQ()" >Cancel</button>
+
+  </nz-footer>
+  
+  
+  
+  

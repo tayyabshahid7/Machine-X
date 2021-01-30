@@ -1,0 +1,71 @@
+<div class="add-parts">
+
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">My Parts / Handle Bar - X02-FKA-2MI /  </span> Create New Revision [D] </nz-page-header-title>
+      <nz-page-header-extra>
+        <span style="color:#1890FF">*</span>All fields are required
+      </nz-page-header-extra>
+    </nz-page-header>
+  </div>
+
+  <div class="gray-st"></div>
+
+<div class="part-detials row">
+<div class="col-9">
+    <div class="row">
+        <div class="col-8">
+            <span class="ast">*</span><span class="fieldname">Short Description</span>
+            <input nz-input/>
+        </div>
+     
+    </div>
+    <br>
+    <div class="col-8">
+        <span class="ast">*</span><span class="fieldname">Long Description</span>
+        <textarea rows="11" nz-input ></textarea>
+    </div>
+<br>
+    <div class="col-8">
+        <span class="ast">*</span><span class="fieldname">Upload Files</span>
+        <!-- <div class="drag">
+            <div class="center">
+                <i nz-icon nzType="inbox" style="color:#40A9FF;font-size: 35px;" nzTheme="outline"></i>
+                <p class="drag-title">Click or drag file to this area to upload</p>
+                <p class="drag-desc">
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+                </p>
+            </div>
+
+        </div> -->
+        <nz-upload
+        nzType="drag"
+        [nzMultiple]="true"
+        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+       >
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
+      </nz-upload>
+    </div>
+</div>
+
+<div class="col-3 p-left">
+    <p class="preview">PREVIEW</p>
+    <div class="img-preview" style="background-image: url(../../../assets/img/part.png);">
+    </div>
+</div>
+
+</div>
+
+<div class="gray-st-down"></div>
+
+<nz-footer>
+   <a routerLink="/dashboard/parts/view"> <button nz-button class="mar-2" nzType="primary">Add Revision</button></a>
+    <button nz-button nzType="ghost" (click)="showDeleteConfirm()">Cancel</button>
+</nz-footer>
+</div>

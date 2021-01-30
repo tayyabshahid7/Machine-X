@@ -1,0 +1,65 @@
+<nz-content>
+    <div class="site-page-header-ghost-wrapper">
+        <nz-page-header [nzGhost]="false">
+          <nz-page-header-title>RFQs</nz-page-header-title>
+          <nz-page-header-content>
+              <div class="row">
+                  <div class="col-6 p-0 space-b">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                        <input type="text" nz-input placeholder="Search part name / RFQ ID" />
+                      </nz-input-group>
+                      <ng-template #suffixIconButton>
+                        <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+                      </ng-template>
+                  </div>
+                  <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a>
+                  </div>
+
+          </nz-page-header-content>
+       
+        </nz-page-header>
+      </div>
+      <div class="p-24px"> 
+        <div nz-row nzGutter="" >
+           
+            <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
+                <thead>
+                  <tr>
+                    <th>RFQ ID</th>
+                    <th>Part Name / Revision Number</th>
+                    <th>Date Needed</th>
+                    <th class="text-center">Submissions</th>
+                    <th class="text-center">Countdown Timer (Days)</th>
+                    <th class="text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr (click)="onSelect(data)" *ngFor="let data of tableData">
+                    <td class="frq-id">{{data.id}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data.date}}</td>
+                    <td class="text-center">{{data.submission}}</td>
+                    <td class="text-center">{{data.timer}}</td>
+                    <td class="text-center" *ngIf="data.status">
+                        <nz-tag  nzColor="success">Accepting Quotes</nz-tag>
+                    </td>
+                    <td  class="text-center" *ngIf="!data.status">
+                        <nz-tag nzColor="default">Not Accepting Quotes</nz-tag>
+                    </td>
+                  
+                  </tr>
+                </tbody>
+              </nz-table>
+            
+           
+          </div>
+      </div>
+    
+        <nz-footer>
+            <!-- <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a> -->
+        </nz-footer>
+    </nz-content>
+    
+    
+    
+     

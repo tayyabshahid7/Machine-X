@@ -1,0 +1,90 @@
+<nz-content>
+    <div class="site-page-header-ghost-wrapper bottom-border">
+        <nz-page-header [nzGhost]="false">
+          <nz-page-header-title>Transaction History</nz-page-header-title>
+          <nz-page-header-content>       
+          </nz-page-header-content>
+          <nz-page-header-extra>
+            <div *ngIf="switchValue">
+              <span class="gray-9">Available to transfer: <span class="blue"><b>$50.00</b></span></span>
+              <button data-toggle="modal" data-target="#ShareModal"  class="ml-2" nz-button nzType="primary">Transfer to Bank</button>
+            </div> 
+            <div *ngIf="!switchValue">
+              <span class="gray-9">Due Amount: <span class="green"><b>$00.00</b></span></span>
+              <button class="ml-2" nz-button nzType="primary" [disabled]="true">Transfer to Bank</button>
+            </div>
+            <nz-switch class="mt-2" [(ngModel)]="switchValue" ></nz-switch>
+
+          </nz-page-header-extra>
+        </nz-page-header>
+      </div>
+      <div class="p-24px"> 
+        <div nz-row nzGutter="" >
+           
+            <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
+                <thead>
+                  <tr>
+                    <th>Invoice Number</th>
+                    <th>Job ID</th>
+                    <th> Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th class="text-center">Amount<sub class="blue">(Balance)</sub></th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let data of tableData">
+                    <td class="frq-id">{{data.id}}</td>
+                    <td>{{data.jobId}}</td>
+                    <td>{{data.date}}</td>
+                    <td >{{data.type}}</td>
+                    <td >{{data.description}}</td>
+                    <td class="text-center">${{data.amount}}<sub class="blue">($50)</sub></td>
+                    <td class="text-center blue"><a>Download</a></td>
+
+                  </tr>
+                </tbody>
+              </nz-table>
+          </div>
+      </div>
+      <nz-footer>
+    </nz-footer>
+    
+    
+    </nz-content>
+    
+    
+    
+    <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+           <h5 class="blue"> Transfer Money </h5>
+            <div class="modal-content-custom-email">
+             
+                <div class="text-center">
+
+                    <span class="fif"><sup>$</sup>50</span>
+                    <p class="blue">Transfer up to $50.00</p>
+
+              </div>
+            
+            <div class="row mt-3">
+              <p class="col-12">Transfer to</p><br>
+              <div class="col-12">
+                <input nz-input placeholder="Bank Account Number ••••••••••">
+    
+              </div>
+            </div>
+              
+              
+            <div class="mt-4 push-r">
+              <button nz-button class="mr-2" nzType="default" data-dismiss="modal">Close</button>
+              <button nz-button nzType="primary" type="button" data-dismiss="modal" (click)="transferDone()">Transfer 50$</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

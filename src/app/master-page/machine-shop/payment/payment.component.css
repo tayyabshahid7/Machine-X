@@ -1,0 +1,75 @@
+.payment-form-gr{
+    height: calc(100vh - 128px );
+
+}
+.previous{
+    color:rgba(191,191,191,1);
+    font-size: 20px;
+    font-family: SFPDLight !important;
+}
+.content{
+    padding: 24px;
+    background-color: #fff;
+    color:#262626;
+    /* height: calc(100vh - 180px); */
+    max-height: calc(100vh - 260px);
+    overflow-y: scroll;
+}
+.gray-st{
+    height: 30px;
+    width: 100% !important;
+    background-color: #f0f2f5;
+}
+.gray-st-down{
+  height: 30px;
+  position: relative;
+  bottom: 0;
+  width: 100% !important;
+  background-color: #f0f2f5;
+}
+nz-footer{
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color:#fff ;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+    height: 64px;
+  }
+  .blue{
+      color: #1890ff;
+  }
+  .mbb-12{
+      margin-bottom: 12px;
+  }
+  .card-part{
+      height: 100%;
+      overflow-y: auto;
+  }
+  .summary-board{
+      background-color: #F5F5F5;
+      border-radius: 2px;
+      margin: auto;
+      padding: 24px;
+      color:#595959;
+      margin-top:12px;
+      height: 600px;
+  }
+  .summary-board > p {
+     margin-bottom: 0.1em;
+  }
+  .mr-top-80{
+      margin-top: 80px;
+  }
+  .total-pr{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    color:#1890FF;    
+  }
+  .mr-top-55{
+      margin-top:55px;
+  }

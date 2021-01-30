@@ -1,0 +1,508 @@
+<div class="steps">
+    <nz-page-header  [nzGhost]="false">
+        <nz-page-header-title><span class="previous">Onboarding /</span> {{(currentStep+1) }} . {{ steps[currentStep].name}} </nz-page-header-title>
+        <nz-page-header-extra>
+            <span class="blue">*</span>All fields are required
+          </nz-page-header-extra>
+      </nz-page-header>
+      <div class="steps-content">
+        <nz-steps [nzCurrent]="currentStep" nzProgressDot>
+            <nz-step *ngFor="let data of steps" nzTitle="{{data.name}}" nzDescription="{{data.status}}"></nz-step>
+            
+          </nz-steps>
+      </div>
+      <div class="main">
+          <div *ngIf="currentStep==0" class="registration row">
+            <div class="col-md-3">
+                <div class="mb-2"><span class="blue">*</span>Email Address</div>
+                <input type="email" nz-input placeholder="John@email.com" [(ngModel)]="email" />
+
+                <div class="mb-2" class="mt-2"><span class="blue">*</span>Password</div>
+                <nz-input-group [nzSuffix]="suffixPassword" >
+                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="passwordString" />
+                  </nz-input-group>
+                  <ng-template #suffixPassword>
+                    <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                  </ng-template>
+               
+            </div>
+          </div>
+
+          <div *ngIf="currentStep==1" class="LegalInfo row">
+            <div class="mb-2 col-md-12"><span class="blue">*</span>Company Legal Name as in EIN registration</div>
+              <div class="col-md-3">
+            <input type="text" nz-input placeholder="John’s Workshop" [(ngModel)]="companyLegalName" />
+
+            <div class="mb-2 mt-1"><span class="blue">*</span>Country</div>
+            <nz-select class="col-12" nzAllowClear  placeholder="Select Country">
+              <nz-option nzValue="1" nzLabel="USA"></nz-option>
+              <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+            </nz-select>
+              </div>
+              <div class="col-md-12 mt-2">
+                <nz-alert nzType="error" nzMessage="We use Stripe to make sure you get paid on time and to keep your personal bank and details secure. Click {CTA Action} to set up your payments on Stripe."></nz-alert>
+              </div>
+              <div class="col-md-12 mt-2">
+                 <img src="../../../assets/img/stripe.svg">
+              </div>
+              <div class="col-md-12 mt-2">
+                <label nz-checkbox >I agree with using Stripe as main payment gateway.</label>
+              </div>
+          </div>
+
+          <div *ngIf="currentStep==2" class="BusnessDetails row">
+            <div class="col-md-4">
+              <b class="gray-7 title">Business Name</b>
+              <div class="row mt-3">
+                <div class="col-md-9">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Legal Business Name </span></div>
+              <input type="text" nz-input placeholder="John@email.com" [(ngModel)]="LegalBusinessName" />
+              <p class="hint">
+                The name you provide must exactly match the name associated with your Employer
+                 Identification Number (EIN).
+              </p>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title"> Identification Number (EIN)</span></div>
+              <input type="text" nz-input placeholder="12 - 34567980" [(ngModel)]="EIN" />
+              <p class="hint">
+                If you use your Social Security number for business tax purposes,
+                 you can entrer that instead.
+              </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="input-title"> Doing Business As</span></div>
+              <input type="text" nz-input placeholder="Donny’s Workshop" [(ngModel)]="EIN" />
+              <p class="hint">
+                The operating name of your company, if it’s different than the legal  name.
+              </p>
+                </div>
+              </div>
+
+            </div>
+              
+
+            <div class="col-md-4">
+              <b class="gray-7 title">Registered Business Address</b>
+              <div class="row mt-3">
+                <div class="col-md-9">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 1 </span></div>
+              <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+             
+                </div>
+              </div>
+              
+              <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title">Address Line 2</span></div>
+              <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="EIN" />
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title">City</span></div>
+              <input type="text" nz-input placeholder="JExample Address, 123456" [(ngModel)]="EIN" />
+                </div>
+              </div>
+
+             <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title">State</span></div>
+                  <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
+                    <nz-option nzValue="1" nzLabel="USA"></nz-option>
+                    <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+                  </nz-select>
+                </div>
+              </div>
+
+            
+          
+
+              <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title">ZIP</span></div>
+              <input type="text" nz-input placeholder="134512" [(ngModel)]="EIN" />
+              <p class="hint">
+                You can use your home address if you don’t have a business address.
+              </p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <b class="gray-7 title">Additional Information</b>
+              <div class="row mt-3">
+                <div class="col-md-9">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Business Phone Number </span></div>
+              <input type="text" nz-input placeholder="+1 555 123 441" [(ngModel)]="LegalBusinessName" />
+             
+                </div>
+              </div>
+              
+
+             <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="blue">*</span><span class="input-title">Industry</span></div>
+                  <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
+                    <nz-option nzValue="1" nzLabel="USA"></nz-option>
+                    <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+                  </nz-select>
+                </div>
+              </div>
+
+            
+          
+
+              <div class="row mt-1">
+                <div class="col-md-9">
+                  <div class="mb-2 "><span class="input-title">Business Website</span></div>
+              <input type="text" nz-input placeholder="www.yourwebsite.com" [(ngModel)]="EIN" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div *ngIf="currentStep==3" class="PayOut row">
+
+            <div class="col-md-12 mt-2">
+              <nz-alert nzType="error" nzMessage="Info message for users to know that the payment method they select will be ‘permanently’ and verified by Stripe / not easy to switch. "></nz-alert>
+            </div>
+
+            <div class="col-md-12 mt-3">
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <!-- <i nz-icon nzType="bank" class="payIcon" nzTheme="outline"></i>  -->
+                         <span> Bank Account</span>
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body row">
+
+                      <div class="col-md-4">
+                        <div class="row mt-3">
+                          <div class="col-md-9">
+                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Holder Name</span></div>
+                        <input type="name" nz-input placeholder="John Smith" [(ngModel)]="LegalBusinessName" />
+                          </div>
+                        </div>
+                        
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Number</span></div>
+                      <input type="name" nz-input placeholder="99821023" [(ngModel)]="LegalBusinessName" />
+                      <div class="hint">
+                        Must be a checking account
+                      </div>
+                        </div>
+                      </div>
+
+                      
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Wire Routing Number</span></div>
+                      <input type="name" nz-input placeholder="2893783" [(ngModel)]="LegalBusinessName" />
+                   
+                        </div>
+                      </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="row mt-3">
+                          <div class="col-md-9">
+                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Currency</span></div>
+                        <input type="name" nz-input placeholder="USD" [(ngModel)]="LegalBusinessName" />
+                          </div>
+                        </div>
+                        
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Bank Name</span></div>
+                      <input type="name" nz-input placeholder="Morgan Chase" [(ngModel)]="LegalBusinessName" />
+                        </div>
+                      </div>
+
+                      
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Address</span></div>
+                      <input type="name" nz-input placeholder="DW, 553901, Arlington Bvd., 3" [(ngModel)]="LegalBusinessName" />
+                   
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        <label nz-checkbox >Set as default payout option.</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <!-- <i nz-icon nzType="dollar-circle"  nzTheme="outline"></i>  Cash -->
+                        Card
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body row">
+                      <div class="col-md-4">
+                        <div class="row mt-3">
+                          <div class="col-md-9">
+                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Card Holder Name</span></div>
+                        <input type="name" nz-input placeholder="John Smith" [(ngModel)]="LegalBusinessName" />
+                          </div>
+                        </div>
+                        
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Card number</span></div>
+                      <input type="name" nz-input placeholder="4566-2332-3009-3122-5521" [(ngModel)]="LegalBusinessName" />
+                        </div>
+                      </div>
+
+                      
+                      <div class="row mt-1">
+                        <div class="col-md-9">
+                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Expiration Date</span></div>
+                      <input type="name" nz-input placeholder="09/23" [(ngModel)]="LegalBusinessName" />
+                   
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        <label nz-checkbox >Set as default payout option.</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+              </div>
+            </div>
+
+          </div>
+
+          <div *ngIf="currentStep==4" class="Representatives row">
+            <div class="col-md-12 mt-2">
+              <nz-alert nzType="error" nzMessage="This account must be activated by an executive, senior manager or someone who otherwise has significant responsibility for the control and management of your business. If that’s not you, select someone new as the business representative."></nz-alert>
+            </div>
+
+            <div class="col-md-4 mt-3">
+              <b class="gray-7 title">Legal Name of Representative</b>
+              <div class="mt-2">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">First Name</span></div>
+              <input type="email" nz-input placeholder="John " [(ngModel)]="LegalBusinessName" />
+              </div>
+
+
+            <div class="mt-2">
+              <div class="mb-2"><span class="blue">*</span><span class="input-title">Last Name</span></div>
+          <input type="text" nz-input placeholder="Smith" [(ngModel)]="LegalBusinessName" />
+          </div>
+
+          <div class="mt-2">
+            <div class="mb-2"><span class="blue">*</span><span class="input-title">Email</span></div>
+        <input type="email" nz-input placeholder="John@email.com" [(ngModel)]="LegalBusinessName" />
+        </div>
+
+        <div class="mt-2">
+          <div class="mb-2"><span class="blue">*</span><span class="input-title">Job Title</span></div>
+      <input type="text" nz-input placeholder="CEO" [(ngModel)]="LegalBusinessName" />
+      </div>
+
+      <div class="mt-2">
+        <div class="mb-2"><span class="blue">*</span><span class="input-title">Date of Birth</span></div>
+        <nz-date-picker class="col-12" [(ngModel)]="date" [nzFormat]="dateFormat">
+        </nz-date-picker>
+    </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+              <b class="gray-7 title">Legal Name of Representative</b>
+              <div class="mt-2">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 1</span></div>
+              <input type="email" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+              </div>
+
+
+            <div class="mt-2">
+              <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 2</span></div>
+          <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+          </div>
+
+          <div class="mt-2">
+            <div class="mb-2"><span class="blue">*</span><span class="input-title">City</span></div>
+        <input type="email" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+        </div>
+
+        <div class="mt-2">
+          <div class="mb-2"><span class="blue">*</span><span class="input-title">State</span></div>
+          <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
+            <nz-option nzValue="1" nzLabel="USA"></nz-option>
+            <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+          </nz-select>
+      </div>
+
+      <div class="mt-2">
+        <div class="mb-2"><span class="blue">*</span><span class="input-title">Zip</span></div>
+        <input type="email" nz-input placeholder="31232" [(ngModel)]="LegalBusinessName" />
+
+        <p class="hint">
+          You can use your home address if you don’t have a business address.
+        </p>
+    </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+              <b class="gray-7 title">Additional Information of Representative</b>
+              <div class="mt-2">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Phone Number</span></div>
+              <input type="email" nz-input placeholder="+1 (123) 123-332" [(ngModel)]="LegalBusinessName" />
+              </div>
+
+
+            <div class="mt-2">
+              <div class="mb-2"><span class="blue">*</span><span class="input-title">Last 4 digits of Social Security number</span></div>
+          <input type="text" nz-input placeholder="•••-••- 1234" [(ngModel)]="LegalBusinessName" />
+          <div class="blue pointer">
+            <a>
+              Provide a government-issued ID number instead
+            </a>
+          </div>
+          </div>
+
+            </div>
+          </div>
+
+          <div *ngIf="currentStep==5" class="owner row">
+
+            <div class="col-md-12 mt-2">
+              <nz-alert nzType="error" nzMessage="Due to regulatory guidelines, we’re required to collect information on anyone who has significant ownership of your business."></nz-alert>
+            </div>
+            
+            <p class="gray-9 col-md-12 mt-3">Add any individual who owns 25% ore more of your buiness.</p>
+            <div class="col-md-12">
+              <button  data-toggle="modal" data-target="#ShareModal" nz-button class="add-owner">+ Add Business Owner</button>
+            </div>
+            <div class="col-7 mt-3">
+              <nz-table #basicTable [nzData]="ownerTableData" [nzShowPagination]="false">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of ownerTableData">
+                    <td>{{data.name}}</td>
+                    <td>{{data.email}}</td>
+                    <td (click)="deleteOwner()"><i nz-icon class="red-6" nzType="delete" nzTheme="outline"></i></td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </div>
+
+
+          <div *ngIf="currentStep==6" class="addictionalData row">
+            <div class="mb-2 col-md-12"><span class="blue">*</span>
+              <span class="input-title">Upload Additional Files</span>
+            </div>
+            <nz-upload class="col-md-7"
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+           >
+            <p class="ant-upload-drag-icon">
+              <i nz-icon nzType="inbox"></i>
+            </p>
+            <p class="ant-upload-text">Click or drag file to this area to upload</p>
+            <p class="ant-upload-hint">
+              Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+            </p>
+          </nz-upload>
+          </div>
+
+          <div *ngIf="currentStep==7" class="B">
+            <p class="gray-6">
+              Back-End Response (Stripe)
+            </p>
+          </div>
+
+          <div *ngIf="currentStep == 8" class="done">
+
+            <nz-result
+            nzStatus="success"
+            nzTitle="Accout successfully set up!"
+            nzSubTitle="You can review all the information in the settings menu. "
+          >
+            <div nz-result-extra>
+              <button nz-button>Settings</button>
+            </div>
+          </nz-result>
+
+          </div>
+      </div>
+
+
+
+      <nz-footer>   
+          <button *ngIf="currentStep !=8" nz-button (click)="backStep()" class="mar-2"  nzType="ghost" >Back</button>
+          <button *ngIf="currentStep !=8" nz-button (click)="NextStep()" type="submit" nzType="primary">{{steps[currentStep+1].name}}
+            <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+          </button>
+          <button *ngIf="currentStep ==8"  nz-button (click)="goToDashboard()" type="submit" nzType="primary">Start</button>
+
+    </nz-footer>
+</div>
+
+
+
+
+
+<div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <b> <img src="../../../../assets/img/share.svg" style="margin-right:10px">Add a business owner </b>
+        <div class="modal-content-custom-email">
+        <div class="row mt-1">
+           <p class="col-12"> <span class="blue">*</span>First Name</p><br>
+         <div class="col-12"><input nz-input placeholder="Jhon" [(ngModel)]="newOwnerFirstName" /></div>   
+        </div>
+        <div class="row mt-1">
+          <p class="col-12"> <span class="blue">*</span>Last Name</p><br>
+        <div class="col-12"><input nz-input placeholder="Smith"[(ngModel)]="newOwnerLastName" /></div>   
+       </div>
+       <div class="row mt-1">
+        <p class="col-12"> <span class="blue">*</span>Email</p><br>
+      <div class="col-12"><input nz-input placeholder="email@domain.com" [(ngModel)]="newOwnerEmail" /></div>   
+     </div>
+     <label nz-checkbox  class="mt-2">I agree with using Stripe as main payment gateway.</label>
+
+   
+        <div class="mt-2 push-r">
+          <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Cancle</button>
+          <button (click)="addOwner()" nz-button nzType="primary" type="button" data-dismiss="modal">Add</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

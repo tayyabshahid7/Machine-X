@@ -1,0 +1,279 @@
+<nz-content>
+    <div class="site-page-header-ghost-wrapper bottom-border">
+        <nz-page-header nzBackIcon [nzGhost]="false">
+          <nz-page-header-title><span class="previous">JOBs / </span> JOB ID: #00133312 Details </nz-page-header-title>
+          <nz-page-header-extra>
+            <nz-tag  *ngIf="status=='progress'" nzColor="success"> Job in Progress</nz-tag>
+            <nz-tag  *ngIf="status=='shipped'" [nzColor]="'purple'"> Shipped</nz-tag>
+            <nz-tag  *ngIf="status=='completed'" nzColor="default"> Job is Completed</nz-tag>
+            <i *ngIf="status!='shipped'" class="message-icon" nz-icon nzType="message" nzTheme="outline"></i>
+            <i *ngIf="status=='shipped'" class="red-message-icon" nz-icon nzType="message" nzTheme="outline"></i>
+
+          </nz-page-header-extra>
+        </nz-page-header>
+      </div>
+      <div class="content">
+        <div class="row full-h">
+            <div *ngIf="!history" class="col-6 p-24 scrollable">
+              <div class="row">
+                  <div class="col-6">
+                      <div class="summary">
+                          <h6><b class="mb-1">JOB Summary</b></h6>
+                          <p>
+                            Shop handling part: <b>Metal Shop X</b> 
+                          </p><br>
+                          <p>
+                            Selected part <b>ASD-491-231</b> 
+                          </p>
+                          <p>
+                            Part revision: <b>Revision C</b> 
+                          </p>
+                          <p>
+                            Material selected: <b>Aluminium</b> 
+                          </p>
+                          <p>
+                            Quantity: <b>12</b> 
+                          </p>
+                          <p>
+                            Part revision: <b>Revision C</b> 
+                          </p>
+                          <p>
+                            Part needed by: <b>29.10.2020 C</b> 
+                          </p>
+                        </div>
+                  </div>
+  
+                  <div class="col-6">
+                    <h6><b class="mb-1">PREVIEW</b></h6>
+                    <div class="preview">
+            
+                    </div>
+            
+                  </div>
+              </div>
+              <div class="mt-30px">
+                  
+                <div class="mt-4 row">
+                        <div class="col-12">
+                            <h6><b class="mb-2">NOTES</b></h6>
+                            <p>
+                                Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently 
+                                leverage existing revolutionary alignments rather than client-centric process improvements.
+                                <br><br> 
+                                Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently 
+                                leverage existing revolutionary alignments rather than client-centric process improvements.          
+                           </p>
+                        </div>
+
+                    </div>
+                    <div class="mt-4 row">
+                        <div class="col-12">
+                            <h6><b class="mb-2">ATTACHED FILES</b></h6>
+                        </div>
+                        <div class="col-12"> 
+                          <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322-901_Rvision-C.PDF</a>
+                        </div>
+                    </div>
+                    <div class="mt-4 row">
+                        <div class="col-12">
+                            <h6><b class="mb-2">DETAILS</b></h6>
+                        </div>
+                        <div class="col-6"> 
+                            <h6><b class="mb-2 blue">Receipt</b></h6>
+                        </div>
+                        <div class="col-6 text-right"> 
+                            <h6><b class="mb-2 ">Invoice #00133312</b></h6>
+                          </div>
+                    </div>
+                   
+              </div>
+            </div>
+            <!-- <div *ngIf="history" class="col-3"></div> -->
+            <div *ngIf="history" class="col-12 p-24 white-bg scrollable">
+                <nz-timeline>
+                    <nz-timeline-item  [nzDot]="cloud">
+                       <h5><b class="gray-9">Initial Revision</b></h5> 
+                        <p class="gray-8">09.20.2020</p>
+                        <p class="gray-7">
+                            Lorem Ipsum is simply dummy text of the 
+                            printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                        </p>
+                        
+                    
+                    </nz-timeline-item>
+                    <nz-timeline-item [nzDot]="cloud">
+                       <h5><b class="gray-9">Invoice generated</b></h5> 
+                       <p class="gray-8">29.9.2020</p>
+                       <p class="gray-7">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                       </p>
+                    </nz-timeline-item>
+                    <nz-timeline-item [nzDot]="cloud" nzColor="gray">
+                      <h5><b class="gray-8">RFQ Name Created</b></h5>
+                      <p class="gray-8">01.03.2020</p>
+                  </nz-timeline-item>
+                  <nz-timeline-item [nzDot]="cloud" nzColor="gray">
+                      <h5><b class="gray-8">Engineer submitted revision A for quoting</b></h5>
+                      <p class="gray-8">03.03.2020</p>
+                      <p class="gray-7">
+                          Lorem Ipsum is simply dummy text of the printing 
+                          and typesetting industry. Lorem Ipsum has been the industry's standard.
+                      </p>
+                      <nz-timeline>
+                          <nz-timeline-item>
+                              <h5><b class="red-6"> Issue ID #231311</b></h5>
+                              <p class="gray-7">07.03.2020</p>
+                          </nz-timeline-item>
+                      </nz-timeline>
+                  </nz-timeline-item>
+                  </nz-timeline>
+
+                  <ng-template #cloud>
+                    <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
+                  </ng-template>
+            </div>
+
+            <div *ngIf="!history" class="col-6 white-bg">
+                <nz-list class="messages" *ngIf="data.length" [nzDataSource]="data" 
+                [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                    <ng-template #item let-item>
+                        
+                      <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
+                        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                        <nz-comment-content class="bubble bubble-bottom-left">
+                            <b class="red">{{item.title}}</b>
+                          <p>{{ item.content }}</p>
+                        </nz-comment-content>
+                      </nz-comment>
+                    </ng-template>
+                  </nz-list>
+                  <div class="messages no-message-container" *ngIf="!data.length">
+                    <img *ngIf="status=='shipped'" src="../../../../../assets/img/chatIcon-red.svg" >
+                      <img *ngIf="status!='shipped'" src="../../../../assets/img/chatIcon-blue.svg">
+                      <p *ngIf="status!='shipped'" class="blue no-message-p">
+                        Engage with the Machine Shop handling 
+                        this part by sending them a message or 
+                        aising an issue if something uncontrolled comes up. 
+                      </p>
+
+                      <p *ngIf="status=='shipped'" class="red no-message-p">
+                        You are about to raise an issue with the Machine Shop handling this part. 
+                      </p>
+    
+                  </div>
+                  <nz-comment class="chat-box">
+                    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                    <nz-comment-content >
+                      <nz-form-item>
+                        <input *ngIf="issue" nz-input class="mb-2" placeholder="Title" [(ngModel)]="titleValue" />
+
+                        <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                      </nz-form-item>
+                      <nz-form-item class="send space-between">
+                        <button *ngIf="!issue" (click)="startIssue()" nz-button nzType="primary" nzDanger>Report Issue <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i></button>
+                        <button *ngIf="issue" (click)="cancelIssue()" nz-button nzType="default" nzDanger class="gray-9">Cancel </button>
+
+                       <div class="push-r">
+                        <i class="attach pr-3" nz-icon nzType="paper-clip" nzTheme="outline"></i>
+                        <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+                          Add Comment
+                        </button>
+                    </div>
+                      </nz-form-item>
+                    </nz-comment-content>
+                  </nz-comment>
+            </div>
+            </div>
+      </div>
+      <nz-footer *ngIf="history">
+        <button (click)="hideHistory()" nz-button class="mar-2" nzType="default">Back</button>
+
+      </nz-footer>
+      <nz-footer *ngIf="!history" class="space-between">
+          <div >
+               <button (click)="openInvoice()"  nz-button class="mar-2" nzType="primary">Open Invoice</button>
+               <button  data-toggle="modal" data-target="#ShareModal"   nz-button class="mar-2" nzType="default">Share<i nz-icon nzType="share-alt" nzTheme="outline"></i></button>
+          </div>
+          <div>
+            <button data-toggle="modal" [disabled]="status=='progress'" data-target="#RateModal"  nz-button class="mar-2" nzType="default">Rate your experience<i nz-icon nzType="star" nzTheme="outline"></i></button>
+            <button (click)="showHistory()"  nz-button class="mar-2" nzType="default">History<i nz-icon nzType="history" nzTheme="outline"></i></button>
+          </div>
+         
+     </nz-footer>
+</nz-content>
+
+
+<!-- Modal -->
+<div class="modal fade" id="RateModal" tabindex="-1" role="dialog" aria-labelledby="RateModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            
+            <div class="rate">
+                <img src="{{rateImg[rate-1]}}">
+                <h4 class="gray-8"><b>Rate your experience</b></h4>
+
+                <nz-rate [(ngModel)]="rate" [nzTooltips]="tooltips" class="large" nzColor="#1890FF"></nz-rate>
+                
+                <ng-template #heart>
+                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    <b>Hello</b>
+                </ng-template>
+                <ng-template #star>
+                    <i nz-icon nzType="star" nzTheme="outline"></i>   
+                  </ng-template>
+            </div>
+
+          <div class="row mt-3">
+            <p class="col-12">Tell us what you really think!</p><br>
+            <div class="col-12">
+              <textarea rows="4" nz-input></textarea>
+            </div>
+          </div>
+          <div class="mt-2 push-r">
+            <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Cancel</button>
+            <button nz-button nzType="primary" type="button" data-dismiss="modal">Submit</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <b> <img src="../../../../assets/img/share.svg" style="margin-right:10px"> Share with others</b>
+            <div class="modal-content-custom-email">
+            <div class="row mt-1">
+               <p class="col-12"> <span class="blue">*</span>Email</p><br>
+             <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>   
+             <div class="col-2">
+               <img (click)="addEmail()" src="../../../../assets/img/plus-circle.svg">
+             </div>    
+            </div>
+            <div class="row mt-2" *ngFor="let email of receivers">
+              <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>   
+              <div class="col-2">
+                <img (click)="removeEmail()" src="../../../../assets/img/delete.svg">
+              </div> 
+             </div>
+            <div class="row mt-3">
+              <p class="col-12">Add a note</p><br>
+              <div class="col-12">
+                <textarea rows="4" nz-input  ></textarea>
+    
+              </div>
+            </div>
+            <div class="mt-2 push-r">
+              <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Close</button>
+              <button nz-button nzType="primary" type="button" data-dismiss="modal">Share</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    

@@ -1,0 +1,117 @@
+.steps{
+    height: calc(100vh - 64px);
+}
+.previous{
+    color:grey;
+    font-size: 20px;
+    font-family: "SFPDLight" !important;
+}
+.bottom-border{
+    border-bottom: 1px solid #E8E8E8;
+}
+nz-footer{
+    padding: 16px 24px;  
+    background-color:#fff ;
+    width: calc(100% - 210px);
+  }
+  .mar-2{
+    margin-right: 12px;
+}
+.main{
+    background-color: #fff;
+    height: calc(100% - 136px - 96px);
+    overflow-y: auto;
+    padding: 24px;
+}
+.steps-content{
+    padding-top: 20px;
+    background-color: #FAFAFA;
+    height: 96px;
+    border-top:1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+}
+.ant-steps-item-title {
+    width: 150px !important;
+}
+.title{
+font-family: SFPDsemi;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+/* .row{
+    margin: 0;
+} */
+.hint{
+color: #8C8C8C;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+}
+.input-title{
+    font-family: SFPDsemi;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    
+}
+
+.btn-link {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #1890FF;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.btn-link.focus, .btn-link:focus {
+    text-decoration: none;
+    box-shadow: none;
+}
+.btn-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.payIcon{
+    color: #fff;
+}
+.card-body{
+    background-color: #f5f5f5;
+}
+.pointer{
+    cursor: pointer;
+}
+.add-owner{
+    background-color: #52C41A;
+    color:#fff;
+}
+
+.modal-content-custom-email{
+    padding: 20px;
+}
+.modal-content{
+  padding: 33px 11px;
+}
+.modal {
+    background-color:rgba(0, 39, 102, 0.8);
+    backdrop-filter: blur(4px);
+}
+.modal-dialog{
+  margin: auto;
+  width: 33% !important;
+}
+.push-r{
+        float: right !important;
+}

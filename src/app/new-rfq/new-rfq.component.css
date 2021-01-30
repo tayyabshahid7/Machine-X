@@ -1,0 +1,120 @@
+.space-b{
+    margin: 0px 6px 0px 6px;
+}
+
+.grey-icon-btn{
+    color:#595959;
+    padding-bottom: 5px;
+}
+.to-right-btn{
+    position: absolute;
+    right: 5px;
+}
+.pointer{
+    cursor: pointer;
+}
+
+nz-content {
+    background: #f5f5f5;
+    min-height: 400px;
+    border-top: 1px solid #E8E8E8 ;
+    height: calc(100vh - 64px);
+  }
+  nz-footer{
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+      background-color:#fff ;
+      display: flex;
+      position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+  }
+  .inner-box {
+    background: #0092ff;
+  }
+  .p-24px{
+      padding: 24px;
+      height: calc(100% - 180px);
+      overflow-y: auto;
+      background: #fff;
+  }
+  .custom-card{
+      background-color: white;
+      padding: 0 !important;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #D9D9D9;
+
+  }
+  .part-img{
+      padding-bottom: 10px;
+  }
+  .card-title{
+      padding: 10px 24px;
+      font-family: "SFPDsemi";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0em;
+      text-align: left;
+  }
+  hr{
+    margin: 6px 0px;
+  }
+.part-number-title{
+    padding: 0px 24px;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: left;
+color: #595959;
+}
+.part-number{
+    font-family: "SFPDsemi";
+    color:#1890FF;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+    
+}
+.content{
+    background-color: white;
+}
+.center-footer{
+    margin: auto;
+}
+th{
+font-family: SFPDsemi;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: center;
+color: #262626;
+}
+.frq-id{
+    color: #1890FF;
+}
+nz-tag{
+    width: 70%;
+}
+tr:hover{
+    background-color: #E6F7FF;
+}
+.ant-table-tbody > tr.ant-table-row:hover > td {
+    background: #E6F7FF;
+}
+.ant-table-tbody>tr.ant-table-row:hover>td {
+    background: #E6F7FF;
+}
+.bold{
+    font-weight: bold;
+}

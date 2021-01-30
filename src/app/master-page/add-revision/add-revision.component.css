@@ -1,0 +1,123 @@
+.part-detials{
+    padding: 24px;
+    /* min-height: 680px;
+    padding-bottom: 64px; */
+
+    height: 100%;
+    background-color: #fff;
+    /* margin-top: 30px; */
+    /* height: calc(100vh - 180px); */
+    max-height: calc(100% - 136px);
+    overflow-y: scroll;
+}
+.add-parts{
+    height: calc(100vh - 128px );
+}
+.previous{
+    color:grey;
+    font-size: 20px;
+    font-family: "SFPDLight" !important;
+}
+.bottom-border{
+    border-bottom: 1px solid #E8E8E8;
+}
+.preview{
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+}
+.img-preview{
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 180px;
+    background-position: center;
+    background-color: #fafafa;
+}
+.row{
+    margin: 0;
+}
+.p-left{
+    padding-left: 20px;
+}
+.col-9{
+    -ms-flex: 0 0 73%;
+    flex: 0 0 73%; 
+    max-width: 73%;
+}
+.ast{
+    color:#1890FF
+}
+.fieldname{
+font-family: "SFPDsemi";
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: left;
+}
+.drag{
+    border: 1px dashed #D9D9D9;
+    background-color: #f5f5f5;
+    height: 168px;
+}
+nz-footer{
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color:#fff ;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+  }
+  .center{
+      margin: auto;
+      padding-top:22px ;
+      text-align: center;
+  }
+  .drag-title{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color:#262626;
+  }
+  .drag-desc{
+    padding: 16px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    color:#8C8C8C;
+  }
+  .ant-upload-list{
+    background: #E6F7FF !important;
+    color: #1890FF !important;
+  }
+  .mar-2{
+      margin-right: 12px;
+  }
+  .ant-modal {
+      top:50% !important;
+  }
+
+  .gray-st{
+    height: 30px;
+    width: 100% !important;
+    background-color: #f0f2f5;
+}
+.gray-st-down{
+  height: 30px;
+  position: relative;
+  bottom: 0;
+  width: 100% !important;
+  background-color: #f0f2f5;
+}

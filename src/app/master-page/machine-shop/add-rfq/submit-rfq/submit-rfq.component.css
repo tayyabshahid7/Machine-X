@@ -1,0 +1,87 @@
+.previous{
+    color:rgba(191,191,191,1);
+    font-size: 20px;
+    font-family: SFPDLight !important;
+  }
+  .container-64{
+      height: calc(100vh - 64px);
+      overflow: hidden;
+  }
+  .content{
+      background-color: #f5f5f5;
+      padding: 24px;
+     height: calc(100% - 136px);
+     overflow-y: auto;
+  }
+  nz-footer{
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color:#fff ;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+    height: 64px;
+  }
+  .blue{
+    color: #1890ff;
+}
+.mar-2{
+    margin-right: 12px;
+}
+.header{
+    font-size: 20px;
+}
+.push-right{
+    float: right !important;
+}
+.summary>p{
+    margin: 0px !important;
+}
+.summary>p>b{
+    color:#262626
+    /* margin: 0px !important; */
+}
+
+
+.summary>title{
+    font-size: 20px;
+    color:#262626;
+}
+.text-right{
+    text-align: right;
+}
+th{
+    font-weight: 900 !important;
+    color: #262626 !important;
+}
+.preview{
+    height: 180px;
+    width: 100%;
+    background-image: url(../../../../../assets/img/part2.png);
+    height: 180px;
+    width: 100%;
+    background-size: contain;
+    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.file{
+    color:rgba(24, 144, 255) !important;
+    padding-left: 8px;
+
+}
+.file-clip{
+    font-size: 17px;
+    color:rgba(140, 140, 140, 1);
+}
+.border-r{
+    padding: 30px 24px;
+    background: #fff;
+    margin-right: 23px;
+    margin-left: 16px;
+    border-radius: 10px;
+}
+.ml-30px{
+    margin-left: 30px;
+}

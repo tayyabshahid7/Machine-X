@@ -1,0 +1,395 @@
+<div class="container-64px">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Settings</nz-page-header-title>
+    </nz-page-header>
+  </div>
+
+  <div class="content row">
+     
+    <nz-tabset class="col-md-12"  nzTabPosition="left" >
+      <nz-tab  [nzTitle]="AccountSettings">
+        <ng-template #AccountSettings>
+          <i nz-icon nzType="setting" nzTheme="outline"></i>
+          Account Settings
+        </ng-template>
+        <small>  Account Settings </small>
+      </nz-tab><nz-tab [nzTitle]="company">
+        <ng-template #company>
+          <i nz-icon nzType="user" nzTheme="outline"></i>
+          Company Details
+        </ng-template>
+       
+        <div class="row custom-tab-X">
+          <div class="col-md-12 accordion" id="Companyaccordion">
+
+
+            <!-- 1 -->
+          <div class="card">
+            <div class="card-headerCom" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn co-btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   <span>Legal Information</span>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#Companyaccordion">
+              <div class="card-body row">
+                <div class="summary">
+                  <p>
+                    Company Legal Name as in EIN registration: <b>SFUX Metal Ltd.</b> 
+                  </p>
+                  <p>
+                    Country: <b> United States of America</b> 
+                  </p>
+                  <p>
+                    Main payment gateway: <b>Stripe</b> 
+                  </p>
+                </div>
+             
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="card">
+            <div class="card-headerCom" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Business Details
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#Companyaccordion">
+              <div class="card-body row">
+                <div class="summary">
+                  <h6><b class="mb-2">Business Name</b></h6>
+                  <p>
+                    Legal Business Name: <b>SFUX Metal Ltd.</b> 
+                  </p>
+                  <p>
+                    Employer Identification Number (EIN):<b>47012 </b> 
+                  </p>
+                  <p>
+                    Doing Business As:<b> Danny’s workshop </b> 
+                  </p> 
+
+                  <h6 class=" mt-3"><b class="mb-2 mt-3">Registered Business Address</b></h6>
+                  <p>
+                    Address Line 1: <b>SFUX Metal Ltd.</b> 
+                  </p>
+                  <p>
+                    Address Line 2: <b>47012 </b> 
+                  </p>
+                  <p>
+                    City: <b>Oakland</b> 
+                  </p>
+                  <p>
+                    State:  <b>CA</b> 
+                  </p>
+                  <p>
+                    Zip Code: <b>90210</b> 
+                  </p>
+
+                  <h6 class=" mt-3"><b class="mb-2 mt-3">Additional Information</b></h6>
+                  <p>
+                    Business Phone Number: <b> +1 555 123 441</b> 
+                  </p>
+                  <p>
+                    Industry:  <b>Metal works </b> 
+                  </p>
+                  <p>
+                    Company Website: <b> www.danny-metal.us</b> 
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="card">
+            <div class="card-headerCom" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Representatives
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#Companyaccordion">
+              <div class="card-body row">
+                <div class="summary">
+                  <h6><b class="mb-2">Legal Name of Representative</b></h6>
+                  <p>
+                    First Name: <b>John</b> 
+                  </p>
+                  <p>
+                    Last Name:<b>Smith </b> 
+                  </p>
+                  <p>
+                    Email: <b> john.raven@north.realm </b> 
+                  </p> 
+                  <p>
+                    Job Title: <b> Nightwatcher </b> 
+                  </p> <p>
+                    Date of Birth:<b>15.04.1945</b> 
+                  </p>
+
+                  <h6 class=" mt-3"><b class="mb-2">Home Address of Representative</b></h6>
+                  <p>
+                    Address Line 1: <b>553901, Arlington Bvd., 3</b> 
+                  </p>
+                  <p>
+                    Address Line 2: <b>Building A, Garage 4 </b> 
+                  </p>
+                  <p>
+                    City: <b>Winnemucca</b> 
+                  </p>
+                  <p>
+                    State:  <b>Nevada</b> 
+                  </p>
+                  <p>
+                    Zip Code: <b>15041</b> 
+                  </p>
+
+                  <h6 class=" mt-3"><b class="mb-2 mt-3">Additional Information of Representative</b></h6>
+                  <p>
+                    Phone Number 1: <b>  +1 (539) 014-141</b> 
+                  </p>
+                  <p>
+                    Last 4 digits of Social Security number: <b> 7789 </b> 
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="card">
+            <div class="card-headerCom" id="headingfour">
+              <h2 class="mb-0">
+                <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                    Business Owners
+                </button>
+              </h2>
+            </div>
+            <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#Companyaccordion">
+              <div class="card-body row">
+                <div class="summary">
+                <h6 ><b class="mb-2">Shareholder #1</b></h6>
+                <p>
+                  Name: <b>John Smith</b> 
+                </p>
+                <p>
+                  Email: <b> john.smith.junior@email.dk </b> 
+                </p>
+
+                <h6 class=" mt-3"><b class="mb-2">Shareholder #1</b></h6>
+                <p>
+                  Name: <b>David Attenborough</b> 
+                </p>
+                <p>
+                  Email: <b>dave.a@national.geographic.com</b> 
+                </p>
+              </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 5 -->
+          <div class="card">
+            <div class="card-headerCom" id="headingFive">
+              <h2 class="mb-0">
+                <button class="btn co-btn btn-link  btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Additional Documents
+                </button>
+              </h2>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#Companyaccordion">
+              <div class="card-body row">
+               <div class="col-md-4">
+                <div class="summary">
+                  <h6 ><b class="mb-2">Document #1</b></h6>
+                  <p>
+                    Number: <b>...</b> 
+                  </p>
+                  <p>
+                    Name: <b> ... </b> 
+                  </p>
+                    <p>
+                    Type: <b>..</b> 
+                  </p>
+                  <p>
+                    Issued by: <b>..</b> 
+                  </p>
+                  <p>
+                   Available until: <b>..</b> 
+                  </p>
+                </div>
+  
+               </div>
+               <div class="col-md-4">
+                <div class="summary">
+                  <h6><b class="mb-3"></b> Attachments</h6>
+
+                  <div class="col-12"> 
+                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322-C.PDF</a>
+                  </div>
+                  <div class="col-12"> 
+                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">File.PNG</a>
+                  </div>
+                  <div class="col-12"> 
+                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322.PDF</a>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        </div>
+        </div>
+ 
+      </nz-tab>
+
+
+      <nz-tab [nzTitle]="payout">
+        <ng-template #payout>
+          <i nz-icon nzType="dollar-circle" nzTheme="outline"></i>
+          Payout Options
+        </ng-template>
+        <div class="row custom-tab-X">
+          <div class="col-md-12 accordion" id="Paymentaccordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <!-- <i nz-icon nzType="bank" class="payIcon" nzTheme="outline"></i>  -->
+                   <span> Bank Account</span>
+                </button>
+              </h2>
+            </div>
+        
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#Paymentaccordion">
+              <div class="card-body row">
+
+                <div class="col-md-4">
+                  <div class="row mt-3">
+                    <div class="col-md-9">
+                      <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Holder Name</span></div>
+                  <input type="name" nz-input placeholder="John Smith"  />
+                    </div>
+                  </div>
+                  
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Number</span></div>
+                <input type="name" nz-input placeholder="99821023" />
+                <div class="hint">
+                  Must be a checking account
+                </div>
+                  </div>
+                </div>
+
+                
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Wire Routing Number</span></div>
+                <input type="name" nz-input placeholder="2893783" />
+             
+                  </div>
+                </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="row mt-3">
+                    <div class="col-md-9">
+                      <div class="mb-2"><span class="blue">*</span><span class="input-title">Currency</span></div>
+                  <input type="name" nz-input placeholder="USD" />
+                    </div>
+                  </div>
+                  
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Bank Name</span></div>
+                <input type="name" nz-input placeholder="Morgan Chase"  />
+                  </div>
+                </div>
+
+                
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Address</span></div>
+                <input type="name" nz-input placeholder="DW, 553901, Arlington Bvd., 3"  />
+             
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <label nz-checkbox >Set as default payout option.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <!-- <i nz-icon nzType="dollar-circle"  nzTheme="outline"></i>  Cash -->
+                  Card
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#Paymentaccordion">
+              <div class="card-body row">
+                <div class="col-md-4">
+                  <div class="row mt-3">
+                    <div class="col-md-9">
+                      <div class="mb-2"><span class="blue">*</span><span class="input-title">Card Holder Name</span></div>
+                  <input type="name" nz-input placeholder="John Smith"  />
+                    </div>
+                  </div>
+                  
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Card number</span></div>
+                <input type="name" nz-input placeholder="4566-2332-3009-3122-5521"  />
+                  </div>
+                </div>
+
+                
+                <div class="row mt-1">
+                  <div class="col-md-9">
+                    <div class="mb-2"><span class="blue">*</span><span class="input-title">Expiration Date</span></div>
+                <input type="name" nz-input placeholder="09/23" />
+             
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <label nz-checkbox >Set as default payout option.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+        </div>
+        </div>
+        
+      </nz-tab>
+      <nz-tab [nzTitle]="notification">
+        <ng-template #notification>
+          <i nz-icon nzType="bell" nzTheme="outline"></i>
+          Notifications
+        </ng-template>
+        <small>Notifications</small>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+
+<nz-footer>
+</nz-footer>
+</div>

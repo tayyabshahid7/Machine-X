@@ -1,0 +1,116 @@
+
+<div class="payment-form-gr">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">RFQs / Returned quotes / RFQ ID: 343123 / </span> Payment </nz-page-header-title>
+    </nz-page-header>
+  </div>
+  <div class="gray-st"></div>
+
+  <div class="content">
+      <div class="row">
+          <div class="col-6 card-part">
+              <h6><b class="mb-1">PAYMENT DETAILS</b></h6>
+
+              <div class="row mbb-12">
+                  <div class="col-6">
+                      <div class="mb-2"><span class="blue">*</span>Card Holder Name</div>
+                      <input nz-input placeholder="John Smith" />
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-2"><span class="blue">*</span>Email</div>
+                    <input type="email" nz-input placeholder="email@example.com"  />
+                </div>
+              </div>
+              <div class="row mbb-12">
+                <div class="col-12">
+                    <div class="mb-2"><span class="blue">*</span>Internal Reference No</div>
+                    <input type="number" nz-input placeholder="ex. 109647" />
+                </div>
+            </div>
+              <div class="row mbb-12">
+                <div class="col-12">
+                    <div class="mb-2"><span class="blue">*</span>Address</div>
+                    <input type="address" nz-input placeholder="44023, Santa Monica Bay, Suite 451" />
+                </div>
+            </div>
+            <div class="row mbb-12">
+                <div class="col-6">
+                    <div class="mb-2"><span class="blue">*</span>City</div>
+                    <input nz-input placeholder="San Diego" />
+                </div>
+                <div class="col-6">
+                  <div class="mb-2"><span class="blue">*</span>State</div>
+                  <input  nz-input placeholder="CA"  />
+              </div>
+            </div>
+            <div class="row mbb-12">
+                <div class="col-9">
+                    <div class="mb-2"><span class="blue">*</span>Country</div>
+                    <input nz-input placeholder="United States of America" />
+                </div>
+                <div class="mb-2 col-3">
+                  <div class="mb-2"><span class="blue">*</span>Zip Code</div>
+                  <input  nz-input placeholder="412901"  />
+              </div>
+            </div>
+
+            <div class="row mbb-12">
+                <div class="col-8">
+                    <div class="mb-2"><span class="blue">*</span>Your Card Details</div>
+                    <input type="address"  nz-input placeholder="44023, Santa Monica Bay, Suite 451" />
+                </div>
+                <div class="col-2 p-0">
+                    <div class="mb-2" style="color:transparent">.</div>
+                    <input type="text"  nz-input placeholder="MM/YY" />
+                </div>
+                <div class="col-2">
+                    <div class="mb-2" style="color:transparent">.</div>
+                    <input type="text"  nz-input placeholder="CVC" />
+                </div>
+            </div>
+
+            <button (click)="paymenConfirmation()" class=" mt-2 col-12" nz-button nzType="primary">Pay ${{cost}}</button>
+
+          </div>
+
+          <div class=" col-6 summary-payment">
+            <h6><b class="mb-1">YOUR ORDER SUMMARY</b></h6>
+
+            <div class="summary-board">
+                <h4>Quote  #2308</h4>
+                <p>Date</p>
+                <p>Engineer Name</p>
+                <p>Part Name</p>
+                <p>Engineer Email</p>
+                <p>Engineer Address Line 1</p>
+
+                <div class="mr-top-80">
+                    <b>Note</b>
+                    <p>
+                        It is a long established fact that a reader will be distracted by the readable 
+                        content of a page when looking at its layout. The point of using Lorem Ipsum
+                    </p>
+                
+                </div>
+
+                <div class="mr-top-55">
+                    <b style="font-size: 16px;">Grand Total</b>
+                    <div class="total-pr">${{cost}}</div>
+                </div>
+
+
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+
+  <div class="gray-st-down"></div>
+
+  <nz-footer>
+   
+ </nz-footer>
+</div>
+ 

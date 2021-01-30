@@ -1,0 +1,97 @@
+<div class="container-64">
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">RFQs / Add new RFQ / 
+    </span> Review & Submit RFQ </nz-page-header-title>
+    </nz-page-header>
+  </div>
+
+  <div class="content">
+
+    <div *ngIf="!submitSuccess" class="row border-r">
+        <div class="col-3 summary">
+          <h6><b class="mb-1">RFQ SUMMARY</b></h6>
+          <p>   Selected part: <b>ASD-491-231</b>   </p>
+          <p>Part revision: <b>Revision C</b> </p>
+          <p> Material selected: <b>Aluminium</b> </p>
+          <p>   Quantity: <b>12</b>   </p>
+          <p>  Selected part: <b>ASD-491-231 </b>    </p>
+          <p> Part revision: <b>Revision C</b>  </p>
+          <p>  Quote needed in: <b>3 Days</b>  </p>
+          <p>  Part needed by: <b>29.10.2020</b> </p>
+        </div>
+     
+        <div class="col-5">
+          <h6><b class="mb-1">ATTACHED FILES</b></h6>
+          <div>
+            <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="file">FSJ-322-901_Rvision-C.PDF</a>
+          </div>
+          <div>
+            <i class="file-clip"  nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="file">FSJ-322-901_Rvision-B.CAD</a>
+          </div>
+  
+        </div>
+        <div class="col-3">
+          <h6><b class="mb-1">PREVIEW</b></h6>
+          <div class="preview">
+  
+          </div>
+  
+        </div>
+      </div>
+
+
+      <div *ngIf="!submitSuccess" class="row mt-5">
+        <div class="col-4 border-r ml-30px">
+          <h6><b class="mb-1">NOTES</b></h6>
+          <p>Continually fashion strategic metrics through interdependent partnerships. 
+              Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments.
+               Phosfluorescently 
+              leverage existing revolutionary alignments rather than client-centric process improvements.  </p>
+        </div>
+        <div class="col-4 summary border-r">   
+            <h6><b class="mb-1">SHIPPING ADDRESS</b></h6>
+            <!-- <h6><b class="mb-1">BILLING ADDRESS</b></h6> -->
+            <p>   Street No, Ap. Building: <b> 42, Willhelm Rd., Ap. 2</b></p>
+            <p>City: <b>Remington</b></p>
+            <p>   State: <b>North Carolina</b></p>
+            <p>  Zip Code: <b>12251 </b></p>
+            <p> Part revision: <b>Revision C</b></p>
+            <p> Country: <b>United States of America </b></p>
+         
+          </div>
+          <!-- <div class="col-3 summary">
+            <h6><b class="mb-1">SHIPPING ADDRESS</b></h6>
+            <p>   Street No, Ap. Building: <b> 216, Pearl Harbor</b> </p>
+            <p>City: <b>Mogadiju</b> </p>
+            <p>   State: <b>Wyoming</b></p>
+            <p>  Zip Code: <b>1225 </b></p>
+            <p> Part revision: <b>Revision C</b></p>
+            <p> Country: <b>United States of America </b></p>
+          </div> -->
+      </div>
+
+
+
+
+      <nz-result *ngIf="submitSuccess"
+      nzStatus="success"
+      nzTitle="Successfully Purchased Cloud Server ECS!"
+      nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+    >
+      <div nz-result-extra>
+        <button (click)="addRFQ()" nz-button nzType="primary">Add Another RFQ</button>
+        <button (click)="RFQS()" nz-button>Back to RFQs</button>
+      </div>
+    </nz-result>
+  </div>
+
+
+  <nz-footer>
+<button *ngIf="!submitSuccess" (click)="submited()" nz-button class="mar-2" nzType="primary">Submit</button>
+    <button *ngIf="!submitSuccess" (click)="backClicked()"  nz-button class="mar-2" nzType="default">Edit</button>
+    <button *ngIf="!submitSuccess" (click)="showDeleteConfirm()"  nz-button class="mar-2" nzType="default">Cancel</button>
+
+</nz-footer>
+
+</div>

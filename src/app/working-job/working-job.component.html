@@ -1,0 +1,78 @@
+<nz-content>
+    <div class="site-page-header-ghost-wrapper border-bottom">
+        <nz-page-header [nzGhost]="false">
+          <nz-page-header-title>Working Jobs</nz-page-header-title>
+          <nz-page-header-content>
+              <div class="row">
+                  <div class="col-6 p-0 space-b">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                        <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID" />
+                      </nz-input-group>
+                      <ng-template #suffixIconButton>
+                        <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+                      </ng-template>
+                  </div>
+                 
+                  <!-- <button nz-button nzTrigger="click" class="space-b" nz-dropdown [nzDropdownMenu]="Datecreated">
+                    Date created
+                    <i nz-icon nzType="down"></i>
+                  </button>
+                  <nz-dropdown-menu #Datecreated="nzDropdownMenu">
+                    <ul nz-menu>
+                      <li nz-menu-item>133</li>
+                      <li nz-menu-item>2</li>
+                      <li nz-menu-item>3</li>
+                    </ul>
+                  </nz-dropdown-menu> -->
+                 
+              </div>
+           
+    
+           
+          </nz-page-header-content>
+        </nz-page-header>
+      </div>
+      <div class="p-24px"> 
+        <div nz-row nzGutter="" >
+           
+            <nz-table [nzShowPagination]="false" class="col-md-12" #basicTable [nzData]="tableData">
+                <thead>
+                  <tr>
+                    <th>Job ID</th>
+                    <th>Invoice</th>
+                    <th>Total Cost</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Status</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr (click)="onSelect(data)" *ngFor="let data of tableData">
+                    <td >{{data.id}}</td>
+                    <td class="blue">{{data.name}}</td>
+                    
+                    <td class="text-left">${{data.daysLeft}}</td>
+                    <td class="text-center">{{data.date}}</td>
+                    <td class="text-center" *ngIf="data.statusX=='InProgress'">
+                        <nz-tag  nzColor="success">In Progress</nz-tag>
+                    </td>
+                    <td  class="text-center" *ngIf="data.statusX=='Shipped'">
+                        <nz-tag [nzColor]="'purple'">Shipped</nz-tag>
+                    </td>
+                    <td  class="text-center" *ngIf="data.statusX=='Issue'">
+                        <nz-tag nzColor="red"><i nz-icon nzType="warning" nzTheme="outline"></i><span>Issue</span></nz-tag>
+                    </td>
+                   
+                  </tr>
+                </tbody>
+              </nz-table>
+          </div>
+      </div>
+      <nz-footer>
+        <!-- <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a> -->
+    </nz-footer>
+    </nz-content>
+    
+    
+    
+     

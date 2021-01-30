@@ -1,0 +1,307 @@
+<div class="container-64">
+
+<div class="site-page-header-ghost-wrapper bottom-border">
+    <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header-title><span class="previous">Working Jobs / </span> #00133312 Details  </nz-page-header-title>
+      <nz-page-header-extra>
+        <nz-tag [nzColor]="'orange'" *ngIf="status == 'Pending'"  class="nz-tag-me">Pinding </nz-tag>
+        <nz-tag  [nzColor]="'blue'" *ngIf="status == 'Approved'" class="nz-tag-me">Approved</nz-tag>
+        <nz-tag [nzColor]="'red'" *ngIf="status == 'Expired'" class="nz-tag-me">Expired </nz-tag>
+
+
+      </nz-page-header-extra>
+    </nz-page-header>
+  </div>
+
+  <div class="content row">
+    <nz-tabset class="col-md-6 border-right" [nzTabBarExtraContent]="extraTemplate" >
+      <ng-template #extraTemplate>
+        <nz-tag *ngIf="status == 'Approved'" nzColor="success"   class="nz-tag-me">Accepting Quotes</nz-tag>
+        <nz-tag *ngIf="status == 'Approved'" [nzColor]="'red'"   class="nz-tag-me">Not Accepting Quotes</nz-tag>
+      </ng-template>
+
+
+        <nz-tab nzTitle="RFQ Details">
+            <div class="firts-tab-content">
+
+                <div class="col-md-12 pt-30px scrollable">
+          
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="summary">
+                                <h6><b class="mb-2">RFQ SUMMARY</b></h6>
+                                <p>
+                                  Shop handling part: <b>Metal Shop X</b> 
+                                </p><br>
+                                <p>
+                                  Selected part <b>ASD-491-231</b> 
+                                </p>
+                                <p>
+                                  Part revision: <b>Revision C</b> 
+                                </p>
+                                <p>
+                                  Material selected: <b>Aluminium</b> 
+                                </p>
+                                <p>
+                                  Quantity: <b>12</b> 
+                                </p>
+                                <p>
+                                  Part revision: <b>Revision C</b> 
+                                </p>
+                                <p>
+                                  Selected part <b>ASD-491-231</b> 
+                                </p>
+                                <p>
+                                  Part needed by: <b>29.10.2020 C</b> 
+                                </p>
+                              </div>
+                        </div>
+        
+                        <div class="col-md-6">
+                          <h6><b class="mb-1">PREVIEW</b></h6>
+                          <div class="preview">
+                  
+                          </div>
+                  
+                        </div>
+                    </div>
+                    <div class="mt-30px">
+                        
+                      <div class="mt-4 row">
+                              <div class="col-md-12">
+                                  <h6><b class="mb-2">NOTES</b></h6>
+                                  <p class="gray-8">
+                                      Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently 
+                                      leverage existing revolutionary alignments rather than client-centric process improvements.
+                                      <br><br> 
+                                      Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently 
+                                      leverage existing revolutionary alignments rather than client-centric process improvements.          
+                                 </p>
+                              </div>
+      
+                          </div>
+                          <div class="mt-4 row">
+                              <div class="col-md-12">
+                                  <h6><b class="mb-2">ATTACHED FILES</b></h6>
+                              </div>
+                              <div class="col-md-12"> 
+                                <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322-901_Rvision-C.PDF</a>
+                              </div>
+                          </div>
+                          <div class="mt-4 row">
+                              <div class="col-md-12">
+                                  <h6><b class="mb-2 mt-2">SHIPPING ADDRESS</b></h6>
+                              </div>
+                              <div class="col-md-6 summary">
+                  
+                                <p>
+                                  Name: <b>John Davison Rockefeller Sr. </b> 
+                                </p>
+                                <p>
+                                  Address: <b>Upstate New York</b> 
+                                </p>
+                                <p>
+                                  City: <b>Utica</b> 
+                                </p>
+                                <p>
+                                  Quantity: <b>12</b> 
+                                </p> 
+                                <p>
+                                  Selected part <b>ASD-491-231</b> 
+                                </p>
+                                <p>
+                                  Part revision: <b>Revision C</b> 
+                                </p>
+                               
+                                <p>
+                                  Part needed by: <b>29.10.2020 C</b> 
+                                </p>
+                              </div>
+                              
+                          </div>
+                         
+                    </div>
+        
+             
+    
+    
+              </div>
+            </div>
+        </nz-tab> 
+        <nz-tab nzTitle="Quote Details">
+          <div class="quote-details-tab">
+            <div class="col-md-12 pt-30px scrollable">
+                <div class="row">
+                  <div class="col-md-6">
+                      <div class="summary">
+                          <p>
+                          Shop Name:   <b> Quantum PHX</b>
+                          </p>
+                          <p>
+                           Address: <b> R221, ST.Monica Pier  </b>
+                          </p>
+                          <p>
+                           City: <b>San Jose</b>  
+                          </p>
+                          <p>
+                            State: <b>  CA, 41211</b>
+                          </p>
+                          <p>
+                            Shop Phone Number: <b> A+1(514)213331</b>
+                          </p>
+                        </div>
+                  </div>
+      
+                  <div class="col-md-6">
+                      <div class="summary">
+                          <!-- <h6><b class="mb-1">QUOTE #2308</b></h6> -->
+                          <p>
+                            Date:  <b> Quantum PHX</b>
+                          </p>
+                          <p>
+                             Engineer Name: <b> R221, ST.Monica Pier</b>
+                          </p>
+                          <p>
+                             Part Name:  <b> Bike Door Handle 551-MXO-4JM</b>
+                          </p>
+                          <p>
+                            Engineer Email:  <b> CA, 41211</b>
+                          </p>
+                          <p>
+                             Engineer Address Line 1:<b>San Diego, CA </b>
+                          </p>
+                        </div>
+                  </div>
+              </div>
+              <div class="mt-30px">
+                  <nz-table  [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Item Name</th>
+                          <th>Quantity</th>
+                          <th>Unit Cost</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of basicTable.data">
+                          <td>{{ data.id }}</td>
+                          <td>{{ data.name }}</td>
+                          <td>{{ data.quantity }}</td>
+                          <td>${{ data.cost }}</td>
+                          <td>${{ data.cost * data.quantity }}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                    <div class="mt-2 row">
+                        <div class="col-md-8">
+                           <b>Note</b>
+                            <p>
+                              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class=" tax text-center">+ Tax $15.00</p>
+                            <nz-table [nzShowPagination]="false"  #basicTable [nzData]="tableData">
+                              <thead>
+                                <tr>
+                                  <th>Grand Total</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr >
+                                  <td class="blue">$1,360.00</td>
+                                </tr>
+                              </tbody>
+                            </nz-table>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="blue">*</span>Attached files
+                    </div>
+                    <div>
+                      <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">FSJ-322-901_Rvision-C.PDF</a>
+                    </div>
+              </div>
+      
+              </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+
+
+      <nz-tabset class="col-md-6">
+       
+        <nz-tab [nzTitle]="titleTemplate">
+            <ng-template #titleTemplate>
+                <i nz-icon nzType="message" nzTheme="outline"></i>
+                Chat
+              </ng-template>
+              <div   class=" chat-tap col-md-12 white-bg">
+                <nz-list class="messages" *ngIf="data.length" [nzDataSource]="data" 
+                [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                    <ng-template #item let-item>
+                        
+                      <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
+                        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                        <nz-comment-content class="bubble bubble-bottom-left">
+                            <b class="red">{{item.title}}</b>
+                          <p>{{ item.content }}</p>
+                        </nz-comment-content>
+                      </nz-comment>
+                    </ng-template>
+                  </nz-list>
+                  <div class="messages no-message-container" *ngIf="!data.length">
+                    <!-- <img *ngIf="status=='shipped'" src="../../../../../assets/img/chatIcon-red.svg" > -->
+                      <img  src="../../../assets/img/chatIcon-blue.svg">
+                      <p  class="blue no-message-p">
+                        Engage with the Machine Shop handling 
+                        this part by sending them a message or 
+                        aising an issue if something uncontrolled comes up. 
+                      </p>
+
+                      <!-- <p *ngIf="status=='shipped'" class="red no-message-p">
+                        You are about to raise an issue with the Machine Shop handling this part. 
+                      </p> -->
+    
+                  </div>
+                  <nz-comment class="chat-box">
+                    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                    <nz-comment-content >
+                      <nz-form-item>
+                        <input *ngIf="issue" nz-input class="mb-2" placeholder="Title" [(ngModel)]="titleValue" />
+
+                        <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                      </nz-form-item>
+                      <nz-form-item class="send space-between">
+                        <button *ngIf="!issue" (click)="startIssue()" nz-button nzType="primary" nzDanger>Report Issue <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i></button>
+                        <button *ngIf="issue" (click)="cancelIssue()" nz-button nzType="default" nzDanger class="gray-9">Cancel </button>
+
+                       <div class="push-r">
+                        <i class="attach pr-3" nz-icon nzType="paper-clip" nzTheme="outline"></i>
+                        <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+                          Add Comment
+                        </button>
+                    </div>
+                      </nz-form-item>
+                    </nz-comment-content>
+                  </nz-comment>
+            </div>
+        </nz-tab>
+      </nz-tabset>
+  </div>
+  <nz-footer>
+    <div>
+      <button (click)="close()" nz-button class="mar-2" >Close</button>
+      <button (click)=" showArchive()" nz-button class="mar-2" nzType="danger">Archive Quote</button>
+    </div>
+
+    
+    <div class="push-r">
+    <button  nz-button class="mar-2" (click)="startJob()" [disabled]="!canStart"  nzType="primary">Start Project <i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>
+    </div>
+
+</nz-footer>
+</div>
