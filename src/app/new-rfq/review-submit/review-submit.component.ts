@@ -7,22 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./review-submit.component.css']
 })
 export class ReviewSubmitComponent implements OnInit {
-  tableData=[
+  tableData = [
     {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
     }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
    }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
    }
   ];
   constructor(private router: Router) { }
@@ -30,7 +30,7 @@ export class ReviewSubmitComponent implements OnInit {
   ngOnInit(): void {
   }
   backToNewRFQ(){
-    console.log("Cancel");
+    console.log('Cancel');
     this.router.navigate(['dashboard/newRFQ']);
   }
 }

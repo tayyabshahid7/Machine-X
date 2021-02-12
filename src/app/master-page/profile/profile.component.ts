@@ -14,7 +14,7 @@ export class ProfileComponent  {
 
   loading = false;
   avatarUrl?: string;
-  addressnew:boolean=false;
+  addressnew = false;
 
   constructor(private msg: NzMessageService) {}
 
@@ -35,7 +35,7 @@ export class ProfileComponent  {
       observer.next(isJpgOrPng && isLt2M);
       observer.complete();
     });
-  };
+  }
 
   private getBase64(img: File, callback: (img: string) => void): void {
     const reader = new FileReader();

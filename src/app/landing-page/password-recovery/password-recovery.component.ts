@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./password-recovery.component.css']
 })
 export class PasswordRecoveryComponent implements OnInit {
-  passwordVisible:boolean=false;
-  RememberMechecked:boolean=true;
-  resetPassword=false;
+  passwordVisible = false;
+  RememberMechecked = true;
+  resetPassword = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -16,6 +16,6 @@ export class PasswordRecoveryComponent implements OnInit {
 
 
   resetPass(){
-    this.resetPassword=!this.resetPassword;
+    this.resetPassword = !this.resetPassword;
   }
 }

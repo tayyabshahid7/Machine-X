@@ -16,31 +16,31 @@ export class PartEditComponent implements OnInit {
     'Man charged over missing wedding girl.',
     'Los Angeles battles huge wildfires.'
   ];
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router ) { }
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router ) { }
 
   ngOnInit(): void {
   }
 
   showArchive(): void {
     this.modal.error({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to archive this part?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Archive',
       nzOkType: 'danger',
-      nzOnOk: () =>{
+      nzOnOk: () => {
         this.router.navigate(['/dashboard/parts']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
-       
+      nzOnCancel: () => {
+
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
   addRevision(){
-    this.router.navigate(["/dashboard/parts/view/addrevision"]);
+    this.router.navigate(['/dashboard/parts/view/addrevision']);
   }
 
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router'; 
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { NzButtonModule } from 'ng-zorro-antd/button'; 
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input/';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -98,152 +98,7 @@ const antDesignIcons = AllIcons as {
 };
 
 
-const routapp: Routes = [
-  {path:"", component:LandingPageComponent},
-  {path:"login", component:LoginComponent},
-  {path:"forgotpassword", component:PasswordRecoveryComponent},
-  {path:"newpassword", component:NewPasswordComponent},
-  {path:"Onboarding" , component:OnboardingComponent},
- 
-  {
-    
-    path:"dashboard",
-    component:MasterPageComponent,
-    children: [
-      {
-        path:'newRFQ',
-        component:NewRFQComponent
-      },
-      {
-        path:'newRFQ/details',
-        component:RfqDetailsComponent
-      },
-      {
-        path:'newRFQ/details/apply',
-        component:GenerateQuoteComponent
-      },
-      {
-        path:'newRFQ/details/submit',
-        component:ReviewSubmitComponent
-      },
-      {
-        path:'submittedQuote',
-        component:SubmittedQuoteComponent
-      },
-      {
-        path: 'submittedQuote/details/:status',
-        component: SubmittedDetailsComponent,
-      },
-      {
-        path:'submittedQuote/details/:status/invoice',
-        component:QuoteInvoiceSubmittedComponent
-      },
-      {
-        path:'WorkingJobs',
-        component:WorkingJobComponent
-      },
-      {
-        path:'WorkingJobs/details/:status',
-        component:WorkingJobDetailsComponent
-
-      },
-      {
-        path: 'parts', // child route path
-        component: PartsComponent,
-        // child route component that the router renders
-      },
-      {
-        path:"home",
-        component:DashboardComponent,
-      },
-      {
-        path: 'parts/add',
-        component: PartDetailsComponent, // another child route component that the router renders
-      },
-      {
-        path: 'parts/view',
-        component: PartEditComponent, // another child route component that the router renders
-      },
-      {
-        path: 'parts/view/addrevision',
-        component: AddRevisionComponent
-      },
-      {
-        path: 'RFQ',
-        component: RFQsComponent
-      },
-      {
-        path:'RFQ/Add',
-        component:AddRfqComponent
-      },
-      {
-        path:'RFQ/Add/confirm',
-        component:SubmitRfqComponent
-      },
-      {
-        path: 'RFQ/RFQDetails',
-        component: RfqDetailsComponent
-      },
-      {
-        path: 'RFQ/RFQDetails/:active',
-        component: RfqDetailsComponent
-      },{
-        path: 'RFQ/RFQDetails/active/viewquote',
-        component: ViewQuoteComponent
-      },{
-        path: 'RFQ/RFQDetails/NotActive/viewquote',
-        component: ExpQuoteComponent
-      },
-      {
-        path:'RFQ/RFQDetails/active/viewquote/payment',
-        component:PaymentComponent
-      },
-      {
-        path:"RFQ/RFQDetails/active/viewquote/paymentConfirmation",
-        component:PaymentConfirmationComponent
-      },
-      {
-        path:"Jobs",
-        component:JobsComponent
-      }, {
-        path: 'Jobs/jobDetails/:status',
-        component: JobsDetailsComponent
-      },
-      
-        {
-          path: 'Jobs/jobDetails/',
-          component: JobsDetailsComponent
-        },
-        {
-          path:"Jobs/jobDetail/:status",
-          component:JobDetailsComponent
-        },{
-          path:"Jobs/invoice",
-          component:InvoiceComponent
-        },
-        {
-          path:"transactions",
-          component:TransactionHistoryComponent
-        },{
-          path:"transactions/receipt",
-          component:ReceiptComponent
-        },{
-          path:'profile',
-          component:ProfileComponent
-        },
-        {
-          path:'terms',
-          component:TermsComponent
-        }
-      
-    ],
-}
-
-
-]
-
-
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
 @NgModule({
   declarations: [
     AppComponent,
@@ -285,7 +140,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   ],
   imports: [
     AppRoutingModule,
-    RouterModule.forRoot(routapp,{ useHash: true }),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -333,7 +187,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzCollapseModule,
     NzTabsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },{ provide: NZ_ICONS, useValue: icons } ],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

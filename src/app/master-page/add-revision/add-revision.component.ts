@@ -9,15 +9,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddRevisionComponent implements OnInit {
 
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router  ) { }
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router  ) { }
 
   ngOnInit(): void {
   }
 
   showDeleteConfirm(): void {
     this.modal.confirm({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to discard this revision?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Ok',
@@ -26,9 +26,9 @@ export class AddRevisionComponent implements OnInit {
         this.router.navigate(['/dashboard/parts/view']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
+      nzOnCancel: () => {
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
 }

@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  passwordVisible:boolean=false;
-  RememberMechecked:boolean=true;
-  passwordString:String;
+  passwordVisible = false;
+  RememberMechecked = true;
+  passwordString: String;
   constructor() { }
 
   ngOnInit(): void {

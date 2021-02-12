@@ -9,33 +9,41 @@ import { formatDistance } from 'date-fns';
   styleUrls: ['./view-quote.component.css']
 })
 export class ViewQuoteComponent implements OnInit {
- tableData=[
+  constructor(private modal: NzModalService, private route: ActivatedRoute, private router: Router) { }
+ tableData = [
    {
-     'id':'1',
-     'name':'itemName',
-     'quantity':12,
-     'cost':90,
+     id: '1',
+     name: 'itemName',
+     quantity: 12,
+     cost: 90,
    }, {
-    'id':'2',
-    'name':'itemName',
-    'quantity':1,
-    'cost':200,
+    id: '2',
+    name: 'itemName',
+    quantity: 1,
+    cost: 200,
   }, {
-    'id':'3',
-    'name':'itemName',
-    'quantity':1,
-    'cost':90,
+    id: '3',
+    name: 'itemName',
+    quantity: 1,
+    cost: 90,
   }
  ];
 
- receivers=[];
-  constructor(private modal: NzModalService,private route:ActivatedRoute,private router: Router) { }
-
-  ngOnInit(): void {
-    this.receivers=[];
-  }
+ receivers = [];
   isVisible = false;
   isOkLoading = false;
+
+  data: any[] = [];
+  submitting = false;
+  user = {
+    author: 'Han Solo',
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+  };
+  inputValue = '';
+
+  ngOnInit(): void {
+    this.receivers = [];
+  }
 
   showModal(): void {
     this.isVisible = true;
@@ -63,29 +71,21 @@ export class ViewQuoteComponent implements OnInit {
 
   showDeleteConfirm(): void {
     this.modal.info({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b> <img src="../../../../assets/img/share.svg" style="margin-right:20px"> Share with others</b>',
       nzContent: '<div><form id="myForm" method="post"> <input  placeholder="Basic usage" /></form> <span>*</span>Emaiaaaal<br></div>',
       nzOkText: 'Yes',
-      nzFooter:'null',
+      nzFooter: 'null',
       nzOkType: 'primary',
-      nzIconType:'null',
+      nzIconType: 'null',
       nzOnOk: () => {
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
+      nzOnCancel: () => {
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
-
-  data: any[] = [];
-  submitting = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
-  inputValue = '';
 
   handleSubmit(): void {
     this.submitting = true;

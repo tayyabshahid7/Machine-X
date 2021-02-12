@@ -7,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  cost=1630.0;
-  constructor(private route:ActivatedRoute,private router: Router) { }
+  cost = 1630.0;
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
   }

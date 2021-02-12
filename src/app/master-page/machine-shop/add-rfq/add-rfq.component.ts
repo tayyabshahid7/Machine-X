@@ -9,20 +9,20 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class AddRfqComponent implements OnInit {
   date = null;
-  addressnew:boolean=false;
-  quantitiy="";
-  materialType="";
-  neededBy="";
-  note="";
-  shippingAddress=null;
+  addressnew = false;
+  quantitiy = '';
+  materialType = '';
+  neededBy = '';
+  note = '';
+  shippingAddress = null;
   dateFormat = 'MM/dd/yyyy';
 
 
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router ) { }
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router ) { }
 
   ngOnInit(): void {
-    this.addressnew=false;
+    this.addressnew = false;
   }
   checkButton(): void {
     this.addressnew = !this.addressnew;
@@ -31,7 +31,7 @@ export class AddRfqComponent implements OnInit {
 
   showDeleteConfirm(): void {
     this.modal.confirm({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to discard this item?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Yes',
@@ -40,9 +40,9 @@ export class AddRfqComponent implements OnInit {
         this.router.navigate(['/dashboard/RFQ']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
+      nzOnCancel: () => {
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
 

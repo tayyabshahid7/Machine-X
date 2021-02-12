@@ -9,50 +9,25 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./job-details.component.css']
 })
 export class JobDetailsComponent implements OnInit {
-  
-
-  constructor(private route:ActivatedRoute,private modal: NzModalService,private router: Router) { }
-  issue=false;
-  receivers=[];
-  addEmail(){
-    this.receivers.push(1);
-  }
-  removeEmail(){
-    this.receivers.pop();
-  }
-
-  startIssue(){
-    this.issue=true;
-  }
-  cancelIssue(){
-    this.issue=false;
-  }
 
 
-  status="";
-  rate=0.0;
+  constructor(private route: ActivatedRoute, private modal: NzModalService, private router: Router) { }
+  issue = false;
+  receivers = [];
+
+
+  status = '';
+  rate = 0.0;
   tooltips = ['Terrible', 'Bad', 'Okay', 'good', 'Great'];
 
-  rateImg=[
-    "../../../../../assets/img/face-1.svg",
-    "../../../../../assets/img/face-2.svg",
-    "../../../../../assets/img/face-3.svg",
-    "../../../../../assets/img/face-4.svg",
-    "../../../../../assets/img/face-5.svg"
+  rateImg = [
+    '../../../../../assets/img/face-1.svg',
+    '../../../../../assets/img/face-2.svg',
+    '../../../../../assets/img/face-3.svg',
+    '../../../../../assets/img/face-4.svg',
+    '../../../../../assets/img/face-5.svg'
   ];
-  history:boolean=false;
-  ngOnInit(): void {
-    let statusUrl = this.route.snapshot.paramMap.get('status');
-    statusUrl == "Completed"?this.status="completed":statusUrl == "Shipped"?this.status="shipped":statusUrl == "InProgress"?this.status="progress":this.status="completed"; 
-  }
-
-showHistory(){
-  this.history=true;
-}
-
-hideHistory(){
-  this.history=false;
-}
+  history = false;
 
   data: any[] = [];
   submitting = false;
@@ -62,6 +37,31 @@ hideHistory(){
   };
   inputValue = '';
   titleValue = '';
+  addEmail(){
+    this.receivers.push(1);
+  }
+  removeEmail(){
+    this.receivers.pop();
+  }
+
+  startIssue(){
+    this.issue = true;
+  }
+  cancelIssue(){
+    this.issue = false;
+  }
+  ngOnInit(): void {
+    const statusUrl = this.route.snapshot.paramMap.get('status');
+    statusUrl == 'Completed' ? this.status = 'completed' : statusUrl == 'Shipped' ? this.status = 'shipped' : statusUrl == 'InProgress' ? this.status = 'progress' : this.status = 'completed';
+  }
+
+showHistory(){
+  this.history = true;
+}
+
+hideHistory(){
+  this.history = false;
+}
 
   handleSubmit(): void {
     this.submitting = true;

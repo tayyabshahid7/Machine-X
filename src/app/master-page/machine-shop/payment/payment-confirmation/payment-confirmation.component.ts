@@ -7,13 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./payment-confirmation.component.css']
 })
 export class PaymentConfirmationComponent implements OnInit {
-  tableData=[{
-    'job':'job #3',
-    'RFQ':'RFQ-112938',
-    'QT':'QT-2308',
-  },];
+  tableData = [{
+    job: 'job #3',
+    RFQ: 'RFQ-112938',
+    QT: 'QT-2308',
+  }, ];
 
-  receivers=[];
+  receivers = [];
   addEmail(){
     this.receivers.push(1);
   }
@@ -21,7 +21,7 @@ export class PaymentConfirmationComponent implements OnInit {
     this.receivers.pop();
   }
 
-  constructor(private route:ActivatedRoute,private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
   }

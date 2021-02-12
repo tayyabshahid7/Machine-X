@@ -9,41 +9,30 @@ import { formatDistance } from 'date-fns';
   styleUrls: ['./jobs-details.component.css']
 })
 export class JobsDetailsComponent implements OnInit {
-  tableData=[
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
+  tableData = [
     {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
     }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
    }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
    }
   ];
-  status:boolean;
-  receivers=[];
+  status: boolean;
+  receivers = [];
   isVisible = false;
   isOkLoading = false;
-  constructor(private route:ActivatedRoute,
-    private router: Router) { }
-
-  ngOnInit(): void {
-    this.receivers=[];
-
-    let statusUrl = this.route.snapshot.paramMap.get('active');
-    statusUrl == "active"?this.status=true:this.status=false; 
-  }
-
-  viewQuote(x:boolean){
-    x==true?this.router.navigate(['/dashboard/RFQ/RFQDetails/active/viewquote']):this.router.navigate(['/dashboard/RFQ/RFQDetails/NotActive/viewquote']);
-  }
   data: any[] = [];
   submitting = false;
   user = {
@@ -51,6 +40,17 @@ export class JobsDetailsComponent implements OnInit {
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
   };
   inputValue = '';
+
+  ngOnInit(): void {
+    this.receivers = [];
+
+    const statusUrl = this.route.snapshot.paramMap.get('active');
+    statusUrl == 'active' ? this.status = true : this.status = false;
+  }
+
+  viewQuote(x: boolean){
+    x == true ? this.router.navigate(['/dashboard/RFQ/RFQDetails/active/viewquote']) : this.router.navigate(['/dashboard/RFQ/RFQDetails/NotActive/viewquote']);
+  }
 
   handleSubmit(): void {
     this.submitting = true;
@@ -98,6 +98,6 @@ export class JobsDetailsComponent implements OnInit {
     this.router.navigate(['/dashboard/RFQ/RFQDetails/active/viewquote/payment']);
   }
 
- 
+
 
 }

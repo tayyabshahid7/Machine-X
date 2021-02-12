@@ -8,28 +8,28 @@ import { Component, OnInit } from '@angular/core';
 export class InvoiceComponent implements OnInit {
 
   constructor() { }
+  tableData = [
+    {
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
+    }, {
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
+   }, {
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
+   }
+  ];
+  receivers = [];
 
   ngOnInit(): void {
   }
-  tableData=[
-    {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
-    }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
-   }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
-   }
-  ];
-  receivers=[];
   addEmail(){
     this.receivers.push(1);
   }

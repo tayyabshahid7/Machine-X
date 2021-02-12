@@ -8,55 +8,55 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  switchValue=true;
+  switchValue = true;
   activeParts = 12 ;
-  finishedParts=231;
-  tableData=[
+  finishedParts = 231;
+  tableData = [
     {
-      'rfq':'RFQ #359',
-      'submissions':'4',
-      'daysLeft':'3',
-      'accepted':true,
-      'jobName':'Bike Handle | X04-321-133-41 ',
-      'jobProgress':100,
-      'JobStatus':'Ongoing',
-      'transJobNumber':'$ 23910',
-      'JobId':'#31212',
-      'transJobDate':'Sep 23, 2020',
-      'transMachine':'Part X04-321-133-412',
-      'transQu':'Quote: #132123',
-      'transCost':'140.5',
-    
+      rfq: 'RFQ #359',
+      submissions: '4',
+      daysLeft: '3',
+      accepted: true,
+      jobName: 'Bike Handle | X04-321-133-41 ',
+      jobProgress: 100,
+      JobStatus: 'Ongoing',
+      transJobNumber: '$ 23910',
+      JobId: '#31212',
+      transJobDate: 'Sep 23, 2020',
+      transMachine: 'Part X04-321-133-412',
+      transQu: 'Quote: #132123',
+      transCost: '140.5',
+
     },
     {
-      'rfq':'RFQ #439',
-      'submissions':'4',
-      'daysLeft':'2',
-      'accepted':true,
-      'jobName':'Part X04-321-133-412',
-      'jobProgress':7,
-      'JobStatus':'Resolved',
-      'transJobNumber':'$ 23910',
-      'JobId':'#31212',
-      'transJobDate':'Sep 23, 2020',
-      'transMachine':'Part X04-321-133-412',
-      'transQu':'Quote: #132123',
-      'transCost':'3,205.50',
+      rfq: 'RFQ #439',
+      submissions: '4',
+      daysLeft: '2',
+      accepted: true,
+      jobName: 'Part X04-321-133-412',
+      jobProgress: 7,
+      JobStatus: 'Resolved',
+      transJobNumber: '$ 23910',
+      JobId: '#31212',
+      transJobDate: 'Sep 23, 2020',
+      transMachine: 'Part X04-321-133-412',
+      transQu: 'Quote: #132123',
+      transCost: '3,205.50',
     },
     {
-      'rfq':'RFQ #519',
-      'submissions':'0',
-      'daysLeft':'1',
-      'accepted':false,
-      'jobName':'Part X04-141-133-412',
-      'jobProgress':74,
-      'JobStatus':'Resolved',
-      'transJobNumber':'$ 23910',
-      'JobId':'#31212',
-      'transJobDate':'Sep 23, 2020',
-      'transMachine':'Part X04-321-133-412',
-      'transQu':'Quote: #132123',
-      'transCost':'1,040.5',
+      rfq: 'RFQ #519',
+      submissions: '0',
+      daysLeft: '1',
+      accepted: false,
+      jobName: 'Part X04-141-133-412',
+      jobProgress: 74,
+      JobStatus: 'Resolved',
+      transJobNumber: '$ 23910',
+      JobId: '#31212',
+      transJobDate: 'Sep 23, 2020',
+      transMachine: 'Part X04-321-133-412',
+      transQu: 'Quote: #132123',
+      transCost: '1,040.5',
     },
   ];
 
@@ -76,12 +76,12 @@ export class DashboardComponent implements OnInit {
     isActive: true,
   }];
 
-  constructor(private route:ActivatedRoute,private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.configuration = { ...DefaultConfig };
     this.configuration.searchEnabled = false;
-    this.configuration.paginationEnabled=false;
+    this.configuration.paginationEnabled = false;
     // ... etc.
     this.columns = [
       { key: 'phone', title: 'Newest' },
@@ -92,55 +92,55 @@ export class DashboardComponent implements OnInit {
   }
 
   handelData(){
-    this.switchValue==false?this.activeParts=0:this.activeParts=12;
-    this.switchValue==false?this.finishedParts=0:this.finishedParts=231;
+    this.switchValue == false ? this.activeParts = 0 : this.activeParts = 12;
+    this.switchValue == false ? this.finishedParts = 0 : this.finishedParts = 231;
 
-      this.switchValue==false? this.tableData=[]:this.tableData=[
+    this.switchValue == false ? this.tableData = [] : this.tableData = [
         {
-          'rfq':'RFQ #359',
-          'submissions':'4',
-          'daysLeft':'3',
-          'accepted':true,
-          'jobName':'Bike Handle | X04-321-133-41 ',
-          'jobProgress':100,
-          'transJobNumber':'$ 23910',
-          'JobId':'#31212',
-          'JobStatus':'Ongoing',
-          'transJobDate':'Sep 23, 2020',
-          'transMachine':'Part X04-321-133-412',
-          'transQu':'Quote: #132123',
-          'transCost':'140.5',
-        
+          rfq: 'RFQ #359',
+          submissions: '4',
+          daysLeft: '3',
+          accepted: true,
+          jobName: 'Bike Handle | X04-321-133-41 ',
+          jobProgress: 100,
+          transJobNumber: '$ 23910',
+          JobId: '#31212',
+          JobStatus: 'Ongoing',
+          transJobDate: 'Sep 23, 2020',
+          transMachine: 'Part X04-321-133-412',
+          transQu: 'Quote: #132123',
+          transCost: '140.5',
+
         },
         {
-          'rfq':'RFQ #439',
-          'submissions':'4',
-          'daysLeft':'2',
-          'accepted':true,
-          'jobName':'Part X04-321-133-412',
-          'jobProgress':7,
-          'transJobNumber':'$ 23910',
-          'JobId':'#31212',
-          'JobStatus':'Resolved',
-          'transJobDate':'Sep 23, 2020',
-          'transMachine':'Part X04-321-133-412',
-          'transQu':'Quote: #132123',
-          'transCost':'3,205.50',
+          rfq: 'RFQ #439',
+          submissions: '4',
+          daysLeft: '2',
+          accepted: true,
+          jobName: 'Part X04-321-133-412',
+          jobProgress: 7,
+          transJobNumber: '$ 23910',
+          JobId: '#31212',
+          JobStatus: 'Resolved',
+          transJobDate: 'Sep 23, 2020',
+          transMachine: 'Part X04-321-133-412',
+          transQu: 'Quote: #132123',
+          transCost: '3,205.50',
         },
         {
-          'rfq':'RFQ #519',
-          'submissions':'0',
-          'daysLeft':'1',
-          'accepted':false,
-          'jobName':'Part X04-141-133-412',
-          'jobProgress':74,
-          'transJobNumber':'$ 23910',
-          'JobStatus':'Resolved',
-          'JobId':'#31212',
-          'transJobDate':'Sep 23, 2020',
-          'transMachine':'Part X04-321-133-412',
-          'transQu':'Quote: #132123',
-          'transCost':'1,040.5',
+          rfq: 'RFQ #519',
+          submissions: '0',
+          daysLeft: '1',
+          accepted: false,
+          jobName: 'Part X04-141-133-412',
+          jobProgress: 74,
+          transJobNumber: '$ 23910',
+          JobStatus: 'Resolved',
+          JobId: '#31212',
+          transJobDate: 'Sep 23, 2020',
+          transMachine: 'Part X04-321-133-412',
+          transQu: 'Quote: #132123',
+          transCost: '1,040.5',
         },
       ];
   }

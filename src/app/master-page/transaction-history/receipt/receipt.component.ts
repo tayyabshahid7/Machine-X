@@ -6,32 +6,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./receipt.component.css']
 })
 export class ReceiptComponent implements OnInit {
- 
+  constructor() { }
 
-  tableData=[
+
+  tableData = [
     {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
     }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
    }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
    }
   ];
-  constructor() { }
+
+  receivers = [];
 
   ngOnInit(): void {
   }
-
-  receivers=[];
   addEmail(){
     this.receivers.push(1);
   }

@@ -7,129 +7,129 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./steps.component.css']
 })
 export class StepsComponent implements OnInit {
-  currentStep=0;
-  email="";
-  companyLegalName="";
-  LegalBusinessName="";
-  EIN="";
+// dtOptions: DataTables.Settings = {};
+
+  constructor(private route: ActivatedRoute,
+              private router: Router ) { }
+  currentStep = 0;
+  email = '';
+  companyLegalName = '';
+  LegalBusinessName = '';
+  EIN = '';
   date = null;
   dateFormat = 'MM/dd/yyyy';
 
-  passwordVisible:boolean=false;
-  RememberMechecked:boolean=true;
-  passwordString:String;
+  passwordVisible = false;
+  RememberMechecked = true;
+  passwordString: String;
   panels = [
     {
       active: true,
       name: 'Bank Account',
       disabled: false,
-      icon:'bank'
+      icon: 'bank'
     },
     {
       active: false,
       disabled: false,
       name: 'Card',
-      icon:'dollar'
+      icon: 'dollar'
 
     }
   ];
-  steps=[
+  steps = [
     {
-      'name':"Registration",
-      'status':'In Progress'
+      name: 'Registration',
+      status: 'In Progress'
     },
     {
-      'name':"Legal Information",
-      'status':'Waiting'
+      name: 'Legal Information',
+      status: 'Waiting'
     },
     {
-      'name':"Business Details",
-      'status':'Waiting'
+      name: 'Business Details',
+      status: 'Waiting'
 
     },
     {
-      'name':"Payout Options",
-      'status':'Waiting'
+      name: 'Payout Options',
+      status: 'Waiting'
 
     },
     {
-      'name':"Representatives",
-      'status':'Waiting'
+      name: 'Representatives',
+      status: 'Waiting'
     },
     {
-      'name':"Business Owners",
-      'status':'Waiting'
+      name: 'Business Owners',
+      status: 'Waiting'
     }, {
-      'name':"Additional Documents",
-      'status':'Waiting'
+      name: 'Additional Documents',
+      status: 'Waiting'
     },
      {
-      'name':"Summary",
-      'status':'Waiting'
+      name: 'Summary',
+      status: 'Waiting'
     },
      {
-      'name':"Done",
-      'status':'Waiting'
+      name: 'Done',
+      status: 'Waiting'
     }
 ];
 
-ownerTableData=[
+ownerTableData = [
   {
-    'name':'Jhon Smith',
-    'email':'Jhon.Smith@email.com'
+    name: 'Jhon Smith',
+    email: 'Jhon.Smith@email.com'
   }
 ];
+newOwnerFirstName = '';
+newOwnerLastName = '';
+newOwnerEmail = '';
 deleteOwner(){
-  if(this.ownerTableData.length>0){
+  if (this.ownerTableData.length > 0){
     this.ownerTableData.pop();
   }
 }
-newOwnerFirstName="";
-newOwnerLastName="";
-newOwnerEmail="";
 
 addOwner(){
-  let newName=this.newOwnerFirstName+this.newOwnerLastName;
+  const newName = this.newOwnerFirstName + this.newOwnerLastName;
   this.ownerTableData.push(
     {
-      'name':newName,
-      'email':this.newOwnerEmail
+      name: newName,
+      email: this.newOwnerEmail
 });
 
-this.newOwnerFirstName="";
-this.newOwnerLastName="";
-this.newOwnerEmail="";
+  this.newOwnerFirstName = '';
+  this.newOwnerLastName = '';
+  this.newOwnerEmail = '';
 }
-//dtOptions: DataTables.Settings = {};
-
-  constructor(private route: ActivatedRoute,
-    private router: Router ) { }
 
   ngOnInit(): void {
-    this.currentStep=0;
-    
+    this.currentStep = 0;
+
   }
 
     NextStep(){
-    
-      if(this.currentStep<this.steps.length-1){
-        this.currentStep=this.currentStep+1;
-     this.steps[this.currentStep].status="In Progress";
-      this.steps[this.currentStep-1].status="Done";
+
+      if (this.currentStep < this.steps.length - 1){
+        this.currentStep = this.currentStep + 1;
+        this.steps[this.currentStep].status = 'In Progress';
+        this.steps[this.currentStep - 1].status = 'Done';
       }else{
-        console.log("more than 8 !");
+        console.log('more than 8 !');
 
       }
       console.log(this.currentStep);
 
     }
     backStep(){
-      if(this.currentStep>0){
-      this.currentStep=this.currentStep-1;
-      this.steps[this.currentStep].status="In Progress";
-      this.steps[this.currentStep+1].status="Waiting";
+      if (this.currentStep > 0){
+      this.currentStep = this.currentStep - 1;
+      this.steps[this.currentStep].status = 'In Progress';
+      this.steps[this.currentStep + 1].status = 'Waiting';
       }else{
-        console.log("less than 0");
+        console.log('less than 0');
             }
     }
 

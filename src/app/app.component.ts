@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'ConceptX';
-   
+
    passwordVisible = false;
    password?: string;
-   inputValue: string = 'my site';
+   inputValue = 'my site';
 
 }

@@ -8,7 +8,49 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./working-job-details.component.css']
 })
 export class WorkingJobDetailsComponent implements OnInit {
-  receivers=[];
+
+
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router) { }
+  receivers = [];
+
+  tableData = [
+    {
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
+    }, {
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
+   }, {
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
+   }
+  ];
+  history = false;
+  dateFormat = 'MM/dd/yyyy';
+  date = null;
+
+  isVisible = false;
+    status = '';
+    canStart = false;
+  data: any[] = [];
+  submitting = false;
+  user = {
+    author: 'Han Solo',
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+  };
+  inputValue = '';
+  titleValue = '';
+  // openInvoice(){
+  //   this.router.navigate(['/dashboard/Jobs/invoice']);
+  // }
+  issue = false;
   addEmail(){
     this.receivers.push(1);
   }
@@ -16,31 +58,7 @@ export class WorkingJobDetailsComponent implements OnInit {
     this.receivers.pop();
   }
 
-  tableData=[
-    {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
-    }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
-   }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
-   }
-  ];
-  history:boolean=false;
-  dateFormat = 'MM/dd/yyyy';
-  date=null;
 
-  isVisible = false;
-
- 
 
   showModal(): void {
     this.isVisible = true;
@@ -55,25 +73,11 @@ export class WorkingJobDetailsComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
-
-
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router) { }
-    status="";
-    canStart=false;
   ngOnInit(): void {
-    let statusUrl = this.route.snapshot.paramMap.get('status');
-    statusUrl == "InProgress"?this.status="InProgress":statusUrl == "Shipped"?this.status="Shipped":statusUrl == "Issue"?this.status="Issue":this.status="InProgress"; 
-    this.status=='Shipped'?this.canStart=true:null;
+    const statusUrl = this.route.snapshot.paramMap.get('status');
+    statusUrl == 'InProgress' ? this.status = 'InProgress' : statusUrl == 'Shipped' ? this.status = 'Shipped' : statusUrl == 'Issue' ? this.status = 'Issue' : this.status = 'InProgress';
+    this.status == 'Shipped' ? this.canStart = true : null;
   }
-  data: any[] = [];
-  submitting = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
-  inputValue = '';
-  titleValue = '';
 
   handleSubmit(): void {
     this.submitting = true;
@@ -99,33 +103,29 @@ export class WorkingJobDetailsComponent implements OnInit {
       });
     }, 800);
   }
-  // openInvoice(){
-  //   this.router.navigate(['/dashboard/Jobs/invoice']);
-  // }
-  issue=false;
 
 
   startIssue(){
-    this.issue=true;
+    this.issue = true;
   }
   cancelIssue(){
-    this.issue=false;
+    this.issue = false;
   }
   showArchive(): void {
     this.modal.error({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to archive this ?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Archive',
       nzOkType: 'danger',
-      nzOnOk: () =>{
+      nzOnOk: () => {
         this.router.navigate(['/dashboard/submittedQuote']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
-       
+      nzOnCancel: () => {
+
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
   close(){
@@ -137,15 +137,15 @@ export class WorkingJobDetailsComponent implements OnInit {
   openInvoice(){
 
     //  this.router.navigate(['/dashboard/Jobs/invoice']);
-    
+
   }
 
   showHistory(){
-    this.history=true;
+    this.history = true;
   }
-  
+
   hideHistory(){
-    this.history=false;
+    this.history = false;
   }
-  
+
 }

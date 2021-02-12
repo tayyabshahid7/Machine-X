@@ -9,33 +9,28 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./submitted-details.component.css']
 })
 export class SubmittedDetailsComponent implements OnInit {
-  tableData=[
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router) { }
+  tableData = [
     {
-      'id':'1',
-      'name':'itemName',
-      'quantity':12,
-      'cost':90,
+      id: '1',
+      name: 'itemName',
+      quantity: 12,
+      cost: 90,
     }, {
-     'id':'2',
-     'name':'itemName',
-     'quantity':1,
-     'cost':200,
+     id: '2',
+     name: 'itemName',
+     quantity: 1,
+     cost: 200,
    }, {
-     'id':'3',
-     'name':'itemName',
-     'quantity':1,
-     'cost':90,
+     id: '3',
+     name: 'itemName',
+     quantity: 1,
+     cost: 90,
    }
   ];
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router) { }
-    status="";
-    canStart=false;
-  ngOnInit(): void {
-    let statusUrl = this.route.snapshot.paramMap.get('status');
-    statusUrl == "ava"?this.status="Approved":statusUrl == "ex"?this.status="Expired":statusUrl == "pen"?this.status="Pending":this.status="Approved"; 
-    this.status=='Approved'?this.canStart=true:null;
-  }
+    status = '';
+    canStart = false;
   data: any[] = [];
   submitting = false;
   user = {
@@ -44,6 +39,15 @@ export class SubmittedDetailsComponent implements OnInit {
   };
   inputValue = '';
   titleValue = '';
+  // openInvoice(){
+  //   this.router.navigate(['/dashboard/Jobs/invoice']);
+  // }
+  issue = false;
+  ngOnInit(): void {
+    const statusUrl = this.route.snapshot.paramMap.get('status');
+    statusUrl == 'ava' ? this.status = 'Approved' : statusUrl == 'ex' ? this.status = 'Expired' : statusUrl == 'pen' ? this.status = 'Pending' : this.status = 'Approved';
+    this.status == 'Approved' ? this.canStart = true : null;
+  }
 
   handleSubmit(): void {
     this.submitting = true;
@@ -69,33 +73,29 @@ export class SubmittedDetailsComponent implements OnInit {
       });
     }, 800);
   }
-  // openInvoice(){
-  //   this.router.navigate(['/dashboard/Jobs/invoice']);
-  // }
-  issue=false;
 
 
   startIssue(){
-    this.issue=true;
+    this.issue = true;
   }
   cancelIssue(){
-    this.issue=false;
+    this.issue = false;
   }
   showArchive(): void {
     this.modal.error({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to archive this ?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Archive',
       nzOkType: 'danger',
-      nzOnOk: () =>{
+      nzOnOk: () => {
         this.router.navigate(['/dashboard/submittedQuote']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
-       
+      nzOnCancel: () => {
+
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
   close(){

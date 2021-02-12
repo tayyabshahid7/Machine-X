@@ -10,15 +10,15 @@ import {Location} from '@angular/common';
 })
 export class SubmitRfqComponent implements OnInit {
 
-  constructor(private modal: NzModalService,private route: ActivatedRoute,
-    private router: Router ,private _location: Location) { }
+  constructor(private modal: NzModalService, private route: ActivatedRoute,
+              private router: Router , private _location: Location) { }
+  submitSuccess = false;
 
   ngOnInit(): void {
   }
-  submitSuccess=false;
   showDeleteConfirm(): void {
     this.modal.confirm({
-      nzStyle:{top: '40%'},
+      nzStyle: {top: '40%'},
       nzTitle: '<b>Do you want to discard this item?</b>',
       nzContent: '<p style="color: #595959;">All of the information you added will be lost</p>',
       nzOkText: 'Yes',
@@ -27,16 +27,16 @@ export class SubmitRfqComponent implements OnInit {
         this.router.navigate(['/dashboard/RFQ']);
       },
       nzCancelText: 'Cancel',
-      nzOnCancel: ()=>{
+      nzOnCancel: () => {
       },
-      nzMaskStyle:{background: 'rgb(0, 39, 102, 0.9)'}
+      nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
   backClicked() {
     this._location.back();
   }
   submited(){
-    this.submitSuccess=true;
+    this.submitSuccess = true;
   }
   RFQS(){
     this.router.navigate(['dashboard/RFQ']);

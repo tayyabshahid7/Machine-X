@@ -9,28 +9,28 @@ import { Router } from '@angular/router';
 export class JobsComponent implements OnInit {
   tableData = [
     {
-      'id' : " Job #00133312",
-      'name':'Shop Name #1',
-      'date':'March 4, 2018',
-      'daysLeft':'2',
-      'status':true,
-      'statusX':"InProgress"
+      id : ' Job #00133312',
+      name: 'Shop Name #1',
+      date: 'March 4, 2018',
+      daysLeft: '2',
+      status: true,
+      statusX: 'InProgress'
     },
     {
-      'id' : " Job #00133312",
-      'name':'Shop Name #1',
-      'date':'March 4, 2018',
-      'daysLeft':'2',
-      'status':true,
-      'statusX':"Shipped"
+      id : ' Job #00133312',
+      name: 'Shop Name #1',
+      date: 'March 4, 2018',
+      daysLeft: '2',
+      status: true,
+      statusX: 'Shipped'
     },
     {
-      'id' : " Job #00133312",
-      'name':'Shop Name #1',
-      'date':'March 4, 2018',
-      'daysLeft':'2',
-      'status':true,
-      'statusX':"Completed"
+      id : ' Job #00133312',
+      name: 'Shop Name #1',
+      date: 'March 4, 2018',
+      daysLeft: '2',
+      status: true,
+      statusX: 'Completed'
     },
  ];
   constructor(private router: Router) { }
@@ -40,7 +40,7 @@ export class JobsComponent implements OnInit {
 
   onSelect(data){
     console.log(data.isActive);
-      this.router.navigate(['dashboard/Jobs/jobDetail/',data.statusX]);
+    this.router.navigate(['dashboard/Jobs/jobDetail/', data.statusX]);
     }
-  
+
 }

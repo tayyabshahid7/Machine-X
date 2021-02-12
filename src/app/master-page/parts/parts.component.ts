@@ -9,15 +9,15 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./parts.component.css']
 })
 export class PartsComponent implements OnInit {
-Data=[1,2,3,4,5,6,7];
-  constructor(private notification: NzNotificationService,private route: ActivatedRoute,
-    private router: Router ) { }
-  
+Data = [1, 2, 3, 4, 5, 6, 7];
+  constructor(private notification: NzNotificationService, private route: ActivatedRoute,
+              private router: Router ) { }
+
   ngOnInit(): void {
-    this.notification.success("Part Added Successfully", 
-    "This {Part name} is the content of the notification. This is the content of the notification. This is the content of the notification.");
+    this.notification.success('Part Added Successfully',
+    'This {Part name} is the content of the notification. This is the content of the notification. This is the content of the notification.');
   }
-  
+
   view(){
     this.router.navigate(['/dashboard/parts/view']);
   }
