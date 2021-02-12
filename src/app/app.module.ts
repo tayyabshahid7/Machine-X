@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
@@ -91,6 +91,17 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { QuoteInvoiceSubmittedComponent } from './submitted-quote/quote-invoice-submitted/quote-invoice-submitted.component';
 import { WorkingJobComponent } from './working-job/working-job.component';
 import { WorkingJobDetailsComponent } from './working-job/working-job-details/working-job-details.component';
+import {ConceptxDatePipe} from './pipes/conceptx-date.pipe';
+import {TimeFromNowPipe} from './pipes/time-from-now.pipe';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {StoreModule} from '@ngrx/store';
+import {appReducers} from './store';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './store/user/user.effects';
+import {AppEffects} from './store/app/app.effects';
+import {appInitializer} from './utilities/auth.utilities/app-auth.initializer';
+import {AuthenticationService} from './services/auth/authentication.service';
+import {JwtInterceptor} from './utilities/auth.utilities/jwt.interceptor';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -137,6 +148,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     QuoteInvoiceSubmittedComponent,
     WorkingJobComponent,
     WorkingJobDetailsComponent,
+    ConceptxDatePipe,
+    TimeFromNowPipe
   ],
   imports: [
     AppRoutingModule,
@@ -186,8 +199,21 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzStepsModule,
     NzCollapseModule,
     NzTabsModule,
+    NgxSpinnerModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('app', appReducers),
+    EffectsModule.forRoot([
+      UserEffects,
+      AppEffects
+    ])
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons } ],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService]},
+    {provide: NZ_I18N, useValue: en_US},
+    {provide: NZ_ICONS, useValue: icons},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

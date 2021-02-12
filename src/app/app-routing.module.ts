@@ -35,14 +35,15 @@ import {TransactionHistoryComponent} from './master-page/transaction-history/tra
 import {ReceiptComponent} from './master-page/transaction-history/receipt/receipt.component';
 import {ProfileComponent} from './master-page/profile/profile.component';
 import {TermsComponent} from './master-page/terms/terms.component';
+import {AuthGuard} from './utilities/auth.utilities/auth.guard';
 
 
 const routes: Routes = [
-  {path: '', component: LandingPageComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'forgotpassword', component: PasswordRecoveryComponent},
-  {path: 'newpassword', component: NewPasswordComponent},
-  {path: 'Onboarding' , component: OnboardingComponent},
+  {path: '', component: LandingPageComponent , canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+  {path: 'forgotpassword', component: PasswordRecoveryComponent, canActivate: [AuthGuard]},
+  {path: 'newpassword', component: NewPasswordComponent, canActivate: [AuthGuard]},
+  {path: 'Onboarding' , component: OnboardingComponent, canActivate: [AuthGuard]},
 
   {
 

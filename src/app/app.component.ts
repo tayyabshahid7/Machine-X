@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import {AuthenticationService} from './services/auth/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,20 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'ConceptX';
+  title = 'MahcineX';
 
    passwordVisible = false;
    password?: string;
    inputValue = 'my site';
+    constructor(
+        private authenticationService: AuthenticationService
+    ) {
+    }
 
+    @HostListener('window:beforeunload', ['$event'])
+    unloadHandler(event: Event) {
+        if (this.authenticationService.isLoggedIn() && !this.authenticationService.persistToken) {
+            this.authenticationService.logout().subscribe();
+        }
+    }
 }
