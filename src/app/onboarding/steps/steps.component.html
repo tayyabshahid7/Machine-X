@@ -12,41 +12,62 @@
           </nz-steps>
       </div>
       <div class="main">
+          <form nz-form  [formGroup]="form" (ngSubmit)="onSubmit(form)">
           <div *ngIf="currentStep==0" class="registration row">
             <div class="col-md-3">
+
                 <div class="mb-2"><span class="blue">*</span>Email Address</div>
-                <input type="email" nz-input placeholder="John@email.com" [(ngModel)]="email" />
+
+                <input type="email" nz-input placeholder="John@email.com"  formControlName="email" />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <nz-alert *ngIf="email.errors.required"  nzType="error" nzMessage="{{validationMessages.email}}" nzShowIcon></nz-alert>
+                    <nz-alert *ngIf="email.errors.email"  nzType="error" nzMessage="{{validationMessages.emailInvalid}} nzShowIcon"></nz-alert>
+                </div>
 
                 <div class="mb-2" class="mt-2"><span class="blue">*</span>Password</div>
                 <nz-input-group [nzSuffix]="suffixPassword" >
-                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="passwordString" />
+                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" formControlName="password" />
                   </nz-input-group>
                   <ng-template #suffixPassword>
                     <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
                   </ng-template>
-               
+                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+
+                    <nz-alert *ngIf="password.errors.required"  nzType="error" nzMessage="{{validationMessages.password}}" nzShowIcon></nz-alert>
+                    <nz-alert *ngIf="password.errors.minlength"  nzType="error" nzMessage="{{validationMessages.passwordLen}}" nzShowIcon></nz-alert>
+
+                </div>
             </div>
           </div>
 
           <div *ngIf="currentStep==1" class="LegalInfo row">
             <div class="mb-2 col-md-12"><span class="blue">*</span>Company Legal Name as in EIN registration</div>
               <div class="col-md-3">
-            <input type="text" nz-input placeholder="John’s Workshop" [(ngModel)]="companyLegalName" />
-
+            <input type="text" nz-input placeholder="John’s Workshop" formControlName="companyLegalName"  />
+                  <div *ngIf="companyLegalName.invalid && (companyLegalName.dirty || companyLegalName.touched)">
+                      <nz-alert *ngIf="companyLegalName.errors.required"  nzType="error" nzMessage="{{validationMessages.companyLegalName}}" nzShowIcon></nz-alert>
+                  </div>
             <div class="mb-2 mt-1"><span class="blue">*</span>Country</div>
-            <nz-select class="col-12" nzAllowClear  placeholder="Select Country">
-              <nz-option nzValue="1" nzLabel="USA"></nz-option>
-              <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+            <nz-select class="col-12" nzAllowClear  placeholder="Select Country" formControlName="countrylegal">
+                <nz-option nzValue="" nzLabel="Select Country"></nz-option>
+                <nz-option nzValue="US" nzLabel="USA"></nz-option>
+                <nz-option nzValue="CA" nzLabel="Canada"></nz-option>
             </nz-select>
+                  <div *ngIf="countrylegal.invalid && (countrylegal.dirty || countrylegal.touched)">
+                      <nz-alert *ngIf="countrylegal.errors.required"  nzType="error" nzMessage="{{validationMessages.countrylegal}}" nzShowIcon></nz-alert>
+                  </div>
               </div>
               <div class="col-md-12 mt-2">
-                <nz-alert nzType="error" nzMessage="We use Stripe to make sure you get paid on time and to keep your personal bank and details secure. Click {CTA Action} to set up your payments on Stripe."></nz-alert>
+                <nz-alert  nzType="error" nzMessage="We use Stripe to make sure you get paid on time and to keep your personal bank and details secure. Click {CTA Action} to set up your payments on Stripe."></nz-alert>
               </div>
               <div class="col-md-12 mt-2">
                  <img src="../../../assets/img/stripe.svg">
               </div>
               <div class="col-md-12 mt-2">
-                <label nz-checkbox >I agree with using Stripe as main payment gateway.</label>
+                  <label nz-checkbox formControlName="stripeAccept"  >I agree with using Stripe as main payment gateway.</label>
+                  <div *ngIf="stripeAccept.invalid && (stripeAccept.dirty || stripeAccept.touched)">
+                      <nz-alert *ngIf="stripeAccept.errors.required"  nzType="error" nzMessage="{{validationMessages.stripeAccept}}" nzShowIcon></nz-alert>
+                  </div>
               </div>
           </div>
 
@@ -56,18 +77,25 @@
               <div class="row mt-3">
                 <div class="col-md-9">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Legal Business Name </span></div>
-              <input type="text" nz-input placeholder="John@email.com" [(ngModel)]="LegalBusinessName" />
+              <input type="text" nz-input placeholder="John@email.com" formControlName="blegalName"  />
+                    <div *ngIf="blegalName.invalid && (blegalName.dirty || blegalName.touched)">
+                        <nz-alert *ngIf="blegalName.errors.required"  nzType="error" nzMessage="{{validationMessages.blegalName}}" nzShowIcon></nz-alert>
+                    </div>
               <p class="hint">
                 The name you provide must exactly match the name associated with your Employer
                  Identification Number (EIN).
               </p>
+
                 </div>
               </div>
               
               <div class="row">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title"> Identification Number (EIN)</span></div>
-              <input type="text" nz-input placeholder="12 - 34567980" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="12 - 34567980"  formControlName="bEIN" />
+                    <div *ngIf="bEIN.invalid && (bEIN.dirty || bEIN.touched)">
+                        <nz-alert *ngIf="bEIN.errors.required"  nzType="error" nzMessage="{{validationMessages.bEIN}}" nzShowIcon></nz-alert>
+                    </div>
               <p class="hint">
                 If you use your Social Security number for business tax purposes,
                  you can entrer that instead.
@@ -78,7 +106,7 @@
               <div class="row">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="input-title"> Doing Business As</span></div>
-              <input type="text" nz-input placeholder="Donny’s Workshop" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="Donny’s Workshop" formControlName="bDBA"  />
               <p class="hint">
                 The operating name of your company, if it’s different than the legal  name.
               </p>
@@ -93,31 +121,93 @@
               <div class="row mt-3">
                 <div class="col-md-9">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 1 </span></div>
-              <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
-             
+              <input type="text" nz-input placeholder="Example Address, 123456" formControlName="bAddressline1"  />
+                    <div *ngIf="bAddressline1.invalid && (bAddressline1.dirty || bAddressline1.touched)">
+                        <nz-alert *ngIf="bAddressline1.errors.required"  nzType="error" nzMessage="{{validationMessages.bAddressline1}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
               
               <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title">Address Line 2</span></div>
-              <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="Example Address, 123456" formControlName="bAddressline2" />
+                    <div *ngIf="bAddressline2.invalid && (bAddressline2.dirty || bAddressline2.touched)">
+                        <nz-alert *ngIf="bAddressline2.errors.required"  nzType="error" nzMessage="{{validationMessages.bAddressline2}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
               <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title">City</span></div>
-              <input type="text" nz-input placeholder="JExample Address, 123456" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="JExample Address, 123456" formControlName="bCity" />
+                    <div *ngIf="bCity.invalid && (bCity.dirty || bCity.touched)">
+                        <nz-alert *ngIf="bCity.errors.required"  nzType="error" nzMessage="{{validationMessages.bCity}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
+
 
              <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title">State</span></div>
-                  <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
-                    <nz-option nzValue="1" nzLabel="USA"></nz-option>
-                    <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+                  <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state" formControlName="bState">
+                      <nz-option nzValue="" nzLabel="Please choose a state"></nz-option>
+                      <nz-option nzValue="AL" nzLabel="Alabama"></nz-option>
+                      <nz-option nzValue="AK" nzLabel="Alaska"></nz-option>
+                      <nz-option nzValue="AZ" nzLabel="Arizona"></nz-option>
+                      <nz-option nzValue="AR" nzLabel="Arkansas"></nz-option>
+                      <nz-option nzValue="CA" nzLabel="California"></nz-option>
+                      <nz-option nzValue="CO" nzLabel="Colorado"></nz-option>
+                      <nz-option nzValue="CT" nzLabel="Connecticut"></nz-option>
+                      <nz-option nzValue="DE" nzLabel="Delaware"></nz-option>
+                      <nz-option nzValue="DC" nzLabel="District Of Columbia"></nz-option>
+                      <nz-option nzValue="FL" nzLabel="Florida"></nz-option>
+                      <nz-option nzValue="GA" nzLabel="Georgia"></nz-option>
+                      <nz-option nzValue="HI" nzLabel="Hawaii"></nz-option>
+                      <nz-option nzValue="ID" nzLabel="Idaho"></nz-option>
+                      <nz-option nzValue="IL" nzLabel="Illinois"></nz-option>
+                      <nz-option nzValue="IN" nzLabel="Indiana"></nz-option>
+                      <nz-option nzValue="IA" nzLabel="Iowa"></nz-option>
+                      <nz-option nzValue="KS" nzLabel="Kansas"></nz-option>
+                      <nz-option nzValue="KY" nzLabel="Kentucky"></nz-option>
+                      <nz-option nzValue="LA" nzLabel="Louisiana"></nz-option>
+                      <nz-option nzValue="ME" nzLabel="Maine"></nz-option>
+                      <nz-option nzValue="MD" nzLabel="Maryland"></nz-option>
+                      <nz-option nzValue="MA" nzLabel="Massachusetts"></nz-option>
+                      <nz-option nzValue="MI" nzLabel="Michigan"></nz-option>
+                      <nz-option nzValue="MN" nzLabel="Minnesota"></nz-option>
+                      <nz-option nzValue="MS" nzLabel="Mississippi"></nz-option>
+                      <nz-option nzValue="MO" nzLabel="Missouri"></nz-option>
+                      <nz-option nzValue="MT" nzLabel="Montana"></nz-option>
+                      <nz-option nzValue="NE" nzLabel="Nebraska"></nz-option>
+                      <nz-option nzValue="NV" nzLabel="Nevada"></nz-option>
+                      <nz-option nzValue="NH" nzLabel="New Hampshire"></nz-option>
+                      <nz-option nzValue="NJ" nzLabel="New Jersey"></nz-option>
+                      <nz-option nzValue="NM" nzLabel="New Mexico"></nz-option>
+                      <nz-option nzValue="NY" nzLabel="New York"></nz-option>
+                      <nz-option nzValue="NC" nzLabel="North Carolina"></nz-option>
+                      <nz-option nzValue="ND" nzLabel="North Dakota"></nz-option>
+                      <nz-option nzValue="OH" nzLabel="Ohio"></nz-option>
+                      <nz-option nzValue="OK" nzLabel="Oklahoma"></nz-option>
+                      <nz-option nzValue="OR" nzLabel="Oregon"></nz-option>
+                      <nz-option nzValue="PA" nzLabel="Pennsylvania"></nz-option>
+                      <nz-option nzValue="RI" nzLabel="Rhode Island"></nz-option>
+                      <nz-option nzValue="SC" nzLabel="South Carolina"></nz-option>
+                      <nz-option nzValue="SD" nzLabel="South Dakota"></nz-option>
+                      <nz-option nzValue="TN" nzLabel="Tennessee"></nz-option>
+                      <nz-option nzValue="TX" nzLabel="Texas"></nz-option>
+                      <nz-option nzValue="UT" nzLabel="Utah"></nz-option>
+                      <nz-option nzValue="VT" nzLabel="Vermont"></nz-option>
+                      <nz-option nzValue="VA" nzLabel="Virginia"></nz-option>
+                      <nz-option nzValue="WA" nzLabel="Washington"></nz-option>
+                      <nz-option nzValue="WV" nzLabel="West Virginia"></nz-option>
+                      <nz-option nzValue="WI" nzLabel="Wisconsin"></nz-option>
+                      <nz-option nzValue="WY" nzLabel="Wyoming"></nz-option>
                   </nz-select>
+                    <div *ngIf="bState.invalid && (bState.dirty || bState.touched)">
+                        <nz-alert *ngIf="bState.errors.required"  nzType="error" nzMessage="{{validationMessages.bState}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
 
@@ -127,7 +217,10 @@
               <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title">ZIP</span></div>
-              <input type="text" nz-input placeholder="134512" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="134512" formControlName="bZip"  />
+                    <div *ngIf="bZip.invalid && (bZip.dirty || bZip.touched)">
+                        <nz-alert *ngIf="bZip.errors.required"  nzType="error" nzMessage="{{validationMessages.bZip}}" nzShowIcon></nz-alert>
+                    </div>
               <p class="hint">
                 You can use your home address if you don’t have a business address.
               </p>
@@ -141,8 +234,13 @@
               <div class="row mt-3">
                 <div class="col-md-9">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Business Phone Number </span></div>
-              <input type="text" nz-input placeholder="+1 555 123 441" [(ngModel)]="LegalBusinessName" />
-             
+              <input type="text" nz-input placeholder="555-123-4441" formControlName="bPhoneNo" />
+                    <div *ngIf="bPhoneNo.invalid && (bPhoneNo.dirty || bPhoneNo.touched)">
+                        <nz-alert *ngIf="bPhoneNo.errors.required"  nzType="error" nzMessage="{{validationMessages.bPhoneNo}}" nzShowIcon></nz-alert>
+                    </div>
+                    <div *ngIf="bPhoneNo.invalid && (bPhoneNo.dirty || bPhoneNo.touched)">
+                        <nz-alert *ngIf="bPhoneNo.errors.pattern"  nzType="error" nzMessage="{{validationMessages.bPhoneNoPattern}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
               
@@ -150,10 +248,16 @@
              <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="blue">*</span><span class="input-title">Industry</span></div>
-                  <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
-                    <nz-option nzValue="1" nzLabel="USA"></nz-option>
-                    <nz-option nzValue="1" nzLabel="Canada"></nz-option>
-                  </nz-select>
+                    <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose Industry" formControlName="bIndustry" >
+                        <nz-option nzValue="" nzLabel="Please choose Industry"></nz-option>
+                        <nz-option nzValue="5085" nzLabel="Industrial Supplies"></nz-option>
+                        <nz-option nzValue="5051" nzLabel="Metal Service Centers"></nz-option>
+                        <nz-option nzValue="5072" nzLabel="Hardware, Equipment, and Supplies"></nz-option>
+
+                    </nz-select>
+                    <div *ngIf="bIndustry.invalid && (bIndustry.dirty || bIndustry.touched)">
+                        <nz-alert *ngIf="bIndustry.errors.required"  nzType="error" nzMessage="{{validationMessages.bIndustry}}" nzShowIcon></nz-alert>
+                    </div>
                 </div>
               </div>
 
@@ -163,7 +267,7 @@
               <div class="row mt-1">
                 <div class="col-md-9">
                   <div class="mb-2 "><span class="input-title">Business Website</span></div>
-              <input type="text" nz-input placeholder="www.yourwebsite.com" [(ngModel)]="EIN" />
+              <input type="text" nz-input placeholder="www.yourwebsite.com" formControlName="Bwebsite"  />
                 </div>
               </div>
 
@@ -183,26 +287,32 @@
                     <h2 class="mb-0">
                       <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <!-- <i nz-icon nzType="bank" class="payIcon" nzTheme="outline"></i>  -->
-                         <span> Bank Account</span>
+                         <span>  <label nz-checkbox formControlName="bankPayout" > </label>
+ Bank Account</span>
                       </button>
                     </h2>
                   </div>
               
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body row">
-
                       <div class="col-md-4">
                         <div class="row mt-3">
                           <div class="col-md-9">
-                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Holder Name</span></div>
-                        <input type="name" nz-input placeholder="John Smith" [(ngModel)]="LegalBusinessName" />
+                            <div class="mb-2"><span *ngIf="this.bankSelected"  class="blue">*</span><span class="input-title">Account Holder Name</span></div>
+                        <input type="name" nz-input placeholder="John Smith" formControlName="bnkAccName"  />
+                              <div *ngIf="this.bankSelected && bnkAccName.invalid && (bnkAccName.dirty || bnkAccName.touched)">
+                                  <nz-alert *ngIf="bnkAccName.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkAccName}}" nzShowIcon></nz-alert>
+                              </div>
                           </div>
                         </div>
                         
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Number</span></div>
-                      <input type="name" nz-input placeholder="99821023" [(ngModel)]="LegalBusinessName" />
+                          <div class="mb-2"><span *ngIf="this.bankSelected" class="blue">*</span><span class="input-title">Account Number</span></div>
+                      <input type="name" nz-input placeholder="99821023" formControlName="bnkAccNo" />
+                            <div *ngIf="this.bankSelected && bnkAccNo.invalid && (bnkAccNo.dirty || bnkAccNo.touched)">
+                                <nz-alert *ngIf="bnkAccNo.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkAccNo}}" nzShowIcon></nz-alert>
+                            </div>
                       <div class="hint">
                         Must be a checking account
                       </div>
@@ -212,9 +322,11 @@
                       
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Wire Routing Number</span></div>
-                      <input type="name" nz-input placeholder="2893783" [(ngModel)]="LegalBusinessName" />
-                   
+                          <div class="mb-2"><span *ngIf="this.bankSelected" class="blue">*</span><span class="input-title">Wire Routing Number</span></div>
+                      <input type="name" nz-input placeholder="2893783" formControlName="bnkRoutNo"  />
+                            <div *ngIf="this.bankSelected && bnkRoutNo.invalid && (bnkRoutNo.dirty || bnkRoutNo.touched)">
+                                <nz-alert *ngIf="bnkRoutNo.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkRoutNo}}" nzShowIcon></nz-alert>
+                            </div>
                         </div>
                       </div>
                       </div>
@@ -222,30 +334,36 @@
                       <div class="col-md-4">
                         <div class="row mt-3">
                           <div class="col-md-9">
-                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Currency</span></div>
-                        <input type="name" nz-input placeholder="USD" [(ngModel)]="LegalBusinessName" />
+                            <div class="mb-2"><span *ngIf="this.bankSelected" class="blue">*</span><span class="input-title">Currency</span></div>
+                        <input type="name" nz-input placeholder="USD" formControlName="bnkCur"  />
+                              <div *ngIf="this.bankSelected && bnkCur.invalid && (bnkCur.dirty || bnkCur.touched)">
+                                  <nz-alert *ngIf="bnkCur.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkCur}}" nzShowIcon></nz-alert>
+                              </div>
                           </div>
                         </div>
                         
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Bank Name</span></div>
-                      <input type="name" nz-input placeholder="Morgan Chase" [(ngModel)]="LegalBusinessName" />
+                          <div class="mb-2"><span *ngIf="this.bankSelected" class="blue">*</span><span class="input-title">Bank Name</span></div>
+                      <input type="name" nz-input placeholder="Morgan Chase" formControlName="bnkName" />
+                            <div *ngIf="this.bankSelected && bnkName.invalid && (bnkName.dirty || bnkName.touched)">
+                                <nz-alert *ngIf="bnkName.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkName}}" nzShowIcon></nz-alert>
+                            </div>
                         </div>
                       </div>
 
                       
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Address</span></div>
-                      <input type="name" nz-input placeholder="DW, 553901, Arlington Bvd., 3" [(ngModel)]="LegalBusinessName" />
-                   
+                          <div class="mb-2"><span *ngIf="this.bankSelected" class="blue">*</span><span class="input-title">Address</span></div>
+                      <input type="name" nz-input placeholder="DW, 553901, Arlington Bvd., 3"  formControlName="bnkAddress" />
+                            <div *ngIf="this.bankSelected && bnkAddress.invalid && (bnkAddress.dirty || bnkAddress.touched)">
+                                <nz-alert *ngIf="bnkAddress.errors.required"  nzType="error" nzMessage="{{validationMessages.bnkAddress}}" nzShowIcon></nz-alert>
+                            </div>
                         </div>
                       </div>
                       </div>
-                      <div class="col-md-12 mt-3">
-                        <label nz-checkbox >Set as default payout option.</label>
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -253,40 +371,54 @@
                   <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
                       <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <!-- <i nz-icon nzType="dollar-circle"  nzTheme="outline"></i>  Cash -->
-                        Card
+                        <span>  <label nz-checkbox formControlName="cardPayout" > </label>
+ Card</span>
                       </button>
                     </h2>
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body row">
-                      <div class="col-md-4">
+
+                        <div class="col-md-4">
                         <div class="row mt-3">
                           <div class="col-md-9">
-                            <div class="mb-2"><span class="blue">*</span><span class="input-title">Card Holder Name</span></div>
-                        <input type="name" nz-input placeholder="John Smith" [(ngModel)]="LegalBusinessName" />
+                            <div class="mb-2"><span *ngIf="this.cardSelected" class="blue">*</span><span class="input-title">Card Holder Name</span></div>
+                        <input type="name" nz-input placeholder="John Smith"  formControlName="cardHolderName"  />
+                              <div *ngIf="this.cardSelected && cardHolderName.invalid && (cardHolderName.dirty || cardHolderName.touched)">
+                                  <nz-alert *ngIf="cardHolderName.errors.required"  nzType="error" nzMessage="{{validationMessages.cardHolderName}}" nzShowIcon></nz-alert>
+                              </div>
                           </div>
                         </div>
                         
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Card number</span></div>
-                      <input type="name" nz-input placeholder="4566-2332-3009-3122-5521" [(ngModel)]="LegalBusinessName" />
+                          <div class="mb-2"><span *ngIf="this.cardSelected"  class="blue">*</span><span class="input-title">Card number</span></div>
+                      <input type="name" nz-input placeholder="45662332300931225521" formControlName="CardNumber" />
+                            <div *ngIf="this.cardSelected && CardNumber.invalid && (CardNumber.dirty || CardNumber.touched)">
+                                <nz-alert *ngIf="CardNumber.errors.required"  nzType="error" nzMessage="{{validationMessages.CardNumber}}" nzShowIcon></nz-alert>
+                            </div>
+                            <div *ngIf="this.cardSelected && CardNumber.invalid && (CardNumber.dirty || CardNumber.touched)">
+                                <nz-alert *ngIf="CardNumber.errors.pattern"  nzType="error" nzMessage="{{validationMessages.CardInvalid}}" nzShowIcon></nz-alert>
+                            </div>
                         </div>
                       </div>
 
                       
                       <div class="row mt-1">
                         <div class="col-md-9">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Expiration Date</span></div>
-                      <input type="name" nz-input placeholder="09/23" [(ngModel)]="LegalBusinessName" />
+                          <div class="mb-2"><span *ngIf="this.cardSelected"  class="blue">*</span><span class="input-title">Expiration Date</span></div>
+                      <input type="name" nz-input placeholder="09/23" formControlName="CardExp" />
+                            <div *ngIf="this.cardSelected && CardExp.invalid && (CardExp.dirty || CardExp.touched)">
+                                <nz-alert *ngIf="CardExp.errors.required"  nzType="error" nzMessage="{{validationMessages.CardExp}}" nzShowIcon></nz-alert>
+                            </div>
+                            <div *ngIf="this.cardSelected && CardExp.invalid && (CardExp.dirty || CardExp.touched)">
+                                <nz-alert *ngIf="CardExp.errors.pattern"  nzType="error" nzMessage="{{validationMessages.CardExpInv}}" nzShowIcon></nz-alert>
+                            </div>
                    
                         </div>
                       </div>
                       </div>
-                      <div class="col-md-12 mt-3">
-                        <label nz-checkbox >Set as default payout option.</label>
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -305,29 +437,48 @@
               <b class="gray-7 title">Legal Name of Representative</b>
               <div class="mt-2">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">First Name</span></div>
-              <input type="email" nz-input placeholder="John " [(ngModel)]="LegalBusinessName" />
+              <input type="email" nz-input placeholder="John " formControlName="legalFirstName" />
+                  <div *ngIf=" legalFirstName.invalid && (legalFirstName.dirty || legalFirstName.touched)">
+                      <nz-alert *ngIf="legalFirstName.errors.required"  nzType="error" nzMessage="{{validationMessages.legalFirstName}}" nzShowIcon></nz-alert>
+                  </div>
               </div>
 
 
             <div class="mt-2">
               <div class="mb-2"><span class="blue">*</span><span class="input-title">Last Name</span></div>
-          <input type="text" nz-input placeholder="Smith" [(ngModel)]="LegalBusinessName" />
+          <input type="text" nz-input placeholder="Smith" formControlName="legalLastName"  />
+                <div *ngIf=" legalLastName.invalid && (legalLastName.dirty || legalLastName.touched)">
+                    <nz-alert *ngIf="legalLastName.errors.required"  nzType="error" nzMessage="{{validationMessages.legalLastName}}" nzShowIcon></nz-alert>
+                </div>
           </div>
 
           <div class="mt-2">
             <div class="mb-2"><span class="blue">*</span><span class="input-title">Email</span></div>
-        <input type="email" nz-input placeholder="John@email.com" [(ngModel)]="LegalBusinessName" />
+        <input type="email" nz-input placeholder="John@email.com" formControlName="legalEmail" />
+              <div *ngIf=" legalEmail.invalid && (legalEmail.dirty || legalEmail.touched)">
+                  <nz-alert *ngIf="legalEmail.errors.required"  nzType="error" nzMessage="{{validationMessages.legalEmail}}" nzShowIcon></nz-alert>
+              </div>
+              <div *ngIf=" legalEmail.invalid && (legalEmail.dirty || legalEmail.touched)">
+                  <nz-alert *ngIf="legalEmail.errors.email"  nzType="error" nzMessage="{{validationMessages.legalEmailInvalid}}" nzShowIcon></nz-alert>
+              </div>
         </div>
 
         <div class="mt-2">
           <div class="mb-2"><span class="blue">*</span><span class="input-title">Job Title</span></div>
-      <input type="text" nz-input placeholder="CEO" [(ngModel)]="LegalBusinessName" />
+      <input type="text" nz-input placeholder="CEO" formControlName="legalJobTitle"  />
+            <div *ngIf=" legalJobTitle.invalid && (legalJobTitle.dirty || legalJobTitle.touched)">
+                <nz-alert *ngIf="legalJobTitle.errors.required"  nzType="error" nzMessage="{{validationMessages.legalJobTitle}}" nzShowIcon></nz-alert>
+            </div>
       </div>
 
       <div class="mt-2">
         <div class="mb-2"><span class="blue">*</span><span class="input-title">Date of Birth</span></div>
-        <nz-date-picker class="col-12" [(ngModel)]="date" [nzFormat]="dateFormat">
+        <nz-date-picker class="col-12"  [nzFormat]="dateFormat" formControlName="legalDOB">
+
         </nz-date-picker>
+          <div *ngIf=" legalDOB.invalid && (legalDOB.dirty || legalDOB.touched)">
+              <nz-alert *ngIf="legalDOB.errors.required"  nzType="error" nzMessage="{{validationMessages.legalDOB}}" nzShowIcon></nz-alert>
+          </div>
     </div>
             </div>
 
@@ -335,32 +486,96 @@
               <b class="gray-7 title">Legal Name of Representative</b>
               <div class="mt-2">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 1</span></div>
-              <input type="email" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+              <input type="email" nz-input placeholder="Example Address, 123456" formControlName="legalAddress1"  />
+                  <div *ngIf=" legalAddress1.invalid && (legalAddress1.dirty || legalAddress1.touched)">
+                      <nz-alert *ngIf="legalAddress1.errors.required"  nzType="error" nzMessage="{{validationMessages.legalAddress1}}" nzShowIcon></nz-alert>
+                  </div>
               </div>
 
 
             <div class="mt-2">
               <div class="mb-2"><span class="blue">*</span><span class="input-title">Address Line 2</span></div>
-          <input type="text" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+          <input type="text" nz-input placeholder="Example Address, 123456" formControlName="legalAddress2" />
+                <div *ngIf=" legalAddress2.invalid && (legalAddress2.dirty || legalAddress2.touched)">
+                    <nz-alert *ngIf="legalAddress2.errors.required"  nzType="error" nzMessage="{{validationMessages.legalAddress2}}" nzShowIcon></nz-alert>
+                </div>
           </div>
 
           <div class="mt-2">
             <div class="mb-2"><span class="blue">*</span><span class="input-title">City</span></div>
-        <input type="email" nz-input placeholder="Example Address, 123456" [(ngModel)]="LegalBusinessName" />
+        <input type="name" nz-input placeholder="Example Address, 123456" formControlName="legalCity"  />
+              <div *ngIf=" legalCity.invalid && (legalCity.dirty || legalCity.touched)">
+                  <nz-alert *ngIf="legalCity.errors.required"  nzType="error" nzMessage="{{validationMessages.legalCity}}" nzShowIcon></nz-alert>
+              </div>
         </div>
 
         <div class="mt-2">
           <div class="mb-2"><span class="blue">*</span><span class="input-title">State</span></div>
-          <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state">
-            <nz-option nzValue="1" nzLabel="USA"></nz-option>
-            <nz-option nzValue="1" nzLabel="Canada"></nz-option>
+          <nz-select class="col-md-12" nzAllowClear  placeholder="Please choose a state" formControlName="legaState">
+              <nz-option nzValue="" nzLabel="Please choose a state"></nz-option>
+              <nz-option nzValue="AL" nzLabel="Alabama"></nz-option>
+              <nz-option nzValue="AK" nzLabel="Alaska"></nz-option>
+              <nz-option nzValue="AZ" nzLabel="Arizona"></nz-option>
+              <nz-option nzValue="AR" nzLabel="Arkansas"></nz-option>
+              <nz-option nzValue="CA" nzLabel="California"></nz-option>
+              <nz-option nzValue="CO" nzLabel="Colorado"></nz-option>
+              <nz-option nzValue="CT" nzLabel="Connecticut"></nz-option>
+              <nz-option nzValue="DE" nzLabel="Delaware"></nz-option>
+              <nz-option nzValue="DC" nzLabel="District Of Columbia"></nz-option>
+              <nz-option nzValue="FL" nzLabel="Florida"></nz-option>
+              <nz-option nzValue="GA" nzLabel="Georgia"></nz-option>
+              <nz-option nzValue="HI" nzLabel="Hawaii"></nz-option>
+              <nz-option nzValue="ID" nzLabel="Idaho"></nz-option>
+              <nz-option nzValue="IL" nzLabel="Illinois"></nz-option>
+              <nz-option nzValue="IN" nzLabel="Indiana"></nz-option>
+              <nz-option nzValue="IA" nzLabel="Iowa"></nz-option>
+              <nz-option nzValue="KS" nzLabel="Kansas"></nz-option>
+              <nz-option nzValue="KY" nzLabel="Kentucky"></nz-option>
+              <nz-option nzValue="LA" nzLabel="Louisiana"></nz-option>
+              <nz-option nzValue="ME" nzLabel="Maine"></nz-option>
+              <nz-option nzValue="MD" nzLabel="Maryland"></nz-option>
+              <nz-option nzValue="MA" nzLabel="Massachusetts"></nz-option>
+              <nz-option nzValue="MI" nzLabel="Michigan"></nz-option>
+              <nz-option nzValue="MN" nzLabel="Minnesota"></nz-option>
+              <nz-option nzValue="MS" nzLabel="Mississippi"></nz-option>
+              <nz-option nzValue="MO" nzLabel="Missouri"></nz-option>
+              <nz-option nzValue="MT" nzLabel="Montana"></nz-option>
+              <nz-option nzValue="NE" nzLabel="Nebraska"></nz-option>
+              <nz-option nzValue="NV" nzLabel="Nevada"></nz-option>
+              <nz-option nzValue="NH" nzLabel="New Hampshire"></nz-option>
+              <nz-option nzValue="NJ" nzLabel="New Jersey"></nz-option>
+              <nz-option nzValue="NM" nzLabel="New Mexico"></nz-option>
+              <nz-option nzValue="NY" nzLabel="New York"></nz-option>
+              <nz-option nzValue="NC" nzLabel="North Carolina"></nz-option>
+              <nz-option nzValue="ND" nzLabel="North Dakota"></nz-option>
+              <nz-option nzValue="OH" nzLabel="Ohio"></nz-option>
+              <nz-option nzValue="OK" nzLabel="Oklahoma"></nz-option>
+              <nz-option nzValue="OR" nzLabel="Oregon"></nz-option>
+              <nz-option nzValue="PA" nzLabel="Pennsylvania"></nz-option>
+              <nz-option nzValue="RI" nzLabel="Rhode Island"></nz-option>
+              <nz-option nzValue="SC" nzLabel="South Carolina"></nz-option>
+              <nz-option nzValue="SD" nzLabel="South Dakota"></nz-option>
+              <nz-option nzValue="TN" nzLabel="Tennessee"></nz-option>
+              <nz-option nzValue="TX" nzLabel="Texas"></nz-option>
+              <nz-option nzValue="UT" nzLabel="Utah"></nz-option>
+              <nz-option nzValue="VT" nzLabel="Vermont"></nz-option>
+              <nz-option nzValue="VA" nzLabel="Virginia"></nz-option>
+              <nz-option nzValue="WA" nzLabel="Washington"></nz-option>
+              <nz-option nzValue="WV" nzLabel="West Virginia"></nz-option>
+              <nz-option nzValue="WI" nzLabel="Wisconsin"></nz-option>
+              <nz-option nzValue="WY" nzLabel="Wyoming"></nz-option>
           </nz-select>
+            <div *ngIf=" legaState.invalid && (legaState.dirty || legaState.touched)">
+                <nz-alert *ngIf="legaState.errors.required"  nzType="error" nzMessage="{{validationMessages.legaState}}" nzShowIcon></nz-alert>
+            </div>
       </div>
 
       <div class="mt-2">
         <div class="mb-2"><span class="blue">*</span><span class="input-title">Zip</span></div>
-        <input type="email" nz-input placeholder="31232" [(ngModel)]="LegalBusinessName" />
-
+        <input type="email" nz-input placeholder="31232" formControlName="legalZipCode" />
+          <div *ngIf=" legalZipCode.invalid && (legalZipCode.dirty || legalZipCode.touched)">
+              <nz-alert *ngIf="legalZipCode.errors.required"  nzType="error" nzMessage="{{validationMessages.legalZipCode}}" nzShowIcon></nz-alert>
+          </div>
         <p class="hint">
           You can use your home address if you don’t have a business address.
         </p>
@@ -371,13 +586,22 @@
               <b class="gray-7 title">Additional Information of Representative</b>
               <div class="mt-2">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Phone Number</span></div>
-              <input type="email" nz-input placeholder="+1 (123) 123-332" [(ngModel)]="LegalBusinessName" />
+              <input type="name" nz-input placeholder="123-123-332" formControlName="legalPhoneNo" />
+                  <div *ngIf=" legalPhoneNo.invalid && (legalPhoneNo.dirty || legalPhoneNo.touched)">
+                      <nz-alert *ngIf="legalPhoneNo.errors.required"  nzType="error" nzMessage="{{validationMessages.legalPhoneNo}}" nzShowIcon></nz-alert>
+                  </div>
+                  <div *ngIf=" legalPhoneNo.invalid && (legalPhoneNo.dirty || legalPhoneNo.touched)">
+                      <nz-alert *ngIf="legalPhoneNo.errors.pattern"  nzType="error" nzMessage="{{validationMessages.legalPhoneNoInvalid}}" nzShowIcon></nz-alert>
+                  </div>
               </div>
 
 
             <div class="mt-2">
               <div class="mb-2"><span class="blue">*</span><span class="input-title">Last 4 digits of Social Security number</span></div>
-          <input type="text" nz-input placeholder="•••-••- 1234" [(ngModel)]="LegalBusinessName" />
+          <input type="text" nz-input placeholder="•••-••- 1234" formControlName="legalSSN" />
+                <div *ngIf=" legalSSN.invalid && (legalSSN.dirty || legalSSN.touched)">
+                    <nz-alert *ngIf="legalSSN.errors.required"  nzType="error" nzMessage="{{validationMessages.legalSSN}}" nzShowIcon></nz-alert>
+                </div>
           <div class="blue pointer">
             <a>
               Provide a government-issued ID number instead
@@ -412,7 +636,7 @@
                   <tr *ngFor="let data of ownerTableData">
                     <td>{{data.name}}</td>
                     <td>{{data.email}}</td>
-                    <td (click)="deleteOwner()"><i nz-icon class="red-6" nzType="delete" nzTheme="outline"></i></td>
+                    <td (click)="deleteOwner(data)"><i nz-icon class="red-6" nzType="delete" nzTheme="outline"></i></td>
                   </tr>
                 </tbody>
               </nz-table>
@@ -425,16 +649,18 @@
               <span class="input-title">Upload Additional Files</span>
             </div>
             <nz-upload class="col-md-7"
-            nzType="drag"
-            [nzMultiple]="true"
-            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                       [nzMultiple]="true"
+                       [(nzFileList)]="fileList"
+                       [nzBeforeUpload]="beforeUpload.bind(this)"
+                       [nzRemove]="removeFile.bind(this)"
+                       nzType="drag"
            >
             <p class="ant-upload-drag-icon">
               <i nz-icon nzType="inbox"></i>
             </p>
             <p class="ant-upload-text">Click or drag file to this area to upload</p>
             <p class="ant-upload-hint">
-              Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+              Support for a single or bulk upload. Strictly prohibit from uploading company data or other brand files
             </p>
           </nz-upload>
           </div>
@@ -452,22 +678,23 @@
             nzTitle="Accout successfully set up!"
             nzSubTitle="You can review all the information in the settings menu. "
           >
-            <div nz-result-extra>
-              <button nz-button>Settings</button>
-            </div>
+
           </nz-result>
 
           </div>
+
+
+
+
+
+          </form>
       </div>
-
-
-
-      <nz-footer>   
-          <button *ngIf="currentStep !=8" nz-button (click)="backStep()" class="mar-2"  nzType="ghost" >Back</button>
-          <button *ngIf="currentStep !=8" nz-button (click)="NextStep()" type="submit" nzType="primary">{{steps[currentStep+1].name}}
+    <nz-footer>
+        <button *ngIf="currentStep !=8" nz-button  (click)="backStep()" class="mar-2"  nzType="ghost" >Back</button>
+        <button *ngIf="currentStep !=8" nz-button type="submit" (click)="NextStep()" nzType="primary">{{steps[currentStep+1].name}}
             <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
-          </button>
-          <button *ngIf="currentStep ==8"  nz-button (click)="goToDashboard()" type="submit" nzType="primary">Start</button>
+        </button>
+        <button *ngIf="currentStep ==8"  nz-button (click)="goToDashboard()" type="submit" nzType="primary">Start</button>
 
     </nz-footer>
 </div>
@@ -484,21 +711,21 @@
         <div class="modal-content-custom-email">
         <div class="row mt-1">
            <p class="col-12"> <span class="blue">*</span>First Name</p><br>
-         <div class="col-12"><input nz-input placeholder="Jhon" [(ngModel)]="newOwnerFirstName" /></div>   
+         <div class="col-12"><input nz-input placeholder="Jhon" [(ngModel)]="newOwnerFirstName" /></div>
         </div>
         <div class="row mt-1">
           <p class="col-12"> <span class="blue">*</span>Last Name</p><br>
-        <div class="col-12"><input nz-input placeholder="Smith"[(ngModel)]="newOwnerLastName" /></div>   
+        <div class="col-12"><input nz-input placeholder="Smith"[(ngModel)]="newOwnerLastName" /></div>
        </div>
        <div class="row mt-1">
         <p class="col-12"> <span class="blue">*</span>Email</p><br>
-      <div class="col-12"><input nz-input placeholder="email@domain.com" [(ngModel)]="newOwnerEmail" /></div>   
+      <div class="col-12"><input nz-input placeholder="email@domain.com" [(ngModel)]="newOwnerEmail" /></div>
      </div>
-     <label nz-checkbox  class="mt-2">I agree with using Stripe as main payment gateway.</label>
+     <label nz-checkbox  class="mt-2">I own 25% or more of the company.</label>
 
    
         <div class="mt-2 push-r">
-          <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Cancle</button>
+          <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Cancel</button>
           <button (click)="addOwner()" nz-button nzType="primary" type="button" data-dismiss="modal">Add</button>
         </div>
         </div>

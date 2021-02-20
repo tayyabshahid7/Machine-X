@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { StepsComponent } from './steps.component';
 
 describe('StepsComponent', () => {
