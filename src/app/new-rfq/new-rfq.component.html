@@ -1,67 +1,67 @@
 <nz-content>
-    <div class="site-page-header-ghost-wrapper">
-        <nz-page-header [nzGhost]="false">
-          <nz-page-header-title>RFQs</nz-page-header-title>
-          <nz-page-header-content>
-              <div class="row">
-                  <div class="col-6 p-0 space-b">
-                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                        <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID" />
-                      </nz-input-group>
-                      <ng-template #suffixIconButton>
-                        <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
-                      </ng-template>
-                  </div>
-                  </div>
-
-          </nz-page-header-content>
-       
-        </nz-page-header>
-      </div>
-      <div class="p-24px"> 
-        <div nz-row nzGutter="" >
-           
-            <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
-                <thead>
-                  <tr>
-                    <th>RFQ #</th>
-                    <th>Quantity</th>
-                    <th>Date Needed</th>
-                    <th class="text-center">Remaining Time</th>
-                    <th class="text-center">Submissions</th>
-                    <th class="text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr (click)="onSelect(data)" class="pointer" *ngFor="let data of tableData">
-                    <td class="frq-id">{{data.id}}</td>
-                    <td>{{data.quantity}}</td>
-                    <td>{{data.date}}</td>
-                    <td class="text-center">{{data.submission}}</td>
-                    <td class="text-center">
-
-                         {{data.remaining.days}} days | 
-                        {{data.remaining.hours}} hours | 
-                        {{data.remaining.min}} minutes 
-                    
-                    </td>
-                    <td  class="text-center" >
-                        <a class="blue pointer" (click)="onSelect(data)">
-                            View
-                        </a>
-                    </td>
-                  
-                  </tr>
-                </tbody>
-              </nz-table>
-            
-           
+  <div class="site-page-header-ghost-wrapper">
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>RFQs</nz-page-header-title>
+      <nz-page-header-content>
+        <div class="row">
+          <div class="col-6 p-0 space-b">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+              <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
           </div>
-      </div>
-    
-        <nz-footer>
-        </nz-footer>
-    </nz-content>
+        </div>
+
+      </nz-page-header-content>
+
+    </nz-page-header>
+  </div>
+  <div class="p-24px">
+    <div nz-row nzGutter="">
+
+      <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
+        <thead>
+        <tr>
+          <th>RFQ #</th>
+          <th>Quantity</th>
+          <th>Date Needed</th>
+          <th class="text-center">Remaining Time</th>
+          <th class="text-center">Submissions</th>
+          <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr (click)="onSelect(data)" class="pointer" *ngFor="let data of tableData">
+          <td class="frq-id">{{data.id}}</td>
+          <td>{{data.quantity}}</td>
+          <td>{{data.date}}</td>
+          <td class="text-center">{{data.submission}}</td>
+          <td class="text-center">
+
+            {{data.remaining.days}} days |
+            {{data.remaining.hours}} hours |
+            {{data.remaining.min}} minutes
+
+          </td>
+          <td class="text-center">
+            <a class="blue pointer" (click)="onSelect(data)">
+              View
+            </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </nz-table>
+
+
+    </div>
+  </div>
+
+  <nz-footer>
+  </nz-footer>
+</nz-content>
     
     
     

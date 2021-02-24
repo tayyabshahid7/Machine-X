@@ -27,34 +27,34 @@
   <nz-layout>
     <nz-sider nzWidth="210px" nzTheme="dark" class="rightBorder">
       <ul nz-menu nzMode="inline" class="sider-menu">
-        <a routerLink="home">
-          <li nz-menu-item nzSelected class="nz-menu-item">
+        <a routerLink="home" routerLinkActive #rlaDashboard="routerLinkActive">
+          <li nz-menu-item class="nz-menu-item" [nzSelected]="rlaDashboard.isActive">
             <span>Dashboard</span>
           </li>
         </a>
 
         <li nz-submenu nzTheme="dark" style="background-color: #001529 ; color:#D9D9D9" class="nz-submenu" style="padding-left: 48px;" nzTitle="All Jobs">
           <ul style="background-color: #001529 ;color:#D9D9D9">
-            <a routerLink="newRFQ">
-              <li nz-menu-item>New RFQ</li>
+            <a routerLink="newRFQ" routerLinkActive #rlaNewRFQs="routerLinkActive">
+              <li nz-menu-item [nzSelected]="rlaNewRFQs.isActive">New RFQ</li>
             </a>
-            <a routerLink="submittedQuote">
-              <li nz-menu-item>Submitted Quotes</li>
+            <a routerLink="submittedQuote" routerLinkActive #rlaSubmittedQuotes="routerLinkActive">
+              <li nz-menu-item [nzSelected]="rlaSubmittedQuotes.isActive">Submitted Quotes</li>
             </a>
-            <a routerLink="WorkingJobs">
-              <li nz-menu-item>Working Jobs</li>
+            <a routerLink="WorkingJobs" routerLinkActive #rlaWorkingJobs="routerLinkActive">
+              <li nz-menu-item [nzSelected]="rlaWorkingJobs.isActive">Working Jobs</li>
             </a>
           </ul>
         </li>
-        <a routerLink="transactions">
-          <li nz-menu-item class="nz-menu-item">
+        <a routerLink="transactions" routerLinkActive #rlaTransactions="routerLinkActive">
+          <li nz-menu-item class="nz-menu-item" [nzSelected]="rlaTransactions.isActive">
             <span>Transaction History</span>
           </li>
         </a>
 
         <div class="bottom-items">
-          <a routerLink="profile">
-            <li nz-menu-item class="nz-menu-item">
+          <a routerLink="profile" routerLinkActive #rlaProfile="routerLinkActive">
+            <li nz-menu-item class="nz-menu-item" [nzSelected]="rlaProfile.isActive">
               <span>Settings</span>
             </li>
           </a>
