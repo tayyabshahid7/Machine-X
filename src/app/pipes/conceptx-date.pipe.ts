@@ -2,13 +2,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
-  name: 'conceptXDatePipe'
+  name: 'conceptXDateTimePipe'
 })
-export class ConceptxDatePipe extends DatePipe implements PipeTransform {
-  DEFAULT_FORMAT = 'd.MM.yy | hh:mm aa';
+export class ConceptXDateTimePipePipe extends DatePipe implements PipeTransform {
+  DEFAULT_DATETIME_FORMAT = 'MM.dd.yyyy | hh:mm aa';
+  DEFAULT_DATE_FORMAT = 'MM.dd.yyyy';
 
-  transform(value: any, format?: string, timezone?: string, locale?: string): string | null {
-    return super.transform(value, format || this.DEFAULT_FORMAT, timezone, locale);
+  transform(value: any, format: 'date' | 'datetime' | string = 'datetime', timezone?: string, locale?: string): string | null {
+    format = format === 'datetime' ? this.DEFAULT_DATETIME_FORMAT : format === 'date' ? this.DEFAULT_DATE_FORMAT : format;
+    return super.transform(value, format, timezone, locale);
   }
 
 }

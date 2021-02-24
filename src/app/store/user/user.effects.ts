@@ -19,7 +19,7 @@ export class UserEffects {
       if (existsInStore) {
         return of(loadUserSuccess({user}));
       } else {
-        return this.userAPIService.getEngineerProfile().pipe(
+        return this.userAPIService.getShopProfile().pipe(
           map(engineer => loadUserSuccess({user: engineer})),
           catchError(() => {
             this.notification.error('Error while loading user profile', null);

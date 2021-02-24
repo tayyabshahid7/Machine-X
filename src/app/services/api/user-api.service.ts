@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { MachineInterface } from '../../models/machine';
-import { EngineerProfileInterface, JoinWaitingListRequestDataInterface } from '../../models/user.models';
+import { JoinWaitingListRequestDataInterface, ShopProfileInterface } from '../../models/user.models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class UserAPIService {
   ) {
   }
 
-  getEngineerProfile() {
-    return this.httpClient.get<EngineerProfileInterface>(`${environment.APIUrl}/engineer/profile`);
+  getShopProfile() {
+    return this.httpClient.get<ShopProfileInterface>(`${environment.APIUrl}/shop/profile`);
   }
 
   joinWaitingList(data: JoinWaitingListRequestDataInterface) {

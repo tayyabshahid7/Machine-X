@@ -1,6 +1,6 @@
-import { EngineerProfileInterface } from './user.models';
+import { ShopProfileInterface } from './user.models';
 
 
 export interface AppStateInterface {
-  user: EngineerProfileInterface;
+  user: ShopProfileInterface;
 }
