@@ -20,3 +20,11 @@ export interface EngineerProfileInterface {
   engBio: string;
   avatar: string | null;
 }
+
+
+export interface JoinWaitingListRequestDataInterface {
+  email: string;
+  name: string;
+  company: string;
+  userType: string;
+}
