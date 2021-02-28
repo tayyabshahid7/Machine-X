@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { JobAPIService } from '../services/api/job-api.service';
+import { JobInterface } from '../models/job.models';
 
 @Component({
   selector: 'app-working-job',
@@ -7,39 +11,70 @@ import { Router } from '@angular/router';
   styleUrls: ['./working-job.component.css']
 })
 export class WorkingJobComponent implements OnInit {
-  tableData = [
-    {
-      id : ' Job #00133312',
-      name: '123122',
-      date: 'March 4, 2018',
-      daysLeft: '1000.00',
-      status: true,
-      statusX: 'InProgress'
-    },
-    {
-      id : ' Job #00133312',
-      name: '2343',
-      date: 'March 4, 2018',
-      daysLeft: '1000.00',
-      status: true,
-      statusX: 'Shipped'
-    },
-    {
-      id : ' Job #00133312',
-      name: '5321',
-      date: 'March 4, 2018',
-      daysLeft: '650.00',
-      status: true,
-      statusX: 'Issue'
-    },
- ];
-  constructor(private router: Router) { }
+  pageSize = 11;
+  currentPage = 1;
+  jobsCount = 0;
+  jobs: JobInterface[] = null;
+  jobsPage: JobInterface[] = [];
+  searchKey: string;
+
+  constructor(
+    private notification: NzNotificationService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private jobAPIService: JobAPIService,
+    private spinner: NgxSpinnerService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.changePage(this.currentPage);
   }
-  onSelect(data){
-    console.log(data.isActive);
-    this.router.navigate(['/dashboard/WorkingJobs/details/', data.statusX]);
+
+  loadjobs(page: number): Promise<void> {
+    return new Promise<void>(((resolve, reject) => {
+      this.spinner.show('jobsSpinner');
+      this.jobAPIService.listJobs(
+        {page, pageSize: this.pageSize},
+        {searchKey: this.searchKey}
+      ).subscribe(
+        (jobs) => {
+          this.jobsCount = jobs.count;
+          if (this.jobs !== null) {
+            this.jobs.push(...jobs.results);
+          } else {
+            this.jobs = jobs.results;
+          }
+          this.spinner.hide('jobsSpinner');
+          resolve();
+        },
+        (error) => {
+          this.notification.error('Error loading jobs', null);
+          this.spinner.hide('jobsSpinner');
+          reject();
+        }
+      );
+    }));
+  }
+
+  changePage(pageNumber: number) {
+    const rangeStart = this.pageSize * (pageNumber - 1);
+    const rangeEnd = this.jobsCount ? Math.min(this.jobsCount, this.pageSize * pageNumber) : this.pageSize * pageNumber;
+    if (!this.jobs || this.jobs.length < rangeEnd) {
+      this.loadjobs(pageNumber).then(() => this.jobsPage = this.jobs.slice(rangeStart, rangeEnd));
+    } else {
+      this.jobsPage = this.jobs.slice(rangeStart, rangeEnd);
     }
+  }
+
+  searchjobs() {
+    this.jobs = null;
+    this.jobsPage = [];
+    this.changePage(1);
+  }
+
+  onSelect(job: JobInterface) {
+    this.router.navigate([`dashboard/WorkingJobs/details/${job.id}`]);
+  }
 
 }

@@ -98,6 +98,7 @@ import { AuthenticationService } from './services/auth/authentication.service';
 import { JwtInterceptor } from './utilities/auth.utilities/jwt.interceptor';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ConceptXDateTimePipePipe } from './pipes/conceptx-date.pipe';
+import { FilePreviewerComponent } from './components/file-previewer/file-previewer.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -147,7 +148,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     WorkingJobDetailsComponent,
     DurationPipe,
     ConceptXDateTimePipePipe,
-    TimeFromNowPipe
+    TimeFromNowPipe,
+    FilePreviewerComponent,
   ],
   imports: [
     AppRoutingModule,

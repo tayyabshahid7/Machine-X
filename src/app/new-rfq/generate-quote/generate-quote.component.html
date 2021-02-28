@@ -1,145 +1,187 @@
 <div class="container-64">
+  <ngx-spinner [name]="'rfqSpinner'" [fullScreen]="false"></ngx-spinner>
+  <ng-container *ngIf="rfq!==null; else noRfq">
     <div class="site-page-header-ghost-wrapper bottom-border">
-        <nz-page-header nzBackIcon [nzGhost]="false">
-          <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #2132 - Generate Quote </nz-page-header-title>
-          <nz-page-header-extra>
-            <span class="blue">*</span>All fields are required
-          </nz-page-header-extra>
-        </nz-page-header>
-      </div>
-    
-      <div class="content ">
+      <nz-page-header nzBackIcon [nzGhost]="false">
+        <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #{{rfq.displayId}} - Generate Quote</nz-page-header-title>
+        <nz-page-header-extra>
+          <span class="blue">*</span>All fields are required
+        </nz-page-header-extra>
+      </nz-page-header>
+    </div>
+
+    <div class="content ">
+      <form [formGroup]="form">
         <div class="row">
           <div class="col-md-6">
-                    <h3>Quote for <span class="blue">REF# 21321</span></h3>
-                    <div class="row">
-                        <div class="col-md-12 gray-8">Engineer name:</div>
-                    <div class="col-md-12 gray-8">Shipping address: </div>
+            <h3>Quote for <span class="blue">RFQ#{{rfq.displayId}}</span></h3>
+            <div class="row">
+              <div class="col-md-12 gray-8">Engineer name: {{rfq.engineer.username}}</div>
+              <div class="col-md-12 gray-8" *ngIf="rfq.shippingAddress">
+                Shipping address: {{rfq.shippingAddress.country}}, {{rfq.shippingAddress.city}}, {{rfq.shippingAddress.street}} - {{rfq.shippingAddress.zipCode}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mt-2">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Shop Quote Number</span></div>
+                  <input formControlName="shopQuoteNumber" type="text" nz-input placeholder="Quote Number"/>
+                  <ng-container *ngIf="form.controls.shopQuoteNumber.invalid && (form.controls.shopQuoteNumber.dirty || form.controls.shopQuoteNumber.touched)">
+                    <div class="form-error" *ngFor="let error of form.controls.shopQuoteNumber.errors.APIErrors">{{ error }}</div>
+                    <div class="form-error" *ngIf="form.controls.shopQuoteNumber.errors.required">This field is required</div>
+                    <div class="form-error" *ngIf="form.controls.shopQuoteNumber.errors.maxlength">
+                      max length ({{form.controls.shopQuoteNumber.errors.maxlength.requiredLength}}) exceeded
                     </div>
-                  
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mt-2">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Shop Quote Number</span></div>
-                          <input type="text" nz-input placeholder="Quote Number" />
-                      </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6" >
-                        <div class="mt-2">
-                          <div class="mb-2"><span class="blue">*</span><span class="input-title">Additional Files</span></div>
-                          <nz-upload class="col-md-12 p-0"
-                          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                          [nzHeaders]="{ authorization: 'authorization-text' }"
-                          
-                        >
-                          <button class="full-width block col-md-12" nz-button><i nz-icon nzType="upload"></i>Click to Upload</button>
-                        </nz-upload>
-                      </div>
-                      </div>
-                    </div>
-                    <div class="row mt-1">
-                      <div class="col-12">
-                        <div class="mb-2"><span class="blue">*</span>Note</div>
-                        <textarea nz-input placeholder="" rows="5"></textarea>
-                    </div>
-                    </div>
-
-                    <div class="row mt-1">
-                      <div class="col-md-6">
-                          <div class="mb-2"><span class="blue">*</span>Quote Valid For</div>
-                          <nz-input-number  class="col-md-12" [nzStep]="1"  class="full-width" nzPlaceHolder="number of days" ></nz-input-number>
-                              
-                        </div>
-                      <div class="col-md-6">
-                          <div class="mb-2"><span class="blue">*</span> Delivery Date
-                          </div>
-                          <nz-date-picker class="col-md-12"  [nzFormat]="dateFormat">
-                          </nz-date-picker>
-                      </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="mt-2">
+                  <div class="mb-2"><span class="blue">*</span><span class="input-title">Additional Files</span></div>
+                  <nz-upload
+                    class="col-md-12 p-0"
+                    [nzMultiple]="true"
+                    [(nzFileList)]="fileList"
+                    [nzBeforeUpload]="beforeUpload.bind(this)"
+                    [nzRemove]="removeFile.bind(this)">
+                    <button class="full-width block col-md-12" nz-button><i nz-icon nzType="upload"></i>Click to Upload</button>
+                  </nz-upload>
+                  <ng-container *ngIf="form.controls.attachments.invalid && (form.controls.attachments.dirty || form.controls.attachments.touched)">
+                    <div class="form-error" *ngIf="form.controls.attachments.errors.required">This field is required</div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col-12">
+                <div class="mb-2"><span class="blue">*</span>Note</div>
+                <textarea formControlName="shopQuoteNotes" nz-input placeholder="" rows="5"></textarea>
+                <ng-container *ngIf="form.controls.shopQuoteNotes.invalid && (form.controls.shopQuoteNotes.dirty || form.controls.shopQuoteNotes.touched)">
+                  <div class="form-error" *ngFor="let error of form.controls.shopQuoteNotes.errors.APIErrors">{{ error }}</div>
+                  <div class="form-error" *ngIf="form.controls.shopQuoteNotes.errors.required">This field is required</div>
+                  <div class="form-error" *ngIf="form.controls.shopQuoteNotes.errors.maxlength">
+                    max length ({{form.controls.shopQuoteNotes.errors.maxlength.requiredLength}}) exceeded
                   </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="row mt-1">
+              <div class="col-md-6">
+                <div class="mb-2"><span class="blue">*</span>Quote Valid For</div>
+                <nz-input-number formControlName="validForDays" class="col-md-12 full-width" [nzStep]="1" nzPlaceHolder="number of days"></nz-input-number>
+                <ng-container *ngIf="form.controls.validForDays.invalid && (form.controls.validForDays.dirty || form.controls.validForDays.touched)">
+                  <div class="form-error" *ngFor="let error of form.controls.validForDays.errors.APIErrors">{{ error }}</div>
+                  <div class="form-error" *ngIf="form.controls.validForDays.errors.required">This field is required</div>
+                  <div class="form-error" *ngIf="form.controls.validForDays.errors.min">
+                    Minimum value is ({{form.controls.validForDays.errors.min.min}})
+                  </div>
+                </ng-container>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-2"><span class="blue">*</span> Delivery Date
+                </div>
+                <nz-date-picker formControlName="deliveryDate" class="col-md-12" [nzFormat]="dateFormat">
+                </nz-date-picker>
+                <ng-container *ngIf="form.controls.deliveryDate.invalid && (form.controls.deliveryDate.dirty || form.controls.deliveryDate.touched)">
+                  <div class="form-error" *ngFor="let error of form.controls.deliveryDate.errors.APIErrors">{{ error }}</div>
+                  <div class="form-error" *ngIf="form.controls.deliveryDate.errors.required">This field is required</div>
+                </ng-container>
+              </div>
+            </div>
           </div>
 
           <div class="col-md-6">
             <div class="mb-2"><span class="blue">*</span><span class="input-title">Quoted Items</span></div>
-            <nz-table #basicTable [nzData]="basicTable">
+            <nz-table #basicTable [nzData]="form.controls.lineItems.value" [nzNoResult]="null" [nzShowPagination]="false">
               <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Quantity</th>
-                  <th>Unit Cost</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
+              <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let data of tableData;let i = index">
-                  <td>{{data.description}}</td>
-                  <td>{{data.quantity}}</td>
-                  <td>$ {{data.unitcost}}</td>
-                  <td>$ {{data.total}}</td>
-                  <td>
-                    <span class="red-6 pointer" (click)="deleteItem(i)">Delete</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input nz-input [(ngModel)]="addedDesc" />
-                  </td>
-                  <td>
-                    <input nz-input [(ngModel)]="addedQuantity" />
-                  </td>
-                  <td>
-                    <input nz-input [(ngModel)]="addedUnitCost" />
-                  </td>
-                  <td>
-                    <input nz-input [(ngModel)]="addedTotal" />
-                  </td>
-                  <td>
-                    <span class="blue pointer" (click)="addItem()"> + Add</span>
-
-                  </td>
-                </tr>
+              <tr *ngFor="let lineItem of form.controls.lineItems.value;let i = index">
+                <td>{{lineItem.description}}</td>
+                <td>{{lineItem.quantity}}</td>
+                <td>{{lineItem.price | currency: 'USD'}}</td>
+                <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
+                <td>
+                  <span class="red-6 pointer" (click)="removeLineItem(i)">Delete</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input nz-input [(ngModel)]="newLineItemDesc" [ngModelOptions]="{standalone: true}"/>
+                </td>
+                <td>
+                  <input type="number" nz-input (ngModelChange)="newLineItemQuantityChange($event)" [ngModel]="newLineItemQuantity" [ngModelOptions]="{standalone: true}"/>
+                </td>
+                <td>
+                  <input type="number" nz-input (ngModelChange)="newLineItemPriceChange($event)" [ngModel]="newLineItemPrice" [ngModelOptions]="{standalone: true}"/>
+                </td>
+                <td>
+                  <input [readOnly]="true" type="number" nz-input [(ngModel)]="newLineItemTotalCost" [ngModelOptions]="{standalone: true}"/>
+                </td>
+                <td>
+                  <span class="blue pointer" (click)="addLineItem()"> + Add</span>
+                </td>
+              </tr>
               </tbody>
             </nz-table>
 
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Shipping Rate
+                <input formControlName="shippingRate" (ngModelChange)="setTotals()" type="number" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Shipping Rate
+                <ng-container *ngIf="form.controls.shippingRate.invalid && (form.controls.shippingRate.dirty || form.controls.shippingRate.touched)">
+                  <div class="form-error" *ngFor="let error of form.controls.shippingRate.errors.APIErrors">{{ error }}</div>
+                  <div class="form-error" *ngIf="form.controls.shippingRate.errors.required">This field is required</div>
+                  <div class="form-error" *ngIf="form.controls.shippingRate.errors.min">
+                    Minimum value is ({{form.controls.shippingRate.errors.min.min}})
+                  </div>
+                </ng-container>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Subtotal</b>
+                <input [readOnly]="true" type="number" [value]="subtotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Subtotal</b>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Tax
+                <input formControlName="tax" (ngModelChange)="setTotals()" type="number" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Tax
+                <ng-container *ngIf="form.controls.tax.invalid && (form.controls.tax.dirty || form.controls.tax.touched)">
+                  <div class="form-error" *ngFor="let error of form.controls.tax.errors.APIErrors">{{ error }}</div>
+                  <div class="form-error" *ngIf="form.controls.tax.errors.required">This field is required</div>
+                  <div class="form-error" *ngIf="form.controls.tax.errors.min">
+                    Minimum value is ({{form.controls.tax.errors.min.min}})
+                  </div>
+                </ng-container>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Grand Total</b>
+                <input [readOnly]="true" type="number" [value]="grandTotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Grand Total</b>
               </div>
             </div>
           </div>
         </div>
-        
-        
-      </div>
-      
-    
-    
-      <nz-footer>
-        <button (click)="reviewForm()"  nz-button class="mar-2" nzType="primary">Generate Quote</button>
-        <button  nz-button class="mar-2">Cancel</button>
+      </form>
+    </div>
+    <nz-footer>
+      <button [disabled]="form.invalid" (click)="reviewForm()" nz-button class="mar-2" nzType="primary">Generate Quote</button>
+      <button nz-button class="mar-2" (click)="showDeleteConfirm()">Cancel</button>
     </nz-footer>
-    
-    
-    
-    
+  </ng-container>
+  <ng-template #noRfq>
+    <!--  ToDo  what to show if no rfq-->
+    No Request quote
+  </ng-template>
+</div>

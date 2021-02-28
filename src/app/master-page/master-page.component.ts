@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { PartsAPIService } from '../services/api/parts-api.service';
+import { RfqAPIService } from '../services/api/rfq-api.service';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { Observable } from 'rxjs';
 import { ShopProfileInterface } from '../models/user.models';
@@ -17,7 +17,7 @@ export class MasterPageComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private partsAPIService: PartsAPIService,
+    private partsAPIService: RfqAPIService,
     private notification: NzNotificationService,
     private store: Store
   ) {

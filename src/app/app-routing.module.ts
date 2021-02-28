@@ -15,18 +15,7 @@ import { SubmittedDetailsComponent } from './submitted-quote/submitted-details/s
 import { QuoteInvoiceSubmittedComponent } from './submitted-quote/quote-invoice-submitted/quote-invoice-submitted.component';
 import { WorkingJobComponent } from './working-job/working-job.component';
 import { WorkingJobDetailsComponent } from './working-job/working-job-details/working-job-details.component';
-import { PartsComponent } from './master-page/parts/parts.component';
 import { DashboardComponent } from './master-page/dashboard/dashboard.component';
-import { PartDetailsComponent } from './master-page/part-details/part-details.component';
-import { PartEditComponent } from './master-page/part-edit/part-edit.component';
-import { AddRevisionComponent } from './master-page/add-revision/add-revision.component';
-import { RFQsComponent } from './master-page/machine-shop/rfqs/rfqs.component';
-import { AddRfqComponent } from './master-page/machine-shop/add-rfq/add-rfq.component';
-import { SubmitRfqComponent } from './master-page/machine-shop/add-rfq/submit-rfq/submit-rfq.component';
-import { ViewQuoteComponent } from './master-page/machine-shop/view-quote/view-quote.component';
-import { ExpQuoteComponent } from './master-page/machine-shop/view-quote/exp-quote/exp-quote.component';
-import { PaymentComponent } from './master-page/machine-shop/payment/payment.component';
-import { PaymentConfirmationComponent } from './master-page/machine-shop/payment/payment-confirmation/payment-confirmation.component';
 import { JobsComponent } from './master-page/machine-shop/jobs/jobs.component';
 import { JobsDetailsComponent } from './master-page/machine-shop/jobs/jobs-details/jobs-details.component';
 import { JobDetailsComponent } from './master-page/machine-shop/jobs/job-details/job-details.component';
@@ -54,34 +43,35 @@ const routes: Routes = [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', component: DashboardComponent},
       {path: 'newRFQ', component: NewRFQComponent},
-      {path: 'newRFQ/details', component: RfqDetailsComponent},
-      {path: 'newRFQ/details/apply', component: GenerateQuoteComponent},
-      {path: 'newRFQ/details/submit', component: ReviewSubmitComponent},
+      {path: 'newRFQ/details/:rfqId', component: RfqDetailsComponent},
+      {path: 'newRFQ/details/:rfqId/apply', component: GenerateQuoteComponent},
+      {path: 'newRFQ/details/:rfqId/submit', component: ReviewSubmitComponent},
       {path: 'submittedQuote', component: SubmittedQuoteComponent},
-      {path: 'submittedQuote/details/:status', component: SubmittedDetailsComponent,},
-      {path: 'submittedQuote/details/:status/invoice', component: QuoteInvoiceSubmittedComponent},
+      {path: 'submittedQuote/details/:quoteId', component: SubmittedDetailsComponent},
+      {path: 'submittedQuote/details/:quoteId/invoice', component: QuoteInvoiceSubmittedComponent},
       {path: 'WorkingJobs', component: WorkingJobComponent},
-      {path: 'WorkingJobs/details/:status', component: WorkingJobDetailsComponent},
-      {path: 'parts', component: PartsComponent},
-      {path: 'parts/add', component: PartDetailsComponent},
-      {path: 'parts/view', component: PartEditComponent},
-      {path: 'parts/view/addrevision', component: AddRevisionComponent},
-      {path: 'RFQ', component: RFQsComponent},
-      {path: 'RFQ/Add', component: AddRfqComponent},
-      {path: 'RFQ/Add/confirm', component: SubmitRfqComponent},
-      {path: 'RFQ/RFQDetails', component: RfqDetailsComponent},
-      {path: 'RFQ/RFQDetails/:active', component: RfqDetailsComponent},
-      {path: 'RFQ/RFQDetails/active/viewquote', component: ViewQuoteComponent},
-      {path: 'RFQ/RFQDetails/NotActive/viewquote', component: ExpQuoteComponent},
-      {path: 'RFQ/RFQDetails/active/viewquote/payment', component: PaymentComponent},
-      {path: 'RFQ/RFQDetails/active/viewquote/paymentConfirmation', component: PaymentConfirmationComponent},
-      {path: 'Jobs', component: JobsComponent},
-      {path: 'Jobs/jobDetails/:status', component: JobsDetailsComponent},
-      {path: 'Jobs/jobDetails/', component: JobsDetailsComponent},
-      {path: 'Jobs/jobDetail/:status', component: JobDetailsComponent},
-      {path: 'Jobs/invoice', component: InvoiceComponent},
+      {path: 'WorkingJobs/details/:jobId', component: WorkingJobDetailsComponent},
+      // {path: 'parts', component: PartsComponent},
+      // {path: 'parts/add', component: PartDetailsComponent},
+      // {path: 'parts/view', component: PartEditComponent},
+      // {path: 'parts/view/addrevision', component: AddRevisionComponent},
+      // {path: 'RFQ', component: RFQsComponent},
+      // {path: 'RFQ/Add', component: AddRfqComponent},
+      // {path: 'RFQ/Add/confirm', component: SubmitRfqComponent},
+      // {path: 'RFQ/RFQDetails', component: RfqDetailsComponent},
+      // {path: 'RFQ/RFQDetails/:active', component: RfqDetailsComponent},
+      // {path: 'RFQ/RFQDetails/active/viewquote', component: ViewQuoteComponent},
+      // {path: 'RFQ/RFQDetails/NotActive/viewquote', component: ExpQuoteComponent},
+      // {path: 'RFQ/RFQDetails/active/viewquote/payment', component: PaymentComponent},
+      // {path: 'RFQ/RFQDetails/active/viewquote/paymentConfirmation', component: PaymentConfirmationComponent},
+      // {path: 'Jobs', component: JobsComponent},
+      // {path: 'Jobs/jobDetails/:status', component: JobsDetailsComponent},
+      // {path: 'Jobs/jobDetails/', component: JobsDetailsComponent},
+      // {path: 'Jobs/jobDetail/:status', component: JobDetailsComponent},
+      // {path: 'Jobs/invoice', component: InvoiceComponent},
       {path: 'transactions', component: TransactionHistoryComponent},
-      {path: 'transactions/receipt', component: ReceiptComponent},
+      {path: 'transactions/receipt/:quoteId', component: QuoteInvoiceSubmittedComponent},
+      // {path: 'transactions/receipt', component: ReceiptComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'terms', component: TermsComponent}
     ],

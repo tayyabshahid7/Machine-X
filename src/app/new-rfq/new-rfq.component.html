@@ -6,10 +6,10 @@
         <div class="row">
           <div class="col-6 p-0 space-b">
             <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-              <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+              <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
             </nz-input-group>
             <ng-template #suffixIconButton>
-              <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+              <button nz-button class="grey-icon-btn" nzType="ghost" (click)="searchRfqs()" nzSearch><i nz-icon nzType="search"></i></button>
             </ng-template>
           </div>
         </div>
@@ -21,7 +21,7 @@
   <div class="p-24px">
     <div nz-row nzGutter="">
 
-      <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
+      <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="rfqsPage">
         <thead>
         <tr>
           <th>RFQ #</th>
@@ -33,20 +33,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr (click)="onSelect(data)" class="pointer" *ngFor="let data of tableData">
-          <td class="frq-id">{{data.id}}</td>
-          <td>{{data.quantity}}</td>
-          <td>{{data.date}}</td>
-          <td class="text-center">{{data.submission}}</td>
+        <tr (click)="onSelect(rfq)" class="pointer" *ngFor="let rfq of rfqsPage">
+          <td class="frq-id">{{rfq.displayId}}</td>
+          <td>{{rfq.partQuantity}}</td>
+          <td>{{rfq.partDateNeeded | conceptXDateTimePipe}}</td>
+          <td class="text-center">{{rfq.remainingSeconds > 0 ? (rfq.remainingSeconds | duration) : 0}}</td>
+          <td class="text-center">{{rfq.submissionsCount}}</td>
           <td class="text-center">
-
-            {{data.remaining.days}} days |
-            {{data.remaining.hours}} hours |
-            {{data.remaining.min}} minutes
-
-          </td>
-          <td class="text-center">
-            <a class="blue pointer" (click)="onSelect(data)">
+            <a class="blue pointer" (click)="onSelect(rfq)">
               View
             </a>
           </td>
@@ -60,6 +54,9 @@
   </div>
 
   <nz-footer>
+    <div class="center-footer">
+      <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="rfqsCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+    </div>
   </nz-footer>
 </nz-content>
     

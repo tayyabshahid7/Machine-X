@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { QuoteAPIService } from '../services/api/quote-api.service';
+import { RfqInterface } from '../models/rfq.models';
+import { QuoteInterface } from '../models/quote.models';
 
 @Component({
   selector: 'app-submitted-quote',
@@ -7,87 +12,72 @@ import { Router } from '@angular/router';
   styleUrls: ['./submitted-quote.component.css']
 })
 export class SubmittedQuoteComponent implements OnInit {
-  tableData = [
-    {
-      id : ' QT-112938',
-      name: 'Part XXX-XXX-XXX - Revision D',
-      date: 'March 4, 2018',
-      submission: '2',
-      cost: '80.00',
-      status: 'ava',
-      isActive: 'active'
-    },
-    {
-     id : 'QT-112098',
-     name: 'Part XXX - Revision A',
-     date: 'April 6, 2014',
-     submission: '0',
-     cost: '25.00',
-     status: 'ava',
-     isActive: 'active'
-   },
-   {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '90.00',
-     status: 'ava',
-     isActive: 'NotActive'
-   },
-   {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '40.00',
-     status: 'pen',
-     isActive: 'NotActive'
-   }, {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '50.00',
-     status: 'pen',
-     isActive: 'NotActive'
-   }, {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '100.00',
-     status: 'ex',
-     isActive: 'NotActive'
-   }, {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '30.00',
-     status: 'ex',
-     isActive: 'NotActive'
-   }, {
-     id : 'QT-21232',
-     name: 'Part XXX - Revision X',
-     date: 'April 6, 2015',
-     submission: '1',
-     cost: '200.00',
-     status: 'ex',
-     isActive: 'NotActive'
-   }
+  pageSize = 11;
+  currentPage = 1;
+  submittedQuotesCount = 0;
+  approvedSubmittedQuotesCount = 0;
+  submittedQuotes: QuoteInterface[] = null;
+  submittedQuotesPage: QuoteInterface[] = [];
+  searchKey: string;
 
+  constructor(
+    private notification: NzNotificationService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private quoteAPIService: QuoteAPIService,
+    private spinner: NgxSpinnerService
+  ) {
+  }
 
- ];
- constructor(private router: Router) { }
+  ngOnInit(): void {
+    this.changePage(this.currentPage);
+  }
 
- ngOnInit(): void {
- }
+  loadSubmittedQuotes(page: number): Promise<void> {
+    return new Promise<void>(((resolve, reject) => {
+      this.spinner.show('submittedQuotesSpinner');
+      this.quoteAPIService.listSubmittedQuotes(
+        {page, pageSize: this.pageSize},
+        {searchKey: this.searchKey}
+      ).subscribe(
+        (submittedQuotes) => {
+          this.submittedQuotesCount = submittedQuotes.count;
+          this.approvedSubmittedQuotesCount = submittedQuotes.results.filter(q => q.status === 'approved').length;
+          if (this.submittedQuotes !== null) {
+            this.submittedQuotes.push(...submittedQuotes.results);
+          } else {
+            this.submittedQuotes = submittedQuotes.results;
+          }
+          this.spinner.hide('submittedQuotesSpinner');
+          resolve();
+        },
+        (error) => {
+          this.notification.error('Error loading submittedQuotes', null);
+          this.spinner.hide('submittedQuotesSpinner');
+          reject();
+        }
+      );
+    }));
+  }
 
- onSelect(data){
-   console.log(data.status);
-   this.router.navigate(['dashboard/submittedQuote/details', data.status]);
-   }
+  changePage(pageNumber: number) {
+    const rangeStart = this.pageSize * (pageNumber - 1);
+    const rangeEnd = this.submittedQuotesCount ? Math.min(this.submittedQuotesCount, this.pageSize * pageNumber) : this.pageSize * pageNumber;
+    if (!this.submittedQuotes || this.submittedQuotes.length < rangeEnd) {
+      this.loadSubmittedQuotes(pageNumber).then(() => this.submittedQuotesPage = this.submittedQuotes.slice(rangeStart, rangeEnd));
+    } else {
+      this.submittedQuotesPage = this.submittedQuotes.slice(rangeStart, rangeEnd);
+    }
+  }
 
+  searchSubmittedQuotes() {
+    this.submittedQuotes = null;
+    this.submittedQuotesPage = [];
+    this.changePage(1);
+  }
+
+  onSelect(rfq: RfqInterface) {
+    this.router.navigate([`dashboard/submittedQuote/details/${rfq.id}`]);
+  }
 
 }

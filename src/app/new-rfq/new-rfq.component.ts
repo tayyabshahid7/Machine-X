@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { RfqInterface } from '../models/rfq.models';
+import { RfqAPIService } from '../services/api/rfq-api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-new-rfq',
@@ -8,83 +11,70 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./new-rfq.component.css']
 })
 export class NewRFQComponent implements OnInit {
+  pageSize = 11;
+  currentPage = 1;
+  rfqsCount = 0;
+  rfqs: RfqInterface[] = null;
+  rfqsPage: RfqInterface[] = [];
+  searchKey: string;
 
-  constructor(private router: Router, private notification: NzNotificationService, ) { }
-  tableData = [
-    {
-      id : ' RFQ #4132',
-      quantity: '10',
-      date: 'March 4, 2018',
-      submission: '2',
-      remaining: {
-        days: '6',
-        hours: '4',
-        min: '49'
-    },
-      status: true,
-      isActive: 'active'
-    },
-    {
-     id : 'RFQ #2122',
-     quantity: '5',
-     date: 'April 6, 2014',
-     submission: '0',
-     remaining: {
-      days: '2',
-      hours: '1',
-      min: '19'
-  },
-     status: true,
-     isActive: 'active'
-   },
-   {
-     id : 'RFQ #1232',
-     quantity: '11',
-     date: 'April 6, 2015',
-     submission: '1',
-     remaining: {
-      days: '0',
-      hours: '0',
-      min: '49'
-  },
-     status: false,
-     isActive: 'NotActive'
-   },  {
-    id : ' RFQ #4132',
-    quantity: '10',
-    date: 'March 4, 2018',
-    submission: '2',
-    remaining: {
-      days: '6',
-      hours: '4',
-      min: '49'
-  },
-    status: true,
-    isActive: 'active'
-  },  {
-    id : 'RFQ #2122',
-    quantity: '5',
-    date: 'April 6, 2014',
-    submission: '0',
-    remaining: {
-      days: '0',
-      hours: '4',
-      min: '49'
-  },
-    status: true,
-    isActive: 'active'
-  },
-
-
- ];
+  constructor(
+    private notification: NzNotificationService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private rfqsAPIService: RfqAPIService,
+    private spinner: NgxSpinnerService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.notification.success('Quote Sent Successfully',
-    'This {Quote} is the content of the notification. This is the content of the notification. Can be found on the Submitted Quotes page');
+    this.changePage(this.currentPage);
   }
- onSelect(data){
-  console.log(data.isActive);
-  this.router.navigate(['dashboard/newRFQ/details']);
+
+  loadRFQs(page: number): Promise<void> {
+    return new Promise<void>(((resolve, reject) => {
+      this.spinner.show('rfqsSpinner');
+      this.rfqsAPIService.listRFQs(
+        {page, pageSize: this.pageSize},
+        {searchKey: this.searchKey}
+      ).subscribe(
+        (rfqs) => {
+          this.rfqsCount = rfqs.count;
+          if (this.rfqs !== null) {
+            this.rfqs.push(...rfqs.results);
+          } else {
+            this.rfqs = rfqs.results;
+          }
+          this.spinner.hide('rfqsSpinner');
+          resolve();
+        },
+        (error) => {
+          this.notification.error('Error loading rfqs', null);
+          this.spinner.hide('rfqsSpinner');
+          reject();
+        }
+      );
+    }));
+  }
+
+  changePage(pageNumber: number) {
+    const rangeStart = this.pageSize * (pageNumber - 1);
+    const rangeEnd = this.rfqsCount ? Math.min(this.rfqsCount, this.pageSize * pageNumber) : this.pageSize * pageNumber;
+    if (!this.rfqs || this.rfqs.length < rangeEnd) {
+      this.loadRFQs(pageNumber).then(() => this.rfqsPage = this.rfqs.slice(rangeStart, rangeEnd));
+    } else {
+      this.rfqsPage = this.rfqs.slice(rangeStart, rangeEnd);
+    }
+  }
+
+  searchRfqs() {
+    this.rfqs = null;
+    this.rfqsPage = [];
+    this.changePage(1);
+  }
+
+  onSelect(rfq: RfqInterface) {
+    this.router.navigate([`dashboard/newRFQ/details/${rfq.id}`]);
   }
 
 }
