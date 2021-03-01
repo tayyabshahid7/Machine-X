@@ -3,6 +3,7 @@ import { AttachmentInterface } from './general.models';
 export interface PartRevisionInterface {
   id: string;
   name: string;
+  shortDescription: string;
   notes: string;
   creationDate: string;
   part: string;
@@ -12,14 +13,13 @@ export interface PartRevisionInterface {
 
 export interface PartInterface {
   id: string;
-  revisions: PartRevisionInterface[];
   name: string;
   number: string;
   notes: string;
   status: string;
   creationDate: string;
   archiveDate?: string | null;
-  engineer: string;
+  engineer?: string;
 }
 
 export interface AddPartInputInterface {

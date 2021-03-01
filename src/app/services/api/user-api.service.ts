@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { EngineerProfileInterface } from '../../models/user.models';
-import {MachineInterface} from '../../models/machine';
-import {PartInterface} from '../../models/part.models';
+import { MachineInterface } from '../../models/machine';
+import { JoinWaitingListRequestDataInterface, ShopProfileInterface } from '../../models/user.models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,15 @@ export class UserAPIService {
   ) {
   }
 
-  getEngineerProfile() {
-    return this.httpClient.get<EngineerProfileInterface>(`${environment.APIUrl}/engineer/profile`);
+  getShopProfile() {
+    return this.httpClient.get<ShopProfileInterface>(`${environment.APIUrl}/shop/profile`);
   }
 
-  addMachineshopUser( machine: MachineInterface) {
+  joinWaitingList(data: JoinWaitingListRequestDataInterface) {
+    return this.httpClient.post(`${environment.APIUrl}/join_waiting_list/`, data);
+  }
+
+  addMachineshopUser(machine: MachineInterface) {
     console.log(machine);
     const formData = new FormData();
     formData.append('username', machine.username);

@@ -1,17 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDistance } from 'date-fns';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { JobInterface } from '../../models/job.models';
+import { JobAPIService } from '../../services/api/job-api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorHandlerService } from '../../services/error-handler.service';
+
 @Component({
   selector: 'app-working-job-details',
   templateUrl: './working-job-details.component.html',
   styleUrls: ['./working-job-details.component.css']
 })
 export class WorkingJobDetailsComponent implements OnInit {
+  job: JobInterface = null;
+  shippingForm: FormGroup;
 
+  constructor(
+    private route: ActivatedRoute,
+    private modal: NzModalService,
+    private router: Router,
+    private jobAPIService: JobAPIService,
+    private notification: NzNotificationService,
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder,
+    private errorHandlerService: ErrorHandlerService,
+  ) {
+  }
 
-  constructor(private modal: NzModalService, private route: ActivatedRoute,
-              private router: Router) { }
   receivers = [];
 
   tableData = [
@@ -21,24 +39,24 @@ export class WorkingJobDetailsComponent implements OnInit {
       quantity: 12,
       cost: 90,
     }, {
-     id: '2',
-     name: 'itemName',
-     quantity: 1,
-     cost: 200,
-   }, {
-     id: '3',
-     name: 'itemName',
-     quantity: 1,
-     cost: 90,
-   }
+      id: '2',
+      name: 'itemName',
+      quantity: 1,
+      cost: 200,
+    }, {
+      id: '3',
+      name: 'itemName',
+      quantity: 1,
+      cost: 90,
+    }
   ];
   history = false;
   dateFormat = 'MM/dd/yyyy';
   date = null;
 
-  isVisible = false;
-    status = '';
-    canStart = false;
+  isShippingModalVisible = false;
+  status = '';
+  canStart = false;
   data: any[] = [];
   submitting = false;
   user = {
@@ -51,32 +69,72 @@ export class WorkingJobDetailsComponent implements OnInit {
   //   this.router.navigate(['/dashboard/Jobs/invoice']);
   // }
   issue = false;
-  addEmail(){
+
+  addEmail() {
     this.receivers.push(1);
   }
-  removeEmail(){
+
+  removeEmail() {
     this.receivers.pop();
   }
 
 
-
-  showModal(): void {
-    this.isVisible = true;
+  showShippingModal(): void {
+    this.isShippingModalVisible = true;
   }
 
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+  submitShippingForm(): void {
+    if (this.shippingForm.valid) {
+      this.spinner.show();
+      this.jobAPIService.addShipment({
+        job: this.job.id,
+        ...this.shippingForm.value
+      }).subscribe(
+        response => {
+          this.notification.success('Shipped', null);
+          this.loadJob(this.job.id);
+          this.spinner.hide();
+          this.isShippingModalVisible = false;
+        },
+        errorResponse => {
+          this.notification.error('Error', null);
+          this.errorHandlerService.setFormAPIErrors(this.shippingForm, errorResponse.error);
+        }
+      );
+    }
   }
 
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
+  cancelShipping(): void {
+    this.isShippingModalVisible = false;
   }
+
   ngOnInit(): void {
+    const jobId = this.route.snapshot.paramMap.get('jobId');
+    this.loadJob(jobId);
+    this.shippingForm = this.formBuilder.group({
+      company: [null, [Validators.required, Validators.maxLength(100)]],
+      trackingId: [null, [Validators.required, Validators.maxLength(100)]],
+      status: [null, [Validators.required, Validators.maxLength(20)]],
+    });
     const statusUrl = this.route.snapshot.paramMap.get('status');
     statusUrl == 'InProgress' ? this.status = 'InProgress' : statusUrl == 'Shipped' ? this.status = 'Shipped' : statusUrl == 'Issue' ? this.status = 'Issue' : this.status = 'InProgress';
     this.status == 'Shipped' ? this.canStart = true : null;
+  }
+
+  loadJob(jobId: string) {
+    this.spinner.show();
+    this.jobAPIService.getJob(jobId).subscribe(
+      job => {
+        this.job = job;
+        this.spinner.hide();
+      },
+      error => {
+        // TODO: review how to show error here
+        this.notification.error('Error loading job', null);
+        this.spinner.hide();
+        this.router.navigate(['/dashboard/WorkingJobs']);
+      }
+    );
   }
 
   handleSubmit(): void {
@@ -105,12 +163,14 @@ export class WorkingJobDetailsComponent implements OnInit {
   }
 
 
-  startIssue(){
+  startIssue() {
     this.issue = true;
   }
-  cancelIssue(){
+
+  cancelIssue() {
     this.issue = false;
   }
+
   showArchive(): void {
     this.modal.error({
       nzStyle: {top: '40%'},
@@ -128,23 +188,26 @@ export class WorkingJobDetailsComponent implements OnInit {
       nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
   }
-  close(){
+
+  close() {
     this.router.navigate(['/dashboard/submittedQuote']);
   }
-  startJob(){
+
+  startJob() {
     this.router.navigate(['/dashboard/submittedQuote/details/:status/invoice']);
   }
-  openInvoice(){
+
+  openInvoice() {
 
     //  this.router.navigate(['/dashboard/Jobs/invoice']);
 
   }
 
-  showHistory(){
+  showHistory() {
     this.history = true;
   }
 
-  hideHistory(){
+  hideHistory() {
     this.history = false;
   }
 

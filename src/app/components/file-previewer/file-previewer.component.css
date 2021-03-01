@@ -1,0 +1,12 @@
+.thumb {
+    height: 165px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    background-color: #fafafa;
+}
+
+.filename {
+    text-align: center;
+}

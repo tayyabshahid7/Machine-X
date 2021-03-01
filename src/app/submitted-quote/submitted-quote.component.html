@@ -1,70 +1,77 @@
 <nz-content>
-    <div class="site-page-header-ghost-wrapper">
-        <nz-page-header [nzGhost]="false">
-          <nz-page-header-title>Submitted Quotes</nz-page-header-title>
-          <nz-page-header-content>
-              <div class="row">
-                  <div class="col-6 p-0 space-b">
-                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                        <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID" />
-                      </nz-input-group>
+  <div class="site-page-header-ghost-wrapper">
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Submitted Quotes</nz-page-header-title>
+      <nz-page-header-content>
+        <div class="row">
+          <div class="col-6 p-0 space-b">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+              <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+            </nz-input-group>
 
-                      <ng-template #suffixIconButton>
-                        <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
-                      </ng-template>
-                  </div>
-                  <div class="col-6"><nz-tag [nzColor]="'#87d068'" class="push-right">Approved Quotes: 3</nz-tag>
-                  </div>
-                  </div>
-                
-          </nz-page-header-content>
-         <nz-page-header-extra>
-                 
-                    </nz-page-header-extra>
-        </nz-page-header>
-      </div>
-      <div class="p-24px"> 
-        <div nz-row nzGutter="" >
-           
-            <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
-                <thead>
-                  <tr>
-                    <th>Quote ID</th>
-                    <th>Quote Creation Date</th>
-                    <th class="text-right">Total Cost</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr (click)="onSelect(data)" *ngFor="let data of tableData">
-                    <td class="frq-id">{{data.id}}</td>
-                    <td>{{data.date}}</td>
-                    <td class="text-right">$ {{data.cost}}</td>
-                    <td class="text-center" *ngIf="data.status=='ava'">
-                        <nz-tag  [nzColor]="'blue'"  class="nz-tag-me">Approved</nz-tag>
-                    </td>
-                    <td  class="text-center" *ngIf="data.status=='ex'">
-                        <nz-tag [nzColor]="'red'"  class="nz-tag-me">Expired </nz-tag>
-                    </td>
-                    <td  class="text-center" *ngIf="data.status=='pen'">
-                        <nz-tag [nzColor]="'orange'" class="nz-tag-me">Pinding </nz-tag>
-                    </td>
-                    <td class="text-center">
-                        <span class="blue pointer">View Qoute</span>
-                    </td>
-                  
-                  </tr>
-                </tbody>
-              </nz-table>
-            
-           
+            <ng-template #suffixIconButton>
+              <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
           </div>
-      </div>
-    
-        <nz-footer>
-        </nz-footer>
-    </nz-content>
+          <div class="col-6">
+            <nz-tag [nzColor]="'#87d068'" class="push-right">Approved Quotes: {{approvedSubmittedQuotesCount}}</nz-tag>
+          </div>
+        </div>
+
+      </nz-page-header-content>
+      <nz-page-header-extra>
+
+      </nz-page-header-extra>
+    </nz-page-header>
+  </div>
+  <div class="p-24px">
+    <div nz-row nzGutter="">
+
+      <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="submittedQuotesPage">
+        <thead>
+        <tr>
+          <th>Quote ID</th>
+          <th>Quote Creation Date</th>
+          <th class="text-right">Total Cost</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr (click)="onSelect(quote)" *ngFor="let quote of submittedQuotesPage">
+          <td class="frq-id">{{quote.displayId}}</td>
+          <td>{{quote.creationDate | conceptXDateTimePipe}}</td>
+          <td class="text-right">$ {{quote.grandTotal}}</td>
+          <td class="text-center" *ngIf="quote.status=='approved'">
+            <nz-tag [nzColor]="'blue'" class="nz-tag-me">Approved</nz-tag>
+          </td>
+          <td class="text-center" *ngIf="quote.status=='expired'">
+            <nz-tag [nzColor]="'red'" class="nz-tag-me">Expired</nz-tag>
+          </td>
+          <td class="text-center" *ngIf="quote.status=='not_selected'">
+            <nz-tag [nzColor]="'red'" class="nz-tag-me">Not Selected</nz-tag>
+          </td>
+          <td class="text-center" *ngIf="quote.status=='pending'">
+            <nz-tag [nzColor]="'orange'" class="nz-tag-me">Pinding</nz-tag>
+          </td>
+          <td class="text-center">
+            <span class="blue pointer">View Qoute</span>
+          </td>
+
+        </tr>
+        </tbody>
+      </nz-table>
+
+
+    </div>
+  </div>
+
+  <nz-footer>
+    <div class="center-footer">
+      <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="submittedQuotesCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+    </div>
+  </nz-footer>
+</nz-content>
     
     
     

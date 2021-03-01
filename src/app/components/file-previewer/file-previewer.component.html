@@ -1,0 +1,13 @@
+<div>
+  <div
+    class="thumb {{ classes?.join(' ') }}"
+    [ngStyle]="{
+  backgroundSize: size,
+  backgroundImage: 'url(' + this.fileThumbBaseUrl + '/' + this.fileType + '-thumb.svg)'
+  }"
+  >
+  </div>
+<!--  <div class="filename" *ngIf="showFileName">-->
+<!--    {{ getFileName() }}-->
+<!--  </div>-->
+</div>

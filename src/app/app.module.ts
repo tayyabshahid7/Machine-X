@@ -1,20 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
+import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input/';
-import {NzIconModule} from 'ng-zorro-antd/icon';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
@@ -63,7 +59,6 @@ import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { SubmitRfqComponent } from './master-page/machine-shop/add-rfq/submit-rfq/submit-rfq.component';
 import { ExpQuoteComponent } from './master-page/machine-shop/view-quote/exp-quote/exp-quote.component';
 import { JobsComponent } from './master-page/machine-shop/jobs/jobs.component';
-import { JobsDetailsComponent } from './master-page/machine-shop/jobs/jobs-details/jobs-details.component';
 import { JobDetailsComponent } from './master-page/machine-shop/jobs/job-details/job-details.component';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { NzRateModule } from 'ng-zorro-antd/rate';
@@ -91,17 +86,19 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { QuoteInvoiceSubmittedComponent } from './submitted-quote/quote-invoice-submitted/quote-invoice-submitted.component';
 import { WorkingJobComponent } from './working-job/working-job.component';
 import { WorkingJobDetailsComponent } from './working-job/working-job-details/working-job-details.component';
-import {ConceptxDatePipe} from './pipes/conceptx-date.pipe';
-import {TimeFromNowPipe} from './pipes/time-from-now.pipe';
-import {NgxSpinnerModule} from 'ngx-spinner';
-import {StoreModule} from '@ngrx/store';
-import {appReducers} from './store';
-import {EffectsModule} from '@ngrx/effects';
-import {UserEffects} from './store/user/user.effects';
-import {AppEffects} from './store/app/app.effects';
-import {appInitializer} from './utilities/auth.utilities/app-auth.initializer';
-import {AuthenticationService} from './services/auth/authentication.service';
-import {JwtInterceptor} from './utilities/auth.utilities/jwt.interceptor';
+import { TimeFromNowPipe } from './pipes/time-from-now.pipe';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/user/user.effects';
+import { AppEffects } from './store/app/app.effects';
+import { appInitializer } from './utilities/auth.utilities/app-auth.initializer';
+import { AuthenticationService } from './services/auth/authentication.service';
+import { JwtInterceptor } from './utilities/auth.utilities/jwt.interceptor';
+import { DurationPipe } from './pipes/duration.pipe';
+import { ConceptXDateTimePipePipe } from './pipes/conceptx-date.pipe';
+import { FilePreviewerComponent } from './components/file-previewer/file-previewer.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -110,6 +107,7 @@ const antDesignIcons = AllIcons as {
 
 
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -148,13 +146,15 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     QuoteInvoiceSubmittedComponent,
     WorkingJobComponent,
     WorkingJobDetailsComponent,
-    ConceptxDatePipe,
-    TimeFromNowPipe
+    DurationPipe,
+    ConceptXDateTimePipePipe,
+    TimeFromNowPipe,
+    FilePreviewerComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    AppRoutingModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -216,4 +216,5 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {
+}

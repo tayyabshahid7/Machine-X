@@ -1,19 +1,19 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { clearUserData, loadUserSuccess } from './user.actions';
-import { EngineerProfileInterface } from '../../models/user.models';
+import { ShopProfileInterface } from '../../models/user.models';
 
 const userInitialState = null;
 
 const userReducerInner = createReducer(
   userInitialState,
-  on(loadUserSuccess, (state: EngineerProfileInterface, payload) => {
+  on(loadUserSuccess, (state: ShopProfileInterface, payload) => {
     return payload.user;
   }),
-  on(clearUserData, (state: EngineerProfileInterface, payload) => {
+  on(clearUserData, (state: ShopProfileInterface, payload) => {
     return null;
   }),
 );
 
-export function userReducer(state: EngineerProfileInterface | undefined, action: Action) {
+export function userReducer(state: ShopProfileInterface | undefined, action: Action) {
   return userReducerInner(state, action);
 }

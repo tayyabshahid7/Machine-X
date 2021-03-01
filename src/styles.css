@@ -1,181 +1,218 @@
 @font-face {
     font-family: SFPDBlack;
     src: url(assets/fonts/SFProDisplay-Black.ttf);
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: SFPDBold;
     src: url(assets/fonts/SFProDisplay-Bold.ttf);
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: SFPDRegular;
     src: url(assets/fonts/SFProDisplay-Regular.ttf);
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: SFPDLight;
     src: url(assets/fonts/SFProDisplay-Light.ttf);
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: SFPDThin;
     src: url(assets/fonts/SFProDisplay-Thin.ttf);
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: SFPDsemi;
     src: url(assets/fonts/SFProDisplay-Semibold.ttf);
-  }
-
-  body{
-      font-family: 'SFPDRegular';
-  }
-  html {
-    height: 100%;
-  }
-  body {
-    min-height: 100%;
-  }
-.container-64px{
-  height: calc(100vh - 64px) !important;
 }
-  /* width */
+
+body {
+    font-family: 'SFPDRegular';
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+.container-64px {
+    height: calc(100vh - 64px) !important;
+}
+
+/* width */
 ::-webkit-scrollbar {
-  width: 2px;
+    width: 2px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #F5F5F5; 
+    background: #F5F5F5;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #1890FF;
-  width:2px
+    background: #1890FF;
+    width: 2px
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #1890FF; 
+    background: #1890FF;
 }
-.blue{
-  color:#1890FF !important;
+
+.blue {
+    color: #1890FF !important;
 }
-.gray-9{
-  color: #262626 !important;
+
+.gray-9 {
+    color: #262626 !important;
 }
-.gray-8{
-  color:#595959 !important;
+
+.gray-8 {
+    color: #595959 !important;
 }
-.gray-7{
-  color: #8C8C8C !important;
+
+.gray-7 {
+    color: #8C8C8C !important;
 }
-.gray-6{
-  color:#BFBFBF !important;
+
+.gray-6 {
+    color: #BFBFBF !important;
 }
-.red-6{
-  color:#f5222d !important;
+
+.red-6 {
+    color: #f5222d !important;
 }
-.bottom-border{
+
+.bottom-border {
     border-bottom: 1px solid #E8E8E8;
 }
-.push-rigth{
-  float: right;
+
+.push-rigth {
+    float: right;
 }
-nz-footer{
-  padding: 16px 24px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
-  background-color:#fff ;
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  width: calc(100% - 210px);
-  height: 64px;
+
+nz-footer {
+    padding: 16px 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
+    background-color: #fff;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 210px);
+    height: 64px;
 }
-.gray-st{
-  height: 30px;
-  width: 100% !important;
-  background-color: #f0f2f5;
+
+.gray-st {
+    height: 30px;
+    width: 100% !important;
+    background-color: #f0f2f5;
 }
-.summary>p>b{
-  color:#262626 !important;
-  /* margin: 0px !important; */
+
+.summary > p > b {
+    color: #262626 !important;
+    /* margin: 0px !important; */
 }
+
 /* .content{
   overflow-y: scroll;
 } */
 
 
-@media (min-width:1800px){
-  .content,.part-detials{
-    height: calc(100vh - 180px) !important;
-  }
+@media (min-width: 1800px) {
+    .content, .part-detials {
+        height: calc(100vh - 180px) !important;
+    }
 }
+
 .ant-steps-item-title {
-  width: 150px !important;
+    width: 150px !important;
 }
 
-.ant-steps-item-description{
-  width: 150px !important;
+.ant-steps-item-description {
+    width: 150px !important;
 }
+
 .ant-menu-submenu > .ant-menu {
-  background-color: #001529;
-  border-radius: 2px;
-}
-.bottom-border{
-  border-bottom: 1px solid #E8E8E8;
-}
-.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar, .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
-  bottom: 0;
-  /* left:15px !important; */
-}
-.ant-tabs-tab {
-  margin: 0 32px 0 15px !important;
-}
-.ant-tabs-tab .anticon {
-  margin-right: 2px;
-}
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #1890ff;
-  font-weight: 900;
-}
-.ant-menu-horizontal {
-  line-height: 46px;
-  border: 0;
-  border-bottom: 0px ;
-  box-shadow: none;
+    background-color: #001529;
+    border-radius: 2px;
 }
 
-.cdk-overlay-backdrop,.ant-modal-mask,.cdk-overlay-backdrop-showing{
-  background: rgb(0 39 102 / 0.9) ;
+.bottom-border {
+    border-bottom: 1px solid #E8E8E8;
 }
+
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar, .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+    bottom: 0;
+    /* left:15px !important; */
+}
+
+.ant-tabs-tab {
+    margin: 0 32px 0 15px !important;
+}
+
+.ant-tabs-tab .anticon {
+    margin-right: 2px;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #1890ff;
+    font-weight: 900;
+}
+
+.ant-menu-horizontal {
+    line-height: 46px;
+    border: 0;
+    border-bottom: 0px;
+    box-shadow: none;
+}
+
+.cdk-overlay-backdrop, .ant-modal-mask, .cdk-overlay-backdrop-showing {
+    background: rgb(0 39 102 / 0.9);
+}
+
 .ant-modal-header {
-  padding: 16px 24px;
-  color: rgba(0, 0, 0, 0.65);
-  background: #fff;
-  border-bottom: 0px solid #ffffff;
-  border-radius: 2px 2px 0 0;
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fff;
+    border-bottom: 0px solid #ffffff;
+    border-radius: 2px 2px 0 0;
 }
+
 .ant-modal-title {
-  margin: 0;
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 900;
-  font-size: 19px;
-  line-height: 22px;
-  word-wrap: break-word;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 900;
+    font-size: 19px;
+    line-height: 22px;
+    word-wrap: break-word;
 }
-.ant-modal-title>.ng-star-inserted{
-  padding-left: 27px;
+
+.ant-modal-title > .ng-star-inserted {
+    padding-left: 27px;
 }
-.ant-modal-title>.ng-star-inserted::before{
-  content: "";
-  background-image: url(assets/img/exportion.svg);
-  height: 30px;
-  position: absolute;
-  width: 30px;
-  left: 20px;
-  background-repeat: no-repeat;
-  display: inline;
+
+.ant-modal-title > .ng-star-inserted::before {
+    content: "";
+    background-image: url(assets/img/exportion.svg);
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    left: 20px;
+    background-repeat: no-repeat;
+    display: inline;
 }
 
 
 .ant-tabs-left > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane, .ant-tabs-left > div > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
-  padding-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+.form-error {
+    color: red;
 }

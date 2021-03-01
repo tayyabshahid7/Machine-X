@@ -2,13 +2,13 @@
   <div class="menu-container">
     <div class="grt-menu-row">
       <div class="grt-menu-logo">
-        <a href="#"  class="grt-logo"><img src="../../assets/img/logoConceptX.svg"></a>
+        <a class="grt-logo" href="#"><img src="../../assets/img/logoConceptX.svg"></a>
       </div>
-      
-        <b class="p-16 "><a routerLink="/login">Login</a></b>
-      
+
+      <b class="p-16 "><a routerLink="/login">Login</a></b>
+
       <!-- <div class="grt-menu-right inline-dis">
-       
+
         <nav>
           <button class="grt-mobile-button">
             <span class="line1"></span>
@@ -25,61 +25,80 @@
   </div>
 </header>
 <div class="container-fluid fullheight">
-    <div class="row fullheight">
-      <div class="col-sm-12 rightSide showSmall"></div>
+  <div class="row fullheight">
+    <div class="col-sm-12 rightSide showSmall"></div>
 
     <div class="col-md-6 lpContent">
-        <div class="row ml-0 mr-0 d-none d-lg-block d-xl-block" >
-          <div class="col-6 align-self-end float-right">
-            <a routerLink="/login"><button nz-button nzType="default"  class=" float-right outlinebtn">Login</button></a>
-           </div>
-            <div class="col-6 align-self-start px-0">
-              <img src="../../assets/img/logoConceptX.svg" class="img-responsive" width="208px">
-            </div>
-           
-            </div>
-        <h1>
-            Changing how manufacturing is done!
-        </h1>
-        <p class="home-desc">
-            Separated they live in Bookmarksgrove right at the coast of the famous Semantics,
-             large language ocean and many more stuff and more more more
-        </p>
-       
-        <div *ngIf="!subscription">
-          <div class="mt-48 form-card"  > 
-            <p class="form-title">Join our waiting list</p>
-
-            <nz-input-group  [nzPrefix]="prefixEmail" class="mt-0">
-                <input type="text" nz-input placeholder="email" />
-              </nz-input-group>
-              <ng-template #prefixEmail><i nz-icon style="color:#1890FF;" nzType="mail"></i></ng-template>
-
-              <nz-input-group  [nzPrefix]="prefixFullname" class="mt-3">
-                <input type="text" nz-input placeholder="Full Name" />
-              </nz-input-group>
-              <ng-template #prefixFullname><i nz-icon style="color:#1890FF;" nzType="user"></i></ng-template>
-
-              <nz-input-group  [nzPrefix]="prefixCompany" class="mt-3"> 
-                <input type="text" nz-input placeholder="Company" />
-              </nz-input-group>
-              <ng-template #prefixCompany><i nz-icon style="color:#1890FF;" nzType="home"></i></ng-template>
-              <button nz-button (click)="FinishSubscription()" class="mt-3" nzType="primary" nzBlock>Join us!</button>
-
+      <div class="row ml-0 mr-0 d-none d-lg-block d-xl-block">
+        <div class="col-6 align-self-end float-right">
+          <a routerLink="/login">
+            <button class=" float-right outlinebtn" nz-button nzType="default">Login</button>
+          </a>
         </div>
+        <div class="col-6 align-self-start px-0">
+          <img class="img-responsive" src="../../assets/img/logoConceptX.svg" width="208px">
         </div>
-        <div *ngIf="subscription" class="col-md-8">
-          <nz-result
+
+      </div>
+      <h1>
+        Changing how manufacturing is done!
+      </h1>
+      <p class="home-desc">
+        Separated they live in Bookmarksgrove right at the coast of the famous Semantics,
+        large language ocean and many more stuff and more more more
+      </p>
+
+      <div class="mt-48 form-card" *ngIf="!joinSuccessful" style="position: relative;">
+        <ngx-spinner [fullScreen]="false"></ngx-spinner>
+        <form [formGroup]="form" (ngSubmit)="joinWaitingList()">
+          <p class="form-title">Join our waiting list</p>
+          <ng-container *ngIf="form.invalid && form.errors && (form.dirty || form.touched)">
+            <div class="form-error" *ngFor="let error of form.errors.APIErrors">{{ error }}</div>
+          </ng-container>
+          <nz-input-group [nzPrefix]="prefixEmail" class="mt-0">
+            <input formControlName="email" nz-input placeholder="email" type="text"/>
+          </nz-input-group>
+          <ng-container *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)">
+            <div class="form-error" *ngFor="let error of form.controls.email.errors.APIErrors">{{ error }}</div>
+            <div class="form-error" *ngIf="form.controls.email.errors.required">This field is required</div>
+            <div class="form-error" *ngIf="form.controls.email.errors.email">Invalid email address</div>
+          </ng-container>
+          <ng-template #prefixEmail><i nz-icon nzType="mail" style="color:#1890FF;"></i></ng-template>
+
+          <nz-input-group [nzPrefix]="prefixFullname" class="mt-3">
+            <input formControlName="name" nz-input placeholder="Full Name" type="text"/>
+          </nz-input-group>
+          <ng-container *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)">
+            <div class="form-error" *ngFor="let error of form.controls.name.errors.APIErrors">{{ error }}</div>
+            <div class="form-error" *ngIf="form.controls.name.errors.required">This field is required</div>
+            <div class="form-error" *ngIf="form.controls.name.errors.maxlength">max length ({{form.controls.name.errors.maxlength.requiredLength}}) exceeded</div>
+          </ng-container>
+          <ng-template #prefixFullname><i nz-icon nzType="user" style="color:#1890FF;"></i></ng-template>
+
+          <nz-input-group [nzPrefix]="prefixCompany" class="mt-3">
+            <input formControlName="company" nz-input placeholder="Company" type="text"/>
+          </nz-input-group>
+          <ng-container *ngIf="form.controls.company.invalid && (form.controls.company.dirty || form.controls.company.touched)">
+            <div class="form-error" *ngFor="let error of form.controls.company.errors.APIErrors">{{ error }}</div>
+            <div class="form-error" *ngIf="form.controls.company.errors.required">This field is required</div>
+            <div class="form-error" *ngIf="form.controls.company.errors.maxlength">max length ({{form.controls.company.errors.maxlength.requiredLength}}) exceeded</div>
+          </ng-container>
+          <ng-template #prefixCompany><i nz-icon nzType="home" style="color:#1890FF;"></i></ng-template>
+          <button type="submit" class="mt-3" nz-button nzBlock nzType="primary" [nzLoading]="loading" [disabled]="form.invalid">Join us!</button>
+        </form>
+      </div>
+      <div *ngIf="joinSuccessful" class="col-md-8">
+        <nz-result
           nzStatus="success"
-          nzTitle="Thank you!"
           nzSubTitle="Your were added to our waitlist We will send you an update shortly."
+          nzTitle="Thank you!"
         >
           <div nz-result-extra>
-            <button class="col-10" nz-button nzType="default" (click)="FinishSubscription()">Close</button>
+            <button (click)="joinSuccessful=false" class="col-10" nz-button nzType="default">Close</button>
           </div>
         </nz-result>
-        </div>
+      </div>
     </div>
     <div class="col-md-6 rightSide showLarge"></div>
-</div>
+  </div>
 </div>
