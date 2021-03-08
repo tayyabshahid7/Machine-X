@@ -1,0 +1,74 @@
+<div class="white-bg">
+
+  <nz-list *ngIf="messages.length" [nzDataSource]="messages" [nzItemLayout]="'horizontal'"
+           [nzRenderItem]="item" class="messages">
+    <ng-template #item let-item>
+
+      <nz-comment [nzAuthor]="item.sender.username" [nzDatetime]="item.creationDate">
+        <nz-avatar [nzSrc]="defaultAvatar" nz-comment-avatar nzIcon="user"></nz-avatar>
+        <nz-comment-content class="bubble bubble-bottom-left">
+<!--          <b class="red">{{item.title}}</b>-->
+          <p>{{ item.text }}</p>
+        </nz-comment-content>
+      </nz-comment>
+    </ng-template>
+  </nz-list>
+  <div *ngIf="!messages.length" class="messages no-message-container">
+    <!--    <img src="../../../assets/img/chatIcon-red.svg">-->
+    <img src="../../../assets/img/chatIcon-blue.svg">
+    <p class="blue no-message-p">
+      Engage with the Machine Shop handling
+      this part by sending them a message or
+      raising an issue if something uncontrolled comes up.
+    </p>
+
+    <!--    <p *ngIf="status=='shipped'" class="red no-message-p">-->
+    <!--      You are about to raise an issue with the Machine Shop handling this part.-->
+    <!--    </p>-->
+
+  </div>
+  <nz-comment class="chat-box">
+    <nz-avatar [nzSrc]="defaultAvatar" nz-comment-avatar nzIcon="user"></nz-avatar>
+    <nz-comment-content>
+
+      <ng-container *ngIf="inputMode === 'message'; else reportIssueInput">
+        <nz-form-item>
+          <textarea [(ngModel)]="messageToSend" [disabled]="busy" nz-input rows="4" placeholder="Write your message here ..."></textarea>
+        </nz-form-item>
+        <nz-form-item class="send space-between">
+          <div>
+            <button (click)="inputMode='reportIssue'" *ngIf="enableIssueMode" nz-button nzDanger nzType="primary">
+              Report Issue <i nz-icon nzTheme="outline" nzType="exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="push-r">
+            <i class="attach pr-3" nz-icon nzTheme="outline" nzType="paper-clip"></i>
+            <button (click)="sendMessage()" [disabled]="!messageToSend || busy" [nzLoading]="busy" nz-button nzType="primary">
+              Add Comment
+            </button>
+          </div>
+        </nz-form-item>
+      </ng-container>
+
+      <ng-template #reportIssueInput>
+        <nz-form-item>
+          <input [(ngModel)]="issueTitle" [disabled]="busy" class="mb-2" nz-input placeholder="Issue title"/>
+
+          <textarea [(ngModel)]="issueMessage" [disabled]="busy" nz-input rows="4" placeholder="Write issue here ..."></textarea>
+        </nz-form-item>
+        <nz-form-item class="send space-between">
+          <button (click)="inputMode='message'" *ngIf="inputMode==='reportIssue'" class="gray-9" nz-button nzDanger nzType="default">
+            Cancel
+          </button>
+          <div class="push-r">
+            <i class="attach pr-3" nz-icon nzTheme="outline" nzType="paper-clip"></i>
+            <button (click)="submitIssue()" [disabled]="!issueMessage || !issueTitle" [nzLoading]="busy" nz-button nzType="primary">
+              Submit issue
+            </button>
+          </div>
+        </nz-form-item>
+      </ng-template>
+    </nz-comment-content>
+  </nz-comment>
+
+</div>

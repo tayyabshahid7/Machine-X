@@ -31,6 +31,5 @@ export const QuoteStatus = {
 export const JobStatus = {
   PENDING: 'pending',
   IN_WORK: 'in_work',
-  IN_SHIPMENT: 'in_shipment',
   SHIPPED: 'shipped',
 } as const;

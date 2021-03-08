@@ -49,3 +49,28 @@ export interface AccessTokenResponseInterface {
 }
 
 export type FileType = typeof SUPPORTED_FILE_TYPES[number];
+
+export interface ChatMessageInterface {
+  id: string;
+  attachments?: Array<AttachmentInterface>;
+  sender: {
+    username: string;
+    email: string;
+  };
+  receiver: {
+    username: string;
+    email: string;
+  };
+  creationDate: string;
+  title: string;
+  text: string;
+  user: string;
+  returnedQuote: string;
+}
+
+export interface ChatMessagePostInterface {
+  title: string;
+  text: string;
+  returnedQuote: string;
+  attachments?: Array<File>;
+}

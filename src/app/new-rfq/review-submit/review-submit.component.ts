@@ -99,6 +99,7 @@ export class ReviewSubmitComponent implements OnInit {
     this.quoteAPIService.addQuote(quoteData).subscribe(
       response => {
         this.spinner.hide();
+        this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
         this.notification.success('Quote submitted successfully', null);
         this.router.navigate(['dashboard/submittedQuote']);
       },

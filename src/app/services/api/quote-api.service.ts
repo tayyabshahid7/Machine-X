@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AddQuoteDataInterface, QuoteInterface, QuoteInvoiceInterface, TransactionInterface } from '../../models/quote.models';
-import { PaginatedObjectInterface, PaginatedRequestInterface } from '../../models/general.models';
+import { ChatMessageInterface, ChatMessagePostInterface, PaginatedObjectInterface, PaginatedRequestInterface } from '../../models/general.models';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +57,20 @@ export class QuoteAPIService {
       queryParams.push(filterParams);
     }
     return this.httpClient.get<PaginatedObjectInterface<TransactionInterface>>(`${environment.APIUrl}/transaction/list?${queryParams.join('&')}`);
+  }
+
+  postChatMessage(messageData: ChatMessagePostInterface) {
+    const formData = new FormData();
+    formData.append('title', messageData.title);
+    formData.append('returnedQuote', messageData.returnedQuote);
+    formData.append('text', messageData.text);
+    if (messageData.attachments) {
+      messageData.attachments.forEach(file => formData.append('attachments', file));
+    }
+    return this.httpClient.post<ChatMessageInterface>(`${environment.APIUrl}/returned_quote/chat/post_message`, formData);
+  }
+
+  listMessages(quoteId: string) {
+    return this.httpClient.get<Array<ChatMessageInterface>>(`${environment.APIUrl}/returned_quote/${quoteId}/chat/list_messages`);
   }
 }

@@ -1,0 +1,75 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { QuoteAPIService } from '../../services/api/quote-api.service';
+import { ChatMessageInterface, ChatMessagePostInterface } from '../../models/general.models';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
+@Component({
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
+})
+export class ChatComponent implements OnInit {
+  @Input() inputMode: 'message' | 'reportIssue' = 'message';
+  @Input() quoteId: string = null;
+  @Input() enableIssueMode = false;
+  messageToSend;
+  issueTitle;
+  issueMessage;
+  busy = false;
+
+  messages: Array<ChatMessageInterface> = [];
+  defaultAvatar = 'assets/img/default-profile-icon.png';
+
+  constructor(
+    private quoteAPIService: QuoteAPIService,
+    private notification: NzNotificationService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    if (this.quoteId === null) {
+      throw Error('quoteId not provided.');
+    }
+    this.loadMessages(this.quoteId);
+  }
+
+  loadMessages(quoteId: string) {
+    this.busy = true;
+    this.quoteAPIService.listMessages(quoteId).subscribe(
+      response => {
+        this.messages = response;
+        this.busy = false;
+      },
+      errorResponse => {
+        this.notification.error('Error loading messages message', 'Please try again later, or contact support');
+        this.busy = false;
+      }
+    );
+  }
+
+  sendMessage() {
+    this.busy = true;
+    const messageObj: ChatMessagePostInterface = {
+      title: 'message',
+      text: this.messageToSend,
+      returnedQuote: this.quoteId,
+    };
+    this.quoteAPIService.postChatMessage(messageObj).subscribe(
+      response => {
+        this.messageToSend = null;
+        this.messages = [...this.messages, response];
+        this.busy = false;
+      },
+      errorResponse => {
+        this.notification.error('Error sending message', 'Please try again later, or contact support');
+        this.busy = false;
+      }
+    );
+
+  }
+
+  submitIssue() {
+
+  }
+
+}
