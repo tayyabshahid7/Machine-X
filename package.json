@@ -25,6 +25,7 @@
     "@ngrx/store": "^10.1.2",
     "@types/jquery": "^3.5.4",
     "bootstrap": "^4.5.3",
+    "change-case": "^4.1.2",
     "dayjs": "^1.10.4",
     "jquery": "^3.5.1",
     "ng-zorro-antd": "^10.1.0",

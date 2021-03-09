@@ -25,3 +25,17 @@ export interface JobInterface {
   status: JobStatusType;
   creationDate: string;
 }
+
+export interface JobsCountInterface {
+  status: JobStatusType;
+  count: number;
+}
+
+export interface JobIssueInterface {
+  id: string;
+  title: string;
+  message: string;
+  job: string;
+  creationDate: string;
+  jobDisplayId: string;
+}
