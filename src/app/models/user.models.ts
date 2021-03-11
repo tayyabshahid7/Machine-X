@@ -1,3 +1,5 @@
+import { AttachmentInterface } from './general.models';
+
 export interface JoinWaitingListRequestDataInterface {
   email: string;
   name: string;
@@ -21,7 +23,7 @@ export interface ShopProfileInterface {
   email: string;
   id: string;
   businessOwners: BusinessOwnerInterface[];
-  attachments: any[];
+  attachments: Array<AttachmentInterface>;
   companyLegalName: string;
   country: string;
   termsAgreeDatetime?: any;
@@ -63,4 +65,16 @@ export interface ShopProfileInterface {
   connectedAccountStatus: string;
 }
 
+
+export interface PayoutDataInterface {
+  bankAccountHolderName: string;
+  bankAccountNumber: string;
+  bankAccountRoutingNumber: string;
+  bankAccountCurrency: string;
+  bankAccountBankName: string;
+  bankAccountAddress: string;
+  cardHolderName: string;
+  cardNumber: string;
+  cardExpiryDate: string;
+}
 
