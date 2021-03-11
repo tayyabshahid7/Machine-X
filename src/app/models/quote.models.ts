@@ -63,6 +63,7 @@ export interface QuoteInterface {
   status: QuoteStatusType;
   creationDate: string;
   shippingRate: number;
+  platformFees: number;
   tax: number;
   requestQuote: string;
 }
@@ -108,6 +109,7 @@ export interface QuoteInvoiceInterface {
   status: string;
   creationDate: string;
   shippingRate: number;
+  platformFees: number;
   tax: number;
   requestQuote: string;
 }

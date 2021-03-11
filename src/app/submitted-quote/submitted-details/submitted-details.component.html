@@ -162,8 +162,8 @@
                     <td>{{ lineItem.id }}</td>
                     <td>{{ lineItem.description }}</td>
                     <td>{{ lineItem.quantity }}</td>
-                    <td>${{ lineItem.price | currency: 'USD' }}</td>
-                    <td>${{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
+                    <td>{{ lineItem.price | currency: 'USD' }}</td>
+                    <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
 
                   </tr>
                   </tbody>
@@ -178,6 +178,7 @@
                   <div class="col-md-3">
                     <p class=" tax text-center">+ Tax {{quote.tax | currency: 'USD'}}</p>
                     <p class=" tax text-center">+ Shipping rate {{quote.shippingRate | currency: 'USD'}}</p>
+                    <p class=" tax text-center">+ Platform fees {{quote.platformFees | currency: 'USD'}}</p>
                     <nz-table [nzShowPagination]="false" #basicTable [nzData]="[quote.grandTotal]">
                       <thead>
                       <tr>

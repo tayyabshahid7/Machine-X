@@ -95,6 +95,7 @@
             <div class="col-3">
               <p class=" tax">+ Tax {{quoteInvoice.tax | currency: 'USD'}}</p>
               <p class=" tax">+ Shipping rate {{quoteInvoice.shippingRate | currency: 'USD'}}</p>
+              <p class=" tax">+ Platform fees {{quoteInvoice.platformFees | currency: 'USD'}}</p>
               <nz-table [nzShowPagination]="false" #basicTable [nzData]="[quoteInvoice.grandTotal]">
                 <thead>
                 <tr>

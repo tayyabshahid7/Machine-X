@@ -33,3 +33,6 @@ export const JobStatus = {
   IN_WORK: 'in_work',
   SHIPPED: 'shipped',
 } as const;
+
+export const PLATFORM_FEES_PERCENTAGE = 0.1 as const;
+export const MAX_PLATFORM_FEES = 100 as const;
