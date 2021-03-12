@@ -28,6 +28,7 @@
     "change-case": "^4.1.2",
     "dayjs": "^1.10.4",
     "jquery": "^3.5.1",
+    "jspdf-html2canvas": "^1.4.9",
     "ng-zorro-antd": "^10.1.0",
     "ngx-easy-table": "^13.0.3",
     "ngx-spinner": "^10.0.1",

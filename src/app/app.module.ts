@@ -102,6 +102,10 @@ import { FilePreviewerComponent } from './components/file-previewer/file-preview
 import { ChatComponent } from './components/chat/chat.component';
 import { ChangeCasePipe } from './pipes/change-case.pipe';
 import { QuoteHistoryComponent } from './components/quote-history/quote-history.component';
+import { ShareJobModalComponent } from './components/share-modals/share-job-modal/share-job-modal.component';
+import { ShareInvoiceModalComponent } from './components/share-modals/share-invoice-modal/share-invoice-modal.component';
+import { ShareQuoteModalComponent } from './components/share-modals/share-quote-modal/share-quote-modal.component';
+import { ShareReceiptModalComponent } from './components/share-modals/share-receipt-modal/share-receipt-modal.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -155,7 +159,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     FilePreviewerComponent,
     ChatComponent,
     ChangeCasePipe,
-    QuoteHistoryComponent
+    QuoteHistoryComponent,
+    ShareJobModalComponent,
+    ShareInvoiceModalComponent,
+    ShareQuoteModalComponent,
+    ShareReceiptModalComponent
   ],
   imports: [
     AppRoutingModule,

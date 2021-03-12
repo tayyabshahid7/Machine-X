@@ -51,4 +51,12 @@ export class JobAPIService {
   addShipment(data: { job: string; company: string; trackingId: string; status: string; }) {
     return this.httpClient.post(`${environment.APIUrl}/job/add_shipment`, data);
   }
+
+  shareJobDetails(jobId: string, emails: string[], notes: string) {
+    const formData = new FormData();
+    formData.append('job', jobId);
+    formData.append('notes', notes);
+    emails.forEach(email => formData.append('email', email));
+    return this.httpClient.post(`${environment.APIUrl}/job/share_job`, formData);
+  }
 }

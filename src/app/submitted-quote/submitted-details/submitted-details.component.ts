@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { formatDistance } from 'date-fns';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -31,19 +30,6 @@ export class SubmittedDetailsComponent implements OnInit {
   ) {
   }
 
-  data: any[] = [];
-  submitting = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
-  inputValue = '';
-  titleValue = '';
-  // openInvoice(){
-  //   this.router.navigate(['/dashboard/Jobs/invoice']);
-  // }
-  issue = false;
-
   ngOnInit(): void {
     const quoteId = this.route.snapshot.paramMap.get('quoteId');
     this.loadQuote(quoteId);
@@ -74,39 +60,6 @@ export class SubmittedDetailsComponent implements OnInit {
     );
   }
 
-  handleSubmit(): void {
-    this.submitting = true;
-    const content = this.inputValue;
-    const title = this.titleValue;
-    this.inputValue = '';
-    setTimeout(() => {
-      this.submitting = false;
-      this.data = [
-        ...this.data,
-        {
-          ...this.user,
-          title,
-          content,
-          datetime: new Date(),
-          displayTime: formatDistance(new Date(), new Date())
-        }
-      ].map(e => {
-        return {
-          ...e,
-          displayTime: formatDistance(new Date(), e.datetime)
-        };
-      });
-    }, 800);
-  }
-
-
-  startIssue() {
-    this.issue = true;
-  }
-
-  cancelIssue() {
-    this.issue = false;
-  }
 
   showArchive(): void {
     this.modal.error({
@@ -116,7 +69,7 @@ export class SubmittedDetailsComponent implements OnInit {
       nzOkText: 'Archive',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.router.navigate(['/dashboard/submittedQuote']);
+        this.archiveQuote();
       },
       nzCancelText: 'Cancel',
       nzOnCancel: () => {
@@ -124,6 +77,22 @@ export class SubmittedDetailsComponent implements OnInit {
       },
       nzMaskStyle: {background: 'rgb(0, 39, 102, 0.9)'}
     });
+  }
+
+  archiveQuote() {
+    this.spinner.show('quoteSpinner');
+    this.quoteAPIService.archiveQuote(this.quote).subscribe(
+      response => {
+        this.router.navigate(['/dashboard/submittedQuote']);
+        this.spinner.hide('quoteSpinner');
+        this.notification.success('Quote archived successfully', null);
+      },
+      error => {
+        // TODO: review how to show error here
+        this.notification.error('Error archiving quote', null);
+        this.spinner.hide('quoteSpinner');
+      }
+    );
   }
 
   close() {
