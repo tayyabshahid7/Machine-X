@@ -9,7 +9,7 @@
 
     <div class="content row">
       <div class="col-3 gray-bg"></div>
-      <div class="col-6 pt-30px scrollable">
+      <div class="col-6 pt-30px scrollable" id="pdfAnchor">
         <div class="header row">
           <div class="col-md-6">
             <img src="../../../assets/img/logoConceptX.svg" width="150px"><br>
@@ -95,6 +95,7 @@
             <div class="col-3">
               <p class=" tax">+ Tax {{quoteInvoice.tax | currency: 'USD'}}</p>
               <p class=" tax">+ Shipping rate {{quoteInvoice.shippingRate | currency: 'USD'}}</p>
+              <p class=" tax">+ Platform fees {{quoteInvoice.platformFees | currency: 'USD'}}</p>
               <nz-table [nzShowPagination]="false" #basicTable [nzData]="[quoteInvoice.grandTotal]">
                 <thead>
                 <tr>
@@ -118,7 +119,7 @@
 
 
     <nz-footer>
-      <button nz-button class="mar-2" nzType="primary">Download Invoice<i nz-icon nzType="download" nzTheme="outline"></i></button>
+      <button (click)="downloadInvoice()" nz-button class="mar-2" nzType="primary">Download Invoice<i nz-icon nzType="download" nzTheme="outline"></i></button>
       <button data-toggle="modal" data-target="#ShareModal" nz-button class="mar-2" nzType="default">Share<i nz-icon nzType="share-alt" nzTheme="outline"></i></button>
     </nz-footer>
 
@@ -126,35 +127,7 @@
     <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-            <b> <img src="../../../../assets/img/share.svg" style="margin-right:10px"> Share with others</b>
-            <div class="modal-content-custom-email">
-              <div class="row mt-1">
-                <p class="col-12"><span class="blue">*</span>Email</p><br>
-                <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>
-                <div class="col-2">
-                  <img (click)="addEmail()" src="../../../../assets/img/plus-circle.svg">
-                </div>
-              </div>
-              <div class="row mt-2" *ngFor="let email of receivers">
-                <div class="col-10"><input nz-input placeholder="email@domain.com"/></div>
-                <div class="col-2">
-                  <img (click)="removeEmail()" src="../../../../assets/img/delete.svg">
-                </div>
-              </div>
-              <div class="row mt-3">
-                <p class="col-12">Add a note</p><br>
-                <div class="col-12">
-                  <textarea rows="4" nz-input></textarea>
-
-                </div>
-              </div>
-              <div class="mt-2 push-r">
-                <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Close</button>
-                <button nz-button nzType="primary" type="button" data-dismiss="modal">Share</button>
-              </div>
-            </div>
-          </div>
+          <app-share-invoice-modal [paymentId]="quoteInvoice.payment.id"></app-share-invoice-modal>
         </div>
       </div>
     </div>

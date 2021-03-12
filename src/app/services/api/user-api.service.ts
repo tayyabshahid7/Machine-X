@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { MachineInterface } from '../../models/machine';
-import { JoinWaitingListRequestDataInterface, ShopProfileInterface } from '../../models/user.models';
+import { JoinWaitingListRequestDataInterface, PayoutDataInterface, ShopProfileInterface } from '../../models/user.models';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +71,10 @@ export class UserAPIService {
     formData.append('connectedAccountStatus', machine.connectedAccountStatus);
 
     return this.httpClient.post<MachineInterface>(`${environment.APIUrl}/shop/create`, formData);
+  }
+
+  updatePayoutInfo(data: PayoutDataInterface) {
+    return this.httpClient.patch(`${environment.APIUrl}/shop/update_payout`, data);
+
   }
 }

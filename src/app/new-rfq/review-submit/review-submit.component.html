@@ -78,6 +78,7 @@
             <div class="col-md-3">
               <p class=" tax text-center">+ Shipping rate {{form.value.shippingRate | currency: 'USD'}}</p>
               <p class=" tax text-center">+ Tax {{form.value.tax | currency: 'USD'}}</p>
+              <p class=" tax text-center">+ Platform fees {{platformFees | currency: 'USD'}}</p>
               <nz-table [nzShowPagination]="false" #basicTable [nzData]="[grandTotal]">
                 <thead>
                 <tr>
@@ -86,7 +87,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td class="blue">{{ grandTotal }}</td>
+                  <td class="blue">{{ grandTotal | currency: 'USD' }}</td>
                 </tr>
                 </tbody>
               </nz-table>

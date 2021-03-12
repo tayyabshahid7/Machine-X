@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { getUser } from '../../store/user/user.selectors';
+import { ShopProfileInterface } from '../../models/user.models';
+import { filter } from 'rxjs/operators';
+import { UserAPIService } from '../../services/api/user-api.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -9,62 +15,65 @@ import { Observable, Observer } from 'rxjs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent  {
+export class ProfileComponent implements OnInit {
+  shopProfile: ShopProfileInterface;
+  shopProfilePayOutForm: FormGroup;
+  dateFormat = 'MM.dd.yyyy';
 
+  constructor(
+    private msg: NzMessageService,
+    private formBuilder: FormBuilder,
+    private store: Store,
+    private userAPIService: UserAPIService,
+    private errorHandlerService: ErrorHandlerService,
+    private spinner: NgxSpinnerService,
+  ) {
+  }
 
-  loading = false;
-  avatarUrl?: string;
-  addressnew = false;
+  ngOnInit(): void {
+    this.spinner.show();
+    this.store.select(getUser)
+      .pipe(filter(d => d !== null))
+      .subscribe(userProfile => {
+        this.shopProfile = userProfile;
+        this.initForm(this.shopProfile);
+        this.spinner.hide();
+      });
+  }
 
-  constructor(private msg: NzMessageService) {}
-
-  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]) => {
-    return new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        this.msg.error('You can only upload JPG file!');
-        observer.complete();
-        return;
-      }
-      const isLt2M = file.size! / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.msg.error('Image must smaller than 2MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isLt2M);
-      observer.complete();
+  initForm(shopForm: ShopProfileInterface) {
+    this.shopProfilePayOutForm = this.formBuilder.group({
+      // defaultPayoutType: [shopForm.defaultPayoutType, [Validators.required]],
+      bankAccountHolderName: [shopForm.bankAccountHolderName, [Validators.required]],
+      bankAccountNumber: [shopForm.bankAccountNumber, [Validators.required]],
+      bankAccountRoutingNumber: [shopForm.bankAccountRoutingNumber, [Validators.required]],
+      bankAccountCurrency: [shopForm.bankAccountCurrency, [Validators.required]],
+      bankAccountBankName: [shopForm.bankAccountBankName, [Validators.required]],
+      bankAccountAddress: [shopForm.bankAccountAddress, [Validators.required]],
+      cardHolderName: [shopForm.cardHolderName, [Validators.required]],
+      cardNumber: [shopForm.cardNumber, [Validators.required]],
+      cardExpiryDate: [shopForm.cardExpiryDate, [Validators.required]],
     });
   }
 
-  private getBase64(img: File, callback: (img: string) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result!.toString()));
-    reader.readAsDataURL(img);
-  }
-
-  handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        this.loading = true;
-        break;
-      case 'done':
-        // Get this url from response in real world.
-        this.getBase64(info.file!.originFileObj!, (img: string) => {
-          this.loading = false;
-          this.avatarUrl = img;
-        });
-        break;
-      case 'error':
-        this.msg.error('Network error');
-        this.loading = false;
-        break;
+  saveChanges() {
+    if (this.shopProfilePayOutForm.valid) {
+      this.spinner.show();
+      this.userAPIService.updatePayoutInfo(this.shopProfilePayOutForm.value).subscribe(
+        res => {
+          this.spinner.hide();
+          this.msg.success('Saved changes');
+        },
+        error => {
+          if (error.hasOwnProperty('error')) {
+            this.errorHandlerService.setFormAPIErrors(this.shopProfilePayOutForm, error.error);
+          }
+          this.spinner.hide();
+          this.msg.error('Error Saving changes');
+        }
+      );
+      ;
     }
-  }
-
-  checkButton(): void {
-    this.addressnew = !this.addressnew;
-    console.log(this.addressnew);
   }
 
 }
