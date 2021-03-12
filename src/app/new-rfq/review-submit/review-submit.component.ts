@@ -11,6 +11,8 @@ import { FormGroup } from '@angular/forms';
 import { QuoteAPIService } from '../../services/api/quote-api.service';
 import { AddQuoteDataInterface } from '../../models/quote.models';
 import { ErrorHandlerService } from '../../services/error-handler.service';
+import { MAX_PLATFORM_FEES, PLATFORM_FEES_PERCENTAGE } from '../../utilities/constants';
+import { precisionRound } from '../../utilities/app.utilities';
 
 @Component({
   selector: 'app-review-submit',
@@ -21,6 +23,7 @@ export class ReviewSubmitComponent implements OnInit {
   rfqId: string;
   rfq: RfqInterface = null;
   form: FormGroup;
+  platformFees: number;
   grandTotal: number;
 
   constructor(
@@ -67,7 +70,10 @@ export class ReviewSubmitComponent implements OnInit {
   setTotals() {
     const lineItemsTotal = this.form.value.lineItems.reduce((total, value) => total + (value.price * value.quantity), 0);
     const subtotal = this.form.controls.shippingRate.value + lineItemsTotal;
-    this.grandTotal = this.form.controls.tax.value + subtotal;
+    const amountBeforeFees = subtotal + this.form.controls.tax.value;
+    const feesByPercentage = amountBeforeFees * PLATFORM_FEES_PERCENTAGE;
+    this.platformFees = precisionRound(Math.min(MAX_PLATFORM_FEES, feesByPercentage), 2);
+    this.grandTotal = this.form.controls.tax.value + subtotal + this.platformFees;
   }
 
 
@@ -99,6 +105,7 @@ export class ReviewSubmitComponent implements OnInit {
     this.quoteAPIService.addQuote(quoteData).subscribe(
       response => {
         this.spinner.hide();
+        this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
         this.notification.success('Quote submitted successfully', null);
         this.router.navigate(['dashboard/submittedQuote']);
       },

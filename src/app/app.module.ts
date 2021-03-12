@@ -99,6 +99,13 @@ import { JwtInterceptor } from './utilities/auth.utilities/jwt.interceptor';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ConceptXDateTimePipePipe } from './pipes/conceptx-date.pipe';
 import { FilePreviewerComponent } from './components/file-previewer/file-previewer.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChangeCasePipe } from './pipes/change-case.pipe';
+import { QuoteHistoryComponent } from './components/quote-history/quote-history.component';
+import { ShareJobModalComponent } from './components/share-modals/share-job-modal/share-job-modal.component';
+import { ShareInvoiceModalComponent } from './components/share-modals/share-invoice-modal/share-invoice-modal.component';
+import { ShareQuoteModalComponent } from './components/share-modals/share-quote-modal/share-quote-modal.component';
+import { ShareReceiptModalComponent } from './components/share-modals/share-receipt-modal/share-receipt-modal.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -150,6 +157,13 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ConceptXDateTimePipePipe,
     TimeFromNowPipe,
     FilePreviewerComponent,
+    ChatComponent,
+    ChangeCasePipe,
+    QuoteHistoryComponent,
+    ShareJobModalComponent,
+    ShareInvoiceModalComponent,
+    ShareQuoteModalComponent,
+    ShareReceiptModalComponent
   ],
   imports: [
     AppRoutingModule,

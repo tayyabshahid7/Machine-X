@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+import { Store } from '@ngrx/store';
+import { RfqAPIService } from '../../services/api/rfq-api.service';
+import { JobAPIService } from '../../services/api/job-api.service';
+import { QuoteAPIService } from '../../services/api/quote-api.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { JobIssueInterface, JobsCountInterface } from '../../models/job.models';
+import { RfqInterface } from '../../models/rfq.models';
+import { TransactionInterface } from '../../models/quote.models';
+import { Observable } from 'rxjs';
+import { ShopProfileInterface } from '../../models/user.models';
+import { getUser } from '../../store/user/user.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,160 +19,99 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  switchValue = true;
-  activeParts = 12 ;
-  finishedParts = 231;
-  tableData = [
-    {
-      rfq: 'RFQ #359',
-      submissions: '4',
-      daysLeft: '3',
-      accepted: true,
-      jobName: 'Bike Handle | X04-321-133-41 ',
-      jobProgress: 100,
-      JobStatus: 'Ongoing',
-      transJobNumber: '$ 23910',
-      JobId: '#31212',
-      transJobDate: 'Sep 23, 2020',
-      transMachine: 'Part X04-321-133-412',
-      transQu: 'Quote: #132123',
-      transCost: '140.5',
-
-    },
-    {
-      rfq: 'RFQ #439',
-      submissions: '4',
-      daysLeft: '2',
-      accepted: true,
-      jobName: 'Part X04-321-133-412',
-      jobProgress: 7,
-      JobStatus: 'Resolved',
-      transJobNumber: '$ 23910',
-      JobId: '#31212',
-      transJobDate: 'Sep 23, 2020',
-      transMachine: 'Part X04-321-133-412',
-      transQu: 'Quote: #132123',
-      transCost: '3,205.50',
-    },
-    {
-      rfq: 'RFQ #519',
-      submissions: '0',
-      daysLeft: '1',
-      accepted: false,
-      jobName: 'Part X04-141-133-412',
-      jobProgress: 74,
-      JobStatus: 'Resolved',
-      transJobNumber: '$ 23910',
-      JobId: '#31212',
-      transJobDate: 'Sep 23, 2020',
-      transMachine: 'Part X04-321-133-412',
-      transQu: 'Quote: #132123',
-      transCost: '1,040.5',
-    },
-  ];
+  shop$: Observable<ShopProfileInterface>;
+  jobsCounts: Array<JobsCountInterface> = [];
+  rfqs: Array<RfqInterface> = [];
+  transactions: Array<TransactionInterface> = [];
+  jobsIssues: Array<JobIssueInterface> = [];
 
 
-  public configuration: Config;
-  public columns: Columns[];
-
-  public data = [{
-    phone: '+1 (934) 551-2224',
-    age: 20,
-    company: 'ZILLANET',
-    isActive: false,
-  }, {
-    phone: '+1 (948) 460-3627',
-    age: 31,
-    company: 'KNOWLYSIS',
-    isActive: true,
-  }];
-
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store,
+    private rfqAPIService: RfqAPIService,
+    private jobAPIService: JobAPIService,
+    private quoteAPIService: QuoteAPIService,
+    private notification: NzNotificationService,
+    private spinner: NgxSpinnerService,
+  ) {
+  }
 
   ngOnInit(): void {
-    this.configuration = { ...DefaultConfig };
-    this.configuration.searchEnabled = false;
-    this.configuration.paginationEnabled = false;
-    // ... etc.
-    this.columns = [
-      { key: 'phone', title: 'Newest' },
-      { key: 'age', title: 'Submissions' },
-      { key: 'company', title: 'Days left' },
-      // { key: 'isActive', title: 'Days left' },
-    ];
+    this.shop$ = this.store.select(getUser);
+    this.loadJobsCounts();
+    this.loadRfqs();
+    this.loadTransactions();
+    this.loadJobsIssues();
   }
 
-  handelData(){
-    this.switchValue == false ? this.activeParts = 0 : this.activeParts = 12;
-    this.switchValue == false ? this.finishedParts = 0 : this.finishedParts = 231;
-
-    this.switchValue == false ? this.tableData = [] : this.tableData = [
-        {
-          rfq: 'RFQ #359',
-          submissions: '4',
-          daysLeft: '3',
-          accepted: true,
-          jobName: 'Bike Handle | X04-321-133-41 ',
-          jobProgress: 100,
-          transJobNumber: '$ 23910',
-          JobId: '#31212',
-          JobStatus: 'Ongoing',
-          transJobDate: 'Sep 23, 2020',
-          transMachine: 'Part X04-321-133-412',
-          transQu: 'Quote: #132123',
-          transCost: '140.5',
-
-        },
-        {
-          rfq: 'RFQ #439',
-          submissions: '4',
-          daysLeft: '2',
-          accepted: true,
-          jobName: 'Part X04-321-133-412',
-          jobProgress: 7,
-          transJobNumber: '$ 23910',
-          JobId: '#31212',
-          JobStatus: 'Resolved',
-          transJobDate: 'Sep 23, 2020',
-          transMachine: 'Part X04-321-133-412',
-          transQu: 'Quote: #132123',
-          transCost: '3,205.50',
-        },
-        {
-          rfq: 'RFQ #519',
-          submissions: '0',
-          daysLeft: '1',
-          accepted: false,
-          jobName: 'Part X04-141-133-412',
-          jobProgress: 74,
-          transJobNumber: '$ 23910',
-          JobStatus: 'Resolved',
-          JobId: '#31212',
-          transJobDate: 'Sep 23, 2020',
-          transMachine: 'Part X04-321-133-412',
-          transQu: 'Quote: #132123',
-          transCost: '1,040.5',
-        },
-      ];
+  loadJobsCounts() {
+    this.spinner.show('jobsCountsSpinner');
+    this.jobAPIService.getJobsCount().subscribe(
+      response => {
+        this.jobsCounts = response;
+        this.spinner.hide('jobsCountsSpinner');
+      },
+      errorResponse => {
+        this.notification.error('Error loading jobs information', null);
+        this.spinner.hide('jobsCountsSpinner');
+      }
+    );
   }
 
-  addRFQ(){
-    this.router.navigate(['dashboard/RFQ/Add']);
+  loadRfqs() {
+    this.spinner.show('rfqsSpinner');
+    this.rfqAPIService.listRFQs({pageSize: 4, page: 1}, {searchKey: null}).subscribe(
+      response => {
+        this.rfqs = response.results;
+        this.spinner.hide('rfqsSpinner');
+      },
+      errorResponse => {
+        this.notification.error('Error loading RFQs information', null);
+        this.spinner.hide('rfqsSpinner');
+      }
+    );
   }
-  addPart(){
-    this.router.navigate(['dashboard/parts/add']);
-  }
-  viewParts(){
-    this.router.navigate(['dashboard/parts']);
 
+  loadTransactions() {
+    this.spinner.show('transactionsSpinner');
+    this.quoteAPIService.listTransactions({pageSize: 4, page: 1}, {searchKey: null}).subscribe(
+      response => {
+        this.transactions = response.results;
+        this.spinner.hide('transactionsSpinner');
+      },
+      errorResponse => {
+        this.notification.error('Error loading RFQs information', null);
+        this.spinner.hide('transactionsSpinner');
+      }
+    );
   }
-  viewJobs(){
+
+  loadJobsIssues() {
+    this.spinner.show('jobsIssuesSpinner');
+    this.jobAPIService.listJobsIssues({pageSize: 4, page: 1}, {searchKey: null}).subscribe(
+      response => {
+        this.jobsIssues = response.results;
+        this.spinner.hide('jobsIssuesSpinner');
+      },
+      errorResponse => {
+        this.notification.error('Error loading RFQs information', null);
+        this.spinner.hide('jobsIssuesSpinner');
+      }
+    );
+  }
+
+
+  viewJobs() {
     this.router.navigate(['dashboard/WorkingJobs']);
   }
-  viewRFQ(){
+
+  viewRFQ() {
     this.router.navigate(['dashboard/newRFQ']);
   }
-  viewTransactions(){
+
+  viewTransactions() {
     this.router.navigate(['dashboard/transactions']);
   }
 }

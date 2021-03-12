@@ -8,6 +8,8 @@ import { RfqInterface } from '../../models/rfq.models';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { BufferService } from '../../services/buffer.service';
+import { MAX_PLATFORM_FEES, PLATFORM_FEES_PERCENTAGE } from '../../utilities/constants';
+import { precisionRound } from '../../utilities/app.utilities';
 
 export const QUOTE_FORM_BUFFER_ITEM_KEY = 'quoteForm';
 
@@ -22,6 +24,7 @@ export class GenerateQuoteComponent implements OnInit {
   form: FormGroup;
   fileList: NzUploadFile[] = [];
   subtotal = 0;
+  platformFees = 0;
   grandTotal = 0;
   dateFormat = 'MM.dd.yyyy';
   newLineItemDesc: string;
@@ -145,7 +148,10 @@ export class GenerateQuoteComponent implements OnInit {
   setTotals() {
     const lineItemsTotal = this.form.controls.lineItems.value.reduce((total, value) => total + (value.price * value.quantity), 0);
     this.subtotal = this.form.controls.shippingRate.value + lineItemsTotal;
-    this.grandTotal = this.form.controls.tax.value + this.subtotal;
+    const amountBeforeFees = this.subtotal + this.form.controls.tax.value;
+    const feesByPercentage = amountBeforeFees * PLATFORM_FEES_PERCENTAGE;
+    this.platformFees = precisionRound(Math.min(MAX_PLATFORM_FEES, feesByPercentage), 2);
+    this.grandTotal = this.form.controls.tax.value + this.subtotal + this.platformFees;
   }
 
   resetNewLineItemFields() {

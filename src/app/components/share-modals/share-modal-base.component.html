@@ -1,0 +1,48 @@
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="share()">
+    <b> <img src="../../../assets/img/share.svg" style="margin-right:10px"> Share with others</b>
+    <div class="modal-content-custom-email">
+
+      <div formArrayName="emails">
+        <div *ngFor="let email of emails.controls; let i=index">
+          <div [formGroupName]="i" class="row mt-1">
+
+            <p class="col-12"><span class="blue">*</span>Email</p><br>
+            <div class="col-10">
+              <input [formControl]="email" nz-input placeholder="email@domain.com"/>
+              <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div class="form-error" *ngFor="let error of email.errors.APIErrors">{{ error }}</div>
+                <div class="form-error" *ngIf="email.errors.required">This field is required</div>
+                <div class="form-error" *ngIf="email.errors.email">Invalid email</div>
+              </ng-container>
+            </div>
+
+            <div class="col-2" *ngIf="i===0; else remove">
+              <img (click)="addEmail()" src="../../../assets/img/plus-circle.svg">
+            </div>
+            <ng-template #remove>
+              <div class="col-2">
+                <img (click)="removeEmail(i)" src="../../../assets/img/delete.svg">
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <p class="col-12">Add a note</p><br>
+        <div class="col-12">
+          <textarea formControlName="notes" nz-input rows="4"></textarea>
+          <ng-container *ngIf="form.controls.notes.invalid && (form.controls.notes.dirty || form.controls.notes.touched)">
+            <div class="form-error" *ngFor="let error of form.controls.notes.errors.APIErrors">{{ error }}</div>
+            <div class="form-error" *ngIf="form.controls.notes.errors.maxlength">max length ({{form.controls.notes.errors.maxlength.requiredLength}}) exceeded</div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="mt-2 push-r">
+        <button type="button" class="mar-2" data-dismiss="modal" nz-button nzType="default" id="closeShareModalBtn">Close</button>
+        <button type="submit" [disabled]="form.invalid" nz-button nzType="primary">Share</button>
+      </div>
+    </div>
+  </form>
+</div>

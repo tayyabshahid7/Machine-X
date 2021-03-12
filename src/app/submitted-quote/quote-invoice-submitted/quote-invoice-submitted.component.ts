@@ -7,6 +7,7 @@ import { JobAPIService } from '../../services/api/job-api.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QuoteInvoiceInterface } from '../../models/quote.models';
+import * as html2PDF from 'jspdf-html2canvas';
 
 @Component({
   selector: 'app-quote-invoice-submitted',
@@ -27,27 +28,6 @@ export class QuoteInvoiceSubmittedComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
   }
-
-  tableData = [
-    {
-      id: '1',
-      name: 'itemName',
-      quantity: 12,
-      cost: 90,
-    }, {
-      id: '2',
-      name: 'itemName',
-      quantity: 1,
-      cost: 200,
-    }, {
-      id: '3',
-      name: 'itemName',
-      quantity: 1,
-      cost: 90,
-    }
-  ];
-
-  receivers = [];
 
   ngOnInit(): void {
     const quoteId = this.route.snapshot.paramMap.get('quoteId');
@@ -70,11 +50,19 @@ export class QuoteInvoiceSubmittedComponent implements OnInit {
     );
   }
 
-  addEmail() {
-    this.receivers.push(1);
+  downloadInvoice() {
+    const pdfElement = document.getElementById('pdfAnchor');
+    html2PDF(pdfElement, {
+      jsPDF: {
+        format: 'a4',
+      },
+      imageType: 'image/jpeg',
+      success: (pdf) => {
+        const fileName = `quote_${this.quoteInvoice.displayId}_invoice.pdf`;
+        pdf.save(fileName);
+        this.notification.success('Quote invoice Downloaded', null);
+      }
+    });
   }
 
-  removeEmail() {
-    this.receivers.pop();
-  }
 }

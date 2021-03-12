@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { AddQuoteDataInterface, QuoteInterface, QuoteInvoiceInterface, TransactionInterface } from '../../models/quote.models';
-import { PaginatedObjectInterface, PaginatedRequestInterface } from '../../models/general.models';
+import { AddQuoteDataInterface, QuoteInterface, QuoteInvoiceInterface, QuotLogsInterface, TransactionInterface } from '../../models/quote.models';
+import { ChatMessageInterface, ChatMessagePostInterface, PaginatedObjectInterface, PaginatedRequestInterface } from '../../models/general.models';
+import { QuoteStatus } from '../../utilities/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,56 @@ export class QuoteAPIService {
       queryParams.push(filterParams);
     }
     return this.httpClient.get<PaginatedObjectInterface<TransactionInterface>>(`${environment.APIUrl}/transaction/list?${queryParams.join('&')}`);
+  }
+
+  postChatMessage(messageData: ChatMessagePostInterface) {
+    const formData = new FormData();
+    formData.append('title', messageData.title);
+    formData.append('returnedQuote', messageData.returnedQuote);
+    formData.append('text', messageData.text);
+    if (messageData.attachments) {
+      messageData.attachments.forEach(file => formData.append('attachments', file));
+    }
+    return this.httpClient.post<ChatMessageInterface>(`${environment.APIUrl}/returned_quote/chat/post_message`, formData);
+  }
+
+  listMessages(quoteId: string) {
+    return this.httpClient.get<Array<ChatMessageInterface>>(`${environment.APIUrl}/returned_quote/${quoteId}/chat/list_messages`);
+  }
+
+  getQuoteHistory(quoteId: string) {
+    return this.httpClient.get<QuotLogsInterface>(`${environment.APIUrl}/returned_quote/${quoteId}/history`);
+  }
+
+  archiveQuote(quote: QuoteInterface) {
+    const data = {
+      returned_quote: quote.id,
+      status: QuoteStatus.ARCHIVED
+    };
+    return this.httpClient.post(`${environment.APIUrl}/returned_quote/update_status`, data);
+  }
+
+  shareInvoice(paymentId: string, emails: string[], notes: string) {
+    const formData = new FormData();
+    formData.append('payment', paymentId);
+    formData.append('notes', notes);
+    emails.forEach(email => formData.append('email', email));
+    return this.httpClient.post(`${environment.APIUrl}/transaction/share_invoice`, formData);
+  }
+
+  shareQuote(quoteId: string, emails: string[], notes: string) {
+    const formData = new FormData();
+    formData.append('quote', quoteId);
+    formData.append('notes', notes);
+    emails.forEach(email => formData.append('email', email));
+    return this.httpClient.post(`${environment.APIUrl}/returned_quote/share_quote`, formData);
+  }
+
+  shareReceipt(paymentId: string, emails: string[], notes: string) {
+    const formData = new FormData();
+    formData.append('payment', paymentId);
+    formData.append('notes', notes);
+    emails.forEach(email => formData.append('email', email));
+    return this.httpClient.post(`${environment.APIUrl}/transaction/share_receipt`, formData);
   }
 }

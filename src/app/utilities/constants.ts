@@ -31,6 +31,8 @@ export const QuoteStatus = {
 export const JobStatus = {
   PENDING: 'pending',
   IN_WORK: 'in_work',
-  IN_SHIPMENT: 'in_shipment',
   SHIPPED: 'shipped',
 } as const;
+
+export const PLATFORM_FEES_PERCENTAGE = 0.1 as const;
+export const MAX_PLATFORM_FEES = 100 as const;

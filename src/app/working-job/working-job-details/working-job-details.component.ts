@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { formatDistance } from 'date-fns';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -30,53 +29,11 @@ export class WorkingJobDetailsComponent implements OnInit {
   ) {
   }
 
-  receivers = [];
-
-  tableData = [
-    {
-      id: '1',
-      name: 'itemName',
-      quantity: 12,
-      cost: 90,
-    }, {
-      id: '2',
-      name: 'itemName',
-      quantity: 1,
-      cost: 200,
-    }, {
-      id: '3',
-      name: 'itemName',
-      quantity: 1,
-      cost: 90,
-    }
-  ];
   history = false;
   dateFormat = 'MM/dd/yyyy';
   date = null;
 
   isShippingModalVisible = false;
-  status = '';
-  canStart = false;
-  data: any[] = [];
-  submitting = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
-  inputValue = '';
-  titleValue = '';
-  // openInvoice(){
-  //   this.router.navigate(['/dashboard/Jobs/invoice']);
-  // }
-  issue = false;
-
-  addEmail() {
-    this.receivers.push(1);
-  }
-
-  removeEmail() {
-    this.receivers.pop();
-  }
 
 
   showShippingModal(): void {
@@ -116,9 +73,6 @@ export class WorkingJobDetailsComponent implements OnInit {
       trackingId: [null, [Validators.required, Validators.maxLength(100)]],
       status: [null, [Validators.required, Validators.maxLength(20)]],
     });
-    const statusUrl = this.route.snapshot.paramMap.get('status');
-    statusUrl == 'InProgress' ? this.status = 'InProgress' : statusUrl == 'Shipped' ? this.status = 'Shipped' : statusUrl == 'Issue' ? this.status = 'Issue' : this.status = 'InProgress';
-    this.status == 'Shipped' ? this.canStart = true : null;
   }
 
   loadJob(jobId: string) {
@@ -135,40 +89,6 @@ export class WorkingJobDetailsComponent implements OnInit {
         this.router.navigate(['/dashboard/WorkingJobs']);
       }
     );
-  }
-
-  handleSubmit(): void {
-    this.submitting = true;
-    const content = this.inputValue;
-    const title = this.titleValue;
-    this.inputValue = '';
-    setTimeout(() => {
-      this.submitting = false;
-      this.data = [
-        ...this.data,
-        {
-          ...this.user,
-          title,
-          content,
-          datetime: new Date(),
-          displayTime: formatDistance(new Date(), new Date())
-        }
-      ].map(e => {
-        return {
-          ...e,
-          displayTime: formatDistance(new Date(), e.datetime)
-        };
-      });
-    }, 800);
-  }
-
-
-  startIssue() {
-    this.issue = true;
-  }
-
-  cancelIssue() {
-    this.issue = false;
   }
 
   showArchive(): void {
@@ -198,9 +118,7 @@ export class WorkingJobDetailsComponent implements OnInit {
   }
 
   openInvoice() {
-
-    //  this.router.navigate(['/dashboard/Jobs/invoice']);
-
+    this.router.navigate([`/dashboard/submittedQuote/details/${this.job.quote.id}/invoice`]);
   }
 
   showHistory() {
