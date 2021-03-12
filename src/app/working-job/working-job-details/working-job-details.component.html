@@ -16,48 +16,7 @@
 
       <div *ngIf="history" class="col-md-6 border-right">
         <div class="col-md-12 p-24 white-bg scrollable">
-          <nz-timeline>
-            <nz-timeline-item [nzDot]="cloud">
-              <h5><b class="gray-9">Initial Revision</b></h5>
-              <p class="gray-8">09.20.2020</p>
-              <p class="gray-7">
-                Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry. Lorem Ipsum has been the industry's standard.
-              </p>
-
-
-            </nz-timeline-item>
-            <nz-timeline-item [nzDot]="cloud">
-              <h5><b class="gray-9">Invoice generated</b></h5>
-              <p class="gray-8">29.9.2020</p>
-              <p class="gray-7">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-              </p>
-            </nz-timeline-item>
-            <nz-timeline-item [nzDot]="cloud" nzColor="gray">
-              <h5><b class="gray-8">RFQ Name Created</b></h5>
-              <p class="gray-8">01.03.2020</p>
-            </nz-timeline-item>
-            <nz-timeline-item [nzDot]="cloud" nzColor="gray">
-              <h5><b class="gray-8">Engineer submitted revision A for quoting</b></h5>
-              <p class="gray-8">03.03.2020</p>
-              <p class="gray-7">
-                Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Lorem Ipsum has been the industry's standard.
-              </p>
-              <nz-timeline>
-                <nz-timeline-item>
-                  <h5><b class="red-6"> Issue ID #231311</b></h5>
-                  <p class="gray-7">07.03.2020</p>
-                </nz-timeline-item>
-              </nz-timeline>
-            </nz-timeline-item>
-          </nz-timeline>
-
-          <ng-template #cloud>
-            <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
-          </ng-template>
+          <app-quote-history [quoteId]="job.quote.id"></app-quote-history>
         </div>
       </div>
 

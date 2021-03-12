@@ -101,6 +101,7 @@ import { ConceptXDateTimePipePipe } from './pipes/conceptx-date.pipe';
 import { FilePreviewerComponent } from './components/file-previewer/file-previewer.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChangeCasePipe } from './pipes/change-case.pipe';
+import { QuoteHistoryComponent } from './components/quote-history/quote-history.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -153,7 +154,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     TimeFromNowPipe,
     FilePreviewerComponent,
     ChatComponent,
-    ChangeCasePipe
+    ChangeCasePipe,
+    QuoteHistoryComponent
   ],
   imports: [
     AppRoutingModule,

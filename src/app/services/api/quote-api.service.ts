@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { AddQuoteDataInterface, QuoteInterface, QuoteInvoiceInterface, TransactionInterface } from '../../models/quote.models';
+import { AddQuoteDataInterface, QuoteInterface, QuoteInvoiceInterface, QuotLogsInterface, TransactionInterface } from '../../models/quote.models';
 import { ChatMessageInterface, ChatMessagePostInterface, PaginatedObjectInterface, PaginatedRequestInterface } from '../../models/general.models';
 
 @Injectable({
@@ -72,5 +72,9 @@ export class QuoteAPIService {
 
   listMessages(quoteId: string) {
     return this.httpClient.get<Array<ChatMessageInterface>>(`${environment.APIUrl}/returned_quote/${quoteId}/chat/list_messages`);
+  }
+
+  getQuoteHistory(quoteId: string) {
+    return this.httpClient.get<QuotLogsInterface>(`${environment.APIUrl}/returned_quote/${quoteId}/history`);
   }
 }

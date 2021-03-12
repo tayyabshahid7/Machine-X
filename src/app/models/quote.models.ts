@@ -1,6 +1,8 @@
 import { AttachmentInterface, EngineerInterface } from './general.models';
 import { PartInterface, PartRevisionInterface } from './part.models';
 import { QuoteStatus } from '../utilities/constants';
+import { RfqInterface } from './rfq.models';
+import { JobInterface } from './job.models';
 
 type QuoteStatusKeys = keyof typeof QuoteStatus;
 export type QuoteStatusType = typeof QuoteStatus[QuoteStatusKeys];
@@ -132,4 +134,18 @@ export interface TransactionInterface {
   invoiceNumber: string;
   quote: string;
   billingAddress: string;
+}
+
+export interface QuotLogInterface {
+  creationDate: string;
+  action: string;
+  details: string;
+}
+
+export interface QuotLogsInterface {
+  logs: Array<QuotLogInterface>;
+  quote: QuoteInterface;
+  part: PartInterface;
+  requestQuote: RfqInterface;
+  job: JobInterface;
 }
