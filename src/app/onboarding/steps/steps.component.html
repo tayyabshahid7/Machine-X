@@ -21,7 +21,7 @@
                 <input type="email" nz-input placeholder="John@email.com"  formControlName="email" />
                 <div *ngIf="email.invalid && (email.dirty || email.touched)">
                     <nz-alert *ngIf="email.errors.required"  nzType="error" nzMessage="{{validationMessages.email}}" nzShowIcon></nz-alert>
-                    <nz-alert *ngIf="email.errors.email"  nzType="error" nzMessage="{{validationMessages.emailInvalid}} nzShowIcon"></nz-alert>
+                    <nz-alert *ngIf="email.errors.email"  nzType="error" nzMessage="{{validationMessages.emailInvalid}} " nzShowIcon></nz-alert>
                 </div>
 
                 <div class="mb-2" class="mt-2"><span class="blue">*</span>Password</div>

@@ -8,6 +8,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {ErrorHandlerService} from '../../services/error-handler.service';
 import {coerceStringArray} from '@angular/cdk/coercion';
 import {UserAPIService} from '../../services/api/user-api.service';
+import { DatePipe } from '@angular/common'
 @Component({
   selector: 'app-steps',
   templateUrl: './steps.component.html',
@@ -140,7 +141,8 @@ export class StepsComponent implements OnInit {
               private formBuilder: FormBuilder,
               private spinner: NgxSpinnerService,
               private errorHandlerService: ErrorHandlerService,
-              private userApiService: UserAPIService) {
+              private userApiService: UserAPIService,
+              public datepipe: DatePipe) {
 
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -270,7 +272,7 @@ addOwner(){
           representativeLastName: this.form.get('legalLastName').value,
           representativeEmail: this.form.get('legalEmail').value,
           representativeJobTitle: this.form.get('legalJobTitle').value,
-          representativeDob: this.form.get('legalDOB').value,
+          representativeDob: this.datepipe.transform(this.form.get('legalDOB').value, 'yyyy-MM-dd'),
           representativeAddressLine1: this.form.get('legalAddress1').value,
           representativeAddressLine2: this.form.get('legalAddress2').value,
           representativeCity: this.form.get('legalCity').value,
