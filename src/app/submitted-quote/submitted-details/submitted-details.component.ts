@@ -103,7 +103,8 @@ export class SubmittedDetailsComponent implements OnInit {
     if (this.quote.status === 'approved') {
       this.jobAPIService.startJob(this.quote.id).subscribe(
         response => {
-          this.router.navigate(['/dashboard/submittedQuote/details/', this.quote.id, 'invoice']);
+          this.router.navigate(['/dashboard/WorkingJobs']);
+          this.notification.info('Project started', null);
           this.spinner.hide('quoteSpinner');
         },
         errorResponse => {
