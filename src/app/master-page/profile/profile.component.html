@@ -6,19 +6,19 @@
     </nz-page-header>
   </div>
 
-  <div class="content row" *ngIf="shopProfile">
+  <div *ngIf="shopProfile" class="content row">
 
     <nz-tabset class="col-md-12" nzTabPosition="left">
       <nz-tab [nzTitle]="AccountSettings">
         <ng-template #AccountSettings>
-          <i nz-icon nzType="setting" nzTheme="outline"></i>
+          <i nz-icon nzTheme="outline" nzType="setting"></i>
           Account Settings
         </ng-template>
         <small> Account Settings </small>
       </nz-tab>
       <nz-tab [nzTitle]="company">
         <ng-template #company>
-          <i nz-icon nzType="user" nzTheme="outline"></i>
+          <i nz-icon nzTheme="outline" nzType="user"></i>
           Company Details
         </ng-template>
 
@@ -30,12 +30,12 @@
             <div class="card">
               <div class="card-headerCom" id="headingOne">
                 <h2 class="mb-0">
-                  <button class="btn co-btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <button aria-controls="collapseOne" aria-expanded="true" class="btn co-btn btn-link btn-block text-left" data-target="#collapseOne" data-toggle="collapse" type="button">
                     <span>Legal Information</span>
                   </button>
                 </h2>
               </div>
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#Companyaccordion">
+              <div aria-labelledby="headingOne" class="collapse show" data-parent="#Companyaccordion" id="collapseOne">
                 <div class="card-body row">
                   <div class="summary">
                     <p>
@@ -57,12 +57,12 @@
             <div class="card">
               <div class="card-headerCom" id="headingTwo">
                 <h2 class="mb-0">
-                  <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <button aria-controls="collapseTwo" aria-expanded="false" class="btn co-btn btn-link btn-block text-left collapsed" data-target="#collapseTwo" data-toggle="collapse" type="button">
                     Business Details
                   </button>
                 </h2>
               </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#Companyaccordion">
+              <div aria-labelledby="headingTwo" class="collapse" data-parent="#Companyaccordion" id="collapseTwo">
                 <div class="card-body row">
                   <div class="summary">
                     <h6><b class="mb-2">Business Name</b></h6>
@@ -113,13 +113,13 @@
             <div class="card">
               <div class="card-headerCom" id="headingThree">
                 <h2 class="mb-0">
-                  <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                          aria-controls="collapseThree">
+                  <button aria-controls="collapseThree" aria-expanded="false" class="btn co-btn btn-link btn-block text-left collapsed" data-target="#collapseThree" data-toggle="collapse"
+                          type="button">
                     Representatives
                   </button>
                 </h2>
               </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#Companyaccordion">
+              <div aria-labelledby="headingThree" class="collapse" data-parent="#Companyaccordion" id="collapseThree">
                 <div class="card-body row">
                   <div class="summary">
                     <h6><b class="mb-2">Legal Name of Representative</b></h6>
@@ -172,12 +172,12 @@
             <div class="card">
               <div class="card-headerCom" id="headingfour">
                 <h2 class="mb-0">
-                  <button class="btn co-btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                  <button aria-controls="collapsefour" aria-expanded="false" class="btn co-btn btn-link btn-block text-left collapsed" data-target="#collapsefour" data-toggle="collapse" type="button">
                     Business Owners
                   </button>
                 </h2>
               </div>
-              <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#Companyaccordion">
+              <div aria-labelledby="headingfour" class="collapse" data-parent="#Companyaccordion" id="collapsefour">
                 <div class="card-body row">
                   <div class="summary">
                     <ng-container *ngFor="let businessOwner of shopProfile.businessOwners; let i=index">
@@ -201,13 +201,13 @@
             <div class="card">
               <div class="card-headerCom" id="headingFive">
                 <h2 class="mb-0">
-                  <button class="btn co-btn btn-link  btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false"
-                          aria-controls="collapseFive">
+                  <button aria-controls="collapseFive" aria-expanded="false" class="btn co-btn btn-link  btn-block text-left collapsed" data-target="#collapseFive" data-toggle="collapse"
+                          type="button">
                     Additional Documents
                   </button>
                 </h2>
               </div>
-              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#Companyaccordion">
+              <div aria-labelledby="headingFive" class="collapse" data-parent="#Companyaccordion" id="collapseFive">
                 <div class="card-body row">
                   <div class="col-md-4">
                     <!--                    <div class="summary">-->
@@ -230,12 +230,12 @@
                     <!--                    </div>-->
 
                   </div>
-                  <div class="col-md-4" *ngIf="shopProfile.attachments?.length > 0">
+                  <div *ngIf="shopProfile.attachments?.length > 0" class="col-md-4">
                     <div class="summary">
                       <h6><b class="mb-3"></b> Attachments</h6>
 
-                      <div class="col-12" *ngFor="let att of shopProfile.attachments">
-                        <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
+                      <div *ngFor="let att of shopProfile.attachments" class="col-12">
+                        <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
                       </div>
                     </div>
                   </div>
@@ -251,7 +251,7 @@
 
       <nz-tab [nzTitle]="payout">
         <ng-template #payout>
-          <i nz-icon nzType="dollar-circle" nzTheme="outline"></i>
+          <i nz-icon nzTheme="outline" nzType="dollar-circle"></i>
           Payout Options
         </ng-template>
         <form [formGroup]="shopProfilePayOutForm">
@@ -260,28 +260,28 @@
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button aria-controls="collapseOne" aria-expanded="true" class="btn btn-link btn-block text-left" data-target="#collapseOne" data-toggle="collapse" type="button">
                       <!-- <i nz-icon nzType="bank" class="payIcon" nzTheme="outline"></i>  -->
                       <span> Bank Account</span>
                     </button>
                   </h2>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#Paymentaccordion">
+                <div aria-labelledby="headingOne" class="collapse show" data-parent="#Paymentaccordion" id="collapseOne">
                   <div class="card-body row">
 
                     <div class="col-md-4">
                       <div class="row mt-3">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Holder Name</span></div>
-                          <input formControlName="bankAccountHolderName" type="name" nz-input placeholder="John Smith"/>
+                          <input formControlName="bankAccountHolderName" nz-input placeholder="John Smith" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountHolderName.invalid && (shopProfilePayOutForm.controls.bankAccountHolderName.dirty || shopProfilePayOutForm.controls.bankAccountHolderName.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountHolderName.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountHolderName.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountHolderName.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountHolderName.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountHolderName.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountHolderName.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountHolderName.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountHolderName.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -289,17 +289,17 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Account Number</span></div>
-                          <input formControlName="bankAccountNumber" type="name" nz-input placeholder="99821023"/>
+                          <input formControlName="bankAccountNumber" nz-input placeholder="99821023" type="name"/>
                           <div class="hint">
                             Must be a checking account
                           </div>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountNumber.invalid && (shopProfilePayOutForm.controls.bankAccountNumber.dirty || shopProfilePayOutForm.controls.bankAccountNumber.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountNumber.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountNumber.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountNumber.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountNumber.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountNumber.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountNumber.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountNumber.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountNumber.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -308,14 +308,14 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Wire Routing Number</span></div>
-                          <input formControlName="bankAccountRoutingNumber" type="name" nz-input placeholder="2893783"/>
+                          <input formControlName="bankAccountRoutingNumber" nz-input placeholder="2893783" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountRoutingNumber.invalid && (shopProfilePayOutForm.controls.bankAccountRoutingNumber.dirty || shopProfilePayOutForm.controls.bankAccountRoutingNumber.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountRoutingNumber.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -325,14 +325,14 @@
                       <div class="row mt-3">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Currency</span></div>
-                          <input formControlName="bankAccountCurrency" type="name" nz-input placeholder="USD"/>
+                          <input formControlName="bankAccountCurrency" nz-input placeholder="USD" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountCurrency.invalid && (shopProfilePayOutForm.controls.bankAccountCurrency.dirty || shopProfilePayOutForm.controls.bankAccountCurrency.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountCurrency.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountCurrency.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountCurrency.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountCurrency.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountCurrency.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountCurrency.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountCurrency.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountCurrency.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -340,14 +340,14 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Bank Name</span></div>
-                          <input formControlName="bankAccountBankName" type="name" nz-input placeholder="Morgan Chase"/>
+                          <input formControlName="bankAccountBankName" nz-input placeholder="Morgan Chase" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountBankName.invalid && (shopProfilePayOutForm.controls.bankAccountBankName.dirty || shopProfilePayOutForm.controls.bankAccountBankName.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountBankName.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountBankName.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountBankName.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountBankName.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountBankName.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountBankName.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountBankName.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountBankName.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -356,14 +356,14 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Address</span></div>
-                          <input formControlName="bankAccountAddress" type="name" nz-input placeholder="DW, 553901, Arlington Bvd., 3"/>
+                          <input formControlName="bankAccountAddress" nz-input placeholder="DW, 553901, Arlington Bvd., 3" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.bankAccountAddress.invalid && (shopProfilePayOutForm.controls.bankAccountAddress.dirty || shopProfilePayOutForm.controls.bankAccountAddress.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.bankAccountAddress.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountAddress.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.bankAccountAddress.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.bankAccountAddress.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.bankAccountAddress.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountAddress.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.bankAccountAddress.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.bankAccountAddress.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -377,26 +377,26 @@
               <div class="card">
                 <div class="card-header" id="headingTwo">
                   <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button aria-controls="collapseTwo" aria-expanded="false" class="btn btn-link btn-block text-left collapsed" data-target="#collapseTwo" data-toggle="collapse" type="button">
                       <!-- <i nz-icon nzType="dollar-circle"  nzTheme="outline"></i>  Cash -->
                       Card
                     </button>
                   </h2>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#Paymentaccordion">
+                <div aria-labelledby="headingTwo" class="collapse" data-parent="#Paymentaccordion" id="collapseTwo">
                   <div class="card-body row">
                     <div class="col-md-4">
                       <div class="row mt-3">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Card Holder Name</span></div>
-                          <input formControlName="cardHolderName" type="name" nz-input placeholder="John Smith"/>
+                          <input formControlName="cardHolderName" nz-input placeholder="John Smith" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.cardHolderName.invalid && (shopProfilePayOutForm.controls.cardHolderName.dirty || shopProfilePayOutForm.controls.cardHolderName.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.cardHolderName.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardHolderName.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardHolderName.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.cardHolderName.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.cardHolderName.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardHolderName.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardHolderName.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.cardHolderName.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -404,14 +404,14 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Card number</span></div>
-                          <input formControlName="cardNumber" type="name" nz-input placeholder="4566-2332-3009-3122-5521"/>
+                          <input formControlName="cardNumber" nz-input placeholder="4566-2332-3009-3122-5521" type="name"/>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.cardNumber.invalid && (shopProfilePayOutForm.controls.cardNumber.dirty || shopProfilePayOutForm.controls.cardNumber.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.cardNumber.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardNumber.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardNumber.errors.maxlength">
-                              max length ({{shopProfilePayOutForm.controls.cardNumber.errors.maxlength.requiredLength}}) exceeded
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.cardNumber.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardNumber.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardNumber.errors.maxlength" nzMessage="max length ({{shopProfilePayOutForm.controls.cardNumber.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -420,15 +420,15 @@
                       <div class="row mt-1">
                         <div class="col-md-9">
                           <div class="mb-2"><span class="blue">*</span><span class="input-title">Expiration Date</span></div>
-                          <nz-date-picker formControlName="cardExpiryDate" [nzFormat]="dateFormat" class="col-12">
+                          <nz-date-picker [nzFormat]="dateFormat" class="col-12" formControlName="cardExpiryDate">
                           </nz-date-picker>
                           <ng-container
                             *ngIf="shopProfilePayOutForm.controls.cardExpiryDate.invalid && (shopProfilePayOutForm.controls.cardExpiryDate.dirty || shopProfilePayOutForm.controls.cardExpiryDate.touched)">
-                            <div class="form-error" *ngFor="let error of shopProfilePayOutForm.controls.cardExpiryDate.errors.APIErrors">{{ error }}</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardExpiryDate.errors.required">This field is required</div>
-                            <div class="form-error" *ngIf="shopProfilePayOutForm.controls.cardExpiryDate.errors.pattern">
-                              Follow the pattern MM/YY
-                            </div>
+                            <nz-alert *ngFor="let error of shopProfilePayOutForm.controls.cardExpiryDate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardExpiryDate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                            <nz-alert *ngIf="shopProfilePayOutForm.controls.cardExpiryDate.errors.pattern" nzMessage="Follow the pattern MM/YY" nzShowIcon
+                                      nzType="error"
+                            ></nz-alert>
                           </ng-container>
                         </div>
                       </div>
@@ -446,7 +446,7 @@
       </nz-tab>
       <nz-tab [nzTitle]="notification">
         <ng-template #notification>
-          <i nz-icon nzType="bell" nzTheme="outline"></i>
+          <i nz-icon nzTheme="outline" nzType="bell"></i>
           Notifications
         </ng-template>
         <small>Notifications</small>
@@ -456,8 +456,8 @@
 
 
   <nz-footer>
-    <button type="button" (click)="saveChanges()" class="mar-2" nz-button [disabled]="shopProfilePayOutForm.dirty && shopProfilePayOutForm.invalid" nzType="primary"
-            *ngIf="shopProfile">
+    <button (click)="saveChanges()" *ngIf="shopProfile" [disabled]="shopProfilePayOutForm.dirty && shopProfilePayOutForm.invalid" class="mar-2" nz-button nzType="primary"
+            type="button">
       Save details
     </button>
   </nz-footer>

@@ -2,11 +2,11 @@
   <ngx-spinner></ngx-spinner>
   <ng-container *ngIf="job!==null; else noJob">
     <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header [nzGhost]="false" nzBackIcon>
         <nz-page-header-title><span class="previous">Working Jobs / </span> #{{job.displayId}} Details</nz-page-header-title>
         <nz-page-header-extra>
-          <nz-tag nzColor="success" *ngIf="job.status == 'in_work'" class="nz-tag-me">InProgress</nz-tag>
-          <nz-tag [nzColor]="'purple'" *ngIf="job.status == 'shipped'" class="nz-tag-me">Shipped</nz-tag>
+          <nz-tag *ngIf="job.status == 'in_work'" class="nz-tag-me" nzColor="success">InProgress</nz-tag>
+          <nz-tag *ngIf="job.status == 'shipped'" [nzColor]="'purple'" class="nz-tag-me">Shipped</nz-tag>
           <!--          <nz-tag [nzColor]="'red'" *ngIf="job.status == 'Issue'" class="nz-tag-me">Issue</nz-tag>-->
         </nz-page-header-extra>
       </nz-page-header>
@@ -52,7 +52,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6" *ngIf="job.revision.attachments.length>0">
+                <div *ngIf="job.revision.attachments.length>0" class="col-md-6">
                   <h6><b class="mb-1">PREVIEW</b></h6>
                   <app-file-previewer [file]="job.revision.attachments[0]"></app-file-previewer>
                 </div>
@@ -68,12 +68,12 @@
                   </div>
 
                 </div>
-                <div class="mt-4 row" *ngIf="job.revision.attachments.length>0">
+                <div *ngIf="job.revision.attachments.length>0" class="mt-4 row">
                   <div class="col-md-12">
                     <h6><b class="mb-2">ATTACHED FILES</b></h6>
                   </div>
-                  <div class="col-md-12" *ngFor="let att of job.revision.attachments">
-                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
+                  <div *ngFor="let att of job.revision.attachments" class="col-md-12">
+                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
                   </div>
                 </div>
                 <div class="mt-4 row">
@@ -148,7 +148,7 @@
                 </div>
               </div>
               <div class="mt-30px">
-                <nz-table [nzShowPagination]="false" #basicTable [nzData]="job.quote.lineItems">
+                <nz-table #basicTable [nzData]="job.quote.lineItems" [nzShowPagination]="false">
                   <thead>
                   <tr>
                     <th>#</th>
@@ -178,7 +178,7 @@
                   <div class="col-md-3">
                     <p class=" tax text-center">+ Tax {{job.quote.tax | currency: 'USD'}}</p>
                     <p class=" tax text-center">+ Shipping rate {{job.quote.shippingRate | currency: 'USD'}}</p>
-                    <nz-table [nzShowPagination]="false" #basicTable [nzData]="[job.quote.grandTotal]">
+                    <nz-table #basicTable [nzData]="[job.quote.grandTotal]" [nzShowPagination]="false">
                       <thead>
                       <tr>
                         <th>Grand Total</th>
@@ -197,7 +197,7 @@
                     <span class="blue">*</span>Attached files
                   </div>
                   <div *ngFor="let att of job.quote.attachments">
-                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
+                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
                   </div>
                 </ng-container>
               </div>
@@ -235,7 +235,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6" *ngIf="job.revision.attachments.length>0">
+                <div *ngIf="job.revision.attachments.length>0" class="col-md-6">
                   <h6><b class="mb-1">PREVIEW</b></h6>
                   <app-file-previewer [file]="job.revision.attachments[0]"></app-file-previewer>
                 </div>
@@ -255,8 +255,8 @@
                   <div class="col-md-12">
                     <h6><b class="mb-2">ATTACHED FILES</b></h6>
                   </div>
-                  <div class="col-md-12" *ngFor="let att of job.revision.attachments">
-                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
+                  <div *ngFor="let att of job.revision.attachments" class="col-md-12">
+                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
                   </div>
                 </div>
                 <div class="mt-4 row">
@@ -303,7 +303,7 @@
 
         <nz-tab [nzTitle]="titleTemplate">
           <ng-template #titleTemplate>
-            <i nz-icon nzType="message" nzTheme="outline"></i>
+            <i nz-icon nzTheme="outline" nzType="message"></i>
             Chat
           </ng-template>
           <div class=" chat-tap col-md-12 white-bg">
@@ -313,26 +313,26 @@
       </nz-tabset>
     </div>
     <nz-footer *ngIf="history">
-      <button (click)="hideHistory()" nz-button class="mar-2" nzType="default">Back</button>
+      <button (click)="hideHistory()" class="mar-2" nz-button nzType="default">Back</button>
 
     </nz-footer>
     <nz-footer *ngIf="!history">
       <div>
-        <button (click)="openInvoice()" nz-button class="mar-2" nzType="primary">Open Invoice</button>
-        <button data-toggle="modal" data-target="#ShareModal" nz-button class="mar-2" nzType="default">Share<i nz-icon nzType="share-alt" nzTheme="outline"></i></button>
+        <button (click)="openInvoice()" class="mar-2" nz-button nzType="primary">Open Invoice</button>
+        <button class="mar-2" data-target="#ShareModal" data-toggle="modal" nz-button nzType="default">Share<i nz-icon nzTheme="outline" nzType="share-alt"></i></button>
 
       </div>
 
 
       <div class="push-r">
-        <button (click)="showHistory()" nz-button class="mar-2" nzType="default">History<i nz-icon nzType="history" nzTheme="outline"></i></button>
+        <button (click)="showHistory()" class="mar-2" nz-button nzType="default">History<i nz-icon nzTheme="outline" nzType="history"></i></button>
 
-        <button (click)="showShippingModal()" nz-button class="mar-2 purple-btn" [disabled]="job.status!=='in_work'">Ship Part <i nz-icon nzType="export" nzTheme="outline"></i></button>
+        <button (click)="showShippingModal()" [disabled]="job.status!=='in_work'" class="mar-2 purple-btn" nz-button>Ship Part <i nz-icon nzTheme="outline" nzType="export"></i></button>
       </div>
 
     </nz-footer>
 
-    <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="ShareModal" class="modal fade" id="ShareModal" role="dialog" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <app-share-job-modal [jobId]="job.id"></app-share-job-modal>
@@ -350,27 +350,27 @@
 
 <nz-modal [(nzVisible)]="isShippingModalVisible"
           nzTitle="Shipping Details">
-  <form [formGroup]="shippingForm" (ngSubmit)="submitShippingForm()">
+  <form (ngSubmit)="submitShippingForm()" [formGroup]="shippingForm">
     <ng-container *ngIf="shippingForm.invalid && shippingForm.errors && (shippingForm.dirty || shippingForm.touched)">
-      <div class="form-error" *ngFor="let error of shippingForm.errors.APIErrors">{{ error }}</div>
+      <nz-alert *ngFor="let error of shippingForm.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
     </ng-container>
     <div class="row mt-1">
       <p class="col-12"><span class="blue">*</span>Shipping company</p><br>
       <div class="col-12">
-        <input class="col-12" type="text" nz-input placeholder="Shipping Company" formControlName="company"/>
+        <input class="col-12" formControlName="company" nz-input placeholder="Shipping Company" type="text"/>
         <ng-container *ngIf="shippingForm.controls.company.invalid && (shippingForm.controls.company.dirty || shippingForm.controls.company.touched)">
-          <div class="form-error" *ngFor="let error of shippingForm.controls.company.errors.APIErrors">{{ error }}</div>
-          <div class="form-error" *ngIf="shippingForm.controls.company.errors.required">This field is required</div>
+          <nz-alert *ngFor="let error of shippingForm.controls.company.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+          <nz-alert *ngIf="shippingForm.controls.company.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
         </ng-container>
       </div>
     </div>
     <div class="row mt-1">
       <p class="col-12"><span class="blue">*</span>Tracking ID</p><br>
       <div class="col-12">
-        <input class="col-12" type="text" nz-input placeholder="ID" formControlName="trackingId"/>
+        <input class="col-12" formControlName="trackingId" nz-input placeholder="ID" type="text"/>
         <ng-container *ngIf="shippingForm.controls.trackingId.invalid && (shippingForm.controls.trackingId.dirty || shippingForm.controls.trackingId.touched)">
-          <div class="form-error" *ngFor="let error of shippingForm.controls.trackingId.errors.APIErrors">{{ error }}</div>
-          <div class="form-error" *ngIf="shippingForm.controls.trackingId.errors.required">This field is required</div>
+          <nz-alert *ngFor="let error of shippingForm.controls.trackingId.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+          <nz-alert *ngIf="shippingForm.controls.trackingId.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
         </ng-container>
       </div>
     </div>
@@ -378,21 +378,21 @@
     <div class="row mt-3">
       <p class="col-12"><span class="blue">*</span>Status</p><br>
       <div class="col-12">
-        <input class="col-12" type="text" nz-input placeholder="status" formControlName="status"/>
+        <input class="col-12" formControlName="status" nz-input placeholder="status" type="text"/>
         <ng-container *ngIf="shippingForm.controls.status.invalid && (shippingForm.controls.status.dirty || shippingForm.controls.status.touched)">
-          <div class="form-error" *ngFor="let error of shippingForm.controls.status.errors.APIErrors">{{ error }}</div>
-          <div class="form-error" *ngIf="shippingForm.controls.status.errors.required">This field is required</div>
+          <nz-alert *ngFor="let error of shippingForm.controls.status.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+          <nz-alert *ngIf="shippingForm.controls.status.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
         </ng-container>
       </div>
     </div>
     <ng-template [nzModalFooter]>
-      <button type="button" nz-button nzType="default" (click)="cancelShipping()">Cancel</button>
-      <button type="button" (click)="submitShippingForm()" nz-button nzType="primary" [disabled]="shippingForm.invalid">Submit</button>
+      <button (click)="cancelShipping()" nz-button nzType="default" type="button">Cancel</button>
+      <button (click)="submitShippingForm()" [disabled]="shippingForm.invalid" nz-button nzType="primary" type="button">Submit</button>
     </ng-template>
   </form>
 </nz-modal>
 
-<div class="modal fade" id="ShipModal" tabindex="-1" role="dialog" aria-labelledby="ShipModal" aria-hidden="true">
+<div aria-hidden="true" aria-labelledby="ShipModal" class="modal fade" id="ShipModal" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -401,7 +401,7 @@
           <div class="row mt-1">
             <p class="col-12"><span class="blue">*</span>Shipping Date</p><br>
             <div class="col-12">
-              <nz-date-picker class="col-12" [(ngModel)]="date" [nzFormat]="dateFormat">
+              <nz-date-picker [(ngModel)]="date" [nzFormat]="dateFormat" class="col-12">
               </nz-date-picker>
             </div>
           </div>
@@ -420,13 +420,13 @@
           <div class="row mt-3">
             <p class="col-12"><span class="blue">*</span>Tracking Number</p><br>
             <div class="col-12">
-              <textarea rows="4" nz-input placeholder="Description of this issue"></textarea>
+              <textarea nz-input placeholder="Description of this issue" rows="4"></textarea>
 
             </div>
           </div>
           <div class="mt-2 push-r">
-            <button nz-button class="mar-2" nzType="default" data-dismiss="modal">Close</button>
-            <button nz-button nzType="primary" type="button" data-dismiss="modal">Share</button>
+            <button class="mar-2" data-dismiss="modal" nz-button nzType="default">Close</button>
+            <button data-dismiss="modal" nz-button nzType="primary" type="button">Share</button>
           </div>
         </div>
       </div>
