@@ -1,8 +1,8 @@
 <div class="container-64">
-  <ngx-spinner [name]="'rfqSpinner'" [fullScreen]="false"></ngx-spinner>
+  <ngx-spinner [fullScreen]="false" [name]="'rfqSpinner'"></ngx-spinner>
   <ng-container *ngIf="rfq!==null; else noRfq">
     <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
+      <nz-page-header [nzGhost]="false" nzBackIcon>
         <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #{{rfq.displayId}} - Generate Quote</nz-page-header-title>
         <nz-page-header-extra>
           <span class="blue">*</span>All fields are required
@@ -17,7 +17,7 @@
             <h3>Quote for <span class="blue">RFQ#{{rfq.displayId}}</span></h3>
             <div class="row">
               <div class="col-md-12 gray-8">Engineer name: {{rfq.engineer.username}}</div>
-              <div class="col-md-12 gray-8" *ngIf="rfq.shippingAddress">
+              <div *ngIf="rfq.shippingAddress" class="col-md-12 gray-8">
                 Shipping address: {{rfq.shippingAddress.country}}, {{rfq.shippingAddress.city}}, {{rfq.shippingAddress.street}} - {{rfq.shippingAddress.zipCode}}
               </div>
             </div>
@@ -25,13 +25,13 @@
               <div class="col-md-6">
                 <div class="mt-2">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Shop Quote Number</span></div>
-                  <input formControlName="shopQuoteNumber" type="text" nz-input placeholder="Quote Number"/>
+                  <input formControlName="shopQuoteNumber" nz-input placeholder="Quote Number" type="text"/>
                   <ng-container *ngIf="form.controls.shopQuoteNumber.invalid && (form.controls.shopQuoteNumber.dirty || form.controls.shopQuoteNumber.touched)">
-                    <div class="form-error" *ngFor="let error of form.controls.shopQuoteNumber.errors.APIErrors">{{ error }}</div>
-                    <div class="form-error" *ngIf="form.controls.shopQuoteNumber.errors.required">This field is required</div>
-                    <div class="form-error" *ngIf="form.controls.shopQuoteNumber.errors.maxlength">
-                      max length ({{form.controls.shopQuoteNumber.errors.maxlength.requiredLength}}) exceeded
-                    </div>
+                    <nz-alert *ngFor="let error of form.controls.shopQuoteNumber.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                    <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                    <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.maxlength" nzMessage="max length ({{form.controls.shopQuoteNumber.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                              nzType="error"
+                    ></nz-alert>
                   </ng-container>
                 </div>
               </div>
@@ -39,15 +39,15 @@
                 <div class="mt-2">
                   <div class="mb-2"><span class="blue">*</span><span class="input-title">Additional Files</span></div>
                   <nz-upload
-                    class="col-md-12 p-0"
-                    [nzMultiple]="true"
                     [(nzFileList)]="fileList"
                     [nzBeforeUpload]="beforeUpload.bind(this)"
-                    [nzRemove]="removeFile.bind(this)">
+                    [nzMultiple]="true"
+                    [nzRemove]="removeFile.bind(this)"
+                    class="col-md-12 p-0">
                     <button class="full-width block col-md-12" nz-button><i nz-icon nzType="upload"></i>Click to Upload</button>
                   </nz-upload>
                   <ng-container *ngIf="form.controls.attachments.invalid && (form.controls.attachments.dirty || form.controls.attachments.touched)">
-                    <div class="form-error" *ngIf="form.controls.attachments.errors.required">This field is required</div>
+                    <nz-alert *ngIf="form.controls.attachments.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
                   </ng-container>
                 </div>
               </div>
@@ -57,11 +57,11 @@
                 <div class="mb-2"><span class="blue">*</span>Note</div>
                 <textarea formControlName="shopQuoteNotes" nz-input placeholder="" rows="5"></textarea>
                 <ng-container *ngIf="form.controls.shopQuoteNotes.invalid && (form.controls.shopQuoteNotes.dirty || form.controls.shopQuoteNotes.touched)">
-                  <div class="form-error" *ngFor="let error of form.controls.shopQuoteNotes.errors.APIErrors">{{ error }}</div>
-                  <div class="form-error" *ngIf="form.controls.shopQuoteNotes.errors.required">This field is required</div>
-                  <div class="form-error" *ngIf="form.controls.shopQuoteNotes.errors.maxlength">
-                    max length ({{form.controls.shopQuoteNotes.errors.maxlength.requiredLength}}) exceeded
-                  </div>
+                  <nz-alert *ngFor="let error of form.controls.shopQuoteNotes.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.maxlength" nzMessage="max length ({{form.controls.shopQuoteNotes.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
+                            nzType="error"
+                  ></nz-alert>
                 </ng-container>
               </div>
             </div>
@@ -69,23 +69,23 @@
             <div class="row mt-1">
               <div class="col-md-6">
                 <div class="mb-2"><span class="blue">*</span>Quote Valid For</div>
-                <nz-input-number formControlName="validForDays" class="col-md-12 full-width" [nzStep]="1" nzPlaceHolder="number of days"></nz-input-number>
+                <nz-input-number [nzStep]="1" class="col-md-12 full-width" formControlName="validForDays" nzPlaceHolder="number of days"></nz-input-number>
                 <ng-container *ngIf="form.controls.validForDays.invalid && (form.controls.validForDays.dirty || form.controls.validForDays.touched)">
-                  <div class="form-error" *ngFor="let error of form.controls.validForDays.errors.APIErrors">{{ error }}</div>
-                  <div class="form-error" *ngIf="form.controls.validForDays.errors.required">This field is required</div>
-                  <div class="form-error" *ngIf="form.controls.validForDays.errors.min">
-                    Minimum value is ({{form.controls.validForDays.errors.min.min}})
-                  </div>
+                  <nz-alert *ngFor="let error of form.controls.validForDays.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.validForDays.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.validForDays.errors.min" nzMessage="Minimum value is ({{form.controls.validForDays.errors.min.min}})" nzShowIcon
+                            nzType="error"
+                  ></nz-alert>
                 </ng-container>
               </div>
               <div class="col-md-6">
                 <div class="mb-2"><span class="blue">*</span> Delivery Date
                 </div>
-                <nz-date-picker formControlName="deliveryDate" class="col-md-12" [nzFormat]="dateFormat">
+                <nz-date-picker [nzFormat]="dateFormat" class="col-md-12" formControlName="deliveryDate">
                 </nz-date-picker>
                 <ng-container *ngIf="form.controls.deliveryDate.invalid && (form.controls.deliveryDate.dirty || form.controls.deliveryDate.touched)">
-                  <div class="form-error" *ngFor="let error of form.controls.deliveryDate.errors.APIErrors">{{ error }}</div>
-                  <div class="form-error" *ngIf="form.controls.deliveryDate.errors.required">This field is required</div>
+                  <nz-alert *ngFor="let error of form.controls.deliveryDate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.deliveryDate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
                 </ng-container>
               </div>
             </div>
@@ -110,24 +110,24 @@
                 <td>{{lineItem.price | currency: 'USD'}}</td>
                 <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
                 <td>
-                  <span class="red-6 pointer" (click)="removeLineItem(i)">Delete</span>
+                  <span (click)="removeLineItem(i)" class="red-6 pointer">Delete</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <input nz-input [(ngModel)]="newLineItemDesc" [ngModelOptions]="{standalone: true}"/>
+                  <input [(ngModel)]="newLineItemDesc" [ngModelOptions]="{standalone: true}" nz-input/>
                 </td>
                 <td>
-                  <input type="number" nz-input (ngModelChange)="newLineItemQuantityChange($event)" [ngModel]="newLineItemQuantity" [ngModelOptions]="{standalone: true}"/>
+                  <input (ngModelChange)="newLineItemQuantityChange($event)" [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemQuantity" nz-input type="number"/>
                 </td>
                 <td>
-                  <input type="number" nz-input (ngModelChange)="newLineItemPriceChange($event)" [ngModel]="newLineItemPrice" [ngModelOptions]="{standalone: true}"/>
+                  <input (ngModelChange)="newLineItemPriceChange($event)" [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemPrice" nz-input type="number"/>
                 </td>
                 <td>
-                  <input [readOnly]="true" type="number" nz-input [(ngModel)]="newLineItemTotalCost" [ngModelOptions]="{standalone: true}"/>
+                  <input [(ngModel)]="newLineItemTotalCost" [ngModelOptions]="{standalone: true}" [readOnly]="true" nz-input type="number"/>
                 </td>
                 <td>
-                  <span class="blue pointer" (click)="addLineItem()"> + Add</span>
+                  <span (click)="addLineItem()" class="blue pointer"> + Add</span>
                 </td>
               </tr>
               </tbody>
@@ -136,45 +136,45 @@
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input formControlName="shippingRate" (ngModelChange)="setTotals()" type="number" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Shipping Rate
+                <input (ngModelChange)="setTotals()" class="col-md-6 mr-3" formControlName="shippingRate" nz-input placeholder="$ 0,000.00" type="number"/> <span class="blue">+</span>Shipping Rate
                 <ng-container *ngIf="form.controls.shippingRate.invalid && (form.controls.shippingRate.dirty || form.controls.shippingRate.touched)">
-                  <div class="form-error" *ngFor="let error of form.controls.shippingRate.errors.APIErrors">{{ error }}</div>
-                  <div class="form-error" *ngIf="form.controls.shippingRate.errors.required">This field is required</div>
-                  <div class="form-error" *ngIf="form.controls.shippingRate.errors.min">
-                    Minimum value is ({{form.controls.shippingRate.errors.min.min}})
-                  </div>
+                  <nz-alert *ngFor="let error of form.controls.shippingRate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.shippingRate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.shippingRate.errors.min" nzMessage="Minimum value is ({{form.controls.shippingRate.errors.min.min}})" nzShowIcon
+                            nzType="error"
+                  ></nz-alert>
                 </ng-container>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input [readOnly]="true" type="number" [value]="subtotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Subtotal</b>
+                <input [readOnly]="true" [value]="subtotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Subtotal</b>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input formControlName="tax" (ngModelChange)="setTotals()" type="number" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <span class="blue">+</span>Tax
+                <input (ngModelChange)="setTotals()" class="col-md-6 mr-3" formControlName="tax" nz-input placeholder="$ 0,000.00" type="number"/> <span class="blue">+</span>Tax
                 <ng-container *ngIf="form.controls.tax.invalid && (form.controls.tax.dirty || form.controls.tax.touched)">
-                  <div class="form-error" *ngFor="let error of form.controls.tax.errors.APIErrors">{{ error }}</div>
-                  <div class="form-error" *ngIf="form.controls.tax.errors.required">This field is required</div>
-                  <div class="form-error" *ngIf="form.controls.tax.errors.min">
-                    Minimum value is ({{form.controls.tax.errors.min.min}})
-                  </div>
+                  <nz-alert *ngFor="let error of form.controls.tax.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.tax.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+                  <nz-alert *ngIf="form.controls.tax.errors.min" nzMessage="Minimum value is ({{form.controls.tax.errors.min.min}})" nzShowIcon
+                            nzType="error"
+                  ></nz-alert>
                 </ng-container>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input [readOnly]="true" type="number" [value]="platformFees" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Platform fees</b>
+                <input [readOnly]="true" [value]="platformFees" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Platform fees</b>
               </div>
             </div>
             <div class="row mt-2 gray-9">
               <div class="col-md-6"></div>
               <div class="col-md-6 ">
-                <input [readOnly]="true" type="number" [value]="grandTotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00"/> <b>Grand Total</b>
+                <input [readOnly]="true" [value]="grandTotal" class="col-md-6 mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Grand Total</b>
               </div>
             </div>
           </div>
@@ -182,8 +182,8 @@
       </form>
     </div>
     <nz-footer>
-      <button [disabled]="form.invalid" (click)="reviewForm()" nz-button class="mar-2" nzType="primary">Generate Quote</button>
-      <button nz-button class="mar-2" (click)="showDeleteConfirm()">Cancel</button>
+      <button (click)="reviewForm()" [disabled]="form.invalid" class="mar-2" nz-button nzType="primary">Generate Quote</button>
+      <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>
     </nz-footer>
   </ng-container>
   <ng-template #noRfq>
