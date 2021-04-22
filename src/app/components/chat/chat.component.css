@@ -3,10 +3,10 @@
 }
 
 .messages {
-    min-height: 470px;
-    height: 470px;
-    max-height: 470px;
-    overflow-y: scroll;
+    /*min-height: 680px;*/
+    /*height: 680px;*/
+    /*max-height: 680px;*/
+    overflow-y: auto;
 }
 
 .no-message-container {
@@ -54,8 +54,8 @@
 }
 
 .chat-box {
-    margin: auto;
-    width: 80%;
+    margin: 0 5%;
+    z-index: 999;
 }
 
 .send {
@@ -73,5 +73,35 @@
 .attach {
     font-size: 28px;
 
+}
+.engineer-chat-box .bubble{
+    background: #1590ff;
+}
+.engineer-chat-box .bubble::before{
+    content: "";
+    width: 20px;
+    height: 14px;
+    position: absolute;
+    background-image: url(../../../assets/img/chat-tail-2.svg);
+    left: auto;
+    bottom: -1px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    right: -4px;
+}
+.engineer-chat-box .ant-comment-content-detail p{
+    color: white;
+    text-align: right;
+}
+
+.custom-chat-box{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.comment-type{
+    margin-bottom: 17%;
 }
 

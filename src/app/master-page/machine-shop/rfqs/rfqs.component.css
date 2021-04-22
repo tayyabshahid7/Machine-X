@@ -30,9 +30,12 @@ nz-content {
     background: #0092ff;
   }
   .p-24px{
-      padding: 24px;
+      padding: 15px 24px;
       height: calc(100% - 180px);
       overflow-y: auto;
+      background: white;
+      max-width: 96.5%;
+      margin: auto;
   }
   .custom-card{
       background-color: white;
@@ -110,4 +113,20 @@ tr:hover{
 }
 .ant-table-tbody>tr.ant-table-row:hover>td {
     background: #E6F7FF;
+}
+
+/* new changes */
+
+.search-bar{
+    clear: both;
+    max-width: 100%;
+}
+
+.title-rfq-header{
+    padding: 0 44px;
+}
+
+.title-name{
+    font-size: 20px;
+    font-weight: 600;
 }

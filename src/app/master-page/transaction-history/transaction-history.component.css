@@ -16,58 +16,57 @@ nz-content {
     min-height: 400px;
     border-top: 1px solid #E8E8E8 ;
     height: calc(100vh - 64px);
-  }
-  nz-footer{
+}
+nz-footer{
     padding: 16px 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-      background-color:#fff ;
-      display: flex;
-      position: absolute;
+    background-color:#fff ;
+    display: flex;
+    position: absolute;
     bottom: 0;
     width: calc(100% - 210px);
-  }
-  .inner-box {
+}
+.inner-box {
     background: #0092ff;
-  }
-  .p-24px{
-      padding: 24px;
-      height: calc(100% - 136px);
-      overflow-y: auto;
-      background: #fff;
-  }
-  .custom-card{
-      background-color: white;
-      padding: 0 !important;
-      margin-right: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #D9D9D9;
+}
+.p-24px{
+    padding: 15px 24px;
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+.custom-card{
+    background-color: white;
+    padding: 0 !important;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #D9D9D9;
 
-  }
-  .part-img{
-      padding-bottom: 10px;
-  }
-  .card-title{
-      padding: 10px 24px;
-      font-family: "SFPDsemi";
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 24px;
-      letter-spacing: 0em;
-      text-align: left;
-  }
-  hr{
+}
+.part-img{
+    padding-bottom: 10px;
+}
+.card-title{
+    padding: 10px 24px;
+    font-family: "SFPDsemi";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+hr{
     margin: 6px 0px;
-  }
+}
 .part-number-title{
     padding: 0px 24px;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 22px;
-letter-spacing: 0em;
-text-align: left;
-color: #595959;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #595959;
 }
 .part-number{
     font-family: "SFPDsemi";
@@ -78,8 +77,8 @@ color: #595959;
     line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
-    
-    
+
+
 }
 .content{
     background-color: white;
@@ -88,14 +87,14 @@ color: #595959;
     margin: auto;
 }
 th{
-font-family: SFPDsemi;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: 22px;
-letter-spacing: 0em;
-text-align: center;
-color: #262626;
+    font-family: SFPDsemi;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #262626;
 }
 .frq-id{
     color: #1890FF;
@@ -121,29 +120,65 @@ tr:hover{
 }
 .modal-content-custom-email{
     padding: 20px;
-  }
-  .modal-content{
-  padding: 33px 11px;
-  }
-  .modal {
+}
+.modal-content{
+    padding: 15px 11px;
+}
+.modal {
     background-color:rgba(0, 39, 102, 0.8);
     backdrop-filter: blur(4px);
-  }
-  .modal-dialog{
-  margin: auto;
-  width: 33% !important;
-  }
-  .text-right{
-  text-align: right;
-  }
-  .purple-btn{
+}
+.modal-dialog{
+    margin: auto;
+    width: 33% !important;
+}
+.text-right{
+    text-align: right;
+}
+.purple-btn{
     color:#fff;
     background-color: #9254DE;
-  }
-  .push-r{
-      float: right;
-  }
-  .fif{
+}
+.push-r{
+    float: right;
+}
+.fif{
     font-weight: 900;
     font-size: 65px;
-  }
+}
+
+/* new changes*/
+.search-bar{
+    clear: both;
+    max-width: 100%;
+}
+
+.title-rfq-header{
+    padding: 0 26px;
+}
+
+.title-name{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.transaction-header{
+    max-width: 96.5%;
+    margin: auto;
+    padding-left: 30px;
+}
+
+.main{
+    max-width: 96.5%;
+    margin: auto;
+}
+
+.price{
+    font-size: 46px;
+    font-weight: 600;
+    color: #096DD9;
+}
+
+.popup-input{
+    height: 40px;
+}

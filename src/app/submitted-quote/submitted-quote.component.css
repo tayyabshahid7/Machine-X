@@ -29,12 +29,14 @@ nz-content {
   .inner-box {
     background: #0092ff;
   }
-  .p-24px{
-      padding: 24px;
-      height: calc(100% - 180px);
-      overflow-y: auto;
-      background: #fff;
-  }
+.p-24px{
+    padding: 15px 24px;
+    height: calc(100% - 180px);
+    overflow-y: auto;
+    background: white;
+    max-width: 96.5%;
+    margin: auto;
+}
   .custom-card{
       background-color: white;
       padding: 0 !important;
@@ -126,3 +128,18 @@ tr:hover{
     border-top:1px solid #E8E8E8;
 }
 
+/* new changes*/
+
+.search-bar{
+    clear: both;
+    max-width: 100%;
+}
+
+.submitted-quote-header{
+    padding: 0 26px;
+}
+
+.title-name{
+    font-size: 20px;
+    font-weight: 600;
+}

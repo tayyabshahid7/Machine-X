@@ -3,8 +3,8 @@
   <nz-timeline>
     <ng-container *ngFor="let log of historyLogs">
       <nz-timeline-item [nzDot]="cloud">
-        <h5><b class="gray-9">{{log.action}}</b></h5>
-        <p class="gray-8">{{log.creationDate | conceptXDateTimePipe}}</p>
+        <h5><b class="gray-9 font-20-600">{{log.action}}</b></h5>
+        <p class="gray-8 font-16-400">{{log.creationDate | date:"mm.dd.yyyy"}}</p>
         <p class="gray-7" *ngIf="log.details">
           {{log.details}}
         </p>

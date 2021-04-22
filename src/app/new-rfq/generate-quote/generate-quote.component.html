@@ -1,15 +1,6 @@
 <div class="container-64">
   <ngx-spinner [fullScreen]="false" [name]="'rfqSpinner'"></ngx-spinner>
   <ng-container *ngIf="rfq!==null; else noRfq">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header [nzGhost]="false" nzBackIcon>
-        <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #{{rfq.displayId}} - Generate Quote</nz-page-header-title>
-        <nz-page-header-extra>
-          <span class="blue">*</span>All fields are required
-        </nz-page-header-extra>
-      </nz-page-header>
-    </div>
-
     <div class="content ">
       <form [formGroup]="form">
         <div class="row">

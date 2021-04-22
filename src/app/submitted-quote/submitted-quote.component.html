@@ -1,32 +1,22 @@
 <nz-content>
-  <div class="site-page-header-ghost-wrapper">
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Submitted Quotes</nz-page-header-title>
-      <nz-page-header-content>
-        <div class="row">
-          <div class="col-6 p-0 space-b">
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-              <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
-            </nz-input-group>
-
-            <ng-template #suffixIconButton>
-              <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
-            </ng-template>
-          </div>
-          <div class="col-6">
-            <nz-tag [nzColor]="'#87d068'" class="push-right">Approved Quotes: {{approvedSubmittedQuotesCount}}</nz-tag>
-          </div>
-        </div>
-
-      </nz-page-header-content>
-      <nz-page-header-extra>
-
-      </nz-page-header-extra>
-    </nz-page-header>
+  <div class="d-flex mt-4 mb-3 submitted-quote-header">
+    <p class="font-16-600 m-0">Submitted Quotes</p>
+    <div class="ml-3">
+      <nz-tag class="nz-tag-me w-100" nzColor="success">Approved Quotes: {{approvedSubmittedQuotesCount}}</nz-tag>
+    </div>
   </div>
   <div class="p-24px">
     <div nz-row nzGutter="">
-
+      <div class="search-bar col-12 my-3 pl-2">
+        <div class="col-6 p-0 space-b">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+          </ng-template>
+        </div>
+      </div>
       <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="submittedQuotesPage">
         <thead>
         <tr>
@@ -52,7 +42,7 @@
             <nz-tag [nzColor]="'red'" class="nz-tag-me">Not Selected</nz-tag>
           </td>
           <td class="text-center" *ngIf="quote.status=='pending'">
-            <nz-tag [nzColor]="'orange'" class="nz-tag-me">Pinding</nz-tag>
+            <nz-tag [nzColor]="'orange'" class="nz-tag-me">Pending</nz-tag>
           </td>
           <td class="text-center">
             <span class="blue pointer">View Qoute</span>
@@ -61,16 +51,11 @@
         </tr>
         </tbody>
       </nz-table>
-
-
     </div>
   </div>
-
-  <nz-footer>
-    <div class="center-footer">
-      <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="submittedQuotesCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
-    </div>
-  </nz-footer>
+  <div class="mr-5 d-flex justify-content-end mt-3">
+    <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="submittedQuotesCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+  </div>
 </nz-content>
     
     

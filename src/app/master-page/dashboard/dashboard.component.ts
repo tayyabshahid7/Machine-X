@@ -18,6 +18,7 @@ import { getUser } from '../../store/user/user.selectors';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
   shop$: Observable<ShopProfileInterface>;
   jobsCounts: Array<JobsCountInterface> = [];
@@ -62,7 +63,7 @@ export class DashboardComponent implements OnInit {
 
   loadRfqs() {
     this.spinner.show('rfqsSpinner');
-    this.rfqAPIService.listRFQs({pageSize: 4, page: 1}, {searchKey: null}).subscribe(
+    this.rfqAPIService.listRFQs({pageSize: 3, page: 1}, {searchKey: null}).subscribe(
       response => {
         this.rfqs = response.results;
         this.spinner.hide('rfqsSpinner');
@@ -90,7 +91,7 @@ export class DashboardComponent implements OnInit {
 
   loadJobsIssues() {
     this.spinner.show('jobsIssuesSpinner');
-    this.jobAPIService.listJobsIssues({pageSize: 4, page: 1}, {searchKey: null}).subscribe(
+    this.jobAPIService.listJobsIssues({pageSize: 3, page: 1}, {searchKey: null}).subscribe(
       response => {
         this.jobsIssues = response.results;
         this.spinner.hide('jobsIssuesSpinner');
@@ -113,5 +114,14 @@ export class DashboardComponent implements OnInit {
 
   viewTransactions() {
     this.router.navigate(['dashboard/transactions']);
+  }
+
+  convertSecondsToDays(seconds) {
+    const days = (seconds / (24 * 3600)).toFixed(0);
+    if (Number(days) > 0) {
+      return (seconds / (24 * 3600)).toFixed(0);
+    }else{
+      return '';
+    }
   }
 }

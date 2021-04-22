@@ -1,25 +1,20 @@
 <nz-content>
-  <div class="site-page-header-ghost-wrapper">
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>RFQs</nz-page-header-title>
-      <nz-page-header-content>
-        <div class="row">
-          <div class="col-6 p-0 space-b">
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-              <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
-            </nz-input-group>
-            <ng-template #suffixIconButton>
-              <button nz-button class="grey-icon-btn" nzType="ghost" (click)="searchRfqs()" nzSearch><i nz-icon nzType="search"></i></button>
-            </ng-template>
-          </div>
-        </div>
-
-      </nz-page-header-content>
-
-    </nz-page-header>
+  <div class="d-flex justify-content-between mt-4 title-rfq-header">
+    <p class="title-name">Request for Quotations</p>
   </div>
   <div class="p-24px">
     <div nz-row nzGutter="">
+
+      <div class="search-bar col-12 my-3 pl-2">
+        <div class="col-6 p-0 space-b">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input [(ngModel)]="searchKey" type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button class="grey-icon-btn" nzType="ghost" (click)="searchRfqs()" nzSearch><i nz-icon nzType="search"></i></button>
+          </ng-template>
+        </div>
+      </div>
 
       <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="rfqsPage">
         <thead>
@@ -48,16 +43,16 @@
         </tr>
         </tbody>
       </nz-table>
-
-
     </div>
   </div>
-
-  <nz-footer>
-    <div class="center-footer">
-      <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="rfqsCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
-    </div>
-  </nz-footer>
+  <div class="mr-5 d-flex justify-content-end mt-3">
+    <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="rfqsCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+  </div>
+  <!--  <nz-footer>-->
+  <!--    <div class="center-footer">-->
+  <!--      <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="rfqsCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>-->
+  <!--    </div>-->
+  <!--  </nz-footer>-->
 </nz-content>
     
     

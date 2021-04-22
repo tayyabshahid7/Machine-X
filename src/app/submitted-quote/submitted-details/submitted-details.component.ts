@@ -17,6 +17,8 @@ import { JobAPIService } from '../../services/api/job-api.service';
 export class SubmittedDetailsComponent implements OnInit {
   rfq: RfqInterface = null;
   quote: QuoteInterface = null;
+  showChat: boolean = false;
+  show: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +36,10 @@ export class SubmittedDetailsComponent implements OnInit {
     const quoteId = this.route.snapshot.paramMap.get('quoteId');
     this.loadQuote(quoteId);
 
+  }
+
+  showCloseChat(showChat: boolean) {
+    this.showChat = showChat;
   }
 
   loadQuote(quoteId: string) {

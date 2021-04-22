@@ -16,12 +16,12 @@
 .container-64{
     height: calc(100vh - 64px);
 }
-  .content{
-    background-color: #fff;
-    padding: 0px;
-    height: calc(100% - 136px);
-    overflow-y: auto;
-  }
+.content{
+  max-width: 97%;
+  margin: auto;
+  padding-top: 0 !important;
+  padding: 24px;
+}
 .row{
     margin: 0;
 }
@@ -164,3 +164,67 @@
   height: calc(100% + 154px);
   overflow-y: auto;
 }
+/* new changes */
+
+.section-1,.section-2{
+  padding: 20px 35px;
+}
+
+.filename{
+  color: #1548A6 !important;
+}
+
+
+.notes-container {
+  line-height: 19px;
+  height: 57px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.show {
+  overflow: visible;
+  height: 100%;
+}
+
+.view{
+  color: #1890FF !important;
+}
+
+.shipping-container p{
+  margin: 0;
+}
+
+/* table */
+.grand-total td{
+  background: #E6F7FF;
+}
+
+.grand-total:hover td{
+  background: #E6F7FF !important;
+}
+
+.gray-tr > td {
+  border-bottom: 1px solid #F5F5F5 !important;
+  transition: background 0.3s;
+}
+
+.summary p{
+  margin-bottom: 5px !important;
+}
+
+.custom-hr {
+  margin-bottom: .8em !important;
+}
+.section-2{
+  min-height: 650.56px;
+}
+
+button{
+  display: flex;
+  align-items: center;
+}
+
+
+
+

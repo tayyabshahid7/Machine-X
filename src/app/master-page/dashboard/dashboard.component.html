@@ -1,50 +1,87 @@
 <div class=" dashboard-full-h">
-  <div class="site-page-header-ghost-wrapper bottom-border">
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Hello, {{(shop$ | async)?.username}}!</nz-page-header-title>
-      <!--      <nz-page-header-extra>-->
-      <!--        Dashboard Data-->
-      <!--        <nz-switch [(ngModel)]="switchValue" (ngModelChange)="handelData()"></nz-switch>-->
-      <!--      </nz-page-header-extra>-->
-    </nz-page-header>
+<!--  <div class="site-page-header-ghost-wrapper bottom-border">-->
+<!--    <nz-page-header [nzGhost]="false">-->
+<!--      <nz-page-header-title>Hello, {{(shop$ | async)?.username}}!</nz-page-header-title>-->
+<!--      &lt;!&ndash;      <nz-page-header-extra>&ndash;&gt;-->
+<!--      &lt;!&ndash;        Dashboard Data&ndash;&gt;-->
+<!--      &lt;!&ndash;        <nz-switch [(ngModel)]="switchValue" (ngModelChange)="handelData()"></nz-switch>&ndash;&gt;-->
+<!--      &lt;!&ndash;      </nz-page-header-extra>&ndash;&gt;-->
+<!--    </nz-page-header>-->
 
-  </div>
+<!--  </div>-->
 
   <div class="content">
     <div class="row">
+      <div class="d-flex w-100 align-items-center">
+        <p class="welcome mb-0">Welcome back</p>
+        <div class="ml-5 pl-3">
+          <p class="welcome-name mb-0">{{(shop$ | async)?.username}}!</p>
+          <span class="last-online">Last Login: 3 days ago</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
       <div class="col-6 pr-24px">
-        <h5><b class="gray-9">Welcome Back</b></h5>
-        <small class="gray-8">Here’s an overview of how things are going</small>
-        <div class="mt-2">
-          <div style="position:relative;">
-            <ngx-spinner [fullScreen]="false" name="partsSpinner"></ngx-spinner>
-            <h6><b class="gray-9">Jobs</b></h6><br>
-            <div class="row">
-              <ng-container *ngFor="let jobsCount of jobsCounts">
-                <div class="pointer  statistic-box acive-box" *ngIf="jobsCount.status==='pending'">
-                  <p class="gray-8 card-text">{{jobsCount.status | changeCase : 'sentenceCase'}}</p>
-                  <b class="blue pl-5px">{{jobsCount.count}}</b>
-                </div>
+        <div class="row mt-3">
 
-                <div class="pointer  statistic-box acive-box" *ngIf="jobsCount.status==='in_work'">
-                  <p class="gray-8 card-text">{{jobsCount.status | changeCase : 'sentenceCase'}}</p>
-                  <b class="green pl-5px">{{jobsCount.count}}</b>
-                </div>
+          <div class="col-12 first-row-panel jobs-panel panel overflow-auto">
+            <div class="panel-header">
+              <span class="panel-title">Jobs</span>
+            </div>
+            <div class="" style="position:relative;">
+              <ngx-spinner [fullScreen]="false" name="jobsIssuesSpinner"></ngx-spinner>
+              <div class="col-12 px-0">
+                <div style="position:relative;">
+                  <ngx-spinner [fullScreen]="false" name="partsSpinner"></ngx-spinner>
 
-                <div class=" statistic-box finished-box" *ngIf="jobsCount.status==='shipped'">
-                  <p class="gray-8 card-text">{{jobsCount.status | changeCase : 'sentenceCase'}}</p>
-                  <b class="gray-6 pl-5px">{{jobsCount.count}}</b>
+
+                  <div class="row px-3">
+
+                    <ng-container *ngFor="let jobsCount of jobsCounts">
+<!--                      <div  class="pointer d-flex align-items-center statistic-box acive-box my-3 active-parts-box" *ngIf="jobsCount.status === 'pending'">-->
+<!--                        <img class="img-responsive tile-icon" src="../../../assets/img/parts-tile.svg">-->
+<!--                        <div class="ml-3">-->
+<!--                          <b class="blue pl-5px counts text-left">{{jobsCount.count}}</b>-->
+<!--                          <p class="gray-8 card-text active-title text-left">-->
+<!--                            {{jobsCount.status | changeCase : 'sentenceCase'}}-->
+<!--                          </p>-->
+<!--                        </div>-->
+<!--                      </div>-->
+
+                      <div  class="pointer d-flex align-items-center statistic-box active-box my-3 jobs-box" *ngIf="jobsCount.status === 'in_work'">
+                        <img class="img-responsive tile-icon" src="../../../assets/img/parts-tile.svg">
+                        <div class="ml-3">
+                          <b class="blue pl-5px counts text-left jobs-count">{{jobsCount.count}}</b>
+                          <p class="gray-8 card-text active-title text-left">
+                            {{jobsCount.status | changeCase : 'sentenceCase'}}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div  class="pointer d-flex align-items-center statistic-box active-box my-3 shipped-box" *ngIf="jobsCount.status === 'shipped'">
+                        <img class="img-responsive tile-icon" src="../../../assets/img/double-tick.svg">
+                        <div class="ml-3">
+                          <b class="blue pl-5px counts text-left pending-count">{{jobsCount.count}}</b>
+                          <p class="gray-8 card-text active-title text-left">
+                            {{jobsCount.status | changeCase : 'sentenceCase'}}
+                          </p>
+                        </div>
+                      </div>
+
+                    </ng-container>
+
+                  </div>
                 </div>
-              </ng-container>
+              </div>
             </div>
           </div>
 
-          <div class="row" style="position:relative;">
+          <div class="col-12 px-0" style="position:relative;">
             <ngx-spinner [fullScreen]="false" name="rfqsSpinner"></ngx-spinner>
             <div class="col-12 RFQ-panel panel">
               <div class="panel-header">
                 <span class="panel-title">RFQs</span>
-                <span (click)="viewRFQ()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+                <span (click)="viewRFQ()" class="d-flex align-items-center panel-action push-right">View all <i class="ml-1" nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
               </div>
               <div class="row">
                 <div class="col-12">
@@ -66,8 +103,8 @@
                             class="blue">Files</a></p>
                         </div>
                       </td>
-                      <td class="text-right"><b class="table-data-style">{{rfq.submissionsCount}}</b></td>
-                      <td class="text-right"><b class="table-data-style">{{rfq.remainingSeconds | duration}}</b></td>
+                      <td class="text-right"><b class="table-data-style font-14-600">{{rfq.submissionsCount}}</b></td>
+                      <td class="text-right"><b class="table-data-style font-14-600">{{convertSecondsToDays(rfq.remainingSeconds)}}</b></td>
                     </tr>
                     </tbody>
 
@@ -91,11 +128,11 @@
         </div>
       </div>
       <div class="col-6 pl-24px ">
-        <div class="row">
-          <div class="col-12 jobs-panel panel">
+        <div class="row mt-3">
+          <div class="col-12 first-row-panel panel">
             <div class="panel-header">
               <span class="panel-title">Recent Issues</span>
-              <span (click)=" viewJobs()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+              <span (click)=" viewJobs()" class="d-flex align-items-center panel-action push-right">View all <i class="ml-1" nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
             </div>
             <div class="row" style="position:relative;">
               <ngx-spinner [fullScreen]="false" name="jobsIssuesSpinner"></ngx-spinner>
@@ -137,7 +174,7 @@
             <ngx-spinner [fullScreen]="false" name="transactionsSpinner"></ngx-spinner>
             <div class="panel-header">
               <span class="panel-title">Transaction history</span>
-              <span (click)="viewTransactions()" class="panel-action push-right">View all <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+              <span (click)="viewTransactions()" class="d-flex align-items-center panel-action push-right">View all <i class="ml-1" nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
             </div>
             <div class="row">
               <div class="col-12">
@@ -153,8 +190,8 @@
                   <tr *ngFor="let transaction of transactions">
                     <td>
                       <div class="gray-7">
-                        <div><b>{{transaction.jobDisplayId}}</b></div>
-                        <p class="no-margin">{{transaction.creationDate | conceptXDateTimePipe : 'date'}}</p>
+                        <div><b class="text-body"># {{transaction.jobDisplayId}}</b></div>
+                        <p class="no-margin">{{transaction.creationDate | date : 'MMM dd, yyyy'}}</p>
                       </div>
                     </td>
                     <!--                    <td class="text-right">-->
@@ -194,6 +231,4 @@
       </div>
     </div>
   </div>
-  <nz-footer>
-  </nz-footer>
 </div>

@@ -77,7 +77,7 @@ export class SubmittedQuoteComponent implements OnInit {
   }
 
   onSelect(rfq: RfqInterface) {
-    this.router.navigate([`dashboard/submittedQuote/details/${rfq.id}`]);
+    this.router.navigate([`dashboard/submittedQuote/details/${rfq.id}/${rfq.displayId}`]);
   }
 
 }

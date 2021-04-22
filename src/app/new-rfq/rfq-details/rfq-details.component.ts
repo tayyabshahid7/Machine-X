@@ -48,7 +48,7 @@ export class RfqDetailsComponent implements OnInit {
 
   apply() {
     if (this.rfq.status === 'accepting_quotes'){
-      this.router.navigate([`dashboard/newRFQ/details/${this.rfq.id}/apply`]);
+      this.router.navigate([`dashboard/newRFQ/details/${this.rfq.id}/${this.rfq.displayId}/apply`]);
     }
   }
 }

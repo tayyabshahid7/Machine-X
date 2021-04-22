@@ -1,95 +1,90 @@
 <div class="container-64">
   <ngx-spinner [name]="'rfqSpinner'" [fullScreen]="false"></ngx-spinner>
   <ng-container *ngIf="rfq!==null; else noRfq">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
-        <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #{{rfq.displayId}} </nz-page-header-title>
-      </nz-page-header>
-    </div>
-
-    <div class="content row">
-
-      <div class="col-3 gray-bg"></div>
-      <div class="col-6 pt-30px scrollable">
-
-        <div class="row">
-          <div class="col-6">
-            <div class="summary">
-              <h6><b class="mb-2">RFQ Summary</b></h6>
-              <!-- <p>
-                Shop handling part: <b>Metal Shop X</b>
-              </p> -->
-              <p>
-                Selected part <b>{{rfq.part.name}}</b>
-              </p>
-              <p>
-                Part revision: <b>{{rfq.revision.name}}</b>
-              </p>
-              <p>
-                Material selected: <b>{{rfq.materialType}}</b>
-              </p>
-              <p>
-                Quantity: <b>{{rfq.partQuantity}}</b>
-              </p>
-              <p>
-                Part needed by: <b>{{rfq.partDateNeeded | conceptXDateTimePipe}}</b>
-              </p>
-            </div>
+    <div class="content">
+      <div class="site-page-header-ghost-wrapper">
+        <div class="rfq-header d-flex justify-content-between py-4 w-100">
+          <div class="d-flex align-items-center">
+            <span class="font-20-600 mr-3">RFQ #{{this.rfq.displayId}}</span>
           </div>
-
-          <div class="col-6" *ngIf="rfq.revision.attachments?.length > 0">
-            <h6><b class="mb-1">PREVIEW</b></h6>
-            <app-file-previewer [file]="rfq.revision.attachments[0]"></app-file-previewer>
-          </div>
-        </div>
-        <div class="mt-30px">
-
-          <div class="mt-4 row">
-            <div class="col-12">
-              <h6><b class="mb-2">NOTES</b></h6>
-              <p>
-                {{rfq.notes}}
-              </p>
-            </div>
-
-          </div>
-          <div class="mt-4 row" *ngIf="rfq.revision.attachments?.length > 0">
-            <div class="col-12">
-              <h6><b class="mb-2">ATTACHED FILES</b></h6>
-            </div>
-            <div class="col-12" *ngFor="let att of rfq.revision.attachments">
-              <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
-            </div>
-          </div>
-          <div class="mt-4 row" *ngIf="rfq.shippingAddress">
-            <div class="col-12">
-              <h6><b class="mb-2 mt-2">SHIPPING ADDRESS</b></h6>
-            </div>
-            <div class="col-md-6 summary">
-
-              <p>
-                Street: <b>{{rfq.shippingAddress.street}}</b>
-              </p>
-              <p>
-                City: <b>{{rfq.shippingAddress.city}}</b>
-              </p>
-              <p>
-                Address: <b>{{rfq.shippingAddress.country}}</b>
-              </p>
-              <p>
-                Zip code: <b>{{rfq.shippingAddress.zipCode}}</b>
-              </p>
-            </div>
-
-          </div>
-
         </div>
       </div>
-      <div class="col-3 gray-bg"></div>
+
+      <div class="row full-h">
+        <div class="d-flex col-12 p-24 scrollable">
+          <div class="col-7">
+            <div class="bg-white">
+              <div class="summary section-1">
+                <p class="font-16-600 pb-1">
+                  RFQ SUMMARY
+                </p>
+                <div class="custom-hr"></div>
+                <div class="col-12 px-0 summary-main">
+                  <div class="col-12 d-flex px-0">
+                    <div class="col-4 px-0 mr-3" *ngIf="rfq.revision.attachments?.length > 0">
+                      <app-file-previewer [file]="rfq.revision.attachments[0]"></app-file-previewer>
+                    </div>
+                    <div class="col-8 px-0" *ngIf="rfq.revision.attachments?.length > 0">
+                      <p class="my-1 gray-8">Uploaded Files</p>
+                      <ng-container *ngFor="let attachment of rfq.revision.attachments">
+                        <div class="d-flex align-items-center">
+                          <i class="file-clip filename" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="file filename">{{attachment.fileName}}</a>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="custom-hr mt-3"></div>
+                  <div class="part-data">
+                    <p class="mb-2"> Selected part: <b>{{rfq.part.number}}</b></p>
+                    <div class="custom-hr"></div>
+                    <p class="mb-2">  Part revision: <b>{{rfq.revision.name}}</b></p>
+                    <div class="custom-hr"></div>
+                    <p class="mb-2"> Material selected: <b>{{rfq.materialType}} days</b></p>
+                    <div class="custom-hr"></div>
+                    <p class="mb-2"> Quantity: <b>{{rfq.partQuantity}}</b></p>
+                    <div class="custom-hr"></div>
+                    <p class="mb-2"> Part needed by: <b>{{rfq.partDateNeeded | conceptXDateTimePipe}}</b></p>
+                    <div class="custom-hr"></div>
+                  </div>
+
+                  <div>
+                    <p class="mb-0 font-14-600">NOTES</p>
+                    <p>{{rfq.notes}}</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="bg-white section-2">
+              <div class="summary shipping">
+                <p class="font-16-600 pb-1">
+                  Shipping Address
+                </p>
+                <div class="custom-hr"></div>
+                <div class="my-4">
+                  <p><b> Mohammad Naeem Saleem Karmi</b></p>
+                  <p>{{rfq.shippingAddress.street}}</p>
+                  <p>{{rfq.shippingAddress.city}}</p>
+                  <p>{{rfq.shippingAddress.country}}</p>
+                  <p>{{rfq.shippingAddress.zipCode}}</p>
+                  <p>+972599040625</p>
+                  <button (click)="apply()" [ngClass]="rfq.status ==='accepting_quotes'? 'apply-job' :'' "
+                          [disabled]="rfq.status!=='accepting_quotes'"
+                          nz-button
+                          class="mar-2 mt-3 w-100"
+                  >
+                    Apply for this job
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <nz-footer>
-      <button (click)="apply()" [disabled]="rfq.status!=='accepting_quotes'" nz-button class="mar-2" nzType="primary">Apply for this job</button>
-    </nz-footer>
   </ng-container>
   <ng-template #noRfq>
     <!--  ToDo  what to show if no rfq-->

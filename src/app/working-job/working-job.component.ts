@@ -74,7 +74,7 @@ export class WorkingJobComponent implements OnInit {
   }
 
   onSelect(job: JobInterface) {
-    this.router.navigate([`dashboard/WorkingJobs/details/${job.id}`]);
+    this.router.navigate([`dashboard/WorkingJobs/details/${job.id}/${job.displayId}`]);
   }
 
 }

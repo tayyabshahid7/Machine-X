@@ -74,7 +74,7 @@ export class NewRFQComponent implements OnInit {
   }
 
   onSelect(rfq: RfqInterface) {
-    this.router.navigate([`dashboard/newRFQ/details/${rfq.id}`]);
+    this.router.navigate([`dashboard/newRFQ/details/${rfq.id}/${rfq.displayId}`]);
   }
 
 }

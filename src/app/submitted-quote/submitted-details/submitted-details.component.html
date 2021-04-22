@@ -1,238 +1,236 @@
 <div class="container-64">
   <ngx-spinner [name]="'quoteSpinner'" [fullScreen]="false"></ngx-spinner>
   <ng-container *ngIf="quote!==null && rfq!==null; else noQuote">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
-        <nz-page-header-title><span class="previous">Working Jobs / </span> #{{quote.displayId}} Details</nz-page-header-title>
-        <nz-page-header-extra>
-          <nz-tag [nzColor]="'orange'" *ngIf="quote.status === 'pending'" class="nz-tag-me">Pinding</nz-tag>
-          <nz-tag [nzColor]="'blue'" *ngIf="quote.status === 'approved'" class="nz-tag-me">Approved</nz-tag>
-          <nz-tag [nzColor]="'red'" *ngIf="quote.status === 'expired'" class="nz-tag-me">Expired</nz-tag>
-          <nz-tag [nzColor]="'gray'" *ngIf="quote.status === 'not_selected'" class="nz-tag-me">Not Selected</nz-tag>
-        </nz-page-header-extra>
-      </nz-page-header>
-    </div>
 
-    <div class="content row">
-      <nz-tabset class="col-md-6 border-right" [nzTabBarExtraContent]="extraTemplate">
-        <ng-template #extraTemplate>
-          <nz-tag *ngIf="rfq.status === 'accepting_quotes'" nzColor="success" class="nz-tag-me">Accepting Quotes</nz-tag>
-          <nz-tag *ngIf="rfq.status == 'not_accepting_quotes'" [nzColor]="'red'" class="nz-tag-me">Not Accepting Quotes</nz-tag>
-        </ng-template>
-
-
-        <nz-tab nzTitle="RFQ Details">
-          <div class="firts-tab-content">
-
-            <div class="col-md-12 pt-30px scrollable">
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="summary">
-                    <h6><b class="mb-2">RFQ SUMMARY</b></h6>
-                    <p>
-                      Shop handling part: <b>{{quote.shop.companyLegalName}}</b>
-                    </p><br>
-                    <p>
-                      Selected part <b>{{quote.part.name}}</b>
-                    </p>
-                    <p>
-                      Part revision: <b>{{quote.revision.name}}</b>
-                    </p>
-                    <p>
-                      Material selected: <b>{{rfq.materialType}}</b>
-                    </p>
-                    <p>
-                      Quantity: <b>{{rfq.partQuantity}}</b>
-                    </p>
-                    <p>
-                      Part needed by: <b>{{rfq.partDateNeeded | conceptXDateTimePipe}}</b>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="col-md-6" *ngIf="quote.revision.attachments.length > 0">
-                  <h6><b class="mb-1">PREVIEW</b></h6>
-                  <app-file-previewer [file]="quote.revision.attachments[0]"></app-file-previewer>
-                </div>
-              </div>
-              <div class="mt-30px">
-
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">NOTES</b></h6>
-                    <p class="gray-8">
-                      {{rfq.notes}}
-                    </p>
-                  </div>
-
-                </div>
-                <div class="mt-4 row" *ngIf="quote.revision.attachments.length > 0">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">ATTACHED FILES</b></h6>
-                  </div>
-                  <div class="col-md-12" *ngFor="let att of quote.revision.attachments">
-                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
-                  </div>
-                </div>
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2 mt-2">SHIPPING ADDRESS</b></h6>
-                  </div>
-                  <div class="col-md-6 summary">
-                    <p>
-                      Name: <b>John Davison Rockefeller Sr. </b>
-                    </p>
-                    <p>
-                      Street: <b>{{rfq.shippingAddress.street}}</b>
-                    </p>
-                    <p>
-                      City: <b>{{rfq.shippingAddress.city}}</b>
-                    </p>
-                    <p>
-                      Country: <b>{{rfq.shippingAddress.country}}</b>
-                    </p>
-                    <p>
-                      Zip code: <b>{{rfq.shippingAddress.zipCode}}</b>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="content">
+      <div class="site-page-header-ghost-wrapper">
+        <div class="quotation-header d-flex justify-content-between py-4 w-100">
+          <div class="d-flex align-items-center">
+            <span class="font-20-600 mr-3">Quote #{{quote.displayId}} Details </span>
+            <nz-tag [nzColor]="'orange'" *ngIf="quote.status === 'pending'" class="nz-tag-me">Pending</nz-tag>
+            <nz-tag [nzColor]="'blue'" *ngIf="quote.status === 'approved'" class="nz-tag-me">Approved</nz-tag>
+            <nz-tag [nzColor]="'red'" *ngIf="quote.status === 'expired'" class="nz-tag-me">Expired</nz-tag>
+            <nz-tag [nzColor]="'gray'" *ngIf="quote.status === 'not_selected'" class="nz-tag-me">Not Selected</nz-tag>
           </div>
-        </nz-tab>
-        <nz-tab nzTitle="Quote Details">
-          <div class="quote-details-tab">
-            <div class="col-md-12 pt-30px scrollable">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="summary">
-                    <p>
-                      Shop Name: <b> {{quote.shop.companyLegalName}}</b>
-                    </p>
-                    <p>
-                      Address: <b> {{quote.shop.addressLine1}}</b>
-                    </p>
-                    <p *ngIf="quote.shop.addressLine2">
-                      Address-2: <b> {{quote.shop.addressLine2}}</b>
-                    </p>
-                    <p>
-                      City: <b>{{quote.shop.city}}</b>
-                    </p>
-                    <p>
-                      State: <b> {{quote.shop.state}}</b>
-                    </p>
-                    <p>
-                      Country: <b> {{quote.shop.country}}</b>
-                    </p>
-                    <p>
-                      Shop Phone Number: <b> {{quote.shop.businessPhoneNumber}}</b>
-                    </p>
-                  </div>
-                </div>
+          <div class="d-flex">
+            <button (click)="close()" nz-button class="mar-2">Close</button>
+            <button (click)=" showArchive()" nz-button class="mar-2" nzType="danger">Archive Quote</button>
+            <button nz-button class="d-flex align-items-center mar-2" (click)="startJob()" [disabled]="quote.status!=='approved'" nzType="primary">Start Project <i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>
+          </div>
+        </div>
+      </div>
 
-                <div class="col-md-6">
-                  <div class="summary">
-                    <!-- <h6><b class="mb-1">QUOTE #2308</b></h6> -->
-                    <p>
-                      Engineer Name: <b> {{rfq.engineer.username}}</b>
-                    </p>
-                    <p>
-                      Part Name: <b> {{quote.part.name}}</b>
-                    </p>
-                    <p>
-                      Engineer Email: <b> {{rfq.engineer.email}}</b>
-                    </p>
-                  </div>
-                </div>
+
+      <div class="col-12 px-0 d-flex pb-5" >
+        <div class="col-4 pl-0">
+          <div class="bg-white mt-3 section-1">
+            <p class="font-16-600 pb-1 m-0">
+              RFQ SUMMARY
+            </p>
+            <div class="custom-hr"></div>
+
+            <div class="col-12 d-flex px-0">
+              <div class="col-4 px-0 mr-3 custom-thumb" *ngIf="quote.revision.attachments.length>0" >
+                <app-file-previewer [file]="quote.revision.attachments[0]"></app-file-previewer>
               </div>
-              <div class="mt-30px">
-                <nz-table [nzShowPagination]="false" #basicTable [nzData]="quote.lineItems">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Cost</th>
-                    <th>Total</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let lineItem of quote.lineItems">
-                    <td>{{ lineItem.id }}</td>
-                    <td>{{ lineItem.description }}</td>
-                    <td>{{ lineItem.quantity }}</td>
-                    <td>{{ lineItem.price | currency: 'USD' }}</td>
-                    <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
-
-                  </tr>
-                  </tbody>
-                </nz-table>
-                <div class="mt-2 row">
-                  <div class="col-md-8">
-                    <b>Note</b>
-                    <p>
-                      {{quote.shopQuoteNotes}}
-                    </p>
-                  </div>
-                  <div class="col-md-3">
-                    <p class=" tax text-center">+ Tax {{quote.tax | currency: 'USD'}}</p>
-                    <p class=" tax text-center">+ Shipping rate {{quote.shippingRate | currency: 'USD'}}</p>
-                    <p class=" tax text-center">+ Platform fees {{quote.platformFees | currency: 'USD'}}</p>
-                    <nz-table [nzShowPagination]="false" #basicTable [nzData]="[quote.grandTotal]">
-                      <thead>
-                      <tr>
-                        <th>Grand Total</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td class="blue">{{quote.grandTotal | currency: 'USD'}}</td>
-                      </tr>
-                      </tbody>
-                    </nz-table>
-                  </div>
-                </div>
-                <ng-container *ngIf="quote.attachments.length > 0">
-                  <div>
-                    <span class="blue">*</span>Attached files
-                  </div>
-                  <div *ngFor="let att of quote.attachments">
-                    <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.fileName}}</a>
+              <div class="col-8 px-0" *ngIf="quote.revision.attachments?.length > 0">
+                <p class="my-1 gray-8">Uploaded Files</p>
+                <ng-container *ngFor="let attachment of quote.revision.attachments">
+                  <div class="d-flex align-items-center">
+                    <i class="file-clip filename" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="file filename">{{attachment.fileName}}</a>
                   </div>
                 </ng-container>
               </div>
+            </div>
 
+            <div class="summary mt-3">
+              <div class="custom-hr"></div>
+              <div class="d-flex justify-content-between">
+                <p>Selected part</p>
+                <span class="font-14-600">{{quote.part.name}}</span>
+              </div>
+              <div class="custom-hr"></div>
+
+              <div class="d-flex justify-content-between">
+                <p>Part revision</p>
+                <span class="font-14-600">{{ quote.revision.name }}</span>
+              </div>
+              <div class="custom-hr"></div>
+
+              <div class="d-flex justify-content-between">
+                <p>Material selected</p>
+                <span class="font-14-600">{{rfq.materialType}}</span>
+              </div>
+              <div class="custom-hr"></div>
+
+              <div class="d-flex justify-content-between">
+                <p>Quantity</p>
+                <span class="font-14-600">{{rfq.partQuantity}}</span>
+              </div>
+              <div class="custom-hr"></div>
+
+              <div class="d-flex justify-content-between">
+                <p>Part needed by</p>
+                <span class="font-14-600"> {{rfq.partDateNeeded | conceptXDateTimePipe}}</span>
+              </div>
+              <div class="custom-hr"></div>
+            </div>
+
+            <div>
+              <p class="mb-0 font-14-600 gray-9">NOTES</p>
+              <p class="font-12-400 notes-container" [class.show]="show">
+                {{rfq.notes}}
+              </p>
+              <a *ngIf="rfq.notes.length > 183" class="view"
+                 (click)="show = !show">{{ show ? 'View Less' : 'View More...' }}</a>
             </div>
           </div>
-        </nz-tab>
-      </nz-tabset>
+        </div>
+        <div class="col-8 pr-0">
+          <div class="bg-white mt-3 section-2">
+            <p class="font-16-600 pb-1 m-0">
+              QUOTE DETAILS
+            </p>
+            <div class="custom-hr"></div>
+            <div class="quote-details-tab">
+              <div class="col-md-12 px-0 pt-30px scrollable">
+                <div class="row">
+                  <div class="col-md-6 px-0">
+                    <div class="summary">
+                      <h6><b class="mb-2">MACHINE X</b></h6>
+                      <p class="gray-8"> Shop Name: <span
+                              class="font-14-600">{{quote.shop.companyLegalName}}</span></p>
+                      <p class="gray-8">Shop Phone Number: <span
+                              class="font-14-600">{{quote.shop.businessPhoneNumber}}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="summary">
+                      <h6 class="gray-8 font-14-400">QUOTE No: <span
+                              class="font-14-600">{{quote.displayId}}</span></h6>
+
+                      <p class="gray-8"> Creation Date: <span
+                              class="font-14-600">{{quote.creationDate | conceptXDateTimePipe}}</span>
+                      </p>
+
+                      <!--                    <p>-->
+                      <!--                      Engineer Name: <b> {{job.requestQuote.engineer.username}}</b>-->
+                      <!--                    </p>-->
+                      <p class="gray-8"> Part Name: <span
+                              class="font-14-600">{{quote.part.name}}</span></p>
+                      <!--                    <p>-->
+                      <!--                      Engineer Email: <b> {{job.requestQuote.engineer.email}}</b>-->
+                      <!--                    </p>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-30px">
+                  <p class="font-16-600 mb-1">Items</p>
+                  <nz-table #basicTable [nzData]="quote.lineItems"
+                            [nzShowPagination]="false">
+                    <thead>
+                    <tr>
+                      <th class="font-14-600">#</th>
+                      <th class="font-14-600">Item Name</th>
+                      <th class="font-14-600">Quantity</th>
+                      <th class="font-14-600">Unit Cost</th>
+                      <th class="font-14-600">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--            <tr *ngFor="let item of basicTable.data">-->
+                    <tr *ngFor="let lineItem of quote.lineItems">
+                      <td>{{ lineItem.id }}</td>
+                      <td>{{ lineItem.description }}</td>
+                      <td>{{ lineItem.quantity }}</td>
+                      <td>{{ lineItem.price | currency: 'USD' }}</td>
+                      <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
+                    </tr>
 
 
-      <nz-tabset class="col-md-6">
-        <nz-tab [nzTitle]="titleTemplate">
-          <ng-template #titleTemplate>
-            <i nz-icon nzType="message" nzTheme="outline"></i>
-            Chat
-          </ng-template>
-          <div class=" chat-tap col-md-12 white-bg">
-            <app-chat [enableIssueMode]="false" [quoteId]="quote.id"></app-chat>
+                    <tr class="font-14-600 gray-tr tr">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="font-14-400">+ Shipping Cost</td>
+                      <td class="font-14-600 blue-8">{{quote.shippingRate | currency: 'USD'}}</td>
+                    </tr>
+                    <tr class="gray-tr tr">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>+ TAX</td>
+                      <td class="font-14-600 blue-8">{{quote.tax | currency: 'USD'}}</td>
+                    </tr>
+                    <tr class="grand-total tr">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="text-body font-14-600">Grand Total</td>
+                      <td class="blue-8 font-14-600">{{quote.grandTotal | currency: 'USD'}}</td>
+                    </tr>
+                    </tbody>
+                  </nz-table>
+
+
+                  <div class="mt-2 row">
+                    <div class="col-md-8 pl-0">
+                      <span class="font-14-600 gray-9">Note</span>
+                      <p class="gray-8">
+                        {{quote.shopQuoteNotes}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="mt-2 row" *ngIf="quote.attachments.length>0">
+                    <div class="col-md-8 pl-0">
+                      <span class="font-14-600 gray-9">Attached files</span>
+                      <div class="col-md-8 pl-0 d-flex align-items-center"
+                           *ngFor="let att of quote.attachments">
+                        <i class="file-clip" nz-icon nzTheme="outline"
+                           nzType="paper-clip"></i> <a
+                              class="blue file pl-2">{{att.fileName}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </nz-tab>
-      </nz-tabset>
+        </div>
+      </div>
+
+
     </div>
-    <nz-footer>
-      <div>
-        <button (click)="close()" nz-button class="mar-2">Close</button>
-        <button (click)=" showArchive()" nz-button class="mar-2" nzType="danger">Archive Quote</button>
+
+    <div class="chat-pop-up" *ngIf="showChat">
+      <div class="d-flex p-4">
+        <img (click) = "showCloseChat(false)" class="chat-pop-cross-btn" src="assets/img/cross.svg" />
+        <span class="ml-2 chat-pop-up-title">Welding Services Shop Messages</span>
       </div>
-
-
-      <div class="push-r">
-        <button nz-button class="mar-2" (click)="startJob()" [disabled]="quote.status!=='approved'" nzType="primary">Start Project <i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>
+      <div class="chat-tap col-md-12 white-bg">
+        <app-chat [enableIssueMode]="false" [quoteId]="quote.id"></app-chat>
       </div>
+    </div>
 
-    </nz-footer>
+    <div *ngIf="!showChat"  (click) = "showCloseChat(true)" class="chat-btn">
+      <img src="assets/img/chat-img.svg" />
+    </div>
+
+    <!--    <nz-footer>-->
+    <!--      <div>-->
+    <!--        <button (click)="close()" nz-button class="mar-2">Close</button>-->
+    <!--        <button (click)=" showArchive()" nz-button class="mar-2" nzType="danger">Archive Quote</button>-->
+    <!--      </div>-->
+
+
+    <!--      <div class="push-r">-->
+    <!--        <button nz-button class="mar-2" (click)="startJob()" [disabled]="quote.status!=='approved'" nzType="primary">Start Project <i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>-->
+    <!--      </div>-->
+
+    <!--    </nz-footer>-->
   </ng-container>
   <ng-template #noQuote>
     <!--  ToDo  what to show if no rfq-->

@@ -2,18 +2,16 @@
     color:rgba(191,191,191,1);
     font-size: 20px;
     font-family: SFPDLight !important;
-  }
+}
 
-  .container-63px{
+.container-63px{
     height: calc(100vh - 64px);
-  }
-  .content{
-      background-color: #fff;
-      /* padding: 24px; */
-      overflow-y: auto;
-      height: calc(100% - 136px);
-  }
-  nz-footer{
+}
+.content{
+    overflow-y: auto;
+    height: calc(100% - 136px);
+}
+nz-footer{
     padding: 16px 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     background-color:#fff ;
@@ -22,8 +20,8 @@
     bottom: 0;
     width: calc(100% - 210px);
     height: 64px;
-  }
-  .blue{
+}
+.blue{
     color: #1890ff;
 }
 .mar-2{
@@ -59,15 +57,15 @@ th{
     padding: 20px;
 }
 .modal-content{
-  padding: 33px 11px;
+    padding: 33px 11px;
 }
 .modal {
     background-color:rgba(0, 39, 102, 0.8);
     backdrop-filter: blur(4px);
 }
 .modal-dialog{
-  margin: auto;
-  width: 33% !important;
+    margin: auto;
+    width: 33% !important;
 }
 
 
@@ -87,11 +85,38 @@ th{
     line-height: 22px;
     letter-spacing: 0em;
     padding-left: 10px;
-    }
-    .o20px-size{
-        font-size: 20px;
-    }
-    .scrollable{
-        padding: 30px 50px;
-    }
-  
+}
+.o20px-size{
+    font-size: 20px;
+}
+.scrollable{
+    padding: 25px 50px;
+}
+
+/* new changes */
+
+.invoice-container{
+    max-width: 55%;
+    margin: auto;
+    margin-top: 1% !important;
+}
+
+.grand-total td{
+    background: #40A9FF;
+}
+
+.grand-total:hover td{
+    background: #40A9FF !important;
+}
+
+.summary p{
+    margin-bottom: 5px !important;
+}
+
+.sky-blue td{
+    border-bottom: 1px solid white;
+}
+
+.custom-hr {
+    margin-bottom: .8em !important;
+}

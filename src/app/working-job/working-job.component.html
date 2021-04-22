@@ -1,19 +1,20 @@
 <nz-content>
-  <div class="site-page-header-ghost-wrapper border-bottom">
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Working Jobs</nz-page-header-title>
-      <nz-page-header-content>
-        <div class="row">
-          <div class="col-6 p-0 space-b">
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-              <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
-            </nz-input-group>
-            <ng-template #suffixIconButton>
-              <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
-            </ng-template>
-          </div>
+  <div class="d-flex justify-content-between mt-4 title-jobs-header">
+    <p class="font-20-600">Working Jobs</p>
 
-          <!-- <button nz-button nzTrigger="click" class="space-b" nz-dropdown [nzDropdownMenu]="Datecreated">
+  </div>
+
+  <div class="p-24px">
+    <div nz-row nzGutter="">
+      <div class="search-bar col-12 my-3 pl-2">
+        <div class="col-6 d-flex p-0 space-b">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="Search part name / Quote Number / RFQ ID"/>
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
+          </ng-template>
+          <button nz-button nzTrigger="click" class="space-b" nz-dropdown [nzDropdownMenu]="Datecreated">
             Date created
             <i nz-icon nzType="down"></i>
           </button>
@@ -23,17 +24,9 @@
               <li nz-menu-item>2</li>
               <li nz-menu-item>3</li>
             </ul>
-          </nz-dropdown-menu> -->
-
+          </nz-dropdown-menu>
         </div>
-
-
-      </nz-page-header-content>
-    </nz-page-header>
-  </div>
-  <div class="p-24px">
-    <div nz-row nzGutter="">
-
+      </div>
       <nz-table [nzShowPagination]="false" class="col-md-12" #basicTable [nzData]="jobsPage">
         <thead>
         <tr>
@@ -66,9 +59,6 @@
       </nz-table>
     </div>
   </div>
-  <nz-footer>
-    <!-- <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a> -->
-  </nz-footer>
 </nz-content>
     
     

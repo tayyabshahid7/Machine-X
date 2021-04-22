@@ -163,7 +163,7 @@ export class GenerateQuoteComponent implements OnInit {
 
   reviewForm() {
     this.bufferService.setBufferedItem(QUOTE_FORM_BUFFER_ITEM_KEY, this.form);
-    this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id, 'submit']);
+    this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id, this.rfq.displayId, 'submit']);
   }
 
   showDeleteConfirm(): void {
@@ -175,7 +175,7 @@ export class GenerateQuoteComponent implements OnInit {
       nzOkType: 'primary',
       nzOnOk: () => {
         this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
-        this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id]);
+        this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id, this.rfq.displayId]);
       },
       nzCancelText: 'Cancel',
       nzOnCancel: () => {

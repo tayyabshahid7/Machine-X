@@ -1,436 +1,479 @@
 <div class="container-64">
-  <ngx-spinner></ngx-spinner>
-  <ng-container *ngIf="job!==null; else noJob">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header [nzGhost]="false" nzBackIcon>
-        <nz-page-header-title><span class="previous">Working Jobs / </span> #{{job.displayId}} Details</nz-page-header-title>
-        <nz-page-header-extra>
-          <nz-tag *ngIf="job.status == 'in_work'" class="nz-tag-me" nzColor="success">InProgress</nz-tag>
-          <nz-tag *ngIf="job.status == 'shipped'" [nzColor]="'purple'" class="nz-tag-me">Shipped</nz-tag>
-          <!--          <nz-tag [nzColor]="'red'" *ngIf="job.status == 'Issue'" class="nz-tag-me">Issue</nz-tag>-->
-        </nz-page-header-extra>
-      </nz-page-header>
-    </div>
+<ngx-spinner></ngx-spinner>
 
-    <div class="content row">
 
-      <div *ngIf="history" class="col-md-6 border-right">
-        <div class="col-md-12 p-24 white-bg scrollable">
-          <app-quote-history [quoteId]="job.quote.id"></app-quote-history>
+<ng-container *ngIf="job!==null; else noJob">
+<!--    <div class="site-page-header-ghost-wrapper bottom-border">-->
+<!--      <nz-page-header [nzGhost]="false" nzBackIcon>-->
+<!--        <nz-page-header-title><span class="previous">Job / </span> #{{job.displayId}} Details</nz-page-header-title>-->
+<!--        <nz-page-header-extra>-->
+<!--          <nz-tag *ngIf="job.status == 'in_work'" class="nz-tag-me" nzColor="success">InProgress</nz-tag>-->
+<!--          <nz-tag *ngIf="job.status == 'shipped'" [nzColor]="'purple'" class="nz-tag-me">Shipped</nz-tag>-->
+<!--          &lt;!&ndash;          <nz-tag [nzColor]="'red'" *ngIf="job.status == 'Issue'" class="nz-tag-me">Issue</nz-tag>&ndash;&gt;-->
+<!--        </nz-page-header-extra>-->
+<!--      </nz-page-header>-->
+<!--    </div>-->
+
+
+<div class="content">
+
+<div class="site-page-header-ghost-wrapper">
+    <div class="quotation-header d-flex justify-content-between py-4 w-100">
+        <div class="d-flex align-items-center">
+            <span class="font-20-600 mr-3">Job #{{job.displayId}} Details </span>
+            <nz-tag *ngIf="job.status == 'in_work'" class="nz-tag-me" nzColor="success">InProgress</nz-tag>
+            <nz-tag *ngIf="job.status == 'shipped'" [nzColor]="'purple'" class="nz-tag-me">Shipped</nz-tag>
         </div>
-      </div>
-
-      <nz-tabset *ngIf="!history" class="col-md-6 border-right">
-
-        <nz-tab nzTitle="RFQ Details">
-          <div class="firts-tab-content">
-
-            <div class="col-md-12 pt-30px scrollable">
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="summary">
-                    <h6><b class="mb-2">RFQ SUMMARY</b></h6>
-                    <p>
-                      Shop handling part: <b>{{job.shop.companyLegalName}}</b>
-                    </p><br>
-                    <p>
-                      Selected part <b>{{job.part.name}}</b>
-                    </p>
-                    <p>
-                      Part revision: <b>{{job.revision.name}}</b>
-                    </p>
-                    <p>
-                      Material selected: <b>{{job.requestQuote.materialType}}</b>
-                    </p>
-                    <p>
-                      Quantity: <b>{{job.requestQuote.partQuantity}}</b>
-                    </p>
-                    <p>
-                      Part needed by: <b>{{job.requestQuote.partDateNeeded | conceptXDateTimePipe}}</b>
-                    </p>
-                  </div>
-                </div>
-
-                <div *ngIf="job.revision.attachments.length>0" class="col-md-6">
-                  <h6><b class="mb-1">PREVIEW</b></h6>
-                  <app-file-previewer [file]="job.revision.attachments[0]"></app-file-previewer>
-                </div>
-              </div>
-              <div class="mt-30px">
-
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">NOTES</b></h6>
-                    <p class="gray-8">
-                      {{job.requestQuote.notes}}
-                    </p>
-                  </div>
-
-                </div>
-                <div *ngIf="job.revision.attachments.length>0" class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">ATTACHED FILES</b></h6>
-                  </div>
-                  <div *ngFor="let att of job.revision.attachments" class="col-md-12">
-                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
-                  </div>
-                </div>
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2 mt-2">SHIPPING ADDRESS</b></h6>
-                  </div>
-                  <div class="col-md-6 summary">
-                    <p>
-                      Street: <b>{{job.requestQuote.shippingAddress.street}}</b>
-                    </p>
-                    <p>
-                      City: <b>{{job.requestQuote.shippingAddress.city}}</b>
-                    </p>
-                    <p>
-                      Country: <b>{{job.requestQuote.shippingAddress.country}}</b>
-                    </p>
-                    <p>
-                      Quantity: <b>{{job.requestQuote.partQuantity}}</b>
-                    </p>
-                    <p>
-                      Selected part <b>{{job.part.name}}</b>
-                    </p>
-                    <p>
-                      Part revision: <b>{{job.revision.name}}</b>
-                    </p>
-
-                    <p>
-                      Part needed by: <b>{{job.requestQuote.partDateNeeded | conceptXDateTimePipe}}</b>
-                    </p>
-                  </div>
-
-                </div>
-
-              </div>
-
-
-            </div>
-          </div>
-        </nz-tab>
-        <nz-tab nzTitle="Quote Details">
-          <div class="quote-details-tab">
-            <div class="col-md-12 pt-30px scrollable">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="summary">
-                    <h6><b class="mb-2">MACHINE X</b></h6>
-                    <p>
-                      Shop Name: <b> {{job.shop.companyLegalName}}</b>
-                    </p>
-                    <p>
-                      Shop Phone Number: <b> {{job.shop.businessPhoneNumber}}</b>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="summary">
-                    <h6><b class="mb-1">QUOTE #{{job.quote.displayId}}</b></h6>
-                    <p>
-                      Creation Date: <b> {{job.quote.creationDate | conceptXDateTimePipe}}</b>
-                    </p>
-                    <!--                    <p>-->
-                    <!--                      Engineer Name: <b> {{job.requestQuote.engineer.username}}</b>-->
-                    <!--                    </p>-->
-                    <p>
-                      Part Name: <b> {{job.part.name}}</b>
-                    </p>
-                    <!--                    <p>-->
-                    <!--                      Engineer Email: <b> {{job.requestQuote.engineer.email}}</b>-->
-                    <!--                    </p>-->
-                  </div>
-                </div>
-              </div>
-              <div class="mt-30px">
-                <nz-table #basicTable [nzData]="job.quote.lineItems" [nzShowPagination]="false">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Cost</th>
-                    <th>Total</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let lineItem of job.quote.lineItems">
-                    <td>{{ lineItem.id }}</td>
-                    <td>{{ lineItem.description }}</td>
-                    <td>{{ lineItem.quantity }}</td>
-                    <td>{{ lineItem.price | currency: 'USD' }}</td>
-                    <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
-                  </tr>
-                  </tbody>
-                </nz-table>
-                <div class="mt-2 row">
-                  <div class="col-md-8">
-                    <b>Note</b>
-                    <p>
-                      {{job.quote.shopQuoteNotes}}
-                    </p>
-                  </div>
-                  <div class="col-md-3">
-                    <p class=" tax text-center">+ Tax {{job.quote.tax | currency: 'USD'}}</p>
-                    <p class=" tax text-center">+ Shipping rate {{job.quote.shippingRate | currency: 'USD'}}</p>
-                    <nz-table #basicTable [nzData]="[job.quote.grandTotal]" [nzShowPagination]="false">
-                      <thead>
-                      <tr>
-                        <th>Grand Total</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td class="blue">{{job.quote.grandTotal | currency: 'USD'}}</td>
-                      </tr>
-                      </tbody>
-                    </nz-table>
-                  </div>
-                </div>
-                <ng-container *ngIf="job.quote.attachments.length>0">
-                  <div>
-                    <span class="blue">*</span>Attached files
-                  </div>
-                  <div *ngFor="let att of job.quote.attachments">
-                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
-                  </div>
-                </ng-container>
-              </div>
-
-            </div>
-          </div>
-        </nz-tab>
-        <nz-tab nzTitle="Job Details">
-          <div class="firts-tab-content">
-
-            <div class="col-md-12 pt-30px scrollable">
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="summary">
-                    <h6><b class="mb-2">JOB SUMMARY</b></h6>
-                    <p>
-                      Shop handling part: <b>{{job.shop.companyLegalName}}</b>
-                    </p><br>
-                    <p>
-                      Selected part <b>{{job.part.name}}</b>
-                    </p>
-                    <p>
-                      Part revision: <b>{{job.revision.name}}</b>
-                    </p>
-                    <p>
-                      Material selected: <b>{{job.requestQuote.materialType}}</b>
-                    </p>
-                    <p>
-                      Quantity: <b>{{job.requestQuote.partQuantity}}</b>
-                    </p>
-                    <p>
-                      Part needed by: <b>{{job.requestQuote.partDateNeeded | conceptXDateTimePipe}}</b>
-                    </p>
-                  </div>
-                </div>
-
-                <div *ngIf="job.revision.attachments.length>0" class="col-md-6">
-                  <h6><b class="mb-1">PREVIEW</b></h6>
-                  <app-file-previewer [file]="job.revision.attachments[0]"></app-file-previewer>
-                </div>
-              </div>
-              <div class="mt-30px">
-
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">NOTES</b></h6>
-                    <p class="gray-8">
-                      {{job.revision.notes}}
-                    </p>
-                  </div>
-
-                </div>
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2">ATTACHED FILES</b></h6>
-                  </div>
-                  <div *ngFor="let att of job.revision.attachments" class="col-md-12">
-                    <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file">{{att.fileName}}</a>
-                  </div>
-                </div>
-                <div class="mt-4 row">
-                  <div class="col-md-12">
-                    <h6><b class="mb-2 mt-2">SHIPPING ADDRESS</b></h6>
-                  </div>
-                  <div class="col-md-6 summary">
-                    <p>
-                      Street: <b>{{job.requestQuote.shippingAddress.street}}</b>
-                    </p>
-                    <p>
-                      City: <b>{{job.requestQuote.shippingAddress.city}}</b>
-                    </p>
-                    <p>
-                      Country: <b>{{job.requestQuote.shippingAddress.country}}</b>
-                    </p>
-                    <p>
-                      Quantity: <b>{{job.requestQuote.partQuantity}}</b>
-                    </p>
-                    <p>
-                      Selected part <b>{{job.part.name}}</b>
-                    </p>
-                    <p>
-                      Part revision: <b>{{job.revision.name}}</b>
-                    </p>
-
-                    <p>
-                      Part needed by: <b>{{job.requestQuote.partDateNeeded | conceptXDateTimePipe}}</b>
-                    </p>
-                  </div>
-
-                </div>
-
-              </div>
-
-
-            </div>
-          </div>
-        </nz-tab>
-      </nz-tabset>
-
-
-      <nz-tabset class="col-md-6">
-
-        <nz-tab [nzTitle]="titleTemplate">
-          <ng-template #titleTemplate>
-            <i nz-icon nzTheme="outline" nzType="message"></i>
-            Chat
-          </ng-template>
-          <div class=" chat-tap col-md-12 white-bg">
-            <app-chat [enableIssueMode]="job.status==='in_work' || job.status==='pending'" [quoteId]="job.quote.id"></app-chat>
-          </div>
-        </nz-tab>
-      </nz-tabset>
-    </div>
-    <nz-footer *ngIf="history">
-      <button (click)="hideHistory()" class="mar-2" nz-button nzType="default">Back</button>
-
-    </nz-footer>
-    <nz-footer *ngIf="!history">
-      <div>
-        <button (click)="openInvoice()" class="mar-2" nz-button nzType="primary">Open Invoice</button>
-        <button class="mar-2" data-target="#ShareModal" data-toggle="modal" nz-button nzType="default">Share<i nz-icon nzTheme="outline" nzType="share-alt"></i></button>
-
-      </div>
-
-
-      <div class="push-r">
-        <button (click)="showHistory()" class="mar-2" nz-button nzType="default">History<i nz-icon nzTheme="outline" nzType="history"></i></button>
-
-        <button (click)="showShippingModal()" [disabled]="job.status!=='in_work'" class="mar-2 purple-btn" nz-button>Ship Part <i nz-icon nzTheme="outline" nzType="export"></i></button>
-      </div>
-
-    </nz-footer>
-
-    <div aria-hidden="true" aria-labelledby="ShareModal" class="modal fade" id="ShareModal" role="dialog" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <app-share-job-modal [jobId]="job.id"></app-share-job-modal>
+        <div class="d-flex">
+            <button (click)="openInvoice()" class="mar-2" nz-button nzType="default">Open Invoice</button>
+            <button class="mar-2" data-target="#ShareModal" data-toggle="modal" nz-button nzType="default">
+                Share<i nz-icon nzTheme="outline" nzType="share-alt"></i></button>
+            <!--            <button class="mar-2" data-target="#shippingmodal" data-toggle="modal" nz-button nzType="default">Ship Part<i nz-icon nzTheme="outline" nzType="share-alt"></i></button>-->
+            <button (click)="showShippingModal()" [disabled]="job.status!=='in_work'" class="mar-2"
+                    nzType="default" nz-button>Ship Part <i nz-icon nzTheme="outline" nzType="export"></i>
+            </button>
         </div>
-      </div>
     </div>
-
-  </ng-container>
-  <ng-template #noJob>
-    <!--  ToDo  what to show if no rfq-->
-    No job
-  </ng-template>
 </div>
 
+<div class="col-12 px-0 pb-5 d-flex">
+    <div class="col-4 pl-0">
+        <div class="bg-white mt-3 section-1">
+            <p class="font-16-600 pb-1 m-0">
+                RFQ SUMMARY
+            </p>
+            <div class="custom-hr"></div>
 
-<nz-modal [(nzVisible)]="isShippingModalVisible"
-          nzTitle="Shipping Details">
-  <form (ngSubmit)="submitShippingForm()" [formGroup]="shippingForm">
-    <ng-container *ngIf="shippingForm.invalid && shippingForm.errors && (shippingForm.dirty || shippingForm.touched)">
-      <nz-alert *ngFor="let error of shippingForm.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-    </ng-container>
-    <div class="row mt-1">
-      <p class="col-12"><span class="blue">*</span>Shipping company</p><br>
-      <div class="col-12">
-        <input class="col-12" formControlName="company" nz-input placeholder="Shipping Company" type="text"/>
-        <ng-container *ngIf="shippingForm.controls.company.invalid && (shippingForm.controls.company.dirty || shippingForm.controls.company.touched)">
-          <nz-alert *ngFor="let error of shippingForm.controls.company.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-          <nz-alert *ngIf="shippingForm.controls.company.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-        </ng-container>
-      </div>
+            <div class="col-12 d-flex px-0">
+                <div class="col-4 px-0 mr-3 custom-thumb" *ngIf="job.revision.attachments.length>0">
+                    <app-file-previewer [file]="job.revision.attachments[0]"></app-file-previewer>
+                </div>
+                <div class="col-8 px-0" *ngIf="job.revision.attachments?.length > 0">
+                    <p class="my-1 gray-8">Uploaded Files</p>
+                    <ng-container *ngFor="let attachment of job.revision.attachments">
+                        <div class="d-flex align-items-center">
+                            <i class="file-clip filename" nz-icon nzTheme="outline" nzType="paper-clip"></i>
+                            <a class="file filename">{{attachment.fileName}}</a>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="summary mt-3">
+                <div class="custom-hr"></div>
+                <div class="d-flex justify-content-between">
+                    <p>Selected part</p>
+                    <span class="font-14-600">{{job.part.name}}</span>
+                </div>
+                <div class="custom-hr"></div>
+
+                <div class="d-flex justify-content-between">
+                    <p>Part revision</p>
+                    <span class="font-14-600">{{ job.revision.name }}</span>
+                </div>
+                <div class="custom-hr"></div>
+
+                <div class="d-flex justify-content-between">
+                    <p>Material selected</p>
+                    <span class="font-14-600">{{ job.requestQuote.materialType }}</span>
+                </div>
+                <div class="custom-hr"></div>
+
+                <div class="d-flex justify-content-between">
+                    <p>Quantity</p>
+                    <span class="font-14-600">{{ job.requestQuote.partQuantity }}</span>
+                </div>
+                <div class="custom-hr"></div>
+
+                <div class="d-flex justify-content-between">
+                    <p>Part needed by</p>
+                    <span class="font-14-600">{{ job.requestQuote.partDateNeeded | conceptXDateTimePipe }}</span>
+                </div>
+                <div class="custom-hr"></div>
+            </div>
+
+            <div>
+                <p class="mb-0 font-14-600 gray-9">NOTES</p>
+                <p class="font-12-400 notes-container" [class.show]="show">
+                    {{job.requestQuote.notes}}
+                </p>
+                <a *ngIf="job.requestQuote.notes.length > 183" class="view"
+                   (click)="show = !show">{{ show ? 'View Less' : 'View More...' }}</a>
+            </div>
+
+            <div class="custom-hr mt-2"></div>
+
+            <div class="shipping-container">
+                <p class="mb-0 font-14-600 gray-9">Shipping Address</p>
+                <p class="mt-2">Mohammad Naeem Saleem Karmi</p>
+                <p>{{job.requestQuote.shippingAddress.street}}</p>
+                <p>{{job.requestQuote.shippingAddress.city}}</p>
+                <p>{{job.requestQuote.shippingAddress.country}}</p>
+            </div>
+
+
+        </div>
     </div>
-    <div class="row mt-1">
-      <p class="col-12"><span class="blue">*</span>Tracking ID</p><br>
-      <div class="col-12">
+    <div class="col-8 pr-0">
+        <div class="bg-white mt-3 section-2">
+            <nz-tabset *ngIf="!history" class="w-100">
+                <nz-tab nzTitle="QUOTE DETAILS">
+                    <div class="quote-details-tab">
+                        <div class="col-md-12 px-0 pt-30px scrollable">
+                            <div class="row">
+                                <div class="col-md-6 px-0">
+                                    <div class="summary">
+                                        <h6><b class="mb-2">MACHINE X</b></h6>
+                                        <p class="gray-8"> Shop Name: <span
+                                                class="font-14-600">{{job.shop.companyLegalName}}</span></p>
+                                        <p class="gray-8">Shop Phone Number: <span
+                                                class="font-14-600">{{job.shop.businessPhoneNumber}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="summary">
+                                        <h6 class="gray-8 font-14-400">QUOTE No: <span
+                                                class="font-14-600">{{job.quote.displayId}}</span></h6>
+
+                                        <p class="gray-8"> Creation Date: <span
+                                                class="font-14-600">{{job.quote.creationDate | conceptXDateTimePipe}}</span>
+                                        </p>
+
+                                        <!--                    <p>-->
+                                        <!--                      Engineer Name: <b> {{job.requestQuote.engineer.username}}</b>-->
+                                        <!--                    </p>-->
+                                        <p class="gray-8"> Part Name: <span
+                                                class="font-14-600">{{job.part.name}}</span></p>
+                                        <!--                    <p>-->
+                                        <!--                      Engineer Email: <b> {{job.requestQuote.engineer.email}}</b>-->
+                                        <!--                    </p>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-30px">
+                                <p class="font-16-600 mb-1">Items</p>
+                                <nz-table #basicTable [nzData]="job.quote.lineItems"
+                                          [nzShowPagination]="false">
+                                    <thead>
+                                    <tr>
+                                        <th class="font-14-600">#</th>
+                                        <th class="font-14-600">Item Name</th>
+                                        <th class="font-14-600">Quantity</th>
+                                        <th class="font-14-600">Unit Cost</th>
+                                        <th class="font-14-600">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--            <tr *ngFor="let item of basicTable.data">-->
+                                    <tr *ngFor="let lineItem of job.quote.lineItems">
+                                        <td>{{ lineItem.id }}</td>
+                                        <td>{{ lineItem.description }}</td>
+                                        <td>{{ lineItem.quantity }}</td>
+                                        <td>{{ lineItem.price | currency: 'USD' }}</td>
+                                        <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
+                                    </tr>
+
+
+                                    <tr class="font-14-600 gray-tr tr">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="font-14-400">+ Shipping Cost</td>
+                                        <td class="font-14-600 blue-8">{{job.quote.shippingRate | currency: 'USD'}}</td>
+                                    </tr>
+                                    <tr class="gray-tr tr">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>+ TAX</td>
+                                        <td class="font-14-600 blue-8">{{job.quote.tax | currency: 'USD'}}</td>
+                                    </tr>
+                                    <tr class="grand-total tr">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-body font-14-600">Grand Total</td>
+                                        <td class="blue-8 font-14-600">{{job.quote.grandTotal | currency: 'USD'}}</td>
+                                    </tr>
+                                    </tbody>
+                                </nz-table>
+
+
+                                <div class="mt-2 row">
+                                    <div class="col-md-8 pl-0">
+                                        <span class="font-14-600 gray-9">Note</span>
+                                        <p class="gray-8">
+                                            {{job.quote.shopQuoteNotes}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 row" *ngIf="job.quote.attachments.length>0">
+                                    <div class="col-md-8 pl-0">
+                                        <span class="font-14-600 gray-9">Attached files</span>
+                                        <div class="col-md-8 pl-0 d-flex align-items-center"
+                                             *ngFor="let att of job.quote.attachments">
+                                            <i class="file-clip" nz-icon nzTheme="outline"
+                                               nzType="paper-clip"></i> <a
+                                                class="blue file pl-2">{{att.fileName}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </nz-tab>
+                <nz-tab nzTitle="JOB DETAILS">
+                    <div class="firts-tab-content ">
+                        <div class="col-md-12 px-0 pt-30px scrollable">
+
+                            <div class="d-flex col-12 px-0">
+                                <div class="col-8 pl-0 summary mt-3">
+                                    <div class="d-flex justify-content-between">
+                                        <p>Selected part</p>
+                                        <span class="font-14-600">{{job.part.name}}</span>
+                                    </div>
+                                    <div class="custom-hr"></div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <p>Part revision</p>
+                                        <span class="font-14-600">{{ job.revision.name }}</span>
+                                    </div>
+                                    <div class="custom-hr"></div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <p>Material selected</p>
+                                        <span class="font-14-600">{{ job.requestQuote.materialType }}</span>
+                                    </div>
+                                    <div class="custom-hr"></div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <p>Quantity</p>
+                                        <span class="font-14-600">{{ job.requestQuote.partQuantity }}</span>
+                                    </div>
+                                    <div class="custom-hr"></div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <p>Part needed by</p>
+                                        <span class="font-14-600">{{ job.requestQuote.partDateNeeded | conceptXDateTimePipe }}</span>
+                                    </div>
+                                    <div class="custom-hr"></div>
+                                </div>
+                                <div class="col-4 d-flex flex-column pr-0">
+                                    <div class="mr-3 job-details-thumb"
+                                         *ngIf="job.revision.attachments.length>0">
+                                        <app-file-previewer
+                                                [file]="job.revision.attachments[0]"></app-file-previewer>
+                                    </div>
+                                    <div *ngIf="job.revision.attachments?.length > 0">
+                                        <p class="mt-2 mb-1 gray-8">Uploaded Files</p>
+                                        <ng-container *ngFor="let attachment of job.revision.attachments">
+                                            <div class="d-flex align-items-center">
+                                                <i class="file-clip filename" nz-icon nzTheme="outline"
+                                                   nzType="paper-clip"></i> <a
+                                                    class="file filename">{{attachment.fileName}}</a>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-30px">
+                                <div>
+                                    <p class="mb-0 font-14-600 gray-8">NOTES</p>
+                                    <p class="font-12-400">
+                                        {{job.requestQuote.notes}}
+                                    </p>
+                                </div>
+
+                                <div class="custom-hr"></div>
+
+                                <div class="shipping-container">
+                                    <p class="mb-0 font-14-600 gray-8">Shipping Address</p>
+                                    <p class="mt-2">Mohammad Naeem Saleem Karmi</p>
+                                    <p>{{job.requestQuote.shippingAddress.street}}</p>
+                                    <p>{{job.requestQuote.shippingAddress.city}}</p>
+                                    <p>{{job.requestQuote.shippingAddress.country}}</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </nz-tab>
+                <nz-tab nzTitle="HISTORY">
+                    <div class="firts-tab-content ">
+                        <div class="col-md-12 p-24 white-bg scrollable">
+                            <app-quote-history [quoteId]="job.quote.id"></app-quote-history>
+                        </div>
+                    </div>
+                </nz-tab>
+            </nz-tabset>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="chat-pop-up" *ngIf="showChat">
+<div class="d-flex p-4">
+    <img (click)="showCloseChat(false)" class="chat-pop-cross-btn" src="assets/img/cross.svg"/>
+    <span class="ml-2 chat-pop-up-title">Welding Services Shop Messages</span>
+</div>
+<div *ngIf="!history" class="col-12 white-bg">
+    <app-chat [enableIssueMode]="job.status==='in_work' || job.status==='pending'"
+              [quoteId]="job.quote.id"></app-chat>
+</div>
+</div>
+
+<div *ngIf="!showChat" (click)="showCloseChat(true)" class="chat-btn">
+<img src="assets/img/chat-img.svg"/>
+</div>
+
+<!--        <nz-footer *ngIf="history">-->
+<!--          <button (click)="hideHistory()" class="mar-2" nz-button nzType="default">Back</button>-->
+
+<!--        </nz-footer>-->
+<!--        <nz-footer *ngIf="!history">-->
+<!--          <div>-->
+<!--            <button (click)="openInvoice()" class="mar-2" nz-button nzType="primary">Open Invoice</button>-->
+<!--            <button class="mar-2" data-target="#ShareModal" data-toggle="modal" nz-button nzType="default">Share<i nz-icon nzTheme="outline" nzType="share-alt"></i></button>-->
+
+<!--          </div>-->
+
+
+<!--          <div class="push-r">-->
+<!--            <button (click)="showHistory()" class="mar-2" nz-button nzType="default">History<i nz-icon nzTheme="outline" nzType="history"></i></button>-->
+
+<!--            <button (click)="showShippingModal()" [disabled]="job.status!=='in_work'" class="mar-2 purple-btn" nz-button>Ship Part <i nz-icon nzTheme="outline" nzType="export"></i></button>-->
+<!--          </div>-->
+
+<!--        </nz-footer>-->
+
+<div aria-hidden="true" aria-labelledby="ShareModal" class="modal fade" id="ShareModal" role="dialog"
+ tabindex="-1">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <app-share-job-modal [jobId]="job.id"></app-share-job-modal>
+    </div>
+</div>
+</div>
+
+</ng-container>
+<ng-template #noJob>
+<!--  ToDo  what to show if no rfq-->
+No job
+</ng-template>
+</div>
+
+<div class="job-ship-modal">
+<div [class.show]="isShippingModalVisible" class="modal" id="shippingmodal" role="dialog" tabindex="-1">
+<form class="share-parts-modal" (ngSubmit)="submitShippingForm()" [formGroup]="shippingForm">
+<span class="align-items-center d-flex font-16-600"> <img src="../../../assets/img/exportion.svg"
+                                                          style="margin-right:10px"> Shipping Details</span>
+<ng-container
+        *ngIf="shippingForm.invalid && shippingForm.errors && (shippingForm.dirty || shippingForm.touched)">
+    <nz-alert *ngFor="let error of shippingForm.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon
+              nzType="error"></nz-alert>
+</ng-container>
+<div class="row mt-3">
+    <p class="col-12 mb-1"><span class="blue">*</span>Shipping company</p><br>
+    <div class="col-12">
+        <input class="col-12" formControlName="company" nz-input placeholder="Shipping Company"
+               type="text"/>
+        <ng-container
+                *ngIf="shippingForm.controls.company.invalid && (shippingForm.controls.company.dirty || shippingForm.controls.company.touched)">
+            <nz-alert *ngFor="let error of shippingForm.controls.company.errors.APIErrors"
+                      nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+            <nz-alert *ngIf="shippingForm.controls.company.errors.required"
+                      nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+        </ng-container>
+    </div>
+</div>
+<div class="row mt-3">
+    <p class="col-12 mb-1"><span class="blue">*</span>Tracking ID</p><br>
+    <div class="col-12">
         <input class="col-12" formControlName="trackingId" nz-input placeholder="ID" type="text"/>
-        <ng-container *ngIf="shippingForm.controls.trackingId.invalid && (shippingForm.controls.trackingId.dirty || shippingForm.controls.trackingId.touched)">
-          <nz-alert *ngFor="let error of shippingForm.controls.trackingId.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-          <nz-alert *ngIf="shippingForm.controls.trackingId.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+        <ng-container
+                *ngIf="shippingForm.controls.trackingId.invalid && (shippingForm.controls.trackingId.dirty || shippingForm.controls.trackingId.touched)">
+            <nz-alert *ngFor="let error of shippingForm.controls.trackingId.errors.APIErrors"
+                      nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+            <nz-alert *ngIf="shippingForm.controls.trackingId.errors.required"
+                      nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
         </ng-container>
-      </div>
     </div>
+</div>
 
-    <div class="row mt-3">
-      <p class="col-12"><span class="blue">*</span>Status</p><br>
-      <div class="col-12">
+<div class="row mt-3">
+    <p class="col-12 mb-1"><span class="blue">*</span>Status</p><br>
+    <div class="col-12">
         <input class="col-12" formControlName="status" nz-input placeholder="status" type="text"/>
-        <ng-container *ngIf="shippingForm.controls.status.invalid && (shippingForm.controls.status.dirty || shippingForm.controls.status.touched)">
-          <nz-alert *ngFor="let error of shippingForm.controls.status.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-          <nz-alert *ngIf="shippingForm.controls.status.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
+        <ng-container
+                *ngIf="shippingForm.controls.status.invalid && (shippingForm.controls.status.dirty || shippingForm.controls.status.touched)">
+            <nz-alert *ngFor="let error of shippingForm.controls.status.errors.APIErrors"
+                      nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+            <nz-alert *ngIf="shippingForm.controls.status.errors.required"
+                      nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
         </ng-container>
-      </div>
     </div>
-    <ng-template [nzModalFooter]>
-      <button (click)="cancelShipping()" nz-button nzType="default" type="button">Cancel</button>
-      <button (click)="submitShippingForm()" [disabled]="shippingForm.invalid" nz-button nzType="primary" type="button">Submit</button>
-    </ng-template>
-  </form>
-</nz-modal>
+</div>
+<div class="custom-hr"></div>
+<div class="mt-4 d-flex col-12">
+    <button (click)="submitShippingForm()" [disabled]="shippingForm.invalid" nz-button nzType="primary"
+            type="button">Submit
+    </button>
+    <button (click)="cancelShipping()" class="ml-2" data-dismiss="modal" nz-button nzType="default"
+            type="button">Cancel
+    </button>
+</div>
+</form>
+</div>
 
 <div aria-hidden="true" aria-labelledby="ShipModal" class="modal fade" id="ShipModal" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+    <div class="modal-body">
         <b> <img src="../../../assets/img/exportion.svg" style="margin-right:10px"> Shipping Details</b>
         <div class="modal-content-custom-email">
-          <div class="row mt-1">
-            <p class="col-12"><span class="blue">*</span>Shipping Date</p><br>
-            <div class="col-12">
-              <nz-date-picker [(ngModel)]="date" [nzFormat]="dateFormat" class="col-12">
-              </nz-date-picker>
+            <div class="row mt-1">
+                <p class="col-12"><span class="blue">*</span>Shipping Date</p><br>
+                <div class="col-12">
+                    <nz-date-picker [(ngModel)]="date" [nzFormat]="dateFormat" class="col-12">
+                    </nz-date-picker>
+                </div>
             </div>
-          </div>
-          <div class="row mt-1">
-            <p class="col-12"><span class="blue">*</span>Shipping company</p><br>
-            <div class="col-12">
-              <select id="cars" nz-input>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select>
+            <div class="row mt-1">
+                <p class="col-12"><span class="blue">*</span>Shipping company</p><br>
+                <div class="col-12">
+                    <select id="cars" nz-input>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
             </div>
-          </div>
 
-          <div class="row mt-3">
-            <p class="col-12"><span class="blue">*</span>Tracking Number</p><br>
-            <div class="col-12">
-              <textarea nz-input placeholder="Description of this issue" rows="4"></textarea>
+            <div class="row mt-3">
+                <p class="col-12"><span class="blue">*</span>Tracking Number</p><br>
+                <div class="col-12">
+                    <textarea nz-input placeholder="Description of this issue" rows="4"></textarea>
 
+                </div>
             </div>
-          </div>
-          <div class="mt-2 push-r">
-            <button class="mar-2" data-dismiss="modal" nz-button nzType="default">Close</button>
-            <button data-dismiss="modal" nz-button nzType="primary" type="button">Share</button>
-          </div>
+            <div class="mt-2 push-r">
+                <button class="mar-2" data-dismiss="modal" nz-button nzType="default">Close</button>
+                <button data-dismiss="modal" nz-button nzType="primary" type="button">Share</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-    
+</div>
+</div>
+
+</div>

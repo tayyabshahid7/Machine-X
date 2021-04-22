@@ -86,7 +86,7 @@ export class ReviewSubmitComponent implements OnInit {
       nzOkType: 'primary',
       nzOnOk: () => {
         this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
-        this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id]);
+        this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id, this.rfq.displayId]);
       },
       nzCancelText: 'Cancel',
       nzOnCancel: () => {
@@ -114,7 +114,7 @@ export class ReviewSubmitComponent implements OnInit {
         this.errorHandlerService.setFormAPIErrors(this.form, errorResponse.error);
         this.bufferService.setBufferedItem(QUOTE_FORM_BUFFER_ITEM_KEY, this.form);
         this.notification.error('Error submitting quote', null);
-        this.router.navigate(['dashboard/newRFQ/details/', this.rfq.id, 'apply']);
+        this.router.navigate([`dashboard/newRFQ/details/${this.rfq.id}/${this.rfq.displayId}/apply`]);
       }
     );
   }

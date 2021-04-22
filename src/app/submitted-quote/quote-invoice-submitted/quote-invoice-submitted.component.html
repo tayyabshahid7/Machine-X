@@ -1,137 +1,141 @@
 <div class="container-64px">
   <ngx-spinner></ngx-spinner>
-  <ng-container *ngIf="quoteInvoice!==null; else noInvoice">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
-        <nz-page-header-title><span class="previous">Submitted Quotes /  </span> Quote {{quoteInvoice.displayId}} Details - Invoice</nz-page-header-title>
-      </nz-page-header>
-    </div>
-
-    <div class="content row">
-      <div class="col-3 gray-bg"></div>
-      <div class="col-6 pt-30px scrollable" id="pdfAnchor">
-        <div class="header row">
-          <div class="col-md-6">
-            <img src="../../../assets/img/logoConceptX.svg" width="150px"><br>
-            <span class="gray-7" style="font-size: 14px;padding:0">{{quoteInvoice.shop.companyLegalName}} Shop </span>
-          </div>
-
-          <div class=" col-md-6   text-right">
-            <b class="blue">Invoice</b><br>
-            <small class="push-right gray-7 mb-1">Invoice #{{quoteInvoice.payment.invoiceNumber}}</small>
-          </div>
+  <ng-container >
+    <div class="invoice-container mt-5">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p  class="font-20-600">Job #{{quoteInvoice?.payment.invoiceNumber}} Invoice</p>
         </div>
-        <hr>
 
-        <div class="row">
-          <div class="col-6">
-            <div class="summary">
-              <h6><b class="mb-1">Billed to</b></h6>
-              <p>
-                Shop Name: <b>{{quoteInvoice.shop.companyLegalName}}</b>
-              </p>
-              <p>
-                Address: <b>{{quoteInvoice.shop.addressLine1}}</b>
-              </p>
-              <p *ngIf="quoteInvoice.shop.addressLine2">
-                Address: <b>{{quoteInvoice.shop.addressLine2}}</b>
-              </p>
-              <p>
-                City: <b>{{quoteInvoice.shop.city}}</b>
-              </p>
-              <p>
-                State: <b>{{quoteInvoice.shop.state}}</b>
-              </p>
-              <p>
-                Shop Phone Number: <b>{{quoteInvoice.shop.businessPhoneNumber}}</b>
-              </p>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="summary text-right">
-              <h6><b class="mb-1">QUOTE #{{quoteInvoice.displayId}}</b></h6>
-              <p>
-                Date: {{quoteInvoice.creationDate| conceptXDateTimePipe}}
-              </p>
-              <p>
-                Engineer Name: {{quoteInvoice.engineer.username}}
-              </p>
-              <p>
-                Part Name: {{quoteInvoice.part.name}}
-              </p>
-              <p>
-                Engineer Email: {{quoteInvoice.engineer.email}}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="mt-30px">
-          <nz-table [nzShowPagination]="false" #basicTable [nzData]="quoteInvoice.lineItems">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Unit Cost</th>
-              <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let lineItem of quoteInvoice.lineItems">
-              <td>{{ lineItem.id }}</td>
-              <td>{{ lineItem.description }}</td>
-              <td>{{ lineItem.quantity }}</td>
-              <td>{{ lineItem.price | currency: 'USD' }}</td>
-              <td>{{ (lineItem.price * lineItem.quantity) | currency: 'USD' }}</td>
-
-            </tr>
-            </tbody>
-          </nz-table>
-          <div class="mt-2 row">
-            <div class="col-9">
-
-            </div>
-            <div class="col-3">
-              <p class=" tax">+ Tax {{quoteInvoice.tax | currency: 'USD'}}</p>
-              <p class=" tax">+ Shipping rate {{quoteInvoice.shippingRate | currency: 'USD'}}</p>
-              <p class=" tax">+ Platform fees {{quoteInvoice.platformFees | currency: 'USD'}}</p>
-              <nz-table [nzShowPagination]="false" #basicTable [nzData]="[quoteInvoice.grandTotal]">
-                <thead>
-                <tr>
-                  <th class="text-center">Ammount Due</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td class="blue text-center o20px-size"><b>{{quoteInvoice.grandTotal | currency: 'USD'}}</b></td>
-                </tr>
-                </tbody>
-              </nz-table>
-            </div>
-          </div>
-        </div>
+        <button  class="d-flex align-items-center" (click)="downloadInvoice()" nz-button nzType="default"><i nz-icon nzTheme="outline" nzType="download"></i>Download invoice</button>
       </div>
+      <div class="content mb-4">
+        <div class="col-12 pt-30px scrollable bg-white" id="pdfAnchor">
+          <div class="header">
+            <img width="140px" src="assets/img/logoConceptX.svg">
+            <div class="push-right text-right">
+              <b class="blue font-16-600 blue-7">Invoice</b><br>
+              <small class="font-16-600 push-right gray-7 mb-1">#{{quoteInvoice?.payment.invoiceNumber}}</small>
+            </div>
 
-      <div class="col-3 gray-bg"></div>
+            <hr class="mt-30px">
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="summary">
+                <h6 class="gray-9"><b class="mb-1 font-16-600">Billed to</b></h6>
+                <p class="gray-7">
+                  Shop Name:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.companyLegalName}}</span>
+                </p>
 
-    </div>
+                <p class="gray-7">
+                  Address:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.addressLine1}}</span>
+                </p>
 
+                <p class="gray-7" *ngIf="quoteInvoice?.shop.addressLine2">
+                  Address 2:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.addressLine2}}</span>
+                </p>
 
-    <nz-footer>
-      <button (click)="downloadInvoice()" nz-button class="mar-2" nzType="primary">Download Invoice<i nz-icon nzType="download" nzTheme="outline"></i></button>
-      <button data-toggle="modal" data-target="#ShareModal" nz-button class="mar-2" nzType="default">Share<i nz-icon nzType="share-alt" nzTheme="outline"></i></button>
-    </nz-footer>
+                <p class="gray-7">
+                  City:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.city}}</span>
+                </p>
 
+                <p class="gray-7">
+                  State:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.state}}</span>
+                </p>
 
-    <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <app-share-invoice-modal [paymentId]="quoteInvoice.payment.id"></app-share-invoice-modal>
+                <p class="gray-7">
+                  Shop Phone Number:
+                  <span class="gray-7 font-14-600">{{quoteInvoice?.shop.businessPhoneNumber}}</span>
+                </p>
+
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="summary text-right">
+                <div>
+                  <h6><b class="mb-1">QUOTE No #{{quoteInvoice?.displayId}}</b></h6>
+                  <p class="font-14-600 gray-7">
+                    {{quoteInvoice?.creationDate | date:"MMM dd, yyyy"}}
+                  </p>
+                  <p class="font-14-600 gray-7">
+                    {{quoteInvoice?.engineer.username}}
+                  </p>
+                  <p class="font-14-600 gray-7">
+                    {{quoteInvoice?.part.name}}
+                  </p>
+                  <p class="font-14-600 gray-7">
+                    {{quoteInvoice?.engineer.email}}
+                  </p>
+                  <p class="font-14-600 gray-7">
+                    Engineer Address Line 1
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-30px">
+
+          <p class="font-16-600 m-0">Summary</p>
+          <div class="mt-3">
+            <nz-table #basicTable [nzData]="quoteInvoice?.lineItems" [nzShowPagination]="false">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!--            <tr *ngFor="let item of basicTable.data">-->
+              <tr *ngFor="let item of quoteInvoice?.lineItems">
+                <td>{{ item.id }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price | currency: 'USD' }}</td>
+                <td>{{ (item.price * item.quantity) | currency: 'USD' }}</td>
+              </tr>
+
+              <tr class="font-14-600 sky-blue tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="font-14-400">+ Shipping Cost </td>
+                <td class="font-14-400">{{quoteInvoice?.shippingRate | currency: 'USD'}}</td>
+              </tr>
+              <tr class="sky-blue tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>+ TAX </td>
+                <td>{{quoteInvoice?.tax | currency:'USD'}}</td>
+              </tr>
+              <tr class="grand-total tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-white font-14-600">Grand Total </td>
+                <td class="text-white font-14-600">{{quoteInvoice?.grandTotal | currency: 'USD'}}</td>
+              </tr>
+              </tbody>
+            </nz-table>
+
+          </div>
         </div>
       </div>
     </div>
   </ng-container>
+
   <ng-template #noInvoice>
     <!--  ToDo  what to show if no rfq-->
     No Invoice

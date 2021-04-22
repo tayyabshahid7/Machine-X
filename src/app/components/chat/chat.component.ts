@@ -18,7 +18,8 @@ export class ChatComponent implements OnInit {
   busy = false;
 
   messages: Array<ChatMessageInterface> = [];
-  defaultAvatar = 'assets/img/default-profile-icon.png';
+  defaultAvatar = 'assets/img/chat-outgoing-avatar.svg';
+  engineerDefaultAvatar = 'assets/img/avatar-white.svg';
 
   constructor(
     private quoteAPIService: QuoteAPIService,

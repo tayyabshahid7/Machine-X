@@ -216,3 +216,231 @@ nz-footer {
 .form-error {
     color: red;
 }
+
+/* new changes */
+
+.font-16-600{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+.font-12-400{
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+.font-14-600{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+.font-18-600{
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+.font-16-400{
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+.font-20-600{
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+.font-24-600{
+    font-size: 24px !important;
+    font-weight: 600 !important;
+}
+
+.font-14-400{
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.previous {
+    font-size: 14px !important;
+    font-family: SFPDLight !important;
+}
+
+.custom-route-label .anticon-arrow-left path{
+    fill: #1890FF;
+}
+
+.custom-hr{
+    border-bottom: 1.5px solid #F5F6FA;
+    margin-bottom: 1em;
+}
+
+
+/* sidemenu changes */
+
+.custom-submenu > .ant-menu{
+    background: transparent !important;
+}
+.custom-submenu > .ant-menu .ant-menu-item{
+    color: #ffffff !important;
+}
+
+.custom-submenu > .ant-menu .ant-menu-item:hover{
+    color: #1890ff !important;
+}
+
+.custom-submenu .ant-menu-submenu-title{
+    display: flex;
+    align-items: center;
+}
+
+.custom-submenu i::before,.custom-submenu i::after  {
+    background-image: linear-gradient(to right, #ffffff, #ffffff) !important;
+}
+
+.custom-submenu li{
+    width: 90% !important;
+    margin: auto;
+    padding-left: 31px !important;
+}
+.ant-layout-sider-children{
+    height: auto !important;
+}
+/* sidemenu changes end */
+
+
+/* pagination style*/
+
+.ant-pagination i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ant-pagination-item-active{
+    color: #1890FF !important;
+    border: 1.25px solid;
+}
+button.ant-pagination-item-link.ng-star-inserted,.ant-pagination-item{
+    border-radius: 4px;
+}
+
+/* pagination style end */
+
+.blue-7{
+    color: #096DD9 !important;
+}
+
+.blue-8{
+    color: #1890FF !important;
+}
+
+.sky-blue{
+    background: #E6F7FF !important;
+}
+
+.daybreak-blue{
+    color: #1890FF !important;
+}
+
+
+/* chat css*/
+
+.chat-pop-up{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 562px;
+    height: 100%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+    background: white;
+}
+
+.chat-pop-up-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chat-pop-cross-btn{
+    cursor: pointer;
+}
+
+.chat-btn{
+    background: #1548A6;
+    border-radius: 50%;
+    position: absolute;
+    right:3%;
+    z-index: 10;
+    cursor: pointer;
+    bottom: 45px;
+}
+
+.chat-btn img{
+    width: 60px;
+    height: 60px;
+    padding: 14px;
+}
+
+
+.engineer-chat-box .ant-comment-inner{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.engineer-chat-box .ant-comment-content-author{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.engineer-chat-box .ant-comment-content-detail{
+    margin-left: auto;
+    margin-right: 4%;
+}
+.engineer-chat-box .ant-comment-avatar{
+    margin: 0;
+}
+
+.chat-outgoing img{
+    background: #E8E8E8;
+    padding: 7px;
+}
+.chat-incoming img{
+    background: #1590ff;
+    padding: 7px;
+}
+.engineer-chat-box .ant-comment-content-author-name{
+    color: #1590ff;
+    font-weight: 600;
+}
+
+.ant-comment-content-author-name{
+    font-weight: 600;
+}
+
+/* chat css end */
+
+.custom-thumb .thumb{
+    height: 110px !important;
+    width: 124px !important;
+}
+
+/* working job details changes */
+.ant-tabs-tab{
+    padding: 4px 0 !important;
+    margin-left: 0 !important;
+}
+
+.ant-tabs-tab-btn{
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+    color: #096DD9 !important;
+}
+
+.job-details-thumb .thumb {
+    height: 149px !important;
+    width: 100% !important;
+}
+
+.ant-modal-close-x{
+    display: none !important;
+}
+
+.job-ship-modal{
+
+}

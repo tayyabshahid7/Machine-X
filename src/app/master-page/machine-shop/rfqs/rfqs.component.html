@@ -1,27 +1,38 @@
 <nz-content>
-    <div class="site-page-header-ghost-wrapper">
-        <nz-page-header [nzGhost]="false">
-          <nz-page-header-title>RFQs</nz-page-header-title>
-          <nz-page-header-content>
-              <div class="row">
-                  <div class="col-6 p-0 space-b">
+<!--    <div class="site-page-header-ghost-wrapper">-->
+<!--        <nz-page-header [nzGhost]="false">-->
+<!--          <nz-page-header-title>RFQs</nz-page-header-title>-->
+<!--          <nz-page-header-content>-->
+<!--              <div class="row">-->
+<!--                  <div class="col-6 p-0 space-b">-->
+<!--                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">-->
+<!--                        <input type="text" nz-input placeholder="Search part name / RFQ ID" />-->
+<!--                      </nz-input-group>-->
+<!--                      <ng-template #suffixIconButton>-->
+<!--                        <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>-->
+<!--                      </ng-template>-->
+<!--                  </div>-->
+<!--                  <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a>-->
+<!--                  </div>-->
+
+<!--          </nz-page-header-content>-->
+<!--       -->
+<!--        </nz-page-header>-->
+<!--      </div>-->
+      <div class="p-24px">
+
+        <div nz-row nzGutter="" >
+            <div class="search-bar col-12 my-3 pl-2">
+                <div class="col-6 p-0 space-b">
                     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
                         <input type="text" nz-input placeholder="Search part name / RFQ ID" />
-                      </nz-input-group>
-                      <ng-template #suffixIconButton>
+                    </nz-input-group>
+                    <ng-template #suffixIconButton>
                         <button nz-button class="grey-icon-btn" nzType="ghost" nzSearch><i nz-icon nzType="search"></i></button>
-                      </ng-template>
-                  </div>
-                  <a routerLink="/dashboard/RFQ/Add"><button nz-button nzType="primary">+ Add New RFQ</button></a>
-                  </div>
+                    </ng-template>
+                </div>
+            </div>
 
-          </nz-page-header-content>
-       
-        </nz-page-header>
-      </div>
-      <div class="p-24px"> 
-        <div nz-row nzGutter="" >
-           
             <nz-table [nzShowPagination]="false" class="col-12" #basicTable [nzData]="tableData">
                 <thead>
                   <tr>

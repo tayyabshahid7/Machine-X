@@ -16,6 +16,7 @@ import { ErrorHandlerService } from '../../services/error-handler.service';
 export class WorkingJobDetailsComponent implements OnInit {
   job: JobInterface = null;
   shippingForm: FormGroup;
+  showChat: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,12 +33,16 @@ export class WorkingJobDetailsComponent implements OnInit {
   history = false;
   dateFormat = 'MM/dd/yyyy';
   date = null;
-
+  show: boolean = false;
   isShippingModalVisible = false;
 
 
   showShippingModal(): void {
     this.isShippingModalVisible = true;
+  }
+
+  showCloseChat(showChat: boolean) {
+    this.showChat = showChat;
   }
 
   submitShippingForm(): void {

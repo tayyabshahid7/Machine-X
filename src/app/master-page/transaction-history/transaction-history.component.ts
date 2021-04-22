@@ -86,7 +86,6 @@ export class TransactionHistoryComponent implements OnInit {
   transferDone() {
     this.notification.success('Transer Initiated',
       'Transfers are reviewed which may result in delays or fund begin frozen or removed from your account');
-
   }
 
 }

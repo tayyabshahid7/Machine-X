@@ -1,39 +1,18 @@
 <nz-layout style="height: 100%;">
-  <nz-header class="header">
-    <div class="logo">
-      <img src="../../assets/img/logoMachineX-white.svg" class="img-responsive" width="120px">
-    </div>
-    <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
-      <a nz-dropdown [nzDropdownMenu]="menu">
-        <i nz-icon nzType="bell" class="notificaiton-icon" nzTheme="outline"></i>
-      </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu nzSelectable>
-          <li nz-menu-item>Notification 1</li>
-          <li nz-menu-item>Notification 2</li>
-          <li nz-menu-item>Notification 3</li>
-          <li nz-menu-item>Notification 4</li>
-        </ul>
-      </nz-dropdown-menu>
-
-      <a routerLink="profile" *ngIf="(shopProfile$ | async) as shop">
-        <span class="pointer username">
-<!--          <nz-avatar nzIcon="user" nzSrc="../../../assets/img/pro.jpg"></nz-avatar>-->
-          {{shop.companyLegalName}}
-        </span>
-      </a>
-    </ul>
-  </nz-header>
   <nz-layout>
     <nz-sider nzWidth="210px" nzTheme="dark" class="rightBorder">
+      <div class="logo">
+        <img src="../../assets/img/logoMachineX-white.svg" class="img-responsive" width="120px">
+      </div>
       <ul nz-menu nzMode="inline" class="sider-menu">
         <a routerLink="home" routerLinkActive #rlaDashboard="routerLinkActive">
           <li nz-menu-item class="nz-menu-item" [nzSelected]="rlaDashboard.isActive">
+            <img class="img-responsive menu-icons" src="../../assets/img/dashboard_icon.svg">
             <span>Dashboard</span>
           </li>
         </a>
 
-        <li nz-submenu nzTheme="dark" style="background-color: #001529 ; color:#D9D9D9" class="nz-submenu" style="padding-left: 48px;" nzTitle="All Jobs">
+        <li nzIcon="custom:gear_icon" nz-submenu nzTheme="dark" style="background-color: #001529 ;padding-left: 16px !important;color: #FFFFFF" class="custom-submenu nz-submenu" nzTitle="All Jobs">
           <ul style="background-color: #001529 ;color:#D9D9D9">
             <a routerLink="newRFQ" routerLinkActive #rlaNewRFQs="routerLinkActive">
               <li nz-menu-item [nzSelected]="rlaNewRFQs.isActive">New RFQ</li>
@@ -48,6 +27,7 @@
         </li>
         <a routerLink="transactions" routerLinkActive #rlaTransactions="routerLinkActive">
           <li nz-menu-item class="nz-menu-item" [nzSelected]="rlaTransactions.isActive">
+            <img class="img-responsive menu-icons" src="../../assets/img/file.svg">
             <span>Transaction History</span>
           </li>
         </a>
@@ -69,9 +49,53 @@
 
       </ul>
     </nz-sider>
-    <nz-layout class="inner-layout">
-      <router-outlet></router-outlet>
-    </nz-layout>
+
+    <div class="d-flex flex-column w-100">
+      <nz-header class="header">
+        <nz-page-header class="ant-page-header ant-page-header-compact d-inline-flex ng-star-inserted p-0 pl-4 custom-route-label"
+                        *ngIf = "routeLabelPart1!=''" [nzGhost]="false" nzBackIcon>
+          <nz-page-header-title>
+            <div class="d-flex align-items-center">
+              <span class="previous custom-blue">{{routeLabelPart1}}</span>
+              <span [ngClass]="rfqIdLabel !== '' && routeLabelPart2 ==='' ? 'gray-6' : 'custom-blue'"
+                    *ngIf = "rfqIdLabel!=''" class="previous">&nbsp;/ RFQ ID: {{rfqIdLabel}}
+              </span>
+              <span [ngClass]="jobIdLabel !== '' && routeLabelPart2 ==='' && rfqIdLabel ==='' ? 'gray-6' : 'custom-blue'"
+                    *ngIf = "jobIdLabel!=''" class="previous">&nbsp;/ Job ID: {{jobIdLabel}}
+              </span>
+              <span class="previous" *ngIf = "routeLabelPart2!=''" >&nbsp;/&nbsp;</span>
+              <span *ngIf = "routeLabelPart2!=''" class="previous gray-6">{{routeLabelPart2}}</span>
+            </div>
+          </nz-page-header-title>
+        </nz-page-header>
+
+        <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            <i nz-icon nzType="bell" class="notificaiton-icon" nzTheme="outline"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>Notification 1</li>
+              <li nz-menu-item>Notification 2</li>
+              <li nz-menu-item>Notification 3</li>
+              <li nz-menu-item>Notification 4</li>
+            </ul>
+          </nz-dropdown-menu>
+
+          <a routerLink="profile" *ngIf="(shopProfile$ | async) as shop">
+        <span class="pointer username">
+<!--          <nz-avatar nzIcon="user" nzSrc="../../../assets/img/pro.jpg"></nz-avatar>-->
+          {{shop.companyLegalName}}
+        </span>
+          </a>
+        </ul>
+      </nz-header>
+
+      <nz-layout class="inner-layout overflow-auto">
+        <router-outlet (activate)='onActivate(outlet)' #outlet="outlet"></router-outlet>
+      </nz-layout>
+    </div>
+
   </nz-layout>
 
 </nz-layout>
