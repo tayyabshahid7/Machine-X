@@ -227,7 +227,7 @@ nz-footer{
 }
 
 .gray-tr > td {
-  border-bottom: 1px solid #F5F5F5 !important;
+  border-bottom: 1px solid white !important;
   transition: background 0.3s;
 }
 

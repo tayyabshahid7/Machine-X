@@ -27,6 +27,8 @@ export class QuoteInvoiceSubmittedComponent implements OnInit {
     private notification: NzNotificationService,
     private spinner: NgxSpinnerService
   ) {
+    debugger
+
   }
 
   ngOnInit(): void {

@@ -13,6 +13,9 @@ import { AddQuoteDataInterface } from '../../models/quote.models';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { MAX_PLATFORM_FEES, PLATFORM_FEES_PERCENTAGE } from '../../utilities/constants';
 import { precisionRound } from '../../utilities/app.utilities';
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-review-submit',
@@ -25,17 +28,19 @@ export class ReviewSubmitComponent implements OnInit {
   form: FormGroup;
   platformFees: number;
   grandTotal: number;
+  submitSuccess = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private modal: NzModalService,
-    private router: Router,
-    private rfqAPIService: RfqAPIService,
-    private quoteAPIService: QuoteAPIService,
-    private notification: NzNotificationService,
-    private spinner: NgxSpinnerService,
-    protected bufferService: BufferService,
-    protected errorHandlerService: ErrorHandlerService,
+      private location: Location,
+      private route: ActivatedRoute,
+      private modal: NzModalService,
+      private router: Router,
+      private rfqAPIService: RfqAPIService,
+      private quoteAPIService: QuoteAPIService,
+      private notification: NzNotificationService,
+      private spinner: NgxSpinnerService,
+      protected bufferService: BufferService,
+      protected errorHandlerService: ErrorHandlerService,
   ) {
   }
 
@@ -50,21 +55,33 @@ export class ReviewSubmitComponent implements OnInit {
     this.loadRfq();
   }
 
+  rotateArrow(event): void {
+    if (event.target.lastChild.classList.contains('arrow-up-down-rotate')) {
+      event.target.lastChild.classList.remove('arrow-up-down-rotate');
+    } else {
+      event.target.lastChild.classList.add('arrow-up-down-rotate');
+    }
+  }
+
   loadRfq() {
     this.spinner.show();
     const rfqId = this.route.snapshot.paramMap.get('rfqId');
     this.rfqAPIService.getRfq(rfqId).subscribe(
-      rfq => {
-        this.rfq = rfq;
-        this.spinner.hide();
-      },
-      error => {
-        // TODO: review how to show error here
-        this.notification.error('Error loading rfq', null);
-        this.spinner.hide();
-        this.router.navigate(['/dashboard/RFQ']);
-      }
+        rfq => {
+          this.rfq = rfq;
+          this.spinner.hide();
+        },
+        error => {
+          // TODO: review how to show error here
+          this.notification.error('Error loading rfq', null);
+          this.spinner.hide();
+          this.router.navigate(['/dashboard/RFQ']);
+        }
     );
+  }
+
+  editQuote(): void {
+    this.location.back();
   }
 
   setTotals() {
@@ -75,7 +92,6 @@ export class ReviewSubmitComponent implements OnInit {
     this.platformFees = precisionRound(Math.min(MAX_PLATFORM_FEES, feesByPercentage), 2);
     this.grandTotal = this.form.controls.tax.value + subtotal + this.platformFees;
   }
-
 
   showDeleteConfirm(): void {
     this.modal.confirm({
@@ -103,19 +119,20 @@ export class ReviewSubmitComponent implements OnInit {
       ...this.form.value
     };
     this.quoteAPIService.addQuote(quoteData).subscribe(
-      response => {
-        this.spinner.hide();
-        this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
-        this.notification.success('Quote submitted successfully', null);
-        this.router.navigate(['dashboard/submittedQuote']);
-      },
-      errorResponse => {
-        this.spinner.hide();
-        this.errorHandlerService.setFormAPIErrors(this.form, errorResponse.error);
-        this.bufferService.setBufferedItem(QUOTE_FORM_BUFFER_ITEM_KEY, this.form);
-        this.notification.error('Error submitting quote', null);
-        this.router.navigate([`dashboard/newRFQ/details/${this.rfq.id}/${this.rfq.displayId}/apply`]);
-      }
+        response => {
+          this.spinner.hide();
+          this.bufferService.deleteBufferItem(QUOTE_FORM_BUFFER_ITEM_KEY);
+          this.notification.success('Quote submitted successfully', null);
+          // this.router.navigate(['dashboard/submittedQuote']);
+          this.submitSuccess = true;
+        },
+        errorResponse => {
+          this.spinner.hide();
+          this.errorHandlerService.setFormAPIErrors(this.form, errorResponse.error);
+          this.bufferService.setBufferedItem(QUOTE_FORM_BUFFER_ITEM_KEY, this.form);
+          this.notification.error('Error submitting quote', null);
+          this.router.navigate([`dashboard/newRFQ/details/${this.rfq.id}/${this.rfq.displayId}/apply`]);
+        }
     );
   }
 }

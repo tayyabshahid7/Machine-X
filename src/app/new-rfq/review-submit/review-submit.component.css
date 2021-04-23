@@ -2,8 +2,8 @@
     color:rgba(191,191,191,1);
     font-size: 20px;
     font-family: SFPDLight !important;
-  }
-  .preview{
+}
+.preview{
     height: 180px;
     width: 100%;
     background-image: url(../../../assets/img/part2.png);
@@ -14,17 +14,16 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-  .container-64{
-      height: calc(100vh - 64px);
-  }
-  .content{
-     
-      background-color: #fff;
-      /* padding: 24px; */
-      height: calc(100% - 136px);
-      overflow-y: auto;
-  }
-  nz-footer{
+.container-64{
+    height: calc(100vh - 64px);
+}
+.content{
+    padding: 15px 24px;
+    height: 100% !important;
+    max-width: 70%;
+    margin: auto;
+}
+nz-footer{
     padding: 16px 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     background-color:#fff ;
@@ -33,8 +32,8 @@
     bottom: 0;
     width: calc(100% - 210px);
     height: 64px;
-  }
-  .blue{
+}
+.blue{
     color: #1890ff;
 }
 .mar-2{
@@ -70,15 +69,15 @@ th{
     padding: 20px;
 }
 .modal-content{
-  padding: 33px 11px;
+    padding: 33px 11px;
 }
 .modal {
     background-color:rgba(0, 39, 102, 0.8);
     backdrop-filter: blur(4px);
 }
 .modal-dialog{
-  margin: auto;
-  width: 33% !important;
+    margin: auto;
+    width: 33% !important;
 }
 
 
@@ -98,11 +97,58 @@ th{
     line-height: 22px;
     letter-spacing: 0em;
     padding-left: 10px;
-    }
-    .o20px-size{
-        font-size: 20px;
-    }
-    .scrollable{
-        padding: 30px 50px;
-    }
-  
+}
+.o20px-size{
+    font-size: 20px;
+}
+.scrollable{
+    padding: 30px 50px;
+}
+
+/* new changes */
+
+.section-1,.section-2{
+    padding: 20px 35px;
+    box-shadow: rgba(213, 215, 217, 0.2) 0px 8px 24px;
+    border-radius: 4px;
+}
+
+.shop-img{
+    width: 82px;
+    border: 1px solid #ECECEE;
+    border-radius: 6px;
+    padding: 3px;
+    margin-right: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.part-data p{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.custom-hr {
+    border-bottom: 1.5px solid #F5F6FA;
+    margin-bottom: .5em;
+}
+
+.phone-number{
+    color: #0050B3;
+}
+
+.gray-tr td{
+    border-bottom: 1px solid white !important;
+}
+
+.submit-quote-btn{
+    color: white;
+    background: #219653;
+    border-color: #219653;
+}
+.submit-quote-btn{
+    color: white;
+}
+.view-submitted-btn{
+
+}

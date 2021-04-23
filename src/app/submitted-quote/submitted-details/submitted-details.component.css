@@ -205,7 +205,6 @@
 }
 
 .gray-tr > td {
-  border-bottom: 1px solid #F5F5F5 !important;
   transition: background 0.3s;
 }
 

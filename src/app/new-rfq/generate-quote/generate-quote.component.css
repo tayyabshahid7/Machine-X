@@ -2,8 +2,8 @@
     color:rgba(191,191,191,1);
     font-size: 20px;
     font-family: SFPDLight !important;
-  }
-  .preview{
+}
+.preview{
     height: 180px;
     width: 100%;
     background-image: url(../../../assets/img/part2.png);
@@ -14,17 +14,17 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-  .container-64{
-      height: calc(100vh - 64px);
-  }
-  .content{
-     
-      background-color: #fff;
-      padding: 24px;
-      height: calc(100% - 136px);
-      overflow-y: auto;
-  }
-  nz-footer{
+.container-64{
+    height: calc(100vh - 64px);
+}
+
+.content{
+    padding: 15px 24px;
+    height: 100% !important;
+    max-width: 70%;
+    margin: auto;
+}
+nz-footer{
     padding: 16px 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     background-color:#fff ;
@@ -33,8 +33,8 @@
     bottom: 0;
     width: calc(100% - 210px);
     height: 64px;
-  }
-  .blue{
+}
+.blue{
     color: #1890ff;
 }
 .mar-2{
@@ -70,15 +70,15 @@ th{
     padding: 20px;
 }
 .modal-content{
-  padding: 33px 11px;
+    padding: 33px 11px;
 }
 .modal {
     background-color:rgba(0, 39, 102, 0.8);
     backdrop-filter: blur(4px);
 }
 .modal-dialog{
-  margin: auto;
-  width: 33% !important;
+    margin: auto;
+    width: 33% !important;
 }
 
 
@@ -98,28 +98,96 @@ th{
     line-height: 22px;
     letter-spacing: 0em;
     padding-left: 10px;
-    }
-    .o20px-size{
-        font-size: 20px;
-    }
-    .scrollable{
-        padding: 30px 50px;
-    }
-    .block {
-        display: block;
-        width: 100%;
-        padding: 0px 40px;
-        cursor: pointer;
-        text-align: center;
-      }
-      .full-width{
-        width: 100% !important;
-    }
-    .pointer{
-        cursor: pointer;
-    }
+}
+.o20px-size{
+    font-size: 20px;
+}
+.scrollable{
+    padding: 30px 50px;
+}
+.block {
+    display: block;
+    width: 100%;
+    padding: 0px 40px;
+    cursor: pointer;
+    text-align: center;
+}
+.full-width{
+    width: 100% !important;
+}
+.pointer{
+    cursor: pointer;
+}
 
-    /* nz-table{
-        max-height: 270px !important;
-        overflow-y: auto;
-    } */
+/* nz-table{
+    max-height: 270px !important;
+    overflow-y: auto;
+} */
+
+/* new changes */
+.section-1,.section-2{
+    padding: 20px 35px;
+    box-shadow: rgba(213, 215, 217, 0.2) 0px 8px 24px;
+    border-radius: 4px;
+}
+
+.upload-btn{
+    width: 253px !important;
+    height: 40px !important;
+    justify-content: center;
+}
+
+.part-data p{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+
+.showMore {
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+    border-bottom: 1.5px solid #F5F6FA;
+    padding-bottom: 8px;
+}
+.showMore + input {
+    display:none;
+}
+.showMore + input + * {
+
+    max-height: 0;
+    /*and eventually delay an overflow:auto; */
+    overflow:hidden;
+    transition: max-height 0.7s, overflow 0s;
+}
+.showMore + input:checked + * {
+    /* here comes the compromise, set a max-height that would for your usual contents*/
+    max-height: 500px;
+    overflow:auto;
+    transition: max-height 0.7s, overflow 0.7s 0.7s;
+}
+
+
+.arrow-up-down{
+    transition: all 0.2s 0.2s;
+    transform: rotate(180deg);
+}
+
+.arrow-up-down-rotate{
+    transform: rotate(0deg);
+}
+
+.phone-number{
+    color: #0050B3;
+}
+
+.address p{
+    margin: 0;
+    color: #262626;
+}
+
+.costs input{
+    height: 40px;
+    width: 190px;
+}

@@ -9,7 +9,7 @@
 }
 .content{
     overflow-y: auto;
-    height: calc(100% - 136px);
+    height: calc(100% - 136px) !important;
 }
 nz-footer{
     padding: 16px 24px;

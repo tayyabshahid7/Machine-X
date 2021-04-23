@@ -119,11 +119,11 @@ export class WorkingJobDetailsComponent implements OnInit {
   }
 
   startJob() {
-    this.router.navigate(['/dashboard/submittedQuote/details/:status/invoice']);
+    this.router.navigate(['/dashboard/submittedQuoteInvoice/:status/invoice']);
   }
 
   openInvoice() {
-    this.router.navigate([`/dashboard/submittedQuote/details/${this.job.quote.id}/invoice`]);
+    this.router.navigate([`/dashboard/submittedQuoteInvoice/${this.job.quote.id}/invoice`]);
   }
 
   showHistory() {

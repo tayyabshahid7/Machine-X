@@ -1,120 +1,198 @@
 <div class="container-64">
   <ngx-spinner [fullScreen]="false"></ngx-spinner>
   <ng-container *ngIf="rfq!==null; else noRfq">
-    <div class="site-page-header-ghost-wrapper bottom-border">
-      <nz-page-header nzBackIcon [nzGhost]="false">
-        <nz-page-header-title><span class="previous">New RFQs / </span> RFQ #{{rfq.displayId}}</nz-page-header-title>
-      </nz-page-header>
-    </div>
 
-    <div class="content row">
+    <div class="content">
+      <div *ngIf="!submitSuccess"  class="d-flex mt-4 mb-3 submitted-quote-header">
+        <span class="font-20-600">Review Quote for <span class="blue">REF #{{rfq.displayId}} </span> </span>
+      </div>
+      <div *ngIf="!submitSuccess" class="col-12 px-0 d-flex">
+        <div class="col-md-7 pl-0">
+          <div class="bg-white mt-1 section-1">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="font-16-600 pb-1 m-0">
+                QUOTE DETAILS
+              </p>
+              <img (click)="editQuote()" style="cursor: pointer" src="assets/img/edit-pencil.svg"/>
+            </div>
+            <div class="custom-hr"></div>
 
-      <div class="col-md-3 gray-bg"></div>
-      <div class="col-md-6 pt-30px scrollable">
-        <div class="row">
-          <div class="col-md-6">
-            <!--            <div class="summary">-->
-            <!--              <p>-->
-            <!--                <b> Shop Name: </b>Quantum PHX-->
-            <!--              </p>-->
-            <!--              <p>-->
-            <!--                <b> Address: </b>R221, ST.Monica Pier-->
-            <!--              </p>-->
-            <!--              <p>-->
-            <!--                <b> City:</b> San Jose-->
-            <!--              </p>-->
-            <!--              <p>-->
-            <!--                <b> State: </b> CA, 41211-->
-            <!--              </p>-->
-            <!--              <p>-->
-            <!--                <b> Shop Phone Number:</b> A+1(514)213331-->
-            <!--              </p>-->
-            <!--            </div>-->
-          </div>
+            <div class="d-flex w-100">
+              <div class="col-md-6 px-0">
+                <div class="summary">
+                  <p class="gray-8"> Date: <span class="font-14-600">{{rfq.creationDate | date:"dd.mm.yyyy"}}</span></p>
+                  <p class="gray-8"> Engineer Name: <span class="font-14-600">{{rfq.engineer.username}}</span></p>
+                  <p class="gray-8"> Part Name: <span class="font-14-600">{{rfq.part.name}}</span></p>
+                  <p class="gray-8"> Engineer Email: <span class="font-14-600">{{rfq.engineer.email}}</span></p>
+                  <p class="gray-8"> Engineer Line Address: <span class="font-14-600">{{rfq.engineer.email}}</span></p>
+                </div>
+              </div>
 
-          <div class="col-md-6">
-            <div class="summary">
-              <!-- <h6><b class="mb-1">QUOTE #2308</b></h6> -->
-              <p>
-                <b> Engineer Name:</b> {{rfq.engineer.username}}
-              </p>
-              <p>
-                <b> Part Name:</b> {{rfq.part.name}}
-              </p>
-              <p>
-                <b> Engineer Email: </b> {{rfq.engineer.email}}
-              </p>
+            </div>
+
+            <p class="font-16-600 mb-1 mt-3">Items</p>
+            <nz-table [nzShowPagination]="false" #basicTable [nzData]="form.controls.lineItems.value">
+              <thead>
+              <tr>
+                <th class="font-14-600">#</th>
+                <th class="font-14-600">Item Name</th>
+                <th class="font-14-600">Quantity</th>
+                <th class="font-14-600">Unit Cost</th>
+                <th class="font-14-600">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let lineItem of form.value.lineItems; let i = index">
+                <td>#{{ i }}</td>
+                <td>{{lineItem.description}}</td>
+                <td>{{lineItem.quantity}}</td>
+                <td>{{lineItem.price | currency: 'USD'}}</td>
+                <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
+              </tr>
+
+              <tr class="font-14-600 gray-tr tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="font-14-400">+ Shipping Cost</td>
+                <td class="font-14-600 blue-8">{{form.value.shippingRate | currency: 'USD'}}</td>
+              </tr>
+              <tr class="gray-tr tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>+ TAX</td>
+                <td class="font-14-600 blue-8">{{form.value.tax | currency: 'USD'}}</td>
+              </tr>
+              <tr class="grand-total tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-body font-14-600">Grand Total</td>
+                <td class="blue-8 font-14-600">{{grandTotal | currency: 'USD'}}</td>
+              </tr>
+              </tbody>
+            </nz-table>
+
+
+            <div class="mt-2 row">
+              <div class="col-md-8 pl-0">
+                <span class="font-14-600 gray-9">Note</span>
+                <p class="gray-8">
+                  {{form.value.shopQuoteNotes}}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-2 row" *ngIf="form.value?.attachments?.length > 0">
+              <div class="pl-0">
+                <span class="font-14-600 gray-9">Attached files</span>
+                <div class="pl-0 d-flex align-items-center"
+                     *ngFor="let att of form.value.attachments">
+                  <i class="file-clip" nz-icon nzTheme="outline" nzType="paper-clip"></i> <a class="blue file pl-2">{{att.name}}</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+              <button nz-button class="mar-2" (click)="showDeleteConfirm()">Cancel</button>
+              <button class="d-flex align-items-center submit-quote-btn" nz-button (click)="submitQuote()" ><img class="mr-2" src="assets/img/cart.svg" />Submit Quote</button>
             </div>
           </div>
         </div>
-        <div class="mt-30px">
-          <nz-table [nzShowPagination]="false" #basicTable [nzData]="form.controls.lineItems.value">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Unit Cost</th>
-              <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let lineItem of form.value.lineItems; let i = index">
-              <td>#{{ i }}</td>
-              <td>{{lineItem.description}}</td>
-              <td>{{lineItem.quantity}}</td>
-              <td>{{lineItem.price | currency: 'USD'}}</td>
-              <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
-            </tr>
-            </tbody>
-          </nz-table>
-          <div class="mt-2 row">
-            <div class="col-md-8">
-              <b>Note</b>
-              <p>
-                {{form.value.shopQuoteNotes}}
+        <div class="col-md-5 px-0">
+          <div class="bg-white section-1">
+            <div class="summary">
+              <p class="font-16-600 pb-1">
+                SHOP DETAILS
               </p>
-            </div>
-            <div class="col-md-3">
-              <p class=" tax text-center">+ Shipping rate {{form.value.shippingRate | currency: 'USD'}}</p>
-              <p class=" tax text-center">+ Tax {{form.value.tax | currency: 'USD'}}</p>
-              <p class=" tax text-center">+ Platform fees {{platformFees | currency: 'USD'}}</p>
-              <nz-table [nzShowPagination]="false" #basicTable [nzData]="[grandTotal]">
-                <thead>
-                <tr>
-                  <th>Grand Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td class="blue">{{ grandTotal | currency: 'USD' }}</td>
-                </tr>
-                </tbody>
-              </nz-table>
+              <div class="custom-hr"></div>
+              <div class="row">
+                <img class="shop-img" src="assets/img/welding-service-logo.svg"/>
+                <div class="d-flex flex-column ml-2">
+                    <span class="font-16-600 mt-1">
+                      Welding Services
+                    </span>
+                  <span class="font-12-400 mt-1">
+                      <img class="" width="9px" src="assets/img/location.svg"/>
+                      <span class="font-12-400 ml-2 pl-1">{{ rfq.shippingAddress.street }} {{rfq.shippingAddress.city}} {{rfq.shippingAddress.country}}</span>
+                    </span>
+                  <span class="font-12-400 mt-1 d-flex align-items-center ">
+                      <img class="" width="13px" src="assets/img/phone.svg"/>
+                      <p class="m-0"> Phone <a href="tel:+1(514)213331" class="font-14-600 phone-number">+1(514)213331</a></p>
+                    </span>
+                </div>
+              </div>
             </div>
           </div>
-          <ng-container *ngIf="form.value.attachments.length > 0">
-            <div>
-              <span class="blue">*</span>Attached files
+
+          <div  class="bg-white mt-2 section-1">
+            <p class="font-16-600 pb-1 m-0">
+              RFQ SUMMARY
+            </p>
+            <div class="custom-hr"></div>
+
+            <div class="part-data">
+              <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
+              <!--          <p> Selected part: <b>{{formValue.revision.partName}} - {{formValue.revision.partNumber}}</b></p>-->
+              <!--          <div class="custom-hr"></div>-->
+              <!--          <p> Part revision: <b>{{formValue.revision.revisionName}}</b></p>-->
+              <div class="custom-hr"></div>
+              <p> Selected part: <span class="font-14-600">{{rfq.part.name}}</span></p>
+              <div class="custom-hr"></div>
+              <p> Part revision: <span class="font-14-600">{{rfq.revision.name}} days</span></p>
+              <div class="custom-hr"></div>
+              <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
+              <div class="custom-hr"></div>
+              <p> Quantity: <span class="font-14-600">{{rfq.partQuantity}}</span></p>
+              <div class="custom-hr"></div>
+              <p> Part needed by: <span class="font-14-600">{{ rfq.partDateNeeded | date:"dd.mm.yyyy" }}</span></p>
+              <div class="custom-hr"></div>
+
+              <p class="font-14-600"> Engineer Details</p>
+              <div class="custom-hr"></div>
+              <div>
+                <p> Name <span class="font-14-600">{{rfq.engineer.username}}</span></p>
+                <div class="custom-hr"></div>
+
+                <p> Email <span class="font-14-600">{{rfq.engineer.email}}</span></p>
+                <div class="custom-hr"></div>
+
+                <p> Phone <a href="tel:+1(514)213331" class="font-14-600 phone-number">+1(514)213331</a></p>
+                <div class="custom-hr"></div>
+              </div>
+
+              <p class="font-14-600"> Shipping Address</p>
+              <p class="mb-0"> Mohammad Naeem Saleem Karmi</p>
+              <p class="mb-0">{{rfq.shippingAddress.street}}</p>
+              <p class="mb-0">{{rfq.shippingAddress.city}}</p>
+              <p class="mb-0">{{rfq.shippingAddress.country}}</p>
+
+              <!--                <div>-->
+              <!--                  <p>Notes</p>-->
+              <!--                  <p class="font-weight-bold">{{rfq.notes}}</p>-->
+              <!--                </div>-->
             </div>
-            <div *ngFor="let att of form.value.attachments">
-              <i class="file-clip" nz-icon nzType="paper-clip" nzTheme="outline"></i> <a class="blue file">{{att.name}}</a>
-            </div>
-          </ng-container>
+          </div>
+
         </div>
 
       </div>
 
-      <div class="col-md-3 gray-bg"></div>
+      <div class="mt-5 mx-auto w-75">
+        <nz-result class="bg-white" *ngIf="submitSuccess"
+                   nzStatus="success"
+        >
+          <div nz-result-extra>
+            <span class="font-24-600">Quote on <span class="blue-7">REF# {{rfq.displayId}}</span> have been submitted Successfully!</span>
+            <p> Part number: {{rfq.part.name}}. Part will show up in 1-5 minutes, please wait."</p>
+            <button class="view-submitted-btn" [routerLink]="'/dashboard/submittedQuote'" nz-button nzType="primary">View Submitted Quotes</button>
+          </div>
+        </nz-result>
+      </div>
 
     </div>
-
-
-    <nz-footer>
-      <button nz-button class="mar-2" (click)="submitQuote()" nzType="primary">Submit Quote</button>
-      <button nz-button class="mar-2" (click)="showDeleteConfirm()">Cancel</button>
-
-    </nz-footer>
   </ng-container>
   <ng-template #noRfq>
     <!--  ToDo  what to show if no rfq-->

@@ -441,6 +441,13 @@ button.ant-pagination-item-link.ng-star-inserted,.ant-pagination-item{
     display: none !important;
 }
 
-.job-ship-modal{
+/* rfq-table */
 
+.rfq-table .ant-table-placeholder{
+    display: none;
+}
+
+.gray-tr td{
+    background: #F5F5F5 !important;
+    border-bottom: 1px solid white !important;
 }
