@@ -152,7 +152,8 @@
                 <div class="row mt-2 gray-9">
                   <div class="col-md-5"></div>
                   <div class="col-md-7">
-                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="shippingRate" nz-input placeholder="$ 0,000.00" type="number"/> <span class="blue">+ </span>Shipping Rate
+                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="shippingRate" nz-input placeholder="$ 0,000.00" type="number"/>
+                    <span class="blue">+ </span><span class="responsive-text">Shipping Rate</span>
                     <ng-container *ngIf="form.controls.shippingRate.invalid && (form.controls.shippingRate.dirty || form.controls.shippingRate.touched)">
                       <nz-alert *ngFor="let error of form.controls.shippingRate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
                       <nz-alert *ngIf="form.controls.shippingRate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
@@ -162,12 +163,13 @@
                     </ng-container>
                   </div>
                 </div>
+
                 <div class="custom-hr my-2"></div>
 
                 <div class="row mt-2 gray-9">
                   <div class="col-md-5"></div>
                   <div class="col-md-7 ">
-                    <input [readOnly]="true" [value]="subtotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Subtotal</b>
+                    <input [readOnly]="true" [value]="subtotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Subtotal</b>
                   </div>
                 </div>
 
@@ -176,7 +178,8 @@
                 <div class="row mt-2 gray-9">
                   <div class="col-md-5"></div>
                   <div class="col-md-7 ">
-                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="tax" nz-input placeholder="$ 0,000.00" type="number"/> <span class="blue">+ </span>Tax
+                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="tax" nz-input placeholder="$ 0,000.00" type="number"/>
+                    <span class="blue">+ </span><span class="responsive-text">Tax</span>
                     <ng-container *ngIf="form.controls.tax.invalid && (form.controls.tax.dirty || form.controls.tax.touched)">
                       <nz-alert *ngFor="let error of form.controls.tax.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
                       <nz-alert *ngIf="form.controls.tax.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
@@ -192,7 +195,7 @@
                 <div class="row mt-2 gray-9">
                   <div class="col-md-5"></div>
                   <div class="col-md-7">
-                    <input [readOnly]="true" [value]="platformFees" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Platform fees</b>
+                    <input [readOnly]="true" [value]="platformFees" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Platform fees</b>
                   </div>
                 </div>
 
@@ -201,7 +204,7 @@
                 <div class="row mt-2 gray-9">
                   <div class="col-md-5"></div>
                   <div class="col-md-7">
-                    <input [readOnly]="true" [value]="grandTotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b>Grand Total</b>
+                    <input [readOnly]="true" [value]="grandTotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Grand Total</b>
                   </div>
                 </div>
 
@@ -244,7 +247,7 @@
                 <p> Part needed by: <span class="font-14-600">{{ rfq.partDateNeeded | date:"dd.mm.yyyy" }}</span></p>
                 <div class="custom-hr"></div>
                 <div>
-                  <label (click)="rotateArrow($event)"  class="showMore font-14-600 d-flex align-items-center justify-content-between" for="_1">
+                  <label (click)="rotateArrow($event)" class="showMore font-14-600 d-flex align-items-center justify-content-between" for="_1">
                     Engineer Details
                     <img width="13.36px" height="9px" class="arrow-up-down" src="assets/img/up-arrow.svg">
                   </label>

@@ -149,6 +149,7 @@ th{
 .submit-quote-btn{
     color: white;
 }
-.view-submitted-btn{
 
+.grand-total td{
+    background: #E6F7FF !important;
 }

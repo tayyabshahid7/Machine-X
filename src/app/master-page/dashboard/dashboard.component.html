@@ -35,7 +35,7 @@
                   <ngx-spinner [fullScreen]="false" name="partsSpinner"></ngx-spinner>
 
 
-                  <div class="row px-3">
+                  <div class="row px-3 d-flex justify-content-center">
 
                     <ng-container *ngFor="let jobsCount of jobsCounts">
 <!--                      <div  class="pointer d-flex align-items-center statistic-box acive-box my-3 active-parts-box" *ngIf="jobsCount.status === 'pending'">-->
@@ -55,6 +55,9 @@
                           <p class="gray-8 card-text active-title text-left">
                             {{jobsCount.status | changeCase : 'sentenceCase'}}
                           </p>
+                          <p class="gray-8 active-last-week text-left mt-2">
+                            4 In work jobs since last week
+                          </p>
                         </div>
                       </div>
 
@@ -64,6 +67,9 @@
                           <b class="blue pl-5px counts text-left pending-count">{{jobsCount.count}}</b>
                           <p class="gray-8 card-text active-title text-left">
                             {{jobsCount.status | changeCase : 'sentenceCase'}}
+                          </p>
+                          <p class="gray-8 active-last-week text-left mt-2">
+                            4 Shipped jobs since last week
                           </p>
                         </div>
                       </div>

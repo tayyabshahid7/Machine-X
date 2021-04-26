@@ -12,7 +12,7 @@
       <div class="content mb-4">
         <div class="col-12 pt-30px scrollable bg-white" id="pdfAnchor">
           <div class="header">
-            <img width="140px" src="assets/img/logoConceptX.svg">
+            <img width="140px" src="assets/img/logoConceptX-Beta.svg">
             <div class="push-right text-right">
               <b class="blue font-16-600 blue-7">Invoice</b><br>
               <small class="font-16-600 push-right gray-7 mb-1">#{{quoteInvoice?.payment.invoiceNumber}}</small>
@@ -112,6 +112,13 @@
                 <td></td>
                 <td class="font-14-400">+ Shipping Cost </td>
                 <td class="font-14-400">{{quoteInvoice?.shippingRate | currency: 'USD'}}</td>
+              </tr>
+              <tr class="sky-blue tr">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>+ Platform Fees</td>
+                <td class="font-14-600 blue-8">{{quoteInvoice?.platformFees | currency: 'USD'}}</td>
               </tr>
               <tr class="sky-blue tr">
                 <td></td>

@@ -76,7 +76,7 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   onSelect(transaction: TransactionInterface) {
-    this.router.navigate(['dashboard/transactions/receipt', transaction.quote]);
+    this.router.navigate(['dashboard/transactions/receipt', transaction.quote, transaction.jobDisplayId]);
   }
 
   handelData() {

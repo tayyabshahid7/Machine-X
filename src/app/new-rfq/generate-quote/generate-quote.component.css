@@ -145,6 +145,7 @@ th{
 
 
 .showMore {
+    z-index: 11;
     font-size: 14px;
     display: block;
     cursor: pointer;
@@ -172,6 +173,8 @@ th{
 .arrow-up-down{
     transition: all 0.2s 0.2s;
     transform: rotate(180deg);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .arrow-up-down-rotate{
@@ -191,3 +194,17 @@ th{
     height: 40px;
     width: 190px;
 }
+
+
+
+@media (max-width: 1800px) {
+    .responsive-text{
+        font-size: 11px;
+    }
+    .content{
+        max-width: 95% !important;
+    }
+}
+
+
+

@@ -59,6 +59,9 @@
       </nz-table>
     </div>
   </div>
+  <div class="mr-5 d-flex justify-content-end mt-3">
+    <nz-pagination [(nzPageIndex)]="currentPage" [(nzPageSize)]="pageSize" [nzTotal]="jobsCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+  </div>
 </nz-content>
     
     

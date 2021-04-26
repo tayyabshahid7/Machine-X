@@ -71,7 +71,7 @@ const routes: Routes = [
       // {path: 'Jobs/jobDetail/:status', component: JobDetailsComponent},
       // {path: 'Jobs/invoice', component: InvoiceComponent},
       {path: 'transactions', component: TransactionHistoryComponent},
-      {path: 'transactions/receipt/:quoteId', component: QuoteInvoiceSubmittedComponent},
+      {path: 'transactions/receipt/:quoteId/:jobDisplayId', component: QuoteInvoiceSubmittedComponent, data: {label: 'Transaction History / Invoice'}},
       // {path: 'transactions/receipt', component: ReceiptComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'terms', component: TermsComponent}

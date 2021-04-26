@@ -103,7 +103,7 @@ th{
     color: #1890FF;
 }
 nz-tag{
-    width: 25%;
+    min-width: 30%;
 }
 tr:hover{
     background-color: #E6F7FF;
