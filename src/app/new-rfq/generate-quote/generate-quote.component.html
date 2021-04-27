@@ -1,307 +1,411 @@
 <div class="container-64">
-  <ngx-spinner [fullScreen]="false" [name]="'rfqSpinner'"></ngx-spinner>
-  <ng-container *ngIf="rfq!==null; else noRfq">
-    <div class="content ">
-      <div class="d-flex mt-4 mb-3 submitted-quote-header">
-        <span class="font-20-600">Quote for <span class="blue">RFQ#{{rfq.displayId}}</span></span>
-      </div>
-      <form [formGroup]="form">
-        <div class="col-12 px-0 d-flex">
-          <div *ngIf="pageNo === 1" class="col-md-7 pl-0">
-            <div class="bg-white mt-1 section-1">
-              <p class="font-16-600 pb-1 m-0">
-                Quote Details
-              </p>
-              <div class="custom-hr"></div>
-              <!--              <div class="row">-->
-              <!--                <div class="col-md-12 gray-8">Engineer name: {{rfq.engineer.username}}</div>-->
-              <!--                <div *ngIf="rfq.shippingAddress" class="col-md-12 gray-8">-->
-              <!--                  Shipping address: {{rfq.shippingAddress.country}}, {{rfq.shippingAddress.city}}, {{rfq.shippingAddress.street}} - {{rfq.shippingAddress.zipCode}}-->
-              <!--                </div>-->
-              <!--              </div>-->
-              <div class="row">
-                <div class="col-12">
-                  <div>
-                    <div class="mb-1"><span class="input-title font-14-600">Shop Quote Number</span><span class="text-danger">*</span></div>
-                    <input style="height: 40px;display: flex;align-items: center;" formControlName="shopQuoteNumber" nz-input placeholder="Quote Number" type="text"/>
-                    <ng-container *ngIf="form.controls.shopQuoteNumber.invalid && (form.controls.shopQuoteNumber.dirty || form.controls.shopQuoteNumber.touched)">
-                      <nz-alert *ngFor="let error of form.controls.shopQuoteNumber.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.maxlength" nzMessage="max length ({{form.controls.shopQuoteNumber.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
-                                nzType="error"
-                      ></nz-alert>
-                    </ng-container>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="mt-3">
-                    <div class="mb-1"><span class="input-title font-14-600">Additional Files</span><span class="text-danger">*</span></div>
-                    <nz-upload
-                            class="w-100"
-                            [(nzFileList)]="fileList"
-                            [nzBeforeUpload]="beforeUpload.bind(this)"
-                            [nzMultiple]="true"
-                            [nzRemove]="removeFile.bind(this)"
-                            class="col-md-12 p-0">
-                      <button class="upload-btn d-flex align-items-center " nz-button>
-                        <i nz-icon nzType="upload"></i>
-                        <span class="font-16-400">Upload Files</span>
-                      </button>
-                    </nz-upload>
-                    <ng-container *ngIf="form.controls.attachments.invalid && (form.controls.attachments.dirty || form.controls.attachments.touched)">
-                      <nz-alert *ngIf="form.controls.attachments.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                    </ng-container>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <div class="mb-1 font-14-600">Notes<span class="text-danger">*</span></div>
-                  <textarea formControlName="shopQuoteNotes" nz-input placeholder="" rows="5"></textarea>
-                  <ng-container *ngIf="form.controls.shopQuoteNotes.invalid && (form.controls.shopQuoteNotes.dirty || form.controls.shopQuoteNotes.touched)">
-                    <nz-alert *ngFor="let error of form.controls.shopQuoteNotes.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                    <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                    <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.maxlength" nzMessage="max length ({{form.controls.shopQuoteNotes.errors.maxlength.requiredLength}}) exceeded" nzShowIcon
-                              nzType="error"
-                    ></nz-alert>
-                  </ng-container>
-                </div>
-              </div>
-
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <div class="mb-1 font-14-600">Quote Valid For<span class="text-danger">*</span></div>
-                  <nz-input-number style="height: 40px;display: flex;align-items: center;" [nzStep]="1" class="col-md-12 full-width" formControlName="validForDays" nzPlaceHolder="number of days"></nz-input-number>
-                  <ng-container *ngIf="form.controls.validForDays.invalid && (form.controls.validForDays.dirty || form.controls.validForDays.touched)">
-                    <nz-alert *ngFor="let error of form.controls.validForDays.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                    <nz-alert *ngIf="form.controls.validForDays.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                    <nz-alert *ngIf="form.controls.validForDays.errors.min" nzMessage="Minimum value is ({{form.controls.validForDays.errors.min.min}})" nzShowIcon
-                              nzType="error"
-                    ></nz-alert>
-                  </ng-container>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-1 font-14-600">
-                    Delivery Date<span class="text-danger">*</span>
-                  </div>
-                  <nz-date-picker [nzFormat]="dateFormat" style="height: 40px" class="col-md-12" formControlName="deliveryDate">
-                  </nz-date-picker>
-                  <ng-container *ngIf="form.controls.deliveryDate.invalid && (form.controls.deliveryDate.dirty || form.controls.deliveryDate.touched)">
-                    <nz-alert *ngFor="let error of form.controls.deliveryDate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                    <nz-alert *ngIf="form.controls.deliveryDate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                  </ng-container>
-                </div>
-              </div>
-
-              <div class="row mt-3">
-                <div class="col-12 d-flex justify-content-end px-0">
-                  <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>
-                  <button nz-button [disabled]="form.invalid" class="d-flex align-items-center mar-2" (click)="changePage(2)"  nzType="primary">Specify Items <i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>
-                </div>
-              </div>
+    <ngx-spinner [fullScreen]="false" [name]="'rfqSpinner'"></ngx-spinner>
+    <ng-container *ngIf="rfq!==null; else noRfq">
+        <div class="content" [ngClass]="{'content-2': pageNo === 2}">
+            <div class="d-flex mt-4 mb-3 submitted-quote-header">
+                <span class="font-20-600">Quote for <span class="blue">RFQ#{{rfq.displayId}}</span></span>
             </div>
-          </div>
+            <form [formGroup]="form">
+                <div class="col-12 px-0 d-flex">
+                    <div *ngIf="pageNo === 1" class="col-md-7 pl-0">
+                        <div class="bg-white mt-1 section-1">
+                            <p class="font-16-600 pb-1 m-0">
+                                Quote Details
+                            </p>
+                            <div class="custom-hr"></div>
+                            <!--              <div class="row">-->
+                            <!--                <div class="col-md-12 gray-8">Engineer name: {{rfq.engineer.username}}</div>-->
+                            <!--                <div *ngIf="rfq.shippingAddress" class="col-md-12 gray-8">-->
+                            <!--                  Shipping address: {{rfq.shippingAddress.country}}, {{rfq.shippingAddress.city}}, {{rfq.shippingAddress.street}} - {{rfq.shippingAddress.zipCode}}-->
+                            <!--                </div>-->
+                            <!--              </div>-->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div>
+                                        <div class="mb-1"><span class="input-title font-14-600">Shop Quote Number</span><span
+                                                class="text-danger">*</span></div>
+                                        <input style="height: 40px;display: flex;align-items: center;"
+                                               formControlName="shopQuoteNumber" nz-input placeholder="Quote Number"
+                                               type="text"/>
+                                        <ng-container
+                                                *ngIf="form.controls.shopQuoteNumber.invalid && (form.controls.shopQuoteNumber.dirty || form.controls.shopQuoteNumber.touched)">
+                                            <nz-alert
+                                                    *ngFor="let error of form.controls.shopQuoteNumber.errors.APIErrors"
+                                                    nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                            <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.required"
+                                                      nzMessage="This field is required" nzShowIcon
+                                                      nzType="error"></nz-alert>
+                                            <nz-alert *ngIf="form.controls.shopQuoteNumber.errors.maxlength"
+                                                      nzMessage="max length ({{form.controls.shopQuoteNumber.errors.maxlength.requiredLength}}) exceeded"
+                                                      nzShowIcon
+                                                      nzType="error"
+                                            ></nz-alert>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mt-3">
+                                        <div class="mb-1"><span
+                                                class="input-title font-14-600">Additional Files</span><span
+                                                class="text-danger">*</span></div>
+                                        <nz-upload
+                                                class="w-100"
+                                                [(nzFileList)]="fileList"
+                                                [nzBeforeUpload]="beforeUpload.bind(this)"
+                                                [nzMultiple]="true"
+                                                [nzRemove]="removeFile.bind(this)"
+                                                class="col-md-12 p-0">
+                                            <button class="upload-btn d-flex align-items-center " nz-button>
+                                                <i nz-icon nzType="upload"></i>
+                                                <span class="font-16-400">Upload Files</span>
+                                            </button>
+                                        </nz-upload>
+                                        <ng-container
+                                                *ngIf="form.controls.attachments.invalid && (form.controls.attachments.dirty || form.controls.attachments.touched)">
+                                            <nz-alert *ngIf="form.controls.attachments.errors.required"
+                                                      nzMessage="This field is required" nzShowIcon
+                                                      nzType="error"></nz-alert>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="mb-1 font-14-600">Notes<span class="text-danger">*</span></div>
+                                    <textarea formControlName="shopQuoteNotes" nz-input placeholder=""
+                                              rows="5"></textarea>
+                                    <ng-container
+                                            *ngIf="form.controls.shopQuoteNotes.invalid && (form.controls.shopQuoteNotes.dirty || form.controls.shopQuoteNotes.touched)">
+                                        <nz-alert *ngFor="let error of form.controls.shopQuoteNotes.errors.APIErrors"
+                                                  nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                        <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.required"
+                                                  nzMessage="This field is required" nzShowIcon
+                                                  nzType="error"></nz-alert>
+                                        <nz-alert *ngIf="form.controls.shopQuoteNotes.errors.maxlength"
+                                                  nzMessage="max length ({{form.controls.shopQuoteNotes.errors.maxlength.requiredLength}}) exceeded"
+                                                  nzShowIcon
+                                                  nzType="error"
+                                        ></nz-alert>
+                                    </ng-container>
+                                </div>
+                            </div>
 
-          <div *ngIf="pageNo === 2" class="col-7 pl-0">
-            <div class="bg-white mt-1 section-2">
-              <p class="font-16-600 pb-1 m-0">
-                Item Details
-              </p>
-              <div class="custom-hr"></div>
-              <nz-table class="rfq-table" #basicTable [nzData]="form.controls.lineItems.value" [nzNoResult]="null" [nzShowPagination]="false">
-                <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Quantity</th>
-                  <th>Unit Cost</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let lineItem of form.controls.lineItems.value;let i = index">
-                  <td>{{lineItem.description}}</td>
-                  <td>{{lineItem.quantity}}</td>
-                  <td>{{lineItem.price | currency: 'USD'}}</td>
-                  <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
-                  <td>
-                    <span (click)="removeLineItem(i)" class="red-6 pointer">Delete</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input [(ngModel)]="newLineItemDesc" [ngModelOptions]="{standalone: true}" nz-input/>
-                  </td>
-                  <td>
-                    <input (ngModelChange)="newLineItemQuantityChange($event)" [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemQuantity" nz-input type="number"/>
-                  </td>
-                  <td>
-                    <input (ngModelChange)="newLineItemPriceChange($event)" [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemPrice" nz-input type="number"/>
-                  </td>
-                  <td>
-                    <input [(ngModel)]="newLineItemTotalCost" [ngModelOptions]="{standalone: true}" [readOnly]="true" nz-input type="number"/>
-                  </td>
-                  <td>
-                    <span (click)="addLineItem()" class="blue pointer"> + Add</span>
-                  </td>
-                </tr>
-                </tbody>
-              </nz-table>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="mb-1 font-14-600">Quote Valid For<span class="text-danger">*</span>
+                                    </div>
+                                    <nz-input-number style="height: 40px;display: flex;align-items: center;"
+                                                     [nzStep]="1" class="col-md-12 full-width"
+                                                     formControlName="validForDays"
+                                                     nzPlaceHolder="number of days"></nz-input-number>
+                                    <ng-container
+                                            *ngIf="form.controls.validForDays.invalid && (form.controls.validForDays.dirty || form.controls.validForDays.touched)">
+                                        <nz-alert *ngFor="let error of form.controls.validForDays.errors.APIErrors"
+                                                  nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                        <nz-alert *ngIf="form.controls.validForDays.errors.required"
+                                                  nzMessage="This field is required" nzShowIcon
+                                                  nzType="error"></nz-alert>
+                                        <nz-alert *ngIf="form.controls.validForDays.errors.min"
+                                                  nzMessage="Minimum value is ({{form.controls.validForDays.errors.min.min}})"
+                                                  nzShowIcon
+                                                  nzType="error"
+                                        ></nz-alert>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-1 font-14-600">
+                                        Delivery Date<span class="text-danger">*</span>
+                                    </div>
+                                    <nz-date-picker [nzFormat]="dateFormat" style="height: 40px" class="col-md-12"
+                                                    formControlName="deliveryDate">
+                                    </nz-date-picker>
+                                    <ng-container
+                                            *ngIf="form.controls.deliveryDate.invalid && (form.controls.deliveryDate.dirty || form.controls.deliveryDate.touched)">
+                                        <nz-alert *ngFor="let error of form.controls.deliveryDate.errors.APIErrors"
+                                                  nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                        <nz-alert *ngIf="form.controls.deliveryDate.errors.required"
+                                                  nzMessage="This field is required" nzShowIcon
+                                                  nzType="error"></nz-alert>
+                                    </ng-container>
+                                </div>
+                            </div>
 
-              <div class="costs">
-                <div class="row mt-2 gray-9">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-7">
-                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="shippingRate" nz-input placeholder="$ 0,000.00" type="number"/>
-                    <span class="blue">+ </span><span class="responsive-text">Shipping Rate</span>
-                    <ng-container *ngIf="form.controls.shippingRate.invalid && (form.controls.shippingRate.dirty || form.controls.shippingRate.touched)">
-                      <nz-alert *ngFor="let error of form.controls.shippingRate.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.shippingRate.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.shippingRate.errors.min" nzMessage="Minimum value is ({{form.controls.shippingRate.errors.min.min}})" nzShowIcon
-                                nzType="error"
-                      ></nz-alert>
-                    </ng-container>
-                  </div>
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-end px-0">
+                                    <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>
+                                    <button nz-button [disabled]="form.invalid" class="d-flex align-items-center mar-2"
+                                            (click)="changePage(2)" nzType="primary">Specify Items <i nz-icon
+                                                                                                      nzType="arrow-right"
+                                                                                                      nzTheme="outline"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="pageNo === 2" class="col-7 pl-0">
+                        <div class="bg-white mt-1 section-2">
+                            <p class="font-16-600 pb-1 m-0">
+                                Item Details
+                            </p>
+                            <div class="custom-hr"></div>
+                            <nz-table class="rfq-table" #basicTable [nzData]="form.controls.lineItems.value"
+                                      [nzNoResult]="null" [nzShowPagination]="false">
+                                <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Cost</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let lineItem of form.controls.lineItems.value;let i = index">
+                                    <td>{{lineItem.description}}</td>
+                                    <td>{{lineItem.quantity}}</td>
+                                    <td>{{lineItem.price | currency: 'USD'}}</td>
+                                    <td>{{(lineItem.price * lineItem.quantity) | currency: 'USD'}}</td>
+                                    <td>
+                                        <span (click)="removeLineItem(i)" class="red-6 pointer">Delete</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px" class="pr-0">
+                                        <input [(ngModel)]="newLineItemDesc" [ngModelOptions]="{standalone: true}"
+                                               nz-input/>
+                                    </td>
+                                    <td style="width: 64px">
+                                        <input (ngModelChange)="newLineItemQuantityChange($event)"
+                                               [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemQuantity"
+                                               nz-input type="number"/>
+                                    </td>
+                                    <td style="width: 64px" class="pl-0">
+                                        <input (ngModelChange)="newLineItemPriceChange($event)"
+                                               [ngModelOptions]="{standalone: true}" [ngModel]="newLineItemPrice"
+                                               nz-input type="number"/>
+                                    </td>
+                                    <td style="width: 66px" class="px-0">
+                                        <input [(ngModel)]="newLineItemTotalCost" [ngModelOptions]="{standalone: true}"
+                                               [readOnly]="true" nz-input type="number"/>
+                                    </td>
+                                    <td style="width: 70px">
+                                        <span (click)="addLineItem()" class="blue pointer"> + Add</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </nz-table>
+
+                            <div class="costs">
+                                <div class="row mt-2 gray-9">
+                                    <div class="col-md-4"></div>
+                                    <div class="align-items-center col-md-8 d-flex justify-content-between">
+                                        <div class="w-75">
+                                            <input (ngModelChange)="setTotals()" formControlName="shippingRate" nz-input
+                                                   placeholder="$ 0,000.00" type="number"/>
+                                        </div>
+                                        <div class="w-25">
+                                            <span class="blue">+ </span><span
+                                                class="responsive-text">Shipping Rate</span>
+                                        </div>
+                                        <ng-container
+                                                *ngIf="form.controls.shippingRate.invalid && (form.controls.shippingRate.dirty || form.controls.shippingRate.touched)">
+                                            <nz-alert *ngFor="let error of form.controls.shippingRate.errors.APIErrors"
+                                                      nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                            <nz-alert *ngIf="form.controls.shippingRate.errors.required"
+                                                      nzMessage="This field is required" nzShowIcon
+                                                      nzType="error"></nz-alert>
+                                            <nz-alert *ngIf="form.controls.shippingRate.errors.min"
+                                                      nzMessage="Minimum value is ({{form.controls.shippingRate.errors.min.min}})"
+                                                      nzShowIcon
+                                                      nzType="error"
+                                            ></nz-alert>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                                <div class="custom-hr my-2"></div>
+
+                                <div class="row mt-2 gray-9">
+                                    <div class="col-md-4"></div>
+                                    <div class="align-items-center col-md-8 d-flex justify-content-between">
+                                        <div class="w-75">
+                                            <input [readOnly]="true" [value]="subtotal" nz-input
+                                                   placeholder="$ 0,000.00" type="number"/>
+                                        </div>
+                                        <div class="w-25">
+                                            <b class="responsive-text">Subtotal</b>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="custom-hr my-2"></div>
+
+                                <div class="row mt-2 gray-9">
+                                    <div class="col-md-4"></div>
+                                    <div class="align-items-center col-md-8 d-flex justify-content-between">
+                                        <div class="w-75">
+                                            <input (ngModelChange)="setTotals()" formControlName="tax" nz-input
+                                                   placeholder="$ 0,000.00" type="number"/>
+                                        </div>
+                                        <div class="w-25">
+                                            <span class="blue">+ </span><span class="responsive-text">Tax</span>
+                                            <ng-container
+                                                    *ngIf="form.controls.tax.invalid && (form.controls.tax.dirty || form.controls.tax.touched)">
+                                                <nz-alert *ngFor="let error of form.controls.tax.errors.APIErrors"
+                                                          nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
+                                                <nz-alert *ngIf="form.controls.tax.errors.required"
+                                                          nzMessage="This field is required" nzShowIcon
+                                                          nzType="error"></nz-alert>
+                                                <nz-alert *ngIf="form.controls.tax.errors.min"
+                                                          nzMessage="Minimum value is ({{form.controls.tax.errors.min.min}})"
+                                                          nzShowIcon
+                                                          nzType="error"
+                                                ></nz-alert>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="custom-hr my-2"></div>
+
+                                <div class="row mt-2 gray-9">
+                                    <div class="col-md-4"></div>
+                                    <div class="align-items-center col-md-8 d-flex justify-content-between">
+                                        <div class="w-75">
+                                            <input [readOnly]="true" [value]="platformFees" nz-input
+                                                   placeholder="$ 0,000.00" type="number"/>
+                                        </div>
+                                        <div class="w-25">
+                                            <b class="responsive-text">Platform fees</b>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="custom-hr my-2"></div>
+
+                                <div class="row mt-2 gray-9">
+                                    <div class="col-md-4"></div>
+                                    <div class="align-items-center col-md-8 d-flex justify-content-between">
+                                        <div class="w-75">
+                                            <input [readOnly]="true" [value]="grandTotal" nz-input
+                                                   placeholder="$ 0,000.00" type="number"/>
+                                        </div>
+                                        <div class="w-25">
+                                            <b class="responsive-text">Grand Total</b>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 pt-2">
+                                    <div>
+                                        <button class="d-flex align-items-center" (click)="changePage(1)" nz-button><i
+                                                nz-icon nzType="arrow-left" nzTheme="outline"></i>Quote Details
+                                        </button>
+                                    </div>
+                                    <div class="w-100 d-flex justify-content-end px-0">
+                                        <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>
+                                        <button nz-button class="d-flex align-items-center" [disabled]="form.invalid"
+                                                (click)="reviewForm()" nzType="primary">Generate Quote<i nz-icon
+                                                                                                         nzType="arrow-right"
+                                                                                                         nzTheme="outline"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 px-0">
+                        <div class="bg-white mt-1 section-1">
+                            <p class="font-16-600 pb-1 m-0">
+                                RFQ SUMMARY
+                            </p>
+                            <div class="custom-hr"></div>
+
+                            <div class="part-data">
+                                <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
+                                <!--          <p> Selected part: <b>{{formValue.revision.partName}} - {{formValue.revision.partNumber}}</b></p>-->
+                                <!--          <div class="custom-hr"></div>-->
+                                <!--          <p> Part revision: <b>{{formValue.revision.revisionName}}</b></p>-->
+                                <div class="custom-hr"></div>
+                                <p> Selected part: <span class="font-14-600">{{rfq.part.name}}</span></p>
+                                <div class="custom-hr"></div>
+                                <p> Part revision: <span class="font-14-600">{{rfq.revision.name}} days</span></p>
+                                <div class="custom-hr"></div>
+                                <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
+                                <div class="custom-hr"></div>
+                                <p> Quantity: <span class="font-14-600">{{rfq.partQuantity}}</span></p>
+                                <div class="custom-hr"></div>
+                                <p> Part needed by: <span
+                                        class="font-14-600">{{ rfq.partDateNeeded | date:"dd.mm.yyyy" }}</span></p>
+                                <div class="custom-hr"></div>
+                                <div>
+                                    <label (click)="rotateArrow($event)"
+                                           class="showMore font-14-600 d-flex align-items-center justify-content-between"
+                                           for="_1">
+                                        Engineer Details
+                                        <img width="13.36px" height="9px" class="arrow-up-down"
+                                             src="assets/img/up-arrow.svg">
+                                    </label>
+                                    <input id="_1" type="checkbox">
+                                    <div>
+                                        <p> Name <span class="font-14-600">{{rfq.engineer.username}}</span></p>
+                                        <div class="custom-hr"></div>
+
+                                        <p> Email <span class="font-14-600">{{rfq.engineer.email}}</span></p>
+                                        <div class="custom-hr"></div>
+
+                                        <p> Phone <a href="tel:+1(514)213331" class="font-14-600 phone-number">+1(514)213331</a>
+                                        </p>
+                                        <div class="custom-hr"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-1">
+                                    <label (click)="rotateArrow($event)"
+                                           class="showMore font-14-600 d-flex align-items-center justify-content-between"
+                                           for="_2">
+                                        Shipping Address
+                                        <img width="13.36px" height="9px" class="arrow-up-down"
+                                             src="assets/img/up-arrow.svg">
+                                    </label>
+                                    <input id="_2" type="checkbox">
+
+                                    <div class="address">
+                                        <p> Mohammad Naeem Saleem Karmi</p>
+                                        <p>{{rfq.shippingAddress.street}}</p>
+                                        <p>{{rfq.shippingAddress.city}}</p>
+                                        <p>{{rfq.shippingAddress.country}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2" *ngIf="pageNo === 2">
+                                    <p class="font-14-600"> Quote Details <img (click)="changePage(1)"
+                                                                               style="cursor: pointer"
+                                                                               src="assets/img/edit-pencil.svg"/></p>
+                                    <div class="custom-hr"></div>
+                                </div>
+                                <!--                <div>-->
+                                <!--                  <p>Notes</p>-->
+                                <!--                  <p class="font-weight-bold">{{rfq.notes}}</p>-->
+                                <!--                </div>-->
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-
-                <div class="custom-hr my-2"></div>
-
-                <div class="row mt-2 gray-9">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-7 ">
-                    <input [readOnly]="true" [value]="subtotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Subtotal</b>
-                  </div>
-                </div>
-
-                <div class="custom-hr my-2"></div>
-
-                <div class="row mt-2 gray-9">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-7 ">
-                    <input (ngModelChange)="setTotals()" class="mr-3" formControlName="tax" nz-input placeholder="$ 0,000.00" type="number"/>
-                    <span class="blue">+ </span><span class="responsive-text">Tax</span>
-                    <ng-container *ngIf="form.controls.tax.invalid && (form.controls.tax.dirty || form.controls.tax.touched)">
-                      <nz-alert *ngFor="let error of form.controls.tax.errors.APIErrors" nzMessage="{{ error }}" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.tax.errors.required" nzMessage="This field is required" nzShowIcon nzType="error"></nz-alert>
-                      <nz-alert *ngIf="form.controls.tax.errors.min" nzMessage="Minimum value is ({{form.controls.tax.errors.min.min}})" nzShowIcon
-                                nzType="error"
-                      ></nz-alert>
-                    </ng-container>
-                  </div>
-                </div>
-
-                <div class="custom-hr my-2"></div>
-
-                <div class="row mt-2 gray-9">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-7">
-                    <input [readOnly]="true" [value]="platformFees" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Platform fees</b>
-                  </div>
-                </div>
-
-                <div class="custom-hr my-2"></div>
-
-                <div class="row mt-2 gray-9">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-7">
-                    <input [readOnly]="true" [value]="grandTotal" class="mr-3" nz-input placeholder="$ 0,000.00" type="number"/> <b class="responsive-text">Grand Total</b>
-                  </div>
-                </div>
-
-                <div class="d-flex mt-4 pt-2">
-                  <div>
-                    <button class="d-flex align-items-center" (click)="changePage(1)" nz-button><i nz-icon nzType="arrow-left" nzTheme="outline"></i>Quote Details</button>
-                  </div>
-                  <div class="w-100 d-flex justify-content-end px-0">
-                    <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>
-                    <button nz-button class="d-flex align-items-center" [disabled]="form.invalid" (click)="reviewForm()"  nzType="primary">Generate Quote<i nz-icon nzType="arrow-right" nzTheme="outline"></i></button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-md-5 px-0">
-            <div  class="bg-white mt-1 section-1">
-              <p class="font-16-600 pb-1 m-0">
-                RFQ SUMMARY
-              </p>
-              <div class="custom-hr"></div>
-
-              <div class="part-data">
-                <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
-                <!--          <p> Selected part: <b>{{formValue.revision.partName}} - {{formValue.revision.partNumber}}</b></p>-->
-                <!--          <div class="custom-hr"></div>-->
-                <!--          <p> Part revision: <b>{{formValue.revision.revisionName}}</b></p>-->
-                <div class="custom-hr"></div>
-                <p> Selected part: <span class="font-14-600">{{rfq.part.name}}</span></p>
-                <div class="custom-hr"></div>
-                <p> Part revision: <span class="font-14-600">{{rfq.revision.name}} days</span></p>
-                <div class="custom-hr"></div>
-                <p> Material selected: <span class="font-14-600">{{rfq.materialType}}</span></p>
-                <div class="custom-hr"></div>
-                <p> Quantity: <span class="font-14-600">{{rfq.partQuantity}}</span></p>
-                <div class="custom-hr"></div>
-                <p> Part needed by: <span class="font-14-600">{{ rfq.partDateNeeded | date:"dd.mm.yyyy" }}</span></p>
-                <div class="custom-hr"></div>
-                <div>
-                  <label (click)="rotateArrow($event)" class="showMore font-14-600 d-flex align-items-center justify-content-between" for="_1">
-                    Engineer Details
-                    <img width="13.36px" height="9px" class="arrow-up-down" src="assets/img/up-arrow.svg">
-                  </label>
-                  <input id="_1" type="checkbox">
-                  <div>
-                    <p> Name <span class="font-14-600">{{rfq.engineer.username}}</span></p>
-                    <div class="custom-hr"></div>
-
-                    <p> Email <span class="font-14-600">{{rfq.engineer.email}}</span></p>
-                    <div class="custom-hr"></div>
-
-                    <p> Phone <a href="tel:+1(514)213331" class="font-14-600 phone-number">+1(514)213331</a></p>
-                    <div class="custom-hr"></div>
-                  </div>
-                </div>
-
-                <div class="mt-1">
-                  <label (click)="rotateArrow($event)"  class="showMore font-14-600 d-flex align-items-center justify-content-between" for="_2">
-                    Shipping Address
-                    <img width="13.36px" height="9px" class="arrow-up-down" src="assets/img/up-arrow.svg">
-                  </label>
-                  <input id="_2" type="checkbox">
-
-                  <div class="address">
-                    <p> Mohammad Naeem Saleem Karmi</p>
-                    <p>{{rfq.shippingAddress.street}}</p>
-                    <p>{{rfq.shippingAddress.city}}</p>
-                    <p>{{rfq.shippingAddress.country}}</p>
-                  </div>
-                </div>
-
-                <div class="mt-2" *ngIf="pageNo === 2">
-                  <p class="font-14-600"> Quote Details <img (click)="changePage(1)" style="cursor: pointer" src="assets/img/edit-pencil.svg"/></p>
-                  <div class="custom-hr"></div>
-                </div>
-                <!--                <div>-->
-                <!--                  <p>Notes</p>-->
-                <!--                  <p class="font-weight-bold">{{rfq.notes}}</p>-->
-                <!--                </div>-->
-              </div>
-            </div>
-
-          </div>
-
+            </form>
         </div>
-      </form>
-    </div>
-    <!--    <nz-footer>-->
-    <!--      <button (click)="reviewForm()" [disabled]="form.invalid" class="mar-2" nz-button nzType="primary">Generate Quote</button>-->
-    <!--      <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>-->
-    <!--    </nz-footer>-->
-  </ng-container>
-  <ng-template #noRfq>
-    <!--  ToDo  what to show if no rfq-->
-    No Request quote
-  </ng-template>
+        <!--    <nz-footer>-->
+        <!--      <button (click)="reviewForm()" [disabled]="form.invalid" class="mar-2" nz-button nzType="primary">Generate Quote</button>-->
+        <!--      <button (click)="showDeleteConfirm()" class="mar-2" nz-button>Cancel</button>-->
+        <!--    </nz-footer>-->
+    </ng-container>
+    <ng-template #noRfq>
+        <!--  ToDo  what to show if no rfq-->
+        No Request quote
+    </ng-template>
 </div>

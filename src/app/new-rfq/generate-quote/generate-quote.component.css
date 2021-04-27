@@ -24,6 +24,9 @@
     max-width: 70%;
     margin: auto;
 }
+.content-2{
+    max-width: 80% !important;
+}
 nz-footer{
     padding: 16px 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
@@ -126,7 +129,7 @@ th{
 
 /* new changes */
 .section-1,.section-2{
-    padding: 20px 35px;
+    padding: 20px 24px;
     box-shadow: rgba(213, 215, 217, 0.2) 0px 8px 24px;
     border-radius: 4px;
 }
@@ -192,18 +195,18 @@ th{
 
 .costs input{
     height: 40px;
-    width: 190px;
+    width: 96%;
 }
 
 
 
 @media (max-width: 1800px) {
-    .responsive-text{
+/*    .responsive-text{
         font-size: 11px;
     }
     .content{
         max-width: 95% !important;
-    }
+    }*/
 }
 
 
