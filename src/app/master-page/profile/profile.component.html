@@ -1,13 +1,7 @@
 <div class="container-64px" style="position: relative">
   <ngx-spinner [fullScreen]="false"></ngx-spinner>
-  <div class="site-page-header-ghost-wrapper bottom-border">
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Settings</nz-page-header-title>
-    </nz-page-header>
-  </div>
 
-  <div *ngIf="shopProfile" class="content row">
-
+  <div *ngIf="shopProfile" class="content nav-custom-profile">
     <nz-tabset class="col-md-12" nzTabPosition="left">
       <nz-tab [nzTitle]="AccountSettings">
         <ng-template #AccountSettings>
@@ -455,7 +449,7 @@
   </div>
 
 
-  <nz-footer>
+  <nz-footer class="w-100">
     <button (click)="saveChanges()" *ngIf="shopProfile" [disabled]="shopProfilePayOutForm.dirty && shopProfilePayOutForm.invalid" class="mar-2" nz-button nzType="primary"
             type="button">
       Save details

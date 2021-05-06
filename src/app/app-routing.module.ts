@@ -73,7 +73,7 @@ const routes: Routes = [
       {path: 'transactions', component: TransactionHistoryComponent},
       {path: 'transactions/receipt/:quoteId/:jobDisplayId', component: QuoteInvoiceSubmittedComponent, data: {label: 'Transaction History / Invoice'}},
       // {path: 'transactions/receipt', component: ReceiptComponent},
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile', component: ProfileComponent, data: {label: 'Settings/ '}},
       {path: 'terms', component: TermsComponent}
     ],
   }

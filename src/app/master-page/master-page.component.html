@@ -53,7 +53,7 @@
     <div class="d-flex flex-column w-100">
       <nz-header class="header">
         <nz-page-header class="ant-page-header ant-page-header-compact d-inline-flex ng-star-inserted p-0 pl-4 custom-route-label"
-                        *ngIf = "routeLabelPart1!=''" [nzGhost]="false" nzBackIcon>
+                        *ngIf = "routeLabelPart1!='' && routeLabelPart1!='Settings'" [nzGhost]="false" nzBackIcon>
           <nz-page-header-title>
             <div class="d-flex align-items-center">
               <span class="previous custom-blue">{{routeLabelPart1}}</span>
@@ -68,6 +68,24 @@
             </div>
           </nz-page-header-title>
         </nz-page-header>
+
+        <nz-page-header class="ant-page-header ant-page-header-compact d-inline-flex ng-star-inserted p-0 pl-4 custom-route-label"
+                        *ngIf = "routeLabelPart1 === 'Settings'" [nzGhost]="false">
+          <nz-page-header-title>
+            <div class="d-flex align-items-center">
+              <span class="previous custom-blue">{{routeLabelPart1}}</span>
+              <span [ngClass]="rfqIdLabel !== '' && routeLabelPart2 ==='' ? 'gray-6' : 'custom-blue'"
+                    *ngIf = "rfqIdLabel!=''" class="previous">&nbsp;/ RFQ ID: {{rfqIdLabel}}
+              </span>
+              <span [ngClass]="jobIdLabel !== '' && routeLabelPart2 ==='' && rfqIdLabel ==='' ? 'gray-6' : 'custom-blue'"
+                    *ngIf = "jobIdLabel!=''" class="previous">&nbsp;/ Job ID: {{jobIdLabel}}
+              </span>
+              <span class="previous" *ngIf = "routeLabelPart2!=''" >&nbsp;/&nbsp;</span>
+              <span *ngIf = "routeLabelPart2!=''" class="previous gray-6">{{routeLabelPart2}}</span>
+            </div>
+          </nz-page-header-title>
+        </nz-page-header>
+
 
         <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
           <a nz-dropdown [nzDropdownMenu]="menu">

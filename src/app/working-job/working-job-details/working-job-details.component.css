@@ -64,10 +64,9 @@ nz-footer{
 
 }
 .firts-tab-content{
-
   padding: 6px;
   overflow-y: auto;
-  /* height: calc(100% - 190px); */
+  max-height: 70vh;
 }
 .quote-details-tab{
   padding: 6px;

@@ -451,3 +451,22 @@ button.ant-pagination-item-link.ng-star-inserted,.ant-pagination-item{
     background: #F5F5F5 !important;
     border-bottom: 1px solid white !important;
 }
+
+
+/* profile changes */
+.nav-custom-profile{
+    padding: 10px 0 10px 30px;
+}
+
+.nav-custom-profile .ant-tabs-tab{
+    margin-top: 6px !important;
+}
+
+.nav-custom-profile .ant-tabs-tab .ant-tabs-tab-btn{
+    display: flex;
+    align-items: center;
+}
+
+.nav-custom-profile .ant-tabs-tab .ant-tabs-tab-btn svg{
+    margin-right: 5px;
+}
