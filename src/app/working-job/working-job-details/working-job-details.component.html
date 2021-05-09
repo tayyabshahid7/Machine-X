@@ -340,7 +340,8 @@
     <img (click)="showCloseChat(false)" class="chat-pop-cross-btn" src="assets/img/cross.svg"/>
     <span class="ml-2 chat-pop-up-title">Welding Services Shop Messages</span>
 </div>
-<div *ngIf="!history" class="col-12 white-bg">
+
+<div *ngIf="!history" class="col-12 white-bg px-0">
     <app-chat [enableIssueMode]="job.status==='in_work' || job.status==='pending'"
               [quoteId]="job.quote.id"></app-chat>
 </div>
