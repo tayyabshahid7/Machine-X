@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { QuoteAPIService } from '../../services/api/quote-api.service';
 import { ChatMessageInterface, ChatMessagePostInterface } from '../../models/general.models';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import {filter} from "rxjs/operators";
+import {getUser} from "../../store/user/user.selectors";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-chat',
@@ -16,15 +19,21 @@ export class ChatComponent implements OnInit {
   issueTitle;
   issueMessage;
   busy = false;
-
+  user;
   messages: Array<ChatMessageInterface> = [];
   defaultAvatar = 'assets/img/chat-outgoing-avatar.svg';
   engineerDefaultAvatar = 'assets/img/avatar-white.svg';
 
   constructor(
     private quoteAPIService: QuoteAPIService,
+    private store: Store,
     private notification: NzNotificationService,
   ) {
+    this.store.select(getUser)
+        .pipe(filter(d => d !== null))
+        .subscribe(userProfile => {
+          this.user = userProfile;
+        });
   }
 
   ngOnInit(): void {
