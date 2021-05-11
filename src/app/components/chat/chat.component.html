@@ -13,7 +13,7 @@
           </nz-comment>
         </div>
 
-        <div class="engineer-chat-box" *ngIf="item.sender.username !== user.username">
+        <div class="machine-chat-box" *ngIf="item.sender.username !== user.username">
           <nz-comment [nzAuthor]="item.sender.username" [nzDatetime]="item.creationDate">
             <nz-avatar class="chat-outgoing" [nzSrc]="defaultAvatar" nz-comment-avatar nzIcon="user"></nz-avatar>
             <nz-comment-content class="bubble bubble-bottom-left">
