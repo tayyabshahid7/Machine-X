@@ -1,10 +1,14 @@
 {
   "/api": {
-    "target": "http://127.0.0.1:8000",
-    "secure": false
+    "target": "https://conceptx-258909.uc.r.appspot.com/",
+    "secure": true ,
+    "changeOrigin": true,
+    "protocol": "https"
   },
   "/static": {
-    "target": "http://127.0.0.1:8000",
-    "secure": false
+    "target": "https://conceptx-258909.uc.r.appspot.com/",
+    "secure": true ,
+    "changeOrigin": true,
+    "protocol": "https"
   }
 }
